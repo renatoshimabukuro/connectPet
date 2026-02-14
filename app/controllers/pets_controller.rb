@@ -27,6 +27,11 @@ class PetsController < ApplicationController
   end
 
   def update
+    if @pet.update(pet_params)
+      redirect_to @pet
+    else
+      render :edit
+    end
   end
 
   def destroy
