@@ -1,13 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
 puts "Cleaning database..."
 User.destroy_all
 
@@ -132,15 +122,15 @@ chat2 = Chat.create!(
 puts "Creating messages..."
 
 # Chat 1 conversation
-Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Mochi has been coughing.")
+Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been coughing.")
 Message.create!(chat: chat1, user: vet, contents: "How long has this been happening?")
 Message.create!(chat: chat1, user: katie, contents: "About two days.")
 Message.create!(chat: chat1, user: vet, contents: "Any changes in appetite?")
 Message.create!(chat: chat1, user: katie, contents: "No, appetite is normal.")
-Message.create!(chat: chat1, user: vet, contents: "Please bring Mochi in tomorrow at 10am.")
+Message.create!(chat: chat1, user: vet, contents: "Please bring Raye in tomorrow at 10am.")
 
 # Chat 2 conversation
-Message.create!(chat: chat2, user: renato, contents: "Hi Doctor, Luna is not eating much.")
+Message.create!(chat: chat2, user: renato, contents: "Hi Doctor, Maple is not eating much.")
 Message.create!(chat: chat2, user: vet, contents: "Has she been vomiting?")
 Message.create!(chat: chat2, user: renato, contents: "No vomiting, just low appetite.")
 Message.create!(chat: chat2, user: vet, contents: "Let's schedule a checkup this week.")
