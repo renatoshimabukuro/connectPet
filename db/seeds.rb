@@ -7,14 +7,110 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-Clinic.destroy_all
+
+puts "Cleaning database..."
 User.destroy_all
 
-user = User.create!(name: "renato", email: "renato@test.com", password: "123456", role: "vet", address: "test address")
-clinic = Clinic.create!(field: "cardiology", clinic_name:"Pet Forest", contact: "test", species: ["cats", "dogs", "horses"], user: user)
+puts "Creating users..."
+katie = User.create!(
+  name: "Katie",
+  email: "katie@owner.com",
+  password: "password123",
+  role: "owner"
+)
 
-user2 = User.create!(name: "troy", email: "troy@test.com", password: "123456", role: "owner", address: "test address")
-clinic2 = Clinic.create!(field: "cardiology", clinic_name:"My pet", contact: "test", species: ["cats", "dogs"], user: user)
+renato = User.create!(
+  name: "Renato",
+  email: "renato@owner.com",
+  password: "password123",
+  role: "owner"
+)
 
-user3 = User.create!(name: "katie", email: "katie@test.com", password: "123456", role: "vet", address: "test address")
-clinic3 = Clinic.create!(field: "cardiology", clinic_name:"Pet Shop Boys", contact: "test", species: ["cats", "dogs", "birds"], user: user)
+troy = User.create!(
+  name: "Troy",
+  email: "troy@owner.com",
+  password: "password123",
+  role: "owner"
+)
+
+vet = User.create!(
+  name: "Patrick Gregory House",
+  email: "patrick@vet.com",
+  password: "password123",
+  role: "vet"
+)
+
+puts "Creating pets..."
+Pet.create!(
+  user: katie,
+  name: "Raye",
+  dob: Date.new(2021, 8, 12),
+  species: "Cat",
+  breed: "Mixed black",
+  weight: 4.8,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Male",
+)
+
+Pet.create!(
+  user: katie,
+  name: "Percy",
+  dob: Date.new(2021, 8, 12),
+  species: "Cat",
+  breed: "Mixed orange",
+  weight: 5,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Male",
+)
+
+Pet.create!(
+  user: katie,
+  name: "Cory",
+  dob: Date.new(2024, 10, 22),
+  species: "Cat",
+  breed: "Mixed black",
+  weight: 5.2,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Male",
+)
+
+Pet.create!(
+  user: renato,
+  name: "Maple",
+  dob: Date.new(2025, 4, 30),
+  species: "Dog",
+  breed: "Toy poodle",
+  weight: 4.5,
+  vacc_status: "Vaccinated",
+  fixed: false,
+  gender: "Female",
+)
+
+Pet.create!(
+  user: troy,
+  name: "Gabby",
+  dob: Date.new(2016, 5, 31),
+  species: "Cat",
+  breed: "Exotic shorthair",
+  weight: 5.5,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Male",
+)
+
+Pet.create!(
+  user: troy,
+  name: "Jade",
+  dob: Date.new(2020, 4, 19),
+  species: "Cat",
+  breed: "Exotic shorthair",
+  weight: 5.5,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Female",
+)
+
+puts "Finished! Created #{User.count} users and #{Pet.count} pets."
