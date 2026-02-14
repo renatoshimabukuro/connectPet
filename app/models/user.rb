@@ -3,4 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :role, presence: true, inclusion:{in:["vet", "owner"], allow_nil:false}
+  validates :name, presence: true
 end
