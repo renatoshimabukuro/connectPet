@@ -38,6 +38,10 @@ class ClinicsController < ApplicationController
   end
 
   private
+  # def check_if_vet
+
+  # end
+
   def clinic_params
     params.require(:clinic).permit.(:fields, :clinic_name, :contact, :species)
   end
