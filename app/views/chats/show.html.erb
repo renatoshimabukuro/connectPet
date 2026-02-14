@@ -1,0 +1,17 @@
+<h2>Chat about <%= @chat.pet.name %></h2>
+
+<div id="messages">
+  <% @messages.each do |message| %>
+    <p>
+      <strong><%= message.user.email %>:</strong>
+      <%= message.contents %>
+    </p>
+  <% end %>
+</div>
+
+<hr>
+
+<%= form_with model: [@user, @chat, @message] do |f| %>
+  <%= f.text_area :contents %>
+  <%= f.submit "Send" %>
+<% end %>

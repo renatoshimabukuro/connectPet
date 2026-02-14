@@ -1,0 +1,11 @@
+<h1>Your Chats</h1>
+
+<%= link_to "Start New Chat", new_user_chat_path, method: :post %>
+
+<ul>
+<% @chats.each do |chat| %>
+    <li>
+      <%= link_to "Chat about #{chat.pet.name}", user_chat_path(@user, chat) %>
+    </li>
+  <% end %>
+</ul>
