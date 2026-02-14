@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_many :vet_chats, class_name: "Chat", foreign_key: :vet_id, dependent: :destroy
   # has many messages regardless of role and messages are dependent on chat to persist
   has_many :messages, dependent: :destroy
+  has_many :pets, dependent: :destroy
 end

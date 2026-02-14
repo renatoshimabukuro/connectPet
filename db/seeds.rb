@@ -1,110 +1,116 @@
-puts "Cleaning database..."
+# This file should ensure the existence of records required to run the application in every environment (production,
+# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
+# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+#
+# Example:
+#
+#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
+#     MovieGenre.find_or_create_by!(name: genre_name)
+#   end
 
-Message.destroy_all
-Chat.destroy_all
-Pet.destroy_all
+puts "Cleaning database..."
 User.destroy_all
 
 puts "Creating users..."
-
-owner1 = User.create!(
-  email: "owner1@test.com",
+katie = User.create!(
+  name: "Katie",
+  email: "katie@owner.com",
   password: "password123",
-  password_confirmation: "password123",
-  role: "owner",
-  name: "Alice Tanaka",
-  address: "Tokyo"
+  role: "owner"
 )
 
-owner2 = User.create!(
-  email: "owner2@test.com",
+renato = User.create!(
+  name: "Renato",
+  email: "renato@owner.com",
   password: "password123",
-  password_confirmation: "password123",
-  role: "owner",
-  name: "Ken Suzuki",
-  address: "Osaka"
+  role: "owner"
 )
 
-vet1 = User.create!(
-  email: "vet1@test.com",
+troy = User.create!(
+  name: "Troy",
+  email: "troy@owner.com",
   password: "password123",
-  password_confirmation: "password123",
-  role: "vet",
-  name: "Dr. Sato",
-  address: "Yokohama"
+  role: "owner"
 )
 
-vet2 = User.create!(
-  email: "vet2@test.com",
+vet = User.create!(
+  name: "Patrick Gregory House",
+  email: "patrick@vet.com",
   password: "password123",
-  password_confirmation: "password123",
-  role: "vet",
-  name: "Dr. Williams",
-  address: "Nagoya"
+  role: "vet"
 )
 
 puts "Creating pets..."
-
-pet1 = Pet.create!(
-  user: owner1,
-  name: "Mochi",
-  dob: Date.new(2022, 5, 10),
-  species: "Dog",
-  breed: "Shiba Inu",
-  microchip: "MC001",
-  weight: 8.5,
-  current_meds: "None",
-  vacc_status: "Up to date",
-  notes: "Very energetic"
-)
-
-pet2 = Pet.create!(
-  user: owner2,
-  name: "Luna",
-  dob: Date.new(2021, 3, 3),
+Pet.create!(
+  user: katie,
+  name: "Raye",
+  dob: Date.new(2021, 8, 12),
   species: "Cat",
-  breed: "Scottish Fold",
-  microchip: "MC002",
-  weight: 4.2,
-  current_meds: "Vitamin supplements",
-  vacc_status: "Up to date",
-  notes: "Shy but friendly"
+  breed: "Mixed black",
+  weight: 4.8,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Male",
 )
 
-puts "Creating chats..."
-
-chat1 = Chat.create!(
-  owner: owner1,
-  vet: vet1,
-  pet: pet1
+Pet.create!(
+  user: katie,
+  name: "Percy",
+  dob: Date.new(2021, 8, 12),
+  species: "Cat",
+  breed: "Mixed orange",
+  weight: 5,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Male",
 )
 
-chat2 = Chat.create!(
-  owner: owner2,
-  vet: vet2,
-  pet: pet2
+Pet.create!(
+  user: katie,
+  name: "Cory",
+  dob: Date.new(2024, 10, 22),
+  species: "Cat",
+  breed: "Mixed black",
+  weight: 5.2,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Male",
 )
 
-puts "Creating messages..."
+Pet.create!(
+  user: renato,
+  name: "Maple",
+  dob: Date.new(2025, 4, 30),
+  species: "Dog",
+  breed: "Toy poodle",
+  weight: 4.5,
+  vacc_status: "Vaccinated",
+  fixed: false,
+  gender: "Female",
+)
 
-# Chat 1 conversation
-Message.create!(chat: chat1, user: owner1, contents: "Hello Doctor, Mochi has been coughing.")
-Message.create!(chat: chat1, user: vet1, contents: "How long has this been happening?")
-Message.create!(chat: chat1, user: owner1, contents: "About two days.")
-Message.create!(chat: chat1, user: vet1, contents: "Any changes in appetite?")
-Message.create!(chat: chat1, user: owner1, contents: "No, appetite is normal.")
-Message.create!(chat: chat1, user: vet1, contents: "Please bring Mochi in tomorrow at 10am.")
+Pet.create!(
+  user: troy,
+  name: "Gabby",
+  dob: Date.new(2016, 5, 31),
+  species: "Cat",
+  breed: "Exotic shorthair",
+  weight: 5.5,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Male",
+)
 
-# Chat 2 conversation
-Message.create!(chat: chat2, user: owner2, contents: "Hi Doctor, Luna is not eating much.")
-Message.create!(chat: chat2, user: vet2, contents: "Has she been vomiting?")
-Message.create!(chat: chat2, user: owner2, contents: "No vomiting, just low appetite.")
-Message.create!(chat: chat2, user: vet2, contents: "Let's schedule a checkup this week.")
-Message.create!(chat: chat2, user: owner2, contents: "Thank you, that would be great.")
+Pet.create!(
+  user: troy,
+  name: "Jade",
+  dob: Date.new(2020, 4, 19),
+  species: "Cat",
+  breed: "Exotic shorthair",
+  weight: 5.5,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Female",
+)
 
-puts "Seeding complete!"
-puts "Created:"
-puts "- 4 Users"
-puts "- 2 Pets"
-puts "- 2 Chats"
-puts "- #{Message.count} Messages"
+puts "Finished! Created #{User.count} users and #{Pet.count} pets."
