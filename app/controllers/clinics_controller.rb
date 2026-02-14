@@ -5,6 +5,7 @@ class ClinicsController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
     @clinic = Clinic.find(params[:id])
   end
 
@@ -18,7 +19,9 @@ class ClinicsController < ApplicationController
 
   def create
     @clinic = Clinic.new(clinic_params)
-    @clinic.save
+    @clinic.user = current_user
+
+    @clinic.address = current_user.address
 
     # redirect_to clinics_path
   end
