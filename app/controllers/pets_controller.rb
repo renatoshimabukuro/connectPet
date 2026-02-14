@@ -58,7 +58,7 @@ private
   end
 
   def set_pet
-      # Search only within the @user's pets for safety
+      # this searches only within the @user's pets for safety.........
       @pet = @user.pets.find(params[:id])
   rescue ActiveRecord::RecordNotFound
       redirect_to user_pets_path(@user), alert: "Pet not found or access denied."
