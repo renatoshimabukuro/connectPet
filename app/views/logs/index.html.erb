@@ -1,1 +1,14 @@
-Hello
+<h2><%= @pet.name %>'s Health Logs</h2>
+
+<hr>
+
+<% if @logs.any? %>
+  <% @logs.each do |log| %>
+    <div class="card mb-2 p-3">
+      <strong>Date:</strong> <%= log.date %><br>
+      <strong>Health:</strong> <%= log.health %>
+    </div>
+  <% end %>
+<% else %>
+  <p>No logs yet.</p>
+<% end %>
