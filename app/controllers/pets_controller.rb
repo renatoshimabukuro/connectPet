@@ -1,8 +1,7 @@
 class PetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :set_pet, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_pet, only: [:show]
 
   # GET /users/:user_id/pets
   def index
@@ -31,30 +30,16 @@ class PetsController < ApplicationController
     end
   end
 
-  # GET /users/:user_id/pets/:id/edit
-  def edit
-  end
-
-  # PATCH /users/:user_id/pets/:id
-  def update
-      if @pet.update(pet_params)
-        redirect_to [@user, @pet], notice: 'Pet profile was updated.'
-      else
-        render :edit, status: :unprocessable_entity
-      end
-  end
-
-# DELETE /users/:user_id/pets/:id
-  def destroy
-    @pet.destroy
-      redirect_to user_pets_path(@user), notice: 'Pet was removed.'
-  end
-
-private
+  private
 
   def set_user
-      # using this so that you can ignore the ID in the URL and always use the logged in user
-    @user = current_user
+    # this finds the user from the URL
+    @user = User.find(params[:user_id])
+
+    # this stop the request if the URL ID doesn't match the logged in user
+    if @user != current_user
+      redirect_to root_path, alert: "Unauthorized access."
+    end
   end
 
   def set_pet
@@ -68,8 +53,7 @@ private
       params.require(:pet).permit(
         :name, :dob, :species, :breed, :microchip,
         :weight, :current_meds, :vacc_status, :notes,
-        :insurance, :fixed?, :gender
+        :insurance, :fixed, :gender
       )
   end
-
 end
