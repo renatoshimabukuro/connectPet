@@ -1,6 +1,6 @@
 <h2>Chat about <%= @chat.pet.name %></h2>
 
-<div id="messages">
+<div>
   <% @messages.each do |message| %>
     <p>
       <strong><%= message.user.email %>:</strong>

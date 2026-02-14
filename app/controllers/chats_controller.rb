@@ -4,15 +4,19 @@ class ChatsController < ApplicationController
   before_action :set_chat, only: [:show]
 
   def index
+    # Make it so we can only see chats where the user is either owner or vet -> could be made better with pundit?
     @chats = Chat.where("owner_id = ? OR vet_id = ?", @user.id, @user.id)
   end
 
   def show
+    #After set chat
+    #messages shown by order
     @messages = @chat.messages.includes(:user).order(:created_at)
     @message = @chat.messages.build
   end
 
   def new
+    #make a new chat - I want to refactor so you can make a new chat and new message at the same time
     @chat = Chat.new
   end
 
@@ -29,12 +33,14 @@ class ChatsController < ApplicationController
   end
 
   def edit
-
+    #To do? Do we want edit?
   end
 
   def update
-
+    #To do? Do we want update?
   end
+
+  #Add destroy?
 
   private
 
@@ -53,5 +59,4 @@ class ChatsController < ApplicationController
   def chat_params
     params.require(:chat).permit(:vet_id, :pet_id)
   end
-
 end
