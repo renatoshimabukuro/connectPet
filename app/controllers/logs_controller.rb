@@ -7,6 +7,14 @@ class LogsController < ApplicationController
     @logs = @pet.logs.order(date: :desc)
   end
 
+  # new - To do
+  #
+  #create - To do
+  #
+  #edit - To do
+  #
+  #update - To do
+
   private
 
   def set_user
