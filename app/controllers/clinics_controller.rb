@@ -5,7 +5,6 @@ class ClinicsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @clinic = Clinic.find(params[:id])
   end
 
@@ -18,32 +17,32 @@ class ClinicsController < ApplicationController
   end
 
   def create
-    @clinic = Clinic.new(clinic_params)
-    @clinic.user = current_user
+      @clinic = Clinic.new(clinic_params)
+      @clinic.save
 
-    @clinic.address = current_user.address
-
-    # redirect_to clinics_path
+      if @clinic.save
+        redirect_to @clinic, notice: "Clinic was registered successfully"
+      else
+        render :new, status: :unprocessable_entity
+      end
   end
 
   def update
     @clinic = Clinic.find(params[:id])
-    @clinic.update(clinic_params)
+    if @clinic.update(clinic_params)
+      redirect_to @clinic, notice: "Clinic was updated"
+    else
+      render :new, status: :unprocessable_entity
+    end
 
-    # redirect_to clinics_path(@clinic)
   end
 
   def destroy
     @clinic = Clinic.find(params[:id])
     @clinic.destroy
-
-    # redirect_to clinics_path, status :see_other
   end
 
   private
-  # def check_if_vet
-
-  # end
 
   def clinic_params
     params.require(:clinic).permit.(:fields, :clinic_name, :contact, :species)

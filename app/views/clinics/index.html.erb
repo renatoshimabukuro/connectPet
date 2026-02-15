@@ -1,6 +1,20 @@
 <div class="container">
   <h1>Clinics</h1>
-  <% @clinics.each do |clinic| %>
-  <p><%= clinic.clinic_name %></p>
-  <% end %>
+  <div>
+    <% @clinics.each do |clinic| %>
+      <h2><%= link_to clinic.clinic_name, clinic %></h2>
+      <h4>We provide medical care for</h4>
+      <% clinic.species.each do |specie| %>
+        <p><%= specie %></p>
+      <% end %>
+      <h4>Fields</h4>
+      <% clinic.field.each do |field| %>
+        <p><%= field %></p>
+      <% end %>
+      <h4>Contact</h4>
+      <p><%= clinic.contact %></p>
+      <h4>Address</h4>
+      <p><%= clinic.user.address %></p>
+    <% end %>
+  </div>
 </div>

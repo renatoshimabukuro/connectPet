@@ -1,7 +1,5 @@
-<h1>Clinic</h1>
+<div class="container">
+  <%= render @clinic %>
 
-<p>Clinic: <%= clinic.clinic_name %></p>
-<p>Contact: <%= clinic.contact  %></p>
-<p>Species: <%= clinic.species  %></p>
-<p>Field: <%= clinic.field  %></p>
-<p>Address: <%= clinic.user.address  %></p>
+  <%= link_to "Back to clinics", clinics_path %>
+</div>
