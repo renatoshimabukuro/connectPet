@@ -6,4 +6,4 @@ class User < ApplicationRecord
   validates :role, presence: true, inclusion:{in:["vet", "owner"], allow_nil:false}
   validates :name, presence: true
   has_many :pets, dependent: :destroy
-end
+  has_a :clinic, dependent: :destroy
