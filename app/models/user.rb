@@ -7,3 +7,4 @@ class User < ApplicationRecord
   validates :name, presence: true
   has_many :pets, dependent: :destroy
   has_a :clinic, dependent: :destroy
+end
