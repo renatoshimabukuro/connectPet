@@ -47,10 +47,24 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_17_123117) do
 
   create_table "logs", force: :cascade do |t|
     t.bigint "pet_id", null: false
-    t.string "health"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "attr1"
+    t.integer "attr1_value"
+    t.text "attr1_memo"
+    t.string "attr2"
+    t.integer "attr2_value"
+    t.text "attr2_memo"
+    t.string "attr3"
+    t.integer "attr3_value"
+    t.text "attr3_memo"
+    t.string "attr4"
+    t.integer "attr4_value"
+    t.text "attr4_memo"
+    t.string "attr5"
+    t.integer "attr5_value"
+    t.text "attr5_memo"
     t.index ["pet_id"], name: "index_logs_on_pet_id"
   end
 
@@ -59,7 +73,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_17_123117) do
     t.bigint "chat_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -109,5 +125,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_17_123117) do
   add_foreign_key "friendships", "users", column: "vet_id"
   add_foreign_key "logs", "pets"
   add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "pets", "users"
 end
