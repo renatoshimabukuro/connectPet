@@ -132,13 +132,13 @@ puts "Creating chats..."
 
 chat1 = Chat.create!(
   owner: katie,
-  vet: vet,
+  vet: vet01,
   pet: raye
 )
 
 chat2 = Chat.create!(
   owner: renato,
-  vet: vet,
+  vet: vet01,
   pet: maple
 )
 
@@ -146,17 +146,17 @@ puts "Creating messages..."
 
 # Chat 1 conversation
 Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been coughing.")
-Message.create!(chat: chat1, user: vet, contents: "How long has this been happening?")
+Message.create!(chat: chat1, user: vet01, contents: "How long has this been happening?")
 Message.create!(chat: chat1, user: katie, contents: "About two days.")
-Message.create!(chat: chat1, user: vet, contents: "Any changes in appetite?")
+Message.create!(chat: chat1, user: vet01, contents: "Any changes in appetite?")
 Message.create!(chat: chat1, user: katie, contents: "No, appetite is normal.")
-Message.create!(chat: chat1, user: vet, contents: "Please bring Raye in tomorrow at 10am.")
+Message.create!(chat: chat1, user: vet01, contents: "Please bring Raye in tomorrow at 10am.")
 
 # Chat 2 conversation
 Message.create!(chat: chat2, user: renato, contents: "Hi Doctor, Maple is not eating much.")
-Message.create!(chat: chat2, user: vet, contents: "Has she been vomiting?")
+Message.create!(chat: chat2, user: vet01, contents: "Has she been vomiting?")
 Message.create!(chat: chat2, user: renato, contents: "No vomiting, just low appetite.")
-Message.create!(chat: chat2, user: vet, contents: "Let's schedule a checkup this week.")
+Message.create!(chat: chat2, user: vet01, contents: "Let's schedule a checkup this week.")
 Message.create!(chat: chat2, user: renato, contents: "Thank you, that would be great.")
 
 puts "Creating clinics..."
