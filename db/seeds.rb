@@ -37,10 +37,27 @@ troy = User.create!(
   role: "owner"
 )
 
-vet = User.create!(
+vet01 = User.create!(
   name: "Patrick Gregory House",
   email: "patrick@vet.com",
   password: "password123",
+  address: "123-4567 Tokyo, Meguro Higashi-Meguro 1-2-3",
+  role: "vet"
+)
+
+vet02 = User.create!(
+  name: "James Hetfield",
+  email: "james@vet.com",
+  password: "password123",
+  address: "456-7890 Tokyo Machida, Kanamori 1-2-3",
+  role: "vet"
+)
+
+vet03 = User.create!(
+  name: "John Sykes",
+  email: "john@vet.com",
+  password: "password123",
+  address: "234-5678 Kanagawa Yokohama, Kanai 1-2-3",
   role: "vet"
 )
 
@@ -126,3 +143,30 @@ Log.create!(pet: raye, health: "Toilet - 5", date: Date.today)
 Log.create!(pet: raye, health: "Vomiting", date: Date.today)
 
 puts "Created #{Log.count} logs"
+puts "Creating clinics..."
+
+Clinic.create!(
+  field: ["cardiology", "dentist"],
+  clinic_name:"Pet Forest",
+  contact: "contact@pet_forest.com",
+  species: ["cats", "dogs", "horses"],
+  user: vet01
+  )
+
+  Clinic.create!(
+  field: ["Oncology","surgery"],
+  clinic_name:"SOS Pet",
+  contact: "contact@sospet.com",
+  species: ["cats", "dogs", "birds"],
+  user: vet02
+  )
+
+  Clinic.create!(
+  field: ["Oncology"],
+  clinic_name:"SOS Pet",
+  contact: "contact@sospet.com",
+  species: ["cats", "dogs", "birds"],
+  user: vet03
+  )
+
+puts "Finished! Created #{User.count} users, #{Pet.count} pets and #{Clinic.count} clinics"
