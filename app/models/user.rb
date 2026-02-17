@@ -13,4 +13,5 @@ class User < ApplicationRecord
   # has many messages regardless of role and messages are dependent on chat to persist
   has_many :messages, dependent: :destroy
   has_many :pets, dependent: :destroy
+  has_one :clinic, dependent: :destroy
 end

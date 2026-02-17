@@ -1,4 +1,10 @@
 puts "Cleaning database..."
+
+Log.destroy_all
+Message.destroy_all
+Chat.destroy_all
+Clinic.destroy_all
+Pet.destroy_all
 User.destroy_all
 
 puts "Creating users..."
@@ -23,10 +29,27 @@ troy = User.create!(
   role: "owner"
 )
 
-vet = User.create!(
+vet01 = User.create!(
   name: "Patrick Gregory House",
   email: "patrick@vet.com",
   password: "password123",
+  address: "123-4567 Tokyo, Meguro Higashi-Meguro 1-2-3",
+  role: "vet"
+)
+
+vet02 = User.create!(
+  name: "James Hetfield",
+  email: "james@vet.com",
+  password: "password123",
+  address: "456-7890 Tokyo Machida, Kanamori 1-2-3",
+  role: "vet"
+)
+
+vet03 = User.create!(
+  name: "John Sykes",
+  email: "john@vet.com",
+  password: "password123",
+  address: "234-5678 Kanagawa Yokohama, Kanai 1-2-3",
   role: "vet"
 )
 
@@ -135,3 +158,31 @@ Message.create!(chat: chat2, user: vet, contents: "Has she been vomiting?")
 Message.create!(chat: chat2, user: renato, contents: "No vomiting, just low appetite.")
 Message.create!(chat: chat2, user: vet, contents: "Let's schedule a checkup this week.")
 Message.create!(chat: chat2, user: renato, contents: "Thank you, that would be great.")
+
+puts "Creating clinics..."
+
+Clinic.create!(
+  field: ["cardiology", "dentist"],
+  clinic_name:"Pet Forest",
+  contact: "contact@pet_forest.com",
+  species: ["cats", "dogs", "horses"],
+  user: vet01
+  )
+
+  Clinic.create!(
+  field: ["Oncology","surgery"],
+  clinic_name:"SOS Pet",
+  contact: "contact@sospet.com",
+  species: ["cats", "dogs", "birds"],
+  user: vet02
+  )
+
+  Clinic.create!(
+  field: ["Oncology"],
+  clinic_name:"SOS Pet",
+  contact: "contact@sospet.com",
+  species: ["cats", "dogs", "birds"],
+  user: vet03
+  )
+
+puts "Finished! Created #{User.count} users, #{Pet.count} pets and #{Clinic.count} clinics"

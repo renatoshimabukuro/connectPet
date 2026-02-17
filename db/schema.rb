@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_14_091108) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_15_071301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,13 +26,13 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_14_091108) do
   end
 
   create_table "clinics", force: :cascade do |t|
-    t.string "field"
     t.string "clinic_name"
     t.string "contact"
-    t.string "species"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.string "species", default: [], array: true
+    t.string "field", default: [], array: true
     t.index ["user_id"], name: "index_clinics_on_user_id"
   end
 
