@@ -1,0 +1,14 @@
+<%= simple_form_for ([@user,@pet]) do |f| %>
+  <%= f.input :name, label: 'Your pet name', error: 'Pet name is mandatory' %>
+  <%= f.input :dob, placeholder: 'date of birth.' %>
+  <%= f.input :species, placeholder: 'cat, dog.' %>
+  <%= f.input :breed, placeholder: 'breed.' %>
+  <%= f.input :weight, placeholder: 'weight' %>
+  <%= f.input :vacc_status, placeholder: 'vaccine' %>
+  <%= f.input :fixed, placeholder: 'fixed' %>
+  <%= f.input :gender, placeholder: 'gender' %>
+  <%= f.input :photo, as: :file %>
+  <%= f.button :submit %>
+<% end %>
+
+  <% @test = cl_image_tag pet.photo.key, height: 300, width: 400, crop: :fill %>
