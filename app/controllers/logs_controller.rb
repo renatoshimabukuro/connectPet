@@ -24,10 +24,6 @@ class LogsController < ApplicationController
     end
   end
 
-  # new - To do
-  #
-  #create - To do
-  #
   #edit - To do
   #
   #update - To do
