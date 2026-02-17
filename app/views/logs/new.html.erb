@@ -6,11 +6,11 @@
       <!-- Recieve the attribute names -->
       <% title = @log.send("attr#{i}") %>
       <!-- Skip if blank -->
+      <h5> <%= title %> </h5>
       <% next if title.blank? %>
       <%= f.input "attr#{i}", as: :hidden %>
-      <%= f.input "attr#{i}_value", label: "#{title} Value" %>
+      <%= f.input "attr#{i}_value", collection: 0..5, label: "#{title} Value" %>
       <%= f.input "attr#{i}_memo", as: :text, label: "#{title} Memo" %>
-      <h5> <%= title %> </h5>
     <% end %>
     <%= f.button :submit, "Create Log", class: "btn btn-primary" %>
   <% end %>
