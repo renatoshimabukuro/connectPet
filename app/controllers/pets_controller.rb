@@ -10,6 +10,8 @@ class PetsController < ApplicationController
 
   # GET /users/:user_id/pets/:id
   def show
+    # @pets = Pet.find(params[:id])
+    set_pet
   end
 
   # GET /users/:user_id/pets/new
@@ -53,7 +55,7 @@ class PetsController < ApplicationController
       params.require(:pet).permit(
         :name, :dob, :species, :breed, :microchip,
         :weight, :current_meds, :vacc_status, :notes,
-        :insurance, :fixed, :gender
+        :insurance, :fixed, :gender, :id
       )
   end
 end
