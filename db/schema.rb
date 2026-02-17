@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_15_071301) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_17_123117) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,6 +78,11 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_15_071301) do
     t.string "insurance"
     t.boolean "fixed"
     t.string "gender"
+    t.string "attr1"
+    t.string "attr2"
+    t.string "attr3"
+    t.string "attr4"
+    t.string "attr5"
     t.index ["user_id"], name: "index_pets_on_user_id"
   end
 
