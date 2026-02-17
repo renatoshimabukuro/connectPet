@@ -9,6 +9,10 @@
 #   end
 
 puts "Cleaning database..."
+Log.destroy_all
+Message.destroy_all
+Chat.destroy_all
+Pet.destroy_all
 User.destroy_all
 
 puts "Creating users..."
@@ -58,7 +62,7 @@ vet03 = User.create!(
 )
 
 puts "Creating pets..."
-Pet.create!(
+raye = Pet.create!(
   user: katie,
   name: "Raye",
   dob: Date.new(2021, 8, 12),
@@ -130,6 +134,15 @@ Pet.create!(
   gender: "Female",
 )
 
+puts "Finished! Created #{User.count} users and #{Pet.count} pets."
+
+puts "Creating logs for Raye"
+
+Log.create!(pet: raye, health: "Food - 5", date: Date.today)
+Log.create!(pet: raye, health: "Toilet - 5", date: Date.today)
+Log.create!(pet: raye, health: "Vomiting", date: Date.today)
+
+puts "Created #{Log.count} logs"
 puts "Creating clinics..."
 
 Clinic.create!(
