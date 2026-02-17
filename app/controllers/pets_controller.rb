@@ -10,6 +10,7 @@ class PetsController < ApplicationController
 
   # GET /users/:user_id/pets/:id
   def show
+    @log = Log.new
   end
 
   # GET /users/:user_id/pets/new
