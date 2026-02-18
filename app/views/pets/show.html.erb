@@ -24,9 +24,7 @@
       <%= @pet.fixed ? (@pet.gender == 'Male' ? 'Neutered' : 'Spayed') : 'Intact' %>
     </p>
   </section>
-  <%# Section Title with extra spacing %>
   <h2 class="details-title"><%= @pet.name %>’s Details</h2>
-  <%# Responsive Info Card Grid %>
   <div class="vital-grid">
     <%# DOB %>
     <div class="vital-card">
@@ -71,7 +69,7 @@
       <span class="card-value"><%= @pet.notes.presence || "No notes yet" %></span>
     </div>
   </div>
-  <%# Responsive Action Buttons %>
+  <%# Buttons %>
   <div class="pet-actions-footer">
     <button class="btn-share">
       <i class="fa-solid fa-download"></i> Share <%= @pet.name %>’s Profile

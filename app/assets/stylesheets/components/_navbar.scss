@@ -30,7 +30,6 @@
 .nav-items-right {
   display: flex;
   align-items: center;
-  // Reduced gap slightly for mobile so Home/Messages don't feel cramped
   gap: 15px;
 
   @media (min-width: 768px) {
@@ -42,7 +41,7 @@
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
-    white-space: nowrap; // Prevents "Messages" from wrapping to two lines
+    white-space: nowrap;
     transition: opacity 0.2s;
     &:hover { opacity: 0.8; }
   }
