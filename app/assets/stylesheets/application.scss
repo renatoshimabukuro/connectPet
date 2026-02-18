@@ -1,12 +1,21 @@
-// Graphical variables
-@import "config/fonts";
+// 1. COLORS FIRST (Definitions)
 @import "config/colors";
+@import "config/fonts";
+
+// 2. BOOTSTRAP VARIABLES (Settings)
 @import "config/bootstrap_variables";
 
-// External libraries
+// 3. EXTERNAL LIBRARIES (The Engines)
 @import "bootstrap";
 @import "font-awesome";
 
-// Your CSS partials
+// 4. YOUR CSS PARTIALS (The Design)
 @import "components/index";
 @import "pages/index";
+
+@import "components/navbar";
+@import "components/avatar";
+@import "components/cards";
+@import "components/buttons";
+@import "components/layout";
+@import "pages/show";

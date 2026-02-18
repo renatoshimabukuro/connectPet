@@ -1,0 +1,100 @@
+@import "config/colors";
+@import "config/fonts";
+
+.pet-show-container {
+  width: 100%;
+  background-color: $soft-cream;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 60px;
+}
+
+// Layout for the Hero section text
+.pet-hero-section {
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 2.8rem;
+    color: $dark-text;
+  }
+
+  .pet-subtitle {
+    color: #636e72;
+    font-size: 1.1rem;
+    margin-top: 8px;
+    i { color: $forest-moss; }
+  }
+}
+
+.details-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: $dark-text;
+  margin-top: 15px;
+  margin-bottom: 35px;
+}
+
+
+.vital-grid {
+  display: grid;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto 40px auto;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+  }
+}
+
+.vital-card {
+  background-color: $sage-leaf;
+  border-radius: 22px;
+  padding: 20px;
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 125px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease;
+
+  &:hover { transform: translateY(-3px); }
+
+  .card-icon { font-size: 1.7rem; margin-bottom: auto; opacity: 0.9; }
+  .card-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .card-value { font-size: 1.05rem; font-weight: 600; }
+
+  .edit-pencil {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 0.85rem;
+    background: rgba(255,255,255,0.25);
+    padding: 6px;
+    border-radius: 50%;
+  }
+}
+
+.pet-actions-footer {
+  width: 90%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+}
