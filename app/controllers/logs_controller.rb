@@ -7,13 +7,14 @@ class LogsController < ApplicationController
     @logs = @pet.logs.order(date: :desc)
   end
 
-  # new - To do
-  #
-  #create - To do
-  #
-  #edit - To do
-  #
-  #update - To do
+  def create
+    @log = @pet.logs.build(log_params)
+    if @log.save
+      redirect_to [@user, @pet], notice: "Log entry added."
+    else
+      render "pets/show", status: :unprocessable_entity
+    end
+  end
 
   private
 
@@ -25,4 +26,14 @@ class LogsController < ApplicationController
     @pet = @user.pets.find(params[:pet_id])
   end
 
+  def log_params
+    params.require(:log).permit(
+      :date,
+      :attr1, :attr1_value, :attr1_memo,
+      :attr2, :attr2_value, :attr2_memo,
+      :attr3, :attr3_value, :attr3_memo,
+      :attr4, :attr4_value, :attr4_memo,
+      :attr5, :attr5_value, :attr5_memo
+    )
+  end
 end
