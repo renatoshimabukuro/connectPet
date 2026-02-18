@@ -1,15 +1,15 @@
-// 1. COLORS FIRST (Definitions)
+// COLORS FIRST
 @import "config/colors";
 @import "config/fonts";
 
-// 2. BOOTSTRAP VARIABLES (Settings)
+// BOOTSTRAP VARIABLES
 @import "config/bootstrap_variables";
 
-// 3. EXTERNAL LIBRARIES (The Engines)
+// EXTERNAL LIBRARIES
 @import "bootstrap";
 @import "font-awesome";
 
-// 4. YOUR CSS PARTIALS (The Design)
+// YOUR CSS PARTIALS
 @import "components/index";
 @import "pages/index";
 
