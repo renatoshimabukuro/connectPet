@@ -72,6 +72,9 @@ raye = Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
+  attr1: "Food",
+  attr2: "Vomit",
+  attr3: "Toilet"
 )
 
 Pet.create!(
@@ -84,6 +87,9 @@ Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
+  attr1: "Food",
+  attr2: "Vomit",
+  attr3: "Toilet"
 )
 
 Pet.create!(
@@ -96,6 +102,8 @@ Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
+  attr1: "Food",
+  attr2: "Toilet"
 )
 
 Pet.create!(
@@ -134,16 +142,7 @@ Pet.create!(
   gender: "Female",
 )
 
-puts "Finished! Created #{User.count} users and #{Pet.count} pets."
-
-puts "Creating logs for Raye"
-
-Log.create!(pet: raye, health: "Food - 5", date: Date.today)
-Log.create!(pet: raye, health: "Toilet - 5", date: Date.today)
-Log.create!(pet: raye, health: "Vomiting", date: Date.today)
-
-puts "Created #{Log.count} logs"
-puts "Creating clinics..."
+puts "Making clinics"
 
 Clinic.create!(
   field: ["cardiology", "dentist"],
@@ -153,7 +152,7 @@ Clinic.create!(
   user: vet01
   )
 
-  Clinic.create!(
+Clinic.create!(
   field: ["Oncology","surgery"],
   clinic_name:"SOS Pet",
   contact: "contact@sospet.com",
@@ -161,12 +160,30 @@ Clinic.create!(
   user: vet02
   )
 
-  Clinic.create!(
+Clinic.create!(
   field: ["Oncology"],
   clinic_name:"SOS Pet",
   contact: "contact@sospet.com",
   species: ["cats", "dogs", "birds"],
   user: vet03
   )
+
+puts "Finished making clinics"
+
+puts "Creating logs for Raye"
+
+Log.create!(pet: raye,
+  attr1: "Food", attr1_value: "3", attr1_memo: "50g",
+  attr2: "Vomit", attr2_value: "", attr2_memo: "Threw up in the cat room!",
+  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning",
+  date: Date.today)
+
+Log.create!(pet: raye,
+  attr1: "Food", attr1_value: "4", attr1_memo: "45g",
+  attr2: "Vomit", attr2_value: "0", attr2_memo: "",
+  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
+  date: Date.yesterday)
+
+puts "Created #{Log.count} logs"
 
 puts "Finished! Created #{User.count} users, #{Pet.count} pets and #{Clinic.count} clinics"
