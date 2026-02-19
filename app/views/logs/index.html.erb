@@ -2,11 +2,12 @@
 
 <hr>
 
+<%= link_to 'Add New Log', new_user_pet_log_path(@user, @pet), class: 'btn btn-primary mt-3' %>
+
 <% if @logs.any? %>
   <% @logs.each do |log| %>
     <div class="card mb-2 p-3">
-      <strong>Date:</strong> <%= log.date %><br>
-      <strong>Health:</strong> <%= log.health %>
+      <%= link_to "Date: #{log.date}", user_pet_log_path(@user, @pet, log) %>
     </div>
   <% end %>
 <% else %>

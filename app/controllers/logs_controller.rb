@@ -16,6 +16,10 @@ class LogsController < ApplicationController
     end
   end
 
+  def show
+    set_log
+  end
+
   private
 
   def set_user
@@ -24,6 +28,10 @@ class LogsController < ApplicationController
 
   def set_pet
     @pet = @user.pets.find(params[:pet_id])
+  end
+
+  def set_log
+    @log = @pet.logs.find(params[:id])
   end
 
   def log_params
