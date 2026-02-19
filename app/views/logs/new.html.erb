@@ -31,4 +31,24 @@
     <% end %>
   </div>
   ----
+  <div>
+    <%= simple_form_for [@user, @pet, @log] do |f| %>
+      <%= f.input :date, as: :date %>
+      <% (1..5).each do |i| %>
+        <% title = @pet.read_attribute("attr#{i}")%>
+        <% next if title.blank? %>
+        <div>
+          <h5> <%= title %> </h5>
+          <div>
+            <% (1..5).each do |v| %>
+              <button type="button"> <%= v %> </button>
+            <% end %>
+            <button type="button"> + </button>
+          </div>
+          <hr>
+        </div>
+      <% end %>
+      <%= f.button :submit, "Create log", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
