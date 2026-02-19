@@ -1,18 +1,34 @@
-<h1> Make a new log for <%= @pet.name %> </h1>
-<div class="border">
-  <%= simple_form_for [@user, @pet, @log] do |f| %>
-    <%= f.input :date, as: :date %>
-    <% (1..5).each do |i| %>
-      <!-- Recieve the attribute names -->
-      <% title = @pet.read_attribute("attr#{i}") %>
-      <!-- Skip if blank -->
-      <% next if title.blank? %>
-      <h5> <%= title %> </h5>
-      <%= f.input "attr#{i}", as: :hidden %>
-      <%= f.input "attr#{i}_value", collection: 0..5, label: "#{title} Value" %>
-      <%= f.input "attr#{i}_memo", as: :text, label: "#{title} Memo" %>
+<div class= "pet-show-container">
+  <section class="pet-hero-section">
+    <div class="avatar-carousel">
+      <div class="avatar-secondary"></div>
+      <div class="avatar-main">
+        <%# if @pet.photo.attached? %>
+        <%#= image_tag @pet.photo, crop: :fill %>
+        <%# else %>
+        <i class="fa-solid fa-paw" style="font-size: 3rem; color: #D1D8D0;"></i>
+        <%# end %>
+      </div>
+      <div class="avatar-secondary"></div>
+    </div>
+    <h1> Hello, <%= @pet.name %></h1>
+    <h2> How are you feeling today? </h2>
+  </section>
+  <div>
+    <%= simple_form_for [@user, @pet, @log] do |f| %>
+      <%= f.input :date, as: :date %>
+      <% (1..5).each do |i| %>
+        <!-- Recieve the attribute names -->
+        <% title = @pet.read_attribute("attr#{i}") %>
+        <!-- Skip if blank -->
+        <% next if title.blank? %>
+        <h5> <%= title %> </h5>
+        <%= f.input "attr#{i}", as: :hidden %>
+        <%= f.input "attr#{i}_value", collection: 0..5, label: "#{title} Value" %>
+        <%= f.input "attr#{i}_memo", as: :text, label: "#{title} Memo" %>
+      <% end %>
+      <%= f.button :submit, "Create Log", class: "btn btn-primary" %>
     <% end %>
-    <%= f.button :submit, "Create Log", class: "btn btn-primary" %>
-  <% end %>
-  <%= link_to "Back", user_pet_logs_path(@user, @pet), class: 'btn btn-primary mt-3'%>
+    <%= link_to "Back", user_pet_logs_path(@user, @pet), class: 'btn btn-primary mt-3'%>
+  </div>
 </div>
