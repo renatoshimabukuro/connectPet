@@ -18,6 +18,7 @@ class PetsController < ApplicationController
   # GET /users/:user_id/pets/new
   def new
     @pet = Pet.new
+    @user = current_user
   end
 
   # POST /users/:user_id/pets
@@ -56,7 +57,7 @@ class PetsController < ApplicationController
       params.require(:pet).permit(
         :name, :dob, :species, :breed, :microchip,
         :weight, :current_meds, :vacc_status, :notes,
-        :insurance, :fixed, :gender
+        :insurance, :fixed, :gender, :id, :photo
       )
   end
 end

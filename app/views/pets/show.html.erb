@@ -4,11 +4,11 @@
     <div class="avatar-carousel">
       <div class="avatar-secondary"></div>
       <div class="avatar-main">
-        <%# if @pet.photo.attached? %>
-        <%#= image_tag @pet.photo, crop: :fill %>
-        <%# else %>
+        <% if @pet.photo.attached? %>
+        <%= image_tag @pet.photo, crop: :fill %>
+        <% else %>
         <i class="fa-solid fa-paw" style="font-size: 3rem; color: #D1D8D0;"></i>
-        <%# end %>
+        <% end %>
       </div>
       <div class="avatar-secondary"></div>
     </div>
