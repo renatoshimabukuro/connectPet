@@ -4,7 +4,7 @@
     <%= f.input :date, as: :date %>
     <% (1..5).each do |i| %>
       <!-- Recieve the attribute names -->
-      <% title = @pet.attr%>"#{i}"
+      <% title = @pet.read_attribute("attr#{i}") %>
       <!-- Skip if blank -->
       <% next if title.blank? %>
       <h5> <%= title %> </h5>
@@ -14,4 +14,5 @@
     <% end %>
     <%= f.button :submit, "Create Log", class: "btn btn-primary" %>
   <% end %>
+  <%= link_to "Back", user_pet_logs_path(@user, @pet), class: 'btn btn-primary mt-3'%>
 </div>
