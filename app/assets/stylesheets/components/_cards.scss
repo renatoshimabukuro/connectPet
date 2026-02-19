@@ -1,41 +1,55 @@
+// VITAL DETAILS GRID & CARDS - Used to display pet-specific data like DOB, Weight, etc
+
+/**
+ * Grid Container
+ * Controls the responsive layout of the detail cards.
+ */
 .vital-grid {
   display: grid;
   width: 90%;
   max-width: 1000px;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 40px auto; // Centers the grid and adds spacing below
   gap: 15px;
+  // Mobile: 2-column layout with smaller gaps for compactness
   grid-template-columns: 1fr 1fr;
-
+// On larger screens, switch to a 3-column layout and increase the gap for better spacing
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 25px;
   }
 }
 
+/**
+ * Individual Detail Card
+ * A flexible container that holds an icon, label, value, and edit trigger
+ */
 .vital-card {
   background-color: $sage-leaf;
   border-radius: 22px;
   padding: 20px;
-  position: relative;
+  position: relative; // Necessary for absolute positioning of the edit pencil
   color: white;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 125px;
+  flex-direction: column; // Stacks the icon, label, and value vertically
+  justify-content: flex-end; // Anchors text content to the bottom of the card
+  min-height: 125px; // Ensures consistent height across the grid
   box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease; // Smooth lift effect on hover
 
+  // Interactive lift effect
   &:hover {
     transform: translateY(-3px);
   }
 
+  // Top-aligned icon
   .card-icon {
     font-size: 1.8rem;
-    margin-bottom: auto;
+    margin-bottom: auto; // Pushes text to the bottom while keeping the icon at the top
     color: white;
     opacity: 0.9;
   }
 
+  // Small, capitalized header for the data type
   .card-label {
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -45,12 +59,14 @@
     color: rgba(255, 255, 255, 0.9);
   }
 
+  // Main data display (e.g., "Neutered" or "12kg")
   .card-value {
     font-size: 1.05rem;
     font-weight: 600;
     color: white;
   }
 
+  // Floating edit trigger positioned in the top-right corner
   .edit-pencil {
     position: absolute;
     top: 15px;

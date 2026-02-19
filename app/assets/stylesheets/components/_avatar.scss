@@ -1,17 +1,24 @@
+// Basic small circle avatar
 .avatar {
   width: 40px;
   border-radius: 50%;
 }
+
+// Slightly larger version for headers or profile previews
 .avatar-large {
   width: 56px;
   border-radius: 50%;
 }
+
+// Avatar with a white border and soft shadow to pop against colored backgrounds
 .avatar-bordered {
   width: 40px;
   border-radius: 50%;
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
 }
+
+// Square version for specific UI elements like clinic or brand logos
 .avatar-square {
   width: 40px;
   border-radius: 0px;
@@ -19,6 +26,7 @@
   border: white 1px solid;
 }
 
+// Carousel layout for showing multiple pet avatars on the profile page
 .avatar-carousel {
   display: flex;
   align-items: center;
@@ -27,6 +35,7 @@
   margin-bottom: 15px;
   width: 100%;
 
+// Main pet avatar in the Hero section with larger size and more pronounced styling
  .avatar-main {
   width: 130px;
   height: 130px;
@@ -35,7 +44,7 @@
   background: #fff;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 
-
+// Ensures photos/placeholders stay inside the circle
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -44,10 +53,11 @@
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; // this prevents distortion of pet photos
     }
   }
 
+  // Secondary pet avatars in the Hero section, smaller and has a subtle background to differentiate from the main pet
   .avatar-secondary {
     width: 65px;
     height: 65px;

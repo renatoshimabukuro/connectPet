@@ -1,16 +1,26 @@
+/**
+ * Base Button Styles
+ * Standardizes layout and responsiveness for all primary action buttons.
+ */
 .btn-share, .btn-log {
-  width: 100%;
+  width: 100%; // Full-width on mobile for better thumb-reach
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 10px; // Spacing between FontAwesome icons and text
   font-weight: 700;
   border-radius: 15px;
 
-  @media (min-width: 768px) { width: 280px; }
+  @media (min-width: 768px) { width: 280px; } // Tablet/Desktop: Prevents buttons from stretching too wide on large screens
 }
 
+/**
+ * Share Button
+ * Secondary action used for exporting or sharing the pet's profile
+ * Outlined style to keep it visually lighter than the primary Action button
+ */
+ // Has a white background and a green border to differentiate it from the primary action button
 .btn-share {
   background: white;
   border: 2px solid $forest-moss;
@@ -18,6 +28,12 @@
   padding: 14px;
 }
 
+/**
+ * Primary Action Button
+ * High-emphasis button for the most important user action (like "Go to Daily Log" on the show page)
+ * Uses a solid brand color and a colored shadow for a "floating" effect
+ * Larger and has a shadow to draw attention, especially on the show page where it's the main call-to-action
+ */
 .btn-log {
   background-color: $forest-moss;
   color: white;

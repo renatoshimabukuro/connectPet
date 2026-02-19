@@ -1,5 +1,6 @@
 <div class="pet-nav-header">
   <div class="nav-content">
+    <%# If we are on a Pet's Show page, show a 'Back' arrow. Otherwise, show the 'connectPet' brand name. %>
     <div class="nav-items-left">
       <% if controller_name == 'pets' && action_name == 'show' %>
         <%= link_to user_pets_path(@user), class: "nav-link-custom" do %>
@@ -7,7 +8,7 @@
         <% end %>
       <% else %>
         <%= link_to root_path, class: "nav-brand-text" do %>
-          ConnectPet <i class="fa-solid fa-paw"></i>
+          connectPet <i class="fa-solid fa-paw"></i>
         <% end %>
       <% end %>
     </div>
