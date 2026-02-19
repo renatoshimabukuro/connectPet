@@ -9,10 +9,6 @@ class LogsController < ApplicationController
 
   def new
     @log = @pet.logs.build
-    # Send the attribute names to the form, I think?
-    (1..5).each do |i|
-      @log.send("attr#{i}=", @pet.send("attr#{i}"))
-    end
   end
 
   def create

@@ -4,7 +4,7 @@
     <%= f.input :date, as: :date %>
     <% (1..5).each do |i| %>
       <!-- Recieve the attribute names -->
-      <% title = @log.send("attr#{i}") %>
+      <% title = @pet.attr%>"#{i}"
       <!-- Skip if blank -->
       <% next if title.blank? %>
       <h5> <%= title %> </h5>
