@@ -1,21 +1,14 @@
 <div class="pet-nav-header">
   <div class="nav-content">
-    <%# If we are on a Pet's Show page, show a 'Back' arrow. Otherwise, show the 'connectPet' brand name %>
     <div class="nav-items-left">
-      <% if controller_name == 'pets' && action_name == 'show' %>
-        <%= link_to user_pets_path(@user), class: "nav-link-custom" do %>
-          <i class="fa-solid fa-arrow-left"></i>
-        <% end %>
-      <% else %>
-        <%= link_to root_path, class: "nav-brand-text" do %>
-          connectPet <i class="fa-solid fa-paw"></i>
-        <% end %>
+      <%# Always show the brand name, if logged in, link to Pets Index, otherwise, link to Home %>
+      <% brand_link = user_signed_in? ? user_pets_path(current_user) : root_path %>
+      <%= link_to brand_link, class: "nav-brand-text" do %>
+        connectPet <i class="fa-solid fa-paw"></i>
       <% end %>
     </div>
     <div class="nav-items-right">
       <% if user_signed_in? %>
-        <%#= link_to "Home", root_path, class: "nav-link-custom" %>
-        <%#= link_to "Messages", "#", class: "nav-link-custom" %>
         <div class="dropdown">
           <a href="#" class="nav-link-custom" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa-solid fa-bars" style="font-size: 1.5rem;"></i>
