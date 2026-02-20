@@ -1,8 +1,11 @@
 <div class="pet-nav-header">
   <div class="nav-content">
     <div class="nav-items-left">
-      <%# Always show the brand name, if logged in, link to Pets Index, otherwise, link to Home %>
-      <% brand_link = user_signed_in? ? user_pets_path(current_user) : root_path %>
+      <% if user_signed_in? && current_user.present? %>
+        <% brand_link = user_pets_path(current_user) %>
+      <% else %>
+        <% brand_link = root_path %>
+      <% end %>
       <%= link_to brand_link, class: "nav-brand-text" do %>
         connectPet <i class="fa-solid fa-paw"></i>
       <% end %>
