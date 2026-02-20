@@ -5,9 +5,13 @@
       <div class="avatar-secondary"></div>
       <div class="avatar-main">
         <% if @pet.photo.attached? %>
-        <%= image_tag @pet.photo, crop: :fill %>
+          <%= cl_image_tag @pet.photo.key,
+              width: 400,
+              height: 400,
+              crop: :fill,
+              gravity: :face %>
         <% else %>
-        <i class="fa-solid fa-paw" style="font-size: 3rem; color: #D1D8D0;"></i>
+          <i class="fa-solid fa-paw" style="font-size: 3rem; color: #D1D8D0;"></i>
         <% end %>
       </div>
       <div class="avatar-secondary"></div>
