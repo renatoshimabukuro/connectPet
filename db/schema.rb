@@ -156,4 +156,5 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_17_130310) do
   add_foreign_key "logs", "pets"
   add_foreign_key "messages", "chats"
   add_foreign_key "pets", "users"
+  add_foreign_key "messages", "users"
 end
