@@ -5,6 +5,11 @@
  * Provides the full-width background color and creates the fixed-top feel
  */
 .pet-nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+
   background-color: $forest-moss;
   width: 100%;
   display: flex;
@@ -12,10 +17,6 @@
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   font-family: 'Quicksand', sans-serif;
 
-  /**
-   * Inner Layout Container
-   * Constrains content width to match the app's grid (max 1000px)
-   */
   .nav-content {
     width: 100%;
     max-width: 1000px;
