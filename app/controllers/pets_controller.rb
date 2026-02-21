@@ -48,6 +48,12 @@ class PetsController < ApplicationController
     redirect_to user_pets_path(@user), alert: "Pet not found or access denied."
   end
 
+  def destroy
+      @pet = @user.pets.find(params[:id])
+      @pet.destroy
+
+  end
+
   def pet_params
     params.require(:pet).permit(
       :name, :dob, :species, :breed, :microchip,
