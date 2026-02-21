@@ -155,5 +155,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_17_130310) do
   add_foreign_key "friendships", "users", column: "vet_id"
   add_foreign_key "logs", "pets"
   add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "pets", "users"
 end
