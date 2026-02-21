@@ -42,7 +42,11 @@ class LogsController < ApplicationController
   end
 
   def log_params
-    params.require(:log).permit(:date, :attr1_value, :attr1_memo, :attr2_value, :attr2_memo, :attr3_value, :attr3_memo, :attr4_value, :attr4_memo, :attr5_value, :attr5_memo)
+    params.require(:log).permit(:date,
+      :attr1, :attr1_value, :attr1_memo,
+      :attr2, :attr2_value, :attr2_memo,
+      :attr3, :attr3_value, :attr3_memo,
+      :attr4, :attr4_value, :attr4_memo,
+      :attr5, :attr5_value, :attr5_memo)
   end
-
 end
