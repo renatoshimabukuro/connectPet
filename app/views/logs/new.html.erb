@@ -25,11 +25,12 @@
         <div data-controller="rating">
           <h5> <%= title %> </h5>
           <% (1..5).each do |value| %>
-            <button value="<%= value %>">
+            <button data-value="<%= value %>"
+              data-action="click->rating#select">
               <%= value %>
             </button>
           <% end %>
-          <button>
+          <button data-action="click->rating#select">
             +
           </button>
           <%= f.input "attr#{i}", as: :hidden %>
