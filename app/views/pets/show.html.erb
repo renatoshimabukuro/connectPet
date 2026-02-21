@@ -1,17 +1,14 @@
 <div class="pet-show-container">
-  <%# Hero Section (Avatars and Name) %>
+  <%# Hero Section (Avatar and Name) %>
   <section class="pet-hero-section">
     <div class="avatar-carousel">
-      <div class="avatar-secondary">
-      </div>
       <div class="avatar-main">
         <% if @pet.photo.attached? %>
-          <%= cl_image_tag @pet.photo.key, width: 400, height: 400, crop: :fill%>
+          <%= cl_image_tag @pet.photo.key, width: 400, height: 400, crop: :fill %>
         <% else %>
           <i class="fa-solid fa-paw" style="font-size: 3rem; color: #D1D8D0;"></i>
         <% end %>
       </div>
-      <div class="avatar-secondary"></div>
     </div>
     <h1><%= @pet.name %></h1>
     <p class="pet-subtitle">
@@ -71,9 +68,6 @@
     </div>
   </div>
   <div class="pet-actions-footer">
-    <%= link_to "#", class: "btn-share" do %>
-      <i class="fa-solid fa-download"></i> Share <%= @pet.name %>’s Profile
-    <% end %>
     <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log" do %>
       <i class="fa-solid fa-book-open"></i> View <%= @pet.name %>’s Logs
     <% end %>
