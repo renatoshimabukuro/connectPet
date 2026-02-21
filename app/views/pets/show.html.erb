@@ -2,12 +2,13 @@
   <%# Hero Section (Avatars and Name) %>
   <section class="pet-hero-section">
     <div class="avatar-carousel">
-      <div class="avatar-secondary"></div>
+      <div class="avatar-secondary">
+      </div>
       <div class="avatar-main">
         <% if @pet.photo.attached? %>
-        <%= image_tag @pet.photo, crop: :fill %>
+          <%= cl_image_tag @pet.photo.key, width: 400, height: 400, crop: :fill%>
         <% else %>
-        <i class="fa-solid fa-paw" style="font-size: 3rem; color: #D1D8D0;"></i>
+          <i class="fa-solid fa-paw" style="font-size: 3rem; color: #D1D8D0;"></i>
         <% end %>
       </div>
       <div class="avatar-secondary"></div>
@@ -69,13 +70,15 @@
       <span class="card-value"><%= @pet.notes.presence || "No notes yet" %></span>
     </div>
   </div>
-  <%# Buttons %>
   <div class="pet-actions-footer">
-    <button class="btn-share">
+    <%= link_to "#", class: "btn-share" do %>
       <i class="fa-solid fa-download"></i> Share <%= @pet.name %>’s Profile
-    </button>
+    <% end %>
+    <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log" do %>
+      <i class="fa-solid fa-book-open"></i> View <%= @pet.name %>’s Logs
+    <% end %>
     <%= link_to new_user_pet_log_path(@user, @pet), class: "btn-log" do %>
-      ✨ Go to Daily Log
+      <i class="fa-solid fa-plus"></i> Add New Log
     <% end %>
   </div>
 </div>

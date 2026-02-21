@@ -1,2 +1,7 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%# Placeholder Page %>
+<h1>Welcome Home</h1>
+<% if user_signed_in? %>
+  <%= link_to "My Pets", user_pets_path(current_user), class: "btn-primary" %>
+<% else %>
+  <%= link_to "Login to see your pets", new_user_session_path, class: "btn-secondary" %>
+<% end %>
