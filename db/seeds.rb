@@ -77,7 +77,11 @@ raye = Pet.create!(
   attr3: "Toilet"
 )
 
-Pet.create!(
+raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/44856863-8493-4139-9498-22b38045ad1f_1.jpg"
+raye.photo.attach(io: URI.open(raye_url), filename: "raye.png", content_type: "image/png")
+raye.save!
+
+percy = Pet.create!(
   user: katie,
   name: "Percy",
   dob: Date.new(2021, 8, 12),
@@ -92,7 +96,11 @@ Pet.create!(
   attr3: "Toilet"
 )
 
-Pet.create!(
+percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/4cdbca27-d28f-4a0f-938b-d543347b384e_1.jpg"
+percy.photo.attach(io: URI.open(percy_url), filename: "percy.png", content_type: "image/png")
+percy.save!
+
+cory = Pet.create!(
   user: katie,
   name: "Cory",
   dob: Date.new(2024, 10, 22),
@@ -106,7 +114,11 @@ Pet.create!(
   attr2: "Toilet"
 )
 
-Pet.create!(
+cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/fa4678a3-74b6-470c-ab7d-adecf92b4dcf_1.jpg"
+cory.photo.attach(io: URI.open(cory_url), filename: "cory.png", content_type: "image/png")
+cory.save!
+
+maple = Pet.create!(
   user: renato,
   name: "Maple",
   dob: Date.new(2025, 4, 30),
@@ -118,7 +130,11 @@ Pet.create!(
   gender: "Female",
 )
 
-Pet.create!(
+maple_url = "https://res.cloudinary.com/rts1307/image/upload/v1771497608/development/3qil42klx2nl1isfom3yeg90g3n4.png"
+maple.photo.attach(io: URI.open(maple_url), filename: "maple.png", content_type: "image/png")
+maple.save!
+
+gabby = Pet.create!(
   user: troy,
   name: "Gabby",
   dob: Date.new(2016, 5, 31),
@@ -130,7 +146,11 @@ Pet.create!(
   gender: "Male",
 )
 
-Pet.create!(
+gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1771583181/development/gyla6lp4g4disamp18okxmgpwb4k.jpg"
+gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.png", content_type: "image/png")
+gabby.save!
+
+jade = Pet.create!(
   user: troy,
   name: "Jade",
   dob: Date.new(2020, 4, 5),
@@ -141,6 +161,10 @@ Pet.create!(
   fixed: true,
   gender: "Female",
 )
+
+jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1771584198/development/tqpjatpdi3kvgg2tmr8xad1eav71.jpg"
+jade.photo.attach(io: URI.open(jade_url), filename: "jade.png", content_type: "image/png")
+jade.save!
 
 puts "Making clinics"
 
