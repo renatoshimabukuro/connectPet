@@ -20,3 +20,11 @@
 @import "components/layout";
 @import "pages/show";
 @import "components/log_rating";
+
+.auth-container {
+  padding-top: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: $soft-cream;
+  min-height: 100vh;
+}
