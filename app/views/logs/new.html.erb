@@ -36,7 +36,9 @@
           <button data-action="click->rating#select">
             +
           </button>
-          <%= f.input "attr#{i}", as: :hidden %>
+          <%= f.input "attr#{i}",
+            as: :hidden,
+            input_html: { value: @pet.read_attribute("attr#{i}") } %>
           <%= f.input "attr#{i}_value",
             id: "attr#{i}value",
             input_html: { data: { rating_target: "input" } },
