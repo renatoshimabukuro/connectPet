@@ -33,9 +33,9 @@
               <%= value %>
             </button>
           <% end %>
-          <button data-action="click->rating#select">
+          <%# <button data-action="click->rating#select">
             +
-          </button>
+          </button> %>
           <%= f.input "attr#{i}",
             as: :hidden,
             input_html: { value: @pet.read_attribute("attr#{i}") } %>
@@ -43,8 +43,8 @@
             id: "attr#{i}value",
             input_html: { data: { rating_target: "input" } },
             collection: 0..5,
-            label: "#{title} Value" %>
-          <%= f.input "attr#{i}_memo", as: :text, label: "#{title} Memo" %>
+            as: :hidden %>
+          <%= f.input "attr#{i}_memo", as: :text, label: "Memo" %>
         </div>
       <% end %>
       <%= f.button :submit, "Create Log", class: "btn btn-primary" %>

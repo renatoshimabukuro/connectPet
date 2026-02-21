@@ -17,5 +17,6 @@ export default class extends Controller {
     const attribute = this.buttonTarget.dataset.ratingTextValue.split(" ")[1]
     const formField = document.getElementById(`log_${attribute}_value`)
     formField.value = value
+    button.classList.toggle("rating-btn-active")
   }
 }
