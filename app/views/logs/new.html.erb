@@ -24,9 +24,12 @@
         <% next if title.blank? %>
         <div data-controller="rating">
           <h5> <%= title %> </h5>
+          <!-- Make buttons for rating -->
           <% (1..5).each do |value| %>
-            <button data-value="<%= value %>"
-              data-action="click->rating#select">
+            <button class="rating-btn"
+              data-rating-text-value="<%= "#{value} attr#{i}" %>"
+              data-action="click->rating#select"
+              data-rating-target="button">
               <%= value %>
             </button>
           <% end %>
@@ -34,7 +37,11 @@
             +
           </button>
           <%= f.input "attr#{i}", as: :hidden %>
-          <%= f.input "attr#{i}_value", collection: 0..5, label: "#{title} Value" %>
+          <%= f.input "attr#{i}_value",
+            id: "attr#{i}value",
+            input_html: { data: { rating_target: "input" } },
+            collection: 0..5,
+            label: "#{title} Value" %>
           <%= f.input "attr#{i}_memo", as: :text, label: "#{title} Memo" %>
         </div>
       <% end %>
@@ -45,3 +52,9 @@
     <%= link_to "Back to #{@pet.name}’s Profile", user_pet_path(@user, @pet), class: 'btn btn-primary mt-2' %>
   </div>
   <hr>
+  <style>
+    .rating-btn-active {
+      color: white;
+      background-color: black;
+    }
+  </style>

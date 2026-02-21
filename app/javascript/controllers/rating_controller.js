@@ -2,6 +2,9 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["button"]
+  static values = {
+    text: String
+  }
 
   connect() {
     console.log("Hi")
@@ -9,6 +12,10 @@ export default class extends Controller {
 
   select(event) {
     event.preventDefault();
-    console.log(event.currentTarget.innerText)
+    const button = event.currentTarget
+    const value = button.innerText
+    const attribute = this.buttonTarget.dataset.ratingTextValue.split(" ")[1]
+    const formField = document.getElementById(`log_${attribute}_value`)
+    formField.value = value
   }
 }
