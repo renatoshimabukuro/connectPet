@@ -3,8 +3,8 @@
     <div class="avatar-carousel">
       <div class="avatar-secondary"></div>
       <div class="avatar-main">
-        <% if pet.photo.attached? %>
-          <%= image_tag pet.photo, class: "avatar-large", style: "width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" %>
+        <% if @pet.photo.attached? %>
+          <%= image_tag @pet.photo, class: "avatar-large", style: "width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" %>
         <% else %>
           <i class="fa-solid fa-paw" style="font-size: 80px; color: rgba(255,255,255,0.5);"></i>
         <% end %>
