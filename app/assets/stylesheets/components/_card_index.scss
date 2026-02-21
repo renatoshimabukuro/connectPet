@@ -1,0 +1,31 @@
+// Cads on the index page
+
+
+
+.card {
+   background-color: $sage-leaf;
+   border-radius: 22px;
+  // padding: 20px;
+  // position: relative; // Necessary for absolute positioning of the edit pencil
+   color: white;
+  // display: flex;
+  // flex-direction: column; // Stacks the icon, label, and value vertically
+  // // justify-content: flex-end; // Anchors text content to the bottom of the card
+  // // min-height: 125px; // Ensures consistent height across the grid
+  // text-decoration: none;
+  // box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  // transition: transform 0.2s ease; // Smooth lift effect on hover
+
+  // Interactive lift effect
+  // &:hover {
+  //   transform: translateY(-3px);
+  // }
+}
+
+h2 a {
+  color: white
+}
+
+h3 i {
+  color: white
+}
