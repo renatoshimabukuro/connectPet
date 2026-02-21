@@ -1,18 +1,21 @@
-<h2><%= @pet.name %>'s <%= @log.date %> Health Log</h2>
+<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%;">
+  <div class="card card-index p-2" style="width:50%; border: 1px; border-radius: 8px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <h2><%= @pet.name %>'s <%= @log.date %> Health Log</h2>
 
-
-<% if @log.attr1 %>
-  <h3><%= @log.attr1 %>: <%= @log.attr1_value %></h3>
-<% end %>
-<% if @log.attr2 %>
-  <h3><%= @log.attr2 %>: <%= @log.attr2_value %></h3>
-<% end %>
-<% if @log.attr3 %>
-  <h3><%= @log.attr3 %>: <%= @log.attr3_value %></h3>
-<% end %>
-<% if @log.attr4 %>
-  <h3><%= @log.attr4 %>: <%= @log.attr4_value %></h3>
-<% end %>
-<% if @log.attr5 %>
-  <h3><%= @log.attr5 %>: <%= @log.attr5_value %></h3>
-<% end %>
+    <% if @log.attr1 %>
+      <h3><%= @log.attr1 %>: <%= @log.attr1_value %></h3>
+    <% end %>
+    <% if @log.attr2 %>
+      <h3><%= @log.attr2 %>: <%= @log.attr2_value %></h3>
+    <% end %>
+    <% if @log.attr3 %>
+      <h3><%= @log.attr3 %>: <%= @log.attr3_value %></h3>
+    <% end %>
+    <% if @log.attr4 %>
+      <h3><%= @log.attr4 %>: <%= @log.attr4_value %></h3>
+    <% end %>
+    <% if @log.attr5 %>
+      <h3><%= @log.attr5 %>: <%= @log.attr5_value %></h3>
+  <% end %>
+  </div>
+</div>
