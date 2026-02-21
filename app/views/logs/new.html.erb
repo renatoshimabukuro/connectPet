@@ -22,15 +22,25 @@
         <% title = @pet.read_attribute("attr#{i}") %>
         <!-- Skip if blank -->
         <% next if title.blank? %>
-        <h5> <%= title %> </h5>
-        <%= f.input "attr#{i}", as: :hidden %>
-        <%= f.input "attr#{i}_value", collection: 0..5, label: "#{title} Value" %>
-        <%= f.input "attr#{i}_memo", as: :text, label: "#{title} Memo" %>
+        <div data-controller="rating">
+          <h5> <%= title %> </h5>
+          <% (1..5).each do |value| %>
+            <button value="<%= value %>">
+              <%= value %>
+            </button>
+          <% end %>
+          <button>
+            +
+          </button>
+          <%= f.input "attr#{i}", as: :hidden %>
+          <%= f.input "attr#{i}_value", collection: 0..5, label: "#{title} Value" %>
+          <%= f.input "attr#{i}_memo", as: :text, label: "#{title} Memo" %>
+        </div>
       <% end %>
       <%= f.button :submit, "Create Log", class: "btn btn-primary" %>
     <% end %>
-
     <%= link_to "View All Logs", user_pet_logs_path(@user, @pet), class: 'btn btn-primary mt-3' %>
     <br>
     <%= link_to "Back to #{@pet.name}’s Profile", user_pet_path(@user, @pet), class: 'btn btn-primary mt-2' %>
   </div>
+  <hr>
