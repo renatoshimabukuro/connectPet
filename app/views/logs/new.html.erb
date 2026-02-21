@@ -1,4 +1,4 @@
-<div class= "pet-show-container" data-controller="rating">
+<div class= "pet-show-container">
   <section class="pet-hero-section">
     <div class="avatar-carousel">
       <div class="avatar-secondary"></div>
@@ -30,50 +30,3 @@
       <%= f.button :submit, "Create Log", class: "btn btn-primary" %>
     <% end %>
   </div>
-  ----
-  <div>
-    <%= simple_form_for [@user, @pet, @log] do |f| %>
-      <%= f.input :date, as: :date %>
-      <% (1..5).each do |i| %>
-        <% title = @pet.read_attribute("attr#{i}")%>
-        <% next if title.blank? %>
-        <div>
-          <h5> <%= title %> </h5>
-          <div class= "rating-container">
-            <% (1..5).each do |v| %>
-              <button type="button"
-                class="rating-btn">
-                <%= v %>
-              </button>
-            <% end %>
-            <button type="button">
-              +
-            </button>
-          </div>
-          <hr>
-        </div>
-      <% end %>
-      <%= f.button :submit, "Create log", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
-<style>
-  .rating-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background: white;
-    cursor: pointer;
-  }
-
-  .rating-btn.active {
-    background: #4caf50;
-    color: white;
-    border-color: #4caf50;
-  }
-
-  .rating-container {
-    width: 100%;
-  }
-</style>
