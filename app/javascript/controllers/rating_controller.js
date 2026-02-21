@@ -1,7 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
+// Connects to data-controller="rating"
 export default class extends Controller {
   connect() {
-    console.log("Hello World!")
+    console.log("Hello Moto")
   }
 }

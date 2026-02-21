@@ -1,4 +1,4 @@
-<div class= "pet-show-container">
+<div class= "pet-show-container" data-controller="rating">
   <section class="pet-hero-section">
     <div class="avatar-carousel">
       <div class="avatar-secondary"></div>
@@ -39,7 +39,7 @@
         <% next if title.blank? %>
         <div>
           <h5> <%= title %> </h5>
-          <div>
+          <div class= "rating-container">
             <% (1..5).each do |v| %>
               <button type="button"
                 class="rating-btn">
@@ -71,5 +71,9 @@
     background: #4caf50;
     color: white;
     border-color: #4caf50;
+  }
+
+  .rating-container {
+    width: 100%;
   }
 </style>
