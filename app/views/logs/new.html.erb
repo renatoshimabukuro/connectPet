@@ -41,9 +41,14 @@
           <h5> <%= title %> </h5>
           <div>
             <% (1..5).each do |v| %>
-              <button type="button"> <%= v %> </button>
+              <button type="button"
+                class="rating-btn">
+                <%= v %>
+              </button>
             <% end %>
-            <button type="button"> + </button>
+            <button type="button">
+              +
+            </button>
           </div>
           <hr>
         </div>
@@ -52,3 +57,19 @@
     <% end %>
   </div>
 </div>
+<style>
+  .rating-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+  }
+
+  .rating-btn.active {
+    background: #4caf50;
+    color: white;
+    border-color: #4caf50;
+  }
+</style>
