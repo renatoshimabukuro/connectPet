@@ -24,7 +24,12 @@
         <!-- Skip if blank -->
         <% next if title.blank? %>
         <div data-controller="rating">
-          <h5> <%= title %> </h5>
+          <div class="d-flex">
+            <h5> <%= title %> </h5>
+            <button data-action="click->rating#openModal" class="btn modal-btn">
+              <i class="fa-regular fa-note-sticky"></i>
+            </button>
+          </div>
           <!-- Make buttons for rating -->
           <div class="rating-btns">
             <% (1..5).each do |value| %>
@@ -35,9 +40,6 @@
                 <%= value %>
               </button>
             <% end %>
-            <button data-action="click->rating#openModal" class="rating-btn">
-              <i class="fa-regular fa-note-sticky"></i>
-            </button>
           </div>
           <%= f.input "attr#{i}",
             as: :hidden,
@@ -78,6 +80,15 @@
       border-radius: 8px;
       border: 1px solid #ccc;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .modal-btn {
+      font-size: 16px;
+      border: none;
+      background-color: none;
+      padding: 0px;
+      margin: 0px;
+      margin-left: 5px;
     }
 
     .modal-close {
