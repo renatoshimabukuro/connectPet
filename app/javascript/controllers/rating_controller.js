@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input"]
+  static targets = ["input", "modal"]
 
   static values = {
     text: String
@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   select(event) {
-    event.preventDefault();
+    event.preventDefault()
 
     const button = event.currentTarget
     const value = button.dataset.ratingTextValue.split(" ")[0]
@@ -33,4 +33,16 @@ export default class extends Controller {
     )
     clickedButton.classList.add("rating-btn-active")
   }
+
+  openModal(event) {
+    event.preventDefault()
+    console.log("Opening modal")
+    this.modalTarget.classList.remove("d-none")
+  }
+
+  closeModal(event) {
+    event.preventDefault()
+    this.modalTarget.classList.add("d-none")
+  }
+
 }

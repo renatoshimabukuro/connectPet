@@ -35,7 +35,7 @@
                 <%= value %>
               </button>
             <% end %>
-            <button data-action="" class="rating-btn">
+            <button data-action="click->rating#openModal" class="rating-btn">
               +
             </button>
           </div>
@@ -47,7 +47,16 @@
             input_html: { data: { rating_target: "input" } },
             collection: 0..5,
             as: :hidden %>
-          <%= f.input "attr#{i}_memo", as: :text, label: "Memo" %>
+          <!-- Modal -->
+          <div class="memo-modal d-none" data-rating-target="modal">
+            <div class="memo-modal-content">
+              <button type="button" class="modal-close" data-action="click->rating#closeModal">
+                X
+              </button>
+              <%= f.input "attr#{i}_memo", as: :text,
+                  label: "Memo", input_html: { rows: 4 } %>
+            </div>
+          </div>
         </div>
       <% end %>
       <div>
