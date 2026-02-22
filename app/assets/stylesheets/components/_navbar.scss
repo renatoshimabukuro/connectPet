@@ -1,12 +1,118 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+// GLOBAL NAVIGATION BAR - The primary header used across the entire app, especially on the Pet Profile and related views. Contains the Back Arrow, "ConnectPet" Brand Link, and interactive icons like the Hamburger menu and search
+
+/**
+ * Main Outer Wrapper
+ * Provides the full-width background color and creates the fixed-top feel
+ */
+.pet-nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+
+  background-color: $forest-moss;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-family: 'Quicksand', sans-serif;
+
+  .nav-content {
+    width: 100%;
+    max-width: 1000px;
+    padding: 12px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+/**
+ * Brand Logo / Text
+ * The "ConnectPet" brand identity on the left side of the nav
+ */
+.nav-brand-text {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: -0.5px;
+
+  i { font-size: 1.1rem; margin-left: 4px; }
+  &:hover { color: $soft-cream; }
 }
 
-.navbar-lewagon .navbar-brand img {
+/**
+ * Navigation Actions (Right Side)
+ * Right now contains Home, Messages, and the User Profile Dropdown
+ */
+.nav-items-right {
+  display: flex;
+  align-items: center;
+  gap: 15px; // Tighter spacing for phones
+
+  // Tablet & Desktop: Increase spacing between links
+  @media (min-width: 768px) {
+    gap: 25px;
+  }
+
+// Individual text links (Home, Messages)
+  .nav-link-custom {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap; // Prevents "Messages" from breaking into two lines
+    transition: opacity 0.2s;
+    &:hover { opacity: 0.8; }
+  }
+}
+
+/**
+ * Navbar Profile Avatar
+ * Small, circular user image that triggers the dropdown menu.
+ */
+.avatar-nav {
   width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,0.3);
+  object-fit: cover;
+  transition: transform 0.2s;
+
+  &:hover { transform: scale(1.05); } // pop effect on hover
+}
+
+/**
+ * Dropdown Menu Styling
+ */
+.dropdown-menu {
+  background-color: white !important;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  margin-top: 10px;
+  padding: 10px;
+
+  // Individual links inside the dropdown
+  .dropdown-item {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: $dark-text !important; // Ensures text is readable against white bg
+
+    // Hover state inside the menu
+    &:hover {
+      background-color: $soft-cream;
+      color: $forest-moss !important;
+    }
+
+    // Specific styling for "Log out" or destructive actions
+    &.text-danger {
+      color: #dc3545 !important;
+      &:hover { background-color: #fff5f5; }
+    }
+  }
 }

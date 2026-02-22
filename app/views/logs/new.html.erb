@@ -1,0 +1,70 @@
+<div class= "pet-show-container">
+  <section class="pet-hero-section">
+    <div class="avatar-carousel">
+      <div class="avatar-secondary"></div>
+      <div class="avatar-main">
+        <% if @pet.photo.attached? %>
+          <%= image_tag @pet.photo, class: "avatar-large", style: "width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" %>
+        <% else %>
+          <i class="fa-solid fa-paw" style="font-size: 80px; color: rgba(255,255,255,0.5);"></i>
+        <% end %>
+      </div>
+      <div class="avatar-secondary"></div>
+    </div>
+    <h1> Hello, <%= @pet.name %></h1>
+    <h2> How are you feeling today? </h2>
+  </section>
+  <div>
+    <%= simple_form_for [@user, @pet, @log] do |f| %>
+      <%= f.input :date, as: :date %>
+      <% (1..5).each do |i| %>
+        <!-- Recieve the attribute names -->
+        <% title = @pet.read_attribute("attr#{i}") %>
+        <!-- Skip if blank -->
+        <% next if title.blank? %>
+        <div data-controller="rating">
+          <h5> <%= title %> </h5>
+          <!-- Make buttons for rating -->
+          <% (1..5).each do |value| %>
+            <button class="rating-btn"
+              data-rating-text-value="<%= "#{value} attr#{i}" %>"
+              data-action="click->rating#select"
+              data-rating-target="button">
+              <%= value %>
+            </button>
+          <% end %>
+          <%# <button data-action="click->rating#select">
+            +
+          </button> %>
+          <%= f.input "attr#{i}",
+            as: :hidden,
+            input_html: { value: @pet.read_attribute("attr#{i}") } %>
+          <%= f.input "attr#{i}_value",
+            id: "attr#{i}value",
+            input_html: { data: { rating_target: "input" } },
+            collection: 0..5,
+            as: :hidden %>
+          <%= f.input "attr#{i}_memo", as: :text, label: "Memo" %>
+        </div>
+      <% end %>
+      <%= f.button :submit, "Create Log", class: "btn btn-primary" %>
+    <% end %>
+    <%= link_to "View All Logs", user_pet_logs_path(@user, @pet), class: 'btn btn-primary mt-3' %>
+    <br>
+    <%= link_to "Back to #{@pet.name}’s Profile", user_pet_path(@user, @pet), class: 'btn btn-primary mt-2' %>
+  </div>
+  <hr>
+  <style>
+    .rating-btn-active {
+      color: white;
+      background-color: #636e72;
+    }
+    .rating-btn {
+      width: 44px;
+      height: 44px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+  </style>

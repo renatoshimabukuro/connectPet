@@ -64,9 +64,16 @@ raye = Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
+  attr1: "Food",
+  attr2: "Vomit",
+  attr3: "Toilet"
 )
 
-Pet.create!(
+raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/44856863-8493-4139-9498-22b38045ad1f_1.jpg"
+raye.photo.attach(io: URI.open(raye_url), filename: "raye.png", content_type: "image/png")
+raye.save!
+
+percy = Pet.create!(
   user: katie,
   name: "Percy",
   dob: Date.new(2021, 8, 12),
@@ -76,9 +83,16 @@ Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
+  attr1: "Food",
+  attr2: "Vomit",
+  attr3: "Toilet"
 )
 
-Pet.create!(
+percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/4cdbca27-d28f-4a0f-938b-d543347b384e_1.jpg"
+percy.photo.attach(io: URI.open(percy_url), filename: "percy.png", content_type: "image/png")
+percy.save!
+
+cory = Pet.create!(
   user: katie,
   name: "Cory",
   dob: Date.new(2024, 10, 22),
@@ -88,7 +102,13 @@ Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
+  attr1: "Food",
+  attr2: "Toilet"
 )
+
+cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/fa4678a3-74b6-470c-ab7d-adecf92b4dcf_1.jpg"
+cory.photo.attach(io: URI.open(cory_url), filename: "cory.png", content_type: "image/png")
+cory.save!
 
 maple = Pet.create!(
   user: renato,
@@ -102,29 +122,86 @@ maple = Pet.create!(
   gender: "Female",
 )
 
-Pet.create!(
+maple_url = "https://res.cloudinary.com/rts1307/image/upload/v1771497608/development/3qil42klx2nl1isfom3yeg90g3n4.png"
+maple.photo.attach(io: URI.open(maple_url), filename: "maple.png", content_type: "image/png")
+maple.save!
+
+gabby = Pet.create!(
   user: troy,
   name: "Gabby",
   dob: Date.new(2016, 5, 31),
   species: "Cat",
   breed: "Exotic shorthair",
-  weight: 5.5,
+  weight: 5,
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
 )
 
-Pet.create!(
+gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1771583181/development/gyla6lp4g4disamp18okxmgpwb4k.jpg"
+gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.png", content_type: "image/png")
+gabby.save!
+
+jade = Pet.create!(
   user: troy,
   name: "Jade",
-  dob: Date.new(2020, 4, 19),
+  dob: Date.new(2020, 4, 5),
   species: "Cat",
   breed: "Exotic shorthair",
-  weight: 5.5,
+  weight: 4,
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Female",
 )
+
+jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1771584198/development/tqpjatpdi3kvgg2tmr8xad1eav71.jpg"
+jade.photo.attach(io: URI.open(jade_url), filename: "jade.png", content_type: "image/png")
+jade.save!
+
+puts "Making clinics"
+
+Clinic.create!(
+  field: ["cardiology", "dentist"],
+  clinic_name:"Pet Forest",
+  contact: "contact@pet_forest.com",
+  species: ["cats", "dogs", "horses"],
+  user: vet01
+  )
+
+Clinic.create!(
+  field: ["Oncology","surgery"],
+  clinic_name:"SOS Pet",
+  contact: "contact@sospet.com",
+  species: ["cats", "dogs", "birds"],
+  user: vet02
+  )
+
+Clinic.create!(
+  field: ["Oncology"],
+  clinic_name:"SOS Pet",
+  contact: "contact@sospet.com",
+  species: ["cats", "dogs", "birds"],
+  user: vet03
+  )
+
+puts "Finished making clinics"
+
+puts "Creating logs for Raye"
+
+Log.create!(pet: raye,
+  attr1: "Food", attr1_value: "3", attr1_memo: "50g",
+  attr2: "Vomit", attr2_value: "", attr2_memo: "Threw up in the cat room!",
+  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning",
+  date: Date.today)
+
+Log.create!(pet: raye,
+  attr1: "Food", attr1_value: "4", attr1_memo: "45g",
+  attr2: "Vomit", attr2_value: "0", attr2_memo: "",
+  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
+  date: Date.yesterday)
+
+puts "Created #{Log.count} logs"
+
 
 puts "Finished! Created #{User.count} users and #{Pet.count} pets."
 
@@ -159,30 +236,5 @@ Message.create!(chat: chat2, user: renato, contents: "No vomiting, just low appe
 Message.create!(chat: chat2, user: vet01, contents: "Let's schedule a checkup this week.")
 Message.create!(chat: chat2, user: renato, contents: "Thank you, that would be great.")
 
-puts "Creating clinics..."
 
-Clinic.create!(
-  field: ["cardiology", "dentist"],
-  clinic_name:"Pet Forest",
-  contact: "contact@pet_forest.com",
-  species: ["cats", "dogs", "horses"],
-  user: vet01
-  )
-
-  Clinic.create!(
-  field: ["Oncology","surgery"],
-  clinic_name:"SOS Pet",
-  contact: "contact@sospet.com",
-  species: ["cats", "dogs", "birds"],
-  user: vet02
-  )
-
-  Clinic.create!(
-  field: ["Oncology"],
-  clinic_name:"SOS Pet",
-  contact: "contact@sospet.com",
-  species: ["cats", "dogs", "birds"],
-  user: vet03
-  )
-
-puts "Finished! Created #{User.count} users, #{Pet.count} pets and #{Clinic.count} clinics"
+puts "Finished! Created #{User.count} users, #{Pet.count} pets, #{Clinic.count} clinics, #{Log.count} logs, and #{Chat.count} chats with #{Message.count} messages."

@@ -2,6 +2,15 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
+
+  authenticated :user do
+    # takes the current_user's ID and builds the /users/:id/pets path
+    root to: redirect { |params, request|
+      user = request.env['warden'].user
+      "/users/#{user.id}/pets"
+    }, as: :authenticated_root
+  end
+
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,7 +23,7 @@ Rails.application.routes.draw do
   resources :clinics, only: [:index, :show] #showing the clinics to all
   resources :users, only: [:show, :new, :create] do
     resources :pets, only: [:show, :new, :create, :index] do
-      resources :logs, only: [:index, :new, :create, :edit, :update]
+      resources :logs, only: [:index, :new, :create, :edit, :update, :show]
     end
     resources :clinics, except: [:index, :show]
     resources :friendships, except: [:destroy]

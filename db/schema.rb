@@ -10,9 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_15_071301) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_17_130310) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
 
   create_table "chats", force: :cascade do |t|
     t.bigint "owner_id"
@@ -47,10 +75,24 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_15_071301) do
 
   create_table "logs", force: :cascade do |t|
     t.bigint "pet_id", null: false
-    t.string "health"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "attr1"
+    t.integer "attr1_value"
+    t.text "attr1_memo"
+    t.string "attr2"
+    t.integer "attr2_value"
+    t.text "attr2_memo"
+    t.string "attr3"
+    t.integer "attr3_value"
+    t.text "attr3_memo"
+    t.string "attr4"
+    t.integer "attr4_value"
+    t.text "attr4_memo"
+    t.string "attr5"
+    t.integer "attr5_value"
+    t.text "attr5_memo"
     t.index ["pet_id"], name: "index_logs_on_pet_id"
   end
 
@@ -80,6 +122,11 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_15_071301) do
     t.string "insurance"
     t.boolean "fixed"
     t.string "gender"
+    t.string "attr1"
+    t.string "attr2"
+    t.string "attr3"
+    t.string "attr4"
+    t.string "attr5"
     t.index ["user_id"], name: "index_pets_on_user_id"
   end
 
@@ -98,6 +145,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_15_071301) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "pets"
   add_foreign_key "chats", "users", column: "owner_id"
   add_foreign_key "chats", "users", column: "vet_id"

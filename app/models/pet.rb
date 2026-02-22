@@ -1,5 +1,8 @@
 class Pet < ApplicationRecord
   belongs_to :user
+  has_many :logs, dependent: :destroy
+  has_one_attached :photo
+
   validates :name, presence: true
   validates :dob, presence: true
   validates :species, presence: true
