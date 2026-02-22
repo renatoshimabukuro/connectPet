@@ -23,7 +23,7 @@
         <% title = @pet.read_attribute("attr#{i}") %>
         <!-- Skip if blank -->
         <% next if title.blank? %>
-        <div data-controller="rating">
+        <div data-controller="rating" class="rating">
           <div class="d-flex">
             <h5> <%= title %> </h5>
             <button data-action="click->rating#openModal" class="btn modal-btn">
