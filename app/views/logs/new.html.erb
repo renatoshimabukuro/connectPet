@@ -26,17 +26,19 @@
         <div data-controller="rating">
           <h5> <%= title %> </h5>
           <!-- Make buttons for rating -->
-          <% (1..5).each do |value| %>
-            <button class="rating-btn"
-              data-rating-text-value="<%= "#{value} attr#{i}" %>"
-              data-action="click->rating#select"
-              data-rating-target="button">
-              <%= value %>
+          <div class="rating-btns">
+            <% (1..5).each do |value| %>
+              <button class="rating-btn"
+                data-rating-text-value="<%= "#{value} attr#{i}" %>"
+                data-action="click->rating#select"
+                data-rating-target="button">
+                <%= value %>
+              </button>
+            <% end %>
+            <button data-action="" class="rating-btn">
+              +
             </button>
-          <% end %>
-          <%# <button data-action="click->rating#select">
-            +
-          </button> %>
+          </div>
           <%= f.input "attr#{i}",
             as: :hidden,
             input_html: { value: @pet.read_attribute("attr#{i}") } %>
