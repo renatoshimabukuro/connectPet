@@ -37,7 +37,7 @@ export default class extends Controller {
   openModal(event) {
     event.preventDefault()
     console.log("Opening modal")
-    this.modalTarget.classList.remove("d-none")
+    this.modalTarget.classList.toggle("d-none")
   }
 
   closeModal(event) {
