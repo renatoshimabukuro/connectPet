@@ -44,5 +44,4 @@ export default class extends Controller {
     event.preventDefault()
     this.modalTarget.classList.add("d-none")
   }
-
 }

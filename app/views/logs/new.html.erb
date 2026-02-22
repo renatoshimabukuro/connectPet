@@ -36,7 +36,7 @@
               </button>
             <% end %>
             <button data-action="click->rating#openModal" class="rating-btn">
-              +
+              <i class="fa-regular fa-note-sticky"></i>
             </button>
           </div>
           <%= f.input "attr#{i}",
@@ -51,10 +51,10 @@
           <div class="memo-modal d-none" data-rating-target="modal">
             <div class="memo-modal-content">
               <button type="button" class="modal-close" data-action="click->rating#closeModal">
-                X
+                <i class="fa-solid fa-xmark"></i>
               </button>
               <%= f.input "attr#{i}_memo", as: :text,
-                  label: "Memo", input_html: { rows: 4 } %>
+                  label: "Memo", input_html: { rows: 2 } %>
             </div>
           </div>
         </div>
@@ -72,6 +72,15 @@
       background-color: #636e72;
     }
     .rating-btn {
+      width: 44px;
+      height: 44px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .modal-close {
       width: 44px;
       height: 44px;
       font-size: 16px;
