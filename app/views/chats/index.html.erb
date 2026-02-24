@@ -1,19 +1,28 @@
 <div class="container mt-5 pt-5">
   <% @chats.each do |chat| %>
-    <div class="row align-items-center msg-card">
+    <div class="row msg-card">
       <div class="avatar-section col-2">
         <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg",
               class: "avatar-small", style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
       </div>
-      <div class="col-10">
+      <div class="col-8">
         <%= link_to user_chat_path(@user, chat) do %>
           <h5> <%= chat.vet.clinic.clinic_name %> </h5>
           <h6> For: <%= chat.pet.name %> </h6>
-          <% if chat.messages.last.user == @user %>
-            <p> You: <%= chat.messages.last.contents %> </p>
-          <% else %>
-            <p> <%= chat.vet.clinic.clinic_name %>:  <%= chat.messages.last.contents %></p>
-          <% end %>
+        <% end %>
+      </div>
+      <div class="col-2 st">
+        <% if chat.messages.last.updated_at.today? %>
+          <p> <%= chat.messages.last.updated_at.in_time_zone('Tokyo').strftime("%m:%M%p")%> </p>
+        <% else %>
+          <%= chat.messages.last.updated_at.strftime("%m/%e") %>
+        <% end %>
+      </div>
+      <div style="padding-left: 40px">
+        <% if chat.messages.last.user == @user %>
+          <p> You: <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
+        <% else %>
+          <p> <%= chat.vet.clinic.clinic_name %>:  <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
         <% end %>
       </div>
     </div>
@@ -23,7 +32,7 @@
 </div>
 <style>
   .msg-card{
-
+    padding-right: 4%;
   }
 
   hr {
