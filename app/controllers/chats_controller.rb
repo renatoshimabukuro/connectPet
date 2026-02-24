@@ -1,7 +1,7 @@
 class ChatsController < ApplicationController
   # All actions require user
   before_action :set_user
-  before_action :set_chat, only: [:show]
+  before_action :set_chat, only: [:show, :archive, :unarchive]
 
   def index
     # Make it so we can only see chats where the user is either owner or vet -> could be made better with pundit?
@@ -32,15 +32,17 @@ class ChatsController < ApplicationController
     end
   end
 
-  def edit
-    #To do? Do we want edit?
+  # PATCH/PUT /chat/:id/archive
+  def archive
+    @chat.archive!
+    redirect_to user_chats_path, notice: "Chat was successfully archived."
   end
 
-  def update
-    #To do? Do we want update?
+    # PATCH/PUT /chat/:id/unarchive
+  def unarchive
+    @chat.unarchive!
+    redirect_to user_chats_path, notice: "Chat was successfully unarchived."
   end
-
-  #Add destroy?
 
   private
 

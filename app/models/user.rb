@@ -14,4 +14,9 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :pets, dependent: :destroy
   has_one :clinic, dependent: :destroy
+
+  # Method to get all chats of a user
+  def chats
+    Chat.where("owner_id = ? OR vet_id = ?", id, id)
+  end
 end

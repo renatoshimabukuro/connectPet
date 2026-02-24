@@ -17,6 +17,12 @@
         <% else %>
           <%= chat.messages.last.updated_at.strftime("%m/%e") %>
         <% end %>
+
+        <%# Archiving the chat %>
+        <%= link_to archive_user_chat_path(current_user, chat), data: { turbo_method: :patch, turbo_confirm: "Archive this chat?"} do %>
+          <h3><i class="fa-solid fa-box-archive"></i></h3>
+        <% end %>
+
       </div>
       <div style="padding-left: 40px">
         <% if chat.messages.last.user == @user %>
