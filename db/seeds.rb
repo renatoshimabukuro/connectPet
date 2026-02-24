@@ -70,7 +70,7 @@ raye = Pet.create!(
 )
 
 raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/44856863-8493-4139-9498-22b38045ad1f_1.jpg"
-raye.photo.attach(io: URI.open(raye_url), filename: "raye.png", content_type: "image/png")
+raye.photo.attach(io: URI.open(raye_url), filename: "raye.jpg", content_type: "image/jpg")
 raye.save!
 
 percy = Pet.create!(
@@ -89,7 +89,7 @@ percy = Pet.create!(
 )
 
 percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/4cdbca27-d28f-4a0f-938b-d543347b384e_1.jpg"
-percy.photo.attach(io: URI.open(percy_url), filename: "percy.png", content_type: "image/png")
+percy.photo.attach(io: URI.open(percy_url), filename: "percy.jpg", content_type: "image/jpg")
 percy.save!
 
 cory = Pet.create!(
@@ -107,7 +107,7 @@ cory = Pet.create!(
 )
 
 cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/fa4678a3-74b6-470c-ab7d-adecf92b4dcf_1.jpg"
-cory.photo.attach(io: URI.open(cory_url), filename: "cory.png", content_type: "image/png")
+cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "image/jpg")
 cory.save!
 
 maple = Pet.create!(
@@ -139,7 +139,7 @@ gabby = Pet.create!(
 )
 
 gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1771583181/development/gyla6lp4g4disamp18okxmgpwb4k.jpg"
-gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.png", content_type: "image/png")
+gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
 gabby.save!
 
 jade = Pet.create!(
@@ -155,7 +155,7 @@ jade = Pet.create!(
 )
 
 jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1771584198/development/tqpjatpdi3kvgg2tmr8xad1eav71.jpg"
-jade.photo.attach(io: URI.open(jade_url), filename: "jade.png", content_type: "image/png")
+jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
 jade.save!
 
 puts "Making clinics"
