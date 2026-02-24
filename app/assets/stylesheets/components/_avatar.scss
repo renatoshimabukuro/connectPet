@@ -4,13 +4,11 @@
   border-radius: 50%;
 }
 
-// Slightly larger version for headers or profile previews
 .avatar-large {
   width: 56px;
   border-radius: 50%;
 }
 
-// Avatar with a white border and soft shadow to pop against colored backgrounds
 .avatar-bordered {
   width: 40px;
   border-radius: 50%;
@@ -18,7 +16,7 @@
   border: white 1px solid;
 }
 
-// Square version for specific UI elements like clinic or brand logos
+
 .avatar-square {
   width: 40px;
   border-radius: 0px;
@@ -31,38 +29,67 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   gap: 20px;
   margin-bottom: 15px;
   width: 100%;
 
-// Main pet avatar in the Hero section with larger size and more pronounced styling
- .avatar-main {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  border: 5px solid white;
-  background: #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 
-// Ensures photos/placeholders stay inside the circle
+  .secondary-avatars {
+    position: absolute;
+    left: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar-main {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 5px solid white;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover; // this prevents distortion of pet photos
+      object-fit: cover;
     }
+
+    i { font-size: 3rem; color: #D1D8D0; }
   }
 
-  // Secondary pet avatars in the Hero section, smaller and has a subtle background to differentiate from the main pet
   .avatar-secondary {
     width: 65px;
     height: 65px;
     border-radius: 50%;
     background: #D1D8D0;
-    opacity: 0.6;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: -20px;
+    transition: all 0.3s ease;
+    margin-right: -15px;
+    opacity: 0.8;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1.1);
+      z-index: 5;
+    }
   }
 }

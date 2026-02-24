@@ -2,6 +2,21 @@
   <%# Hero Section (Avatar and Name) %>
   <section class="pet-hero-section">
     <div class="avatar-carousel">
+      <%# Secondary Avatars (Other Pets) %>
+      <div class="secondary-avatars">
+        <% @other_pets.each do |other_pet| %>
+          <%= link_to user_pet_path(@user, other_pet), class: "avatar-secondary" do %>
+            <% if other_pet.photo.attached? %>
+              <%= cl_image_tag other_pet.photo.key, width: 80, height: 80, crop: :fill %>
+            <% else %>
+              <div class="placeholder-avatar">
+                <i class="fa-solid fa-paw"></i>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <%# Main Avatar (Current Pet) %>
       <div class="avatar-main">
         <% if @pet.photo.attached? %>
           <%= cl_image_tag @pet.photo.key, width: 400, height: 400, crop: :fill %>
@@ -11,16 +26,6 @@
       </div>
     </div>
     <h1><%= @pet.name %></h1>
-    <p class="pet-subtitle">
-      <%= @pet.species %> • <%= @pet.breed %> • <%= @pet.gender %>
-      <% if @pet.gender == 'Male' %>
-        <i class="fa-solid fa-mars"></i>
-      <% else %>
-        <i class="fa-solid fa-venus"></i>
-      <% end %>
-      <br>
-      <%= @pet.fixed ? (@pet.gender == 'Male' ? 'Neutered' : 'Spayed') : 'Intact' %>
-    </p>
   </section>
   <h2 class="details-title"><%= @pet.name %>’s Details</h2>
   <div class="vital-grid">
