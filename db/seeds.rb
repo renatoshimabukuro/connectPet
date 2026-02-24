@@ -219,6 +219,12 @@ chat2 = Chat.create!(
   pet: maple
 )
 
+chat3 = Chat.create!(
+  owner: katie,
+  vet: vet01,
+  pet: percy
+)
+
 puts "Creating messages..."
 
 # Chat 1 conversation
@@ -236,5 +242,11 @@ Message.create!(chat: chat2, user: renato, contents: "No vomiting, just low appe
 Message.create!(chat: chat2, user: vet01, contents: "Let's schedule a checkup this week.")
 Message.create!(chat: chat2, user: renato, contents: "Thank you, that would be great.")
 
+# Chat 4 conversation
+Message.create!(chat: chat3, user: katie, contents: "Percy hasn't been going toilet very often")
+Message.create!(chat: chat3, user: vet01, contents: "That's concerning. Any other symptoms?")
+Message.create!(chat: chat3, user: katie, contents: "His appetite is a little low.")
+Message.create!(chat: chat3, user: vet01, contents: "Alright, let's make an appointment for tomorrow. How is 3pm?")
+Message.create!(chat: chat3, user: katie, contents: "Perfect. Thank you.")
 
 puts "Finished! Created #{User.count} users, #{Pet.count} pets, #{Clinic.count} clinics, #{Log.count} logs, and #{Chat.count} chats with #{Message.count} messages."

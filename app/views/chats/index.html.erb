@@ -1,11 +1,32 @@
-<h1>Your Chats</h1>
-
-<%= link_to "Start New Chat", new_user_chat_path, method: :post %>
-
-<ul>
-<% @chats.each do |chat| %>
-    <li>
-      <%= link_to "Chat about #{chat.pet.name}", user_chat_path(@user, chat) %>
-    </li>
+<div class="container mt-5 pt-5">
+  <% @chats.each do |chat| %>
+    <div class="row align-items-center msg-card">
+      <div class="avatar-section col-2">
+        <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg",
+              class: "avatar-small", style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
+      </div>
+      <div class="col-10">
+        <%= link_to user_chat_path(@user, chat) do %>
+          <h5> <%= chat.vet.clinic.clinic_name %> </h5>
+          <h6> For: <%= chat.pet.name %> </h6>
+          <% if chat.messages.last.user == @user %>
+            <p> You: <%= chat.messages.last.contents %> </p>
+          <% else %>
+            <p> <%= chat.vet.clinic.clinic_name %>:  <%= chat.messages.last.contents %></p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <hr>
   <% end %>
-</ul>
+  <%= link_to "Start New Chat", new_user_chat_path, method: :post %>
+</div>
+<style>
+  .msg-card{
+
+  }
+
+  hr {
+    margin-top: 0px;
+  }
+</style>
