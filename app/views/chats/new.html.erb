@@ -1,0 +1,15 @@
+<%= simple_form_for [@user, @chat] do |f| %>
+
+  <%= f.association :pet,
+        collection: @user.pets,
+        prompt: "Select a pet" %>
+
+  <%= f.input :vet_id,
+        collection: User.where(role: "vet"),
+        label_method: :name,
+        value_method: :id,
+        prompt: "Select a vet" %>
+
+  <%= f.button :submit %>
+
+<% end %>

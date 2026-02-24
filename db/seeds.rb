@@ -1,17 +1,9 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
 puts "Cleaning database..."
+
 Log.destroy_all
 Message.destroy_all
 Chat.destroy_all
+Clinic.destroy_all
 Pet.destroy_all
 User.destroy_all
 
@@ -210,4 +202,51 @@ Log.create!(pet: raye,
 
 puts "Created #{Log.count} logs"
 
-puts "Finished! Created #{User.count} users, #{Pet.count} pets and #{Clinic.count} clinics"
+
+puts "Finished! Created #{User.count} users and #{Pet.count} pets."
+
+puts "Creating chats..."
+
+chat1 = Chat.create!(
+  owner: katie,
+  vet: vet01,
+  pet: raye
+)
+
+chat2 = Chat.create!(
+  owner: renato,
+  vet: vet01,
+  pet: maple
+)
+
+chat3 = Chat.create!(
+  owner: katie,
+  vet: vet01,
+  pet: percy
+)
+
+puts "Creating messages..."
+
+# Chat 1 conversation
+Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been coughing.")
+Message.create!(chat: chat1, user: vet01, contents: "How long has this been happening?")
+Message.create!(chat: chat1, user: katie, contents: "About two days.")
+Message.create!(chat: chat1, user: vet01, contents: "Any changes in appetite?")
+Message.create!(chat: chat1, user: katie, contents: "No, appetite is normal.")
+Message.create!(chat: chat1, user: vet01, contents: "Please bring Raye in tomorrow at 10am.")
+
+# Chat 2 conversation
+Message.create!(chat: chat2, user: renato, contents: "Hi Doctor, Maple is not eating much.")
+Message.create!(chat: chat2, user: vet01, contents: "Has she been vomiting?")
+Message.create!(chat: chat2, user: renato, contents: "No vomiting, just low appetite.")
+Message.create!(chat: chat2, user: vet01, contents: "Let's schedule a checkup this week.")
+Message.create!(chat: chat2, user: renato, contents: "Thank you, that would be great.")
+
+# Chat 4 conversation
+Message.create!(chat: chat3, user: katie, contents: "Percy hasn't been going toilet very often")
+Message.create!(chat: chat3, user: vet01, contents: "That's concerning. Any other symptoms?")
+Message.create!(chat: chat3, user: katie, contents: "His appetite is a little low.")
+Message.create!(chat: chat3, user: vet01, contents: "Alright, let's make an appointment for tomorrow. How is 3pm?")
+Message.create!(chat: chat3, user: katie, contents: "Perfect. Thank you.")
+
+puts "Finished! Created #{User.count} users, #{Pet.count} pets, #{Clinic.count} clinics, #{Log.count} logs, and #{Chat.count} chats with #{Message.count} messages."
