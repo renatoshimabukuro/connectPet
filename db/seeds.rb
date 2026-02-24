@@ -210,7 +210,7 @@ Log.create!(pet: maple,
   attr1: "Food", attr1_value: "3", attr1_memo: "45g",
   attr2: "Vomit", attr2_value: "0", attr2_memo: "",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
-  date: Date.parse("2026-02-22"))
+  date: Date.parse("2026-02-23"))
 
 puts "Created #{Log.count} logs"
 
