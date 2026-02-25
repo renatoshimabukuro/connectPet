@@ -1,11 +1,19 @@
 class ChatsController < ApplicationController
   # All actions require user
   before_action :set_user
-  before_action :set_chat, only: [:show, :archive, :unarchive]
+  before_action :set_chat, only: [:show, :archive]
 
   def index
     # Make it so we can only see chats where the user is either owner or vet -> could be made better with pundit?
     @chats = Chat.where("owner_id = ? OR vet_id = ?", @user.id, @user.id)
+
+    if params[:archived] == "true"
+      @chats = @chats.archived
+      @is_archivied_view = true
+    else
+      @chats = Chat.where("owner_id = ? OR vet_id = ?", @user.id, @user.id)
+      @is_archivied_view = false
+    end
   end
 
   def show
@@ -32,16 +40,15 @@ class ChatsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /chat/:id/archive
   def archive
     @chat.archive!
     redirect_to user_chats_path, notice: "Chat was successfully archived."
   end
 
-    # PATCH/PUT /chat/:id/unarchive
   def unarchive
-    @chat.unarchive!
-    redirect_to user_chats_path, notice: "Chat was successfully unarchived."
+    @chat = Chat.unscoped.find(params[:id])
+    @chat.update(archived: false)
+    redirect_to user_chats_path(current_user, archived: true), notice: "Chat was restored."
   end
 
   private
