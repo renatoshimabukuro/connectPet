@@ -1,3 +1,11 @@
+<div class="chat-subnav">
+  <i class="fa-solid fa-chevron-left"></i>
+  <% if @user == @chat.owner %>
+    <%= @chat.vet.clinic.clinic_name %>
+  <% else %>
+    <%= @chat.owner.name %>: <%= @chat.pet.name %>
+  <% end %>
+</div>
 <div class="container mt-4">
   <h2>Chat about: <%= @chat.pet.name %></h2>
   <div id="chat-messages">
@@ -113,7 +121,7 @@
   .container {
     padding-bottom: 6.5rem;
     min-height: 100vh;
-    padding-top: 12rem;
+    padding-top: 13rem;
   }
 
   @supports (padding: max(0px)) {
@@ -193,6 +201,20 @@
   html,
   body {
   height: 100%;
+  }
+
+  /* ------ */
+
+  .chat-subnav {
+  position: fixed;
+  top: 4rem; /* height of your main navbar */
+  z-index: 9;
+  width: 100vw;
+
+  background: #ffffff;
+  border-bottom: 0.0625rem solid #e5e7eb;
+
+  padding: 0.6rem 1rem;
   }
 </style>
 <script>
