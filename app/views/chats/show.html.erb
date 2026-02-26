@@ -1,4 +1,4 @@
-<div class="container mt-4 pt-5">
+<div class="container mt-4">
   <h2>Chat about: <%= @chat.pet.name %></h2>
   <div id="chat-messages">
     <% @messages.each do |message| %>
@@ -108,14 +108,12 @@
     padding-right: 0;
   }
 
-  .container {
-    padding-bottom: 5.5rem;
-  }
-
   /* -------- */
 
   .container {
     padding-bottom: 6.5rem;
+    min-height: 100vh;
+    padding-top: 12rem;
   }
 
   @supports (padding: max(0px)) {
@@ -190,6 +188,11 @@
   form {
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
+  }
+
+  html,
+  body {
+  height: 100%;
   }
 </style>
 <script>
