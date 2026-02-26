@@ -9,10 +9,10 @@ class ChatsController < ApplicationController
 
     if params[:archived] == "true"
       @chats = @chats.archived
-      @is_archivied_view = true
+      @is_archived_view = true
     else
       @chats = Chat.where("owner_id = ? OR vet_id = ?", @user.id, @user.id)
-      @is_archivied_view = false
+      @is_archived_view = false
     end
   end
 
