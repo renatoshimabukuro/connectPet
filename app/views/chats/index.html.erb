@@ -21,12 +21,12 @@
         <% if chat.archived? %>
           <%# Unarchiving the chat %>
           <%= link_to unarchive_user_chat_path(current_user, chat), data: { turbo_method: :patch, turbo_confirm: "Unarchive this chat?"} do %>
-            <h3><i class="fa-solid fa-box-archive" style="color:blue"></i></h3>
+            <h3><i class="fa-regular fa-eye" style="color: #A3B899"></i></h3>
           <% end %>
         <% else %>
           <%# Archiving the chat %>
           <%= link_to archive_user_chat_path(current_user, chat), data: { turbo_method: :patch, turbo_confirm: "Archive this chat?"} do %>
-            <h3><i class="fa-solid fa-box-archive" style="color:red"></i></h3>
+            <h3><i class="fa-regular fa-eye-slash" style="color: #6c757d"></i></h3>
           <% end %>
         <% end %>
 
