@@ -1,25 +1,33 @@
 import { Controller } from "@hotwired/stimulus"
-
-import { Controller } from "@hotwired/stimulus"
+import Splide from '@splidejs/splide';
 
 export default class extends Controller {
-  static targets = ["scroll"]
-
   connect() {
-    console.log("Carousel connected and ready.")
-  }
+    const slideCount = this.element.querySelectorAll('.splide__slide').length;
 
-  scrollLeft() {
-    this.scrollTarget.scrollBy({
-      left: -150,
-      behavior: "smooth"
-    })
-  }
+    const splide = new Splide(this.element, {
+      type   : 'slide',
+      perPage: 3,
+      focus  : 'center',
+      trimSpace: false,
+      gap    : '10px',
+      arrows : true,
+      pagination: false,
+      drag   : 'free',
+    });
 
-  scrollRight() {
-    this.scrollTarget.scrollBy({
-      left: 150,
-      behavior: "smooth"
-    })
+    splide.on('moved', (newIndex) => {
+      const activeSlide = splide.Components.Slides.getAt(newIndex).slide;
+      const link = activeSlide.querySelector('a');
+
+      if (link) {
+        window.Turbo.visit(link.href, {
+          frame: "pet_details",
+          action: "replace"
+        });
+      }
+    });
+
+    splide.mount();
   }
 }

@@ -1,23 +1,6 @@
 // VITAL DETAILS GRID & CARDS - Used to display pet-specific data like DOB, Weight, etc
 
-/**
- * Grid Container
- * Controls the responsive layout of the detail cards.
- */
-.vital-grid {
-  display: grid;
-  width: 90%;
-  max-width: 1000px;
-  margin: 0 auto 40px auto; // Centers the grid and adds spacing below
-  gap: 15px;
-  // Mobile: 2-column layout with smaller gaps for compactness
-  grid-template-columns: 1fr 1fr;
-// On larger screens, switch to a 3-column layout and increase the gap for better spacing
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 25px;
-  }
-}
+
 
 /**
  * Individual Detail Card

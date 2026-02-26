@@ -1,92 +1,81 @@
 <div class="pet-show-container">
-  <div class="pet-hero-section" data-controller="carousel">
-    <div class="avatar-carousel-container">
-      <%# Updated button with Stimulus action %>
-      <button class="custom-carousel-control prev"
-            data-action="click->carousel#scrollLeft"
-        type="button"></button>
-      <%# Added data-carousel-target so the JS knows what to scroll %>
-      <div class="avatar-carousel" id="avatarScroll" data-carousel-target="scroll">
-        <div class="secondary-group">
-          <% @other_pets.each_with_index do |other_pet, index| %>
-            <% if index.even? %>
-              <%= link_to user_pet_path(@user, other_pet), class: "avatar-secondary" do %>
-                <%= cl_image_tag other_pet.photo.key, width: 65, height: 65, crop: :fill if other_pet.photo.attached? %>
+  <%# --- HERO SECTION (Outside the frame so it stays still) --- %>
+  <div class="pet-hero-section">
+    <%# Create the list for the carousel once %>
+    <% all_pets = [@pet] + @other_pets.to_a %>
+    <div class="splide" data-controller="carousel">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <% all_pets.each do |pet| %>
+            <li class="splide__slide">
+              <%= link_to user_pet_path(@user, pet), class: "avatar-wrapper" do %>
+                <%= cl_image_tag pet.photo.key, crop: :fill, class: "avatar-img" if pet.photo.attached? %>
               <% end %>
-            <% end %>
+            </li>
           <% end %>
-        </div>
-        <div class="avatar-main">
-          <%= cl_image_tag @pet.photo.key, width: 130, height: 130, crop: :fill if @pet.photo.attached? %>
-        </div>
-        <div class="secondary-group">
-          <% @other_pets.each_with_index do |other_pet, index| %>
-            <% if index.odd? %>
-              <%= link_to user_pet_path(@user, other_pet), class: "avatar-secondary" do %>
-                <%= cl_image_tag other_pet.photo.key, width: 65, height: 65, crop: :fill if other_pet.photo.attached? %>
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
+        </ul>
       </div>
-      <%# Updated button with Stimulus action %>
-      <button class="custom-carousel-control next"
-            data-action="click->carousel#scrollRight"
-        type="button"></button>
+      <div class="splide__arrows">
+        <button class="splide__arrow splide__arrow--prev custom-carousel-control prev" type="button"></button>
+        <button class="splide__arrow splide__arrow--next custom-carousel-control next" type="button"></button>
+      </div>
     </div>
+  </div>
+  <%# --- TURBO FRAME (Everything inside here swaps when you click an avatar) --- %>
+  <%= turbo_frame_tag "pet_details" do %>
     <h1 class="mt-3 text-center"><%= @pet.name %></h1>
-  </div>
-  <h2 class="details-title"><%= @pet.name %>’s Details</h2>
-  <div class="vital-grid">
-    <%# DOB %>
-    <div class="vital-card">
-      <i class="fa-solid fa-pencil edit-pencil"></i>
-      <i class="fa-solid fa-calendar-days card-icon"></i>
-      <span class="card-label">Date of Birth:</span>
-      <span class="card-value"><%= @pet.dob.strftime("%Y/%m/%d") if @pet.dob %></span>
+    <h2 class="details-title"><%= @pet.name %>’s Details</h2>
+    <div class="vital-grid">
+      <%# DOB %>
+      <div class="vital-card">
+        <i class="fa-solid fa-pencil edit-pencil"></i>
+        <i class="fa-solid fa-calendar-days card-icon"></i>
+        <span class="card-label">Date of Birth:</span>
+        <span class="card-value"><%= @pet.dob.strftime("%Y/%m/%d") if @pet.dob %></span>
+      </div>
+      <%# Vaccines %>
+      <div class="vital-card">
+        <i class="fa-solid fa-pencil edit-pencil"></i>
+        <i class="fa-solid fa-syringe card-icon"></i>
+        <span class="card-label">Vaccines:</span>
+        <span class="card-value"><%= @pet.vacc_status %></span>
+      </div>
+      <%# Microchip %>
+      <div class="vital-card">
+        <i class="fa-solid fa-pencil edit-pencil"></i>
+        <i class="fa-solid fa-microchip card-icon"></i>
+        <span class="card-label">Microchip:</span>
+        <span class="card-value"><%= @pet.microchip.presence || "None" %></span>
+      </div>
+      <%# Weight %>
+      <div class="vital-card">
+        <i class="fa-solid fa-pencil edit-pencil"></i>
+        <i class="fa-solid fa-weight-hanging card-icon"></i>
+        <span class="card-label">Weight:</span>
+        <span class="card-value"><%= @pet.weight %> kg</span>
+      </div>
+      <%# Medications %>
+      <div class="vital-card">
+        <i class="fa-solid fa-pencil edit-pencil"></i>
+        <i class="fa-solid fa-capsules card-icon"></i>
+        <span class="card-label">Medications:</span>
+        <span class="card-value"><%= @pet.current_meds.presence || "None" %></span>
+      </div>
+      <%# Notes %>
+      <div class="vital-card">
+        <i class="fa-solid fa-pencil edit-pencil"></i>
+        <i class="fa-solid fa-note-sticky card-icon"></i>
+        <span class="card-label">Notes:</span>
+        <span class="card-value"><%= @pet.notes.presence || "No notes yet" %></span>
+      </div>
     </div>
-    <%# Vaccines %>
-    <div class="vital-card">
-      <i class="fa-solid fa-pencil edit-pencil"></i>
-      <i class="fa-solid fa-syringe card-icon"></i>
-      <span class="card-label">Vaccines:</span>
-      <span class="card-value"><%= @pet.vacc_status %></span>
+    <div class="pet-actions-footer">
+      <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
+        <i class="fa-solid fa-book-open"></i> View <%= @pet.name %>’s Logs
+      <% end %>
+      <%= link_to new_user_pet_log_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
+        <i class="fa-solid fa-plus"></i> Add New Log
+      <% end %>
     </div>
-    <%# Microchip %>
-    <div class="vital-card">
-      <i class="fa-solid fa-pencil edit-pencil"></i>
-      <i class="fa-solid fa-microchip card-icon"></i>
-      <span class="card-label">Microchip:</span>
-      <span class="card-value"><%= @pet.microchip.presence || "None" %></span>
-    </div>
-    <%# Weight %>
-    <div class="vital-card">
-      <i class="fa-solid fa-pencil edit-pencil"></i>
-      <i class="fa-solid fa-weight-hanging card-icon"></i>
-      <span class="card-label">Weight:</span>
-      <span class="card-value"><%= @pet.weight %> kg</span>
-    </div>
-    <%# Medications %>
-    <div class="vital-card">
-      <i class="fa-solid fa-pencil edit-pencil"></i>
-      <i class="fa-solid fa-capsules card-icon"></i>
-      <span class="card-label">Medications:</span>
-      <span class="card-value"><%= @pet.current_meds.presence || "None" %></span>
-    </div>
-    <%# Notes %>
-    <div class="vital-card">
-      <i class="fa-solid fa-pencil edit-pencil"></i>
-      <i class="fa-solid fa-note-sticky card-icon"></i>
-      <span class="card-label">Notes:</span>
-      <span class="card-value"><%= @pet.notes.presence || "No notes yet" %></span>
-    </div>
-  </div>
-  <div class="pet-actions-footer">
-    <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log" do %>
-      <i class="fa-solid fa-book-open"></i> View <%= @pet.name %>’s Logs
-    <% end %>
-    <%= link_to new_user_pet_log_path(@user, @pet), class: "btn-log" do %>
-      <i class="fa-solid fa-plus"></i> Add New Log
-    <% end %>
-  </div>
+  <% end %>
 </div>

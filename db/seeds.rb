@@ -110,12 +110,12 @@ cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/developm
 cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "image/jpg")
 cory.save!
 
-luna = Pet.create!(
+big_tex = Pet.create!(
   user: katie,
-  name: "Luna",
+  name: "Big Tex",
   dob: Date.new(2022, 5, 10),
-  species: "Cat",
-  breed: "Siamese",
+  species: "Horse",
+  breed: "Polamino",
   weight: 3.5,
   vacc_status: "Vaccinated",
   fixed: true,
@@ -125,12 +125,12 @@ luna = Pet.create!(
 )
 
 
-mochi = Pet.create!(
+jonathan = Pet.create!(
   user: katie,
-  name: "Mochi",
+  name: "Jonathan",
   dob: Date.new(2023, 1, 15),
-  species: "Cat",
-  breed: "Tabby",
+  species: "Dragon",
+  breed: "Western Red",
   weight: 4.2,
   vacc_status: "Vaccinated",
   fixed: true,

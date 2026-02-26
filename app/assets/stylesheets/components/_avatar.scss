@@ -24,79 +24,18 @@
   border: white 1px solid;
 }
 
-.avatar-carousel-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.splide {
+  visibility: visible !important; /* Forces it to show even if Splide is slow to load */
   width: 100%;
-  padding: 0 5px;
-  margin: 20px 0;
-  max-width: 100vw;
-  box-sizing: border-box;
+  position: relative;
 }
 
-.avatar-carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  overflow: auto;
-  flex: 1;
-  min-width: 0;
-  padding: 15px 0;
+.splide__track {
+  padding: 60px 0 !important; /* Increase padding so the 'scaled up' cat isn't cut off */
+  overflow: visible !important; /* Allows the center avatar to grow outside the box */
 }
 
-.secondary-group {
-  display: flex;
-  gap: 8px;
-  flex: 0 0 auto;
-}
-
-
-.avatar-main {
-  flex: 0 0 110px;
-  height: 110px;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  border: 4px solid white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  overflow: hidden;
-  z-index: 2;
-  img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-}
-
-.avatar-secondary {
-  flex: 0 0 55px;
-  height: 55px;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  border: 2px solid white;
-  overflow: hidden;
-  img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-}
-
-/* Button Fix: No Overlap */
-.custom-carousel-control {
-  flex: 0 0 35px; /* Fixed width arrow lane */
-  height: 35px;
-  background: #f0f0f0;
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  padding: 0;
-
-  &::after {
-    content: '';
-    display: inline-block;
-    border-top: 2px solid #333;
-    border-right: 2px solid #333;
-    width: 7px;
-    height: 7px;
-  }
-  &.prev::after { transform: rotate(-135deg); margin-left: 3px; }
-  &.next::after { transform: rotate(45deg); margin-right: 3px; }
+.avatar-wrapper {
+  /* ... your existing code ... */
+  flex-shrink: 0; /* Prevents the circle from becoming an oval */
 }

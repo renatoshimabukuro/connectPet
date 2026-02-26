@@ -1,0 +1,66 @@
+
+.pet-hero-section {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden; /* Prevents side-scrolling on mobile */
+}
+
+.splide {
+  width: 100% !important;
+  max-width: 500px; /* Optional: prevents it from getting too wide on desktop */
+  margin: 0 auto;
+}
+
+.splide__track {
+  padding: 60px 0 !important;
+  overflow: visible !important; /* Let the 'Jade' center avatar grow */
+}
+
+/* THE CIRCLE FIX */
+.avatar-wrapper {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  border: 3px solid white;
+  background: white;
+  transition: transform 0.3s ease;
+  margin: 0 auto;
+}
+
+.avatar-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* Keeps the cat's face from stretching */
+  border-radius: 50% !important;
+}
+
+/* GROW THE CENTER PET */
+.splide__slide.is-active .avatar-wrapper {
+  transform: scale(1.5); /* Makes the center pet look like the 'Main' one */
+  z-index: 5;
+}
+
+/* FIX THE ARROWS */
+.splide__arrows {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  pointer-events: none;
+}
+
+.custom-carousel-control {
+  pointer-events: auto;
+  background: white !important;
+  border-radius: 50% !important;
+  width: 35px;
+  height: 35px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
