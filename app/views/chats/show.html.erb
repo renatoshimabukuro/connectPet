@@ -1,6 +1,6 @@
 <div class="container mt-4 pt-5">
   <h2>Chat about: <%= @chat.pet.name %></h2>
-  <div>
+  <div id="chat-messages">
     <% @messages.each do |message| %>
       <% if message.user == @user %>
         <div class="row mx-2 justify-content-center">
@@ -30,15 +30,15 @@
         </div>
       <% end %>
     <% end %>
+    <div class="chat-bottom"> </div>
   </div>
 </div>
-<hr>
 <%= form_with model: [@user, @chat, @message] do |f| %>
   <%= f.text_area :contents %>
-  <%= f.submit "Send" %>
+  <button type="submit" class="send-btn" aria-label="Send message">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
 <% end %>
-</div>
-</div>
 <style>
   .msg-wrapper {
     position: relative;
@@ -107,4 +107,105 @@
     padding-left: 0;
     padding-right: 0;
   }
+
+  .container {
+    padding-bottom: 5.5rem;
+  }
+
+  /* -------- */
+
+  .container {
+    padding-bottom: 6.5rem;
+  }
+
+  @supports (padding: max(0px)) {
+    .container {
+      padding-bottom: max(0rem, env(safe-area-inset-bottom));
+    }
+  }
+
+  form {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+
+    background: #ffffff;
+    border-top: 0.0625rem solid #e5e7eb;
+
+    padding: 0.75rem 0.75rem 1rem;
+  }
+
+  form textarea {
+    width: 100%;
+    min-height: 2.75rem;
+    max-height: 9rem;
+
+    padding: 0.6rem 2.75rem 0.6rem 0.9rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+
+    border-radius: 1.25rem;
+    border: 0.0625rem solid #d1d5db;
+    background: #f9fafb;
+
+  }
+
+  form textarea:focus {
+    background: #ffffff;
+    border-color: #6aa98f;
+    box-shadow: 0 0 0 0.15rem rgba(106, 169, 143, 0.25);
+  }
+
+  .send-btn {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 2.25rem;
+
+    width: 2.1rem;
+    height: 2.1rem;
+
+    border-radius: 50%;
+    border: none;
+
+    background: #6aa98f;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .send-btn i {
+  font-size: 0. 9rem;
+  }
+
+  .send-btn:hover {
+    opacity: 0.9;
+  }
+
+  @supports (padding: max(0px)) {
+  form {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  }
 </style>
+<script>
+  function scrollToBottomSmooth() {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  }
+
+    document.addEventListener("turbo:load", scrollToBottomSmooth);
+
+    document.addEventListener("turbo:submit-end", (event) => {
+    // Only react to your chat form
+    if (!event.target.closest("form")) return;
+
+    scrollToBottomSmooth();
+  });
+</script>
