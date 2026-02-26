@@ -1,11 +1,16 @@
+require 'open-uri'
+
 puts "Cleaning database..."
 
-Log.destroy_all
-Message.destroy_all
-Chat.destroy_all
-Clinic.destroy_all
-Pet.destroy_all
-User.destroy_all
+# Wipes all data from the tables, resets auto-incrementing IDs, and bypasses foreign key constraints.
+# Instead of asking Rails to destroy objects one by one, send a command directly to the database engine.
+connection = ActiveRecord::Base.connection
+# TRUNCATE: Removes all records from a table without processing each one individually(fast).
+# RESTART IDENTITY: Clears all data, resets IDs to 1.
+# CASCADE: Ignores link errors between tables.
+connection.execute("TRUNCATE messages, logs, friendships, chats, pets, clinics, users RESTART IDENTITY CASCADE")
+
+puts "Database cleaned! Creating new data..."
 
 puts "Creating users..."
 katie = User.create!(
@@ -222,19 +227,22 @@ puts "Creating chats..."
 chat1 = Chat.create!(
   owner: katie,
   vet: vet01,
-  pet: raye
+  pet: raye,
+  archived: false
 )
 
 chat2 = Chat.create!(
   owner: renato,
   vet: vet01,
-  pet: maple
+  pet: maple,
+  archived: false
 )
 
 chat3 = Chat.create!(
   owner: katie,
   vet: vet01,
-  pet: percy
+  pet: percy,
+  archived: false
 )
 
 puts "Creating messages..."
