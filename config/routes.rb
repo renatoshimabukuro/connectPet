@@ -23,6 +23,16 @@ Rails.application.routes.draw do
   resources :clinics, only: [:index, :show] #showing the clinics to all
   resources :users, only: [:show, :new, :create] do
     resources :pets, only: [:show, :new, :create, :index] do
+      collection do
+        # Route to Heart Gallery
+        get :archived, as: :heart_gallery
+      end
+      member do
+      # Add route /users/:user_id/pets/:id/archive
+        patch :archive
+        # /users/:user_id/pets/:id/unarchive
+        patch :unarchive
+      end
       resources :logs, only: [:index, :new, :create, :edit, :update, :show]
     end
     resources :clinics, except: [:index, :show]

@@ -1,7 +1,7 @@
 class PetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :set_pet, only: [:show]
+  before_action :set_pet, only: [:show, :archive]
 
   # GET /users/:user_id/pets
   def index
@@ -32,6 +32,21 @@ class PetsController < ApplicationController
     end
   end
 
+  def archive
+    @pet.archive!
+    redirect_to user_pets_path(current_user, @pets)
+  end
+
+  def archived
+    @archived_pets = current_user.pets.unscoped.where(archived: true)
+  end
+
+  def unarchive
+    @pets = Pet.unscoped.find(params[:id])
+    @pets.update(archived: false)
+    redirect_to user_pets_path(current_user, archived: true), notice: "#{@pets.name} was restored."
+  end
+
   private
 
   def set_user
@@ -51,7 +66,6 @@ class PetsController < ApplicationController
   def destroy
       @pet = @user.pets.find(params[:id])
       @pet.destroy
-
   end
 
   def pet_params
