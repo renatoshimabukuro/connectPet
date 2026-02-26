@@ -110,6 +110,35 @@ cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/developm
 cory.photo.attach(io: URI.open(cory_url), filename: "cory.png", content_type: "image/png")
 cory.save!
 
+luna = Pet.create!(
+  user: katie,
+  name: "Luna",
+  dob: Date.new(2022, 5, 10),
+  species: "Cat",
+  breed: "Siamese",
+  weight: 3.5,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Female",
+  attr1: "Food",
+  attr2: "Toilet",
+)
+
+
+mochi = Pet.create!(
+  user: katie,
+  name: "Mochi",
+  dob: Date.new(2023, 1, 15),
+  species: "Cat",
+  breed: "Tabby",
+  weight: 4.2,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Female",
+  attr1: "Food",
+  attr2: "Toilet",
+)
+
 maple = Pet.create!(
   user: renato,
   name: "Maple",
