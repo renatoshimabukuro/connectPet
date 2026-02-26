@@ -1,5 +1,6 @@
 class LogsController < ApplicationController
   require "csv"
+  require "date"
   #All actions need users and pets
   before_action :set_user
   before_action :set_pet
@@ -22,15 +23,17 @@ class LogsController < ApplicationController
   end
 
   def export
+
     @logs = @pet.logs
     start_date = params[:start_date]
     end_date   = params[:end_date]
     # set start and end date params in view
     # get all logs in this range.
     @logs.where(date:start_date..end_date)
-
+    # create a file name for the csv and ai
+    filepath_name = "#{@pet.name}Log#{params[:start_date]}To#{params[:end_date]}.csv"
     # create csv file
-    CSV.open("#{@pet.name}Log#{params[:start_date]}To#{params[:end_date]}", "wb") do |csv|
+    CSV.open(filepath_name, "wb") do |csv|
       header = ["Date"]
       (1..5).each do |num|
         attr_name = @pet.send("attr#{num}")
@@ -56,6 +59,23 @@ class LogsController < ApplicationController
         csv << row
       end
     end
+    # end of csv
+    # add AI agent
+    gemini = RubyLLM.chat(model: "gemini-2.0-flash")
+
+    # set prompt for AI
+    prompt = "Your job is to analyze data about #{@pet.name},a #{@pet.breed} #{@pet.species}.
+    Provide any insights into their health based off the content of this summary and their CSV
+    data in the attached document. This should include any recommended procedures at checkup or
+    annomolies you notice in their data.
+    Summary:
+    DOB: #{@pet.dob}, AGE(#{Date.today.year- @pet.dob.year})
+    weight: #{@pet.weight}
+    current medication(s) : #{@pet.current_meds}
+    vaccine status: #{@pet.vacc_status}
+    microchip status: #{@pet.microchip}
+    "
+    puts gemini.ask(prompt, with:{csv:filepath_name}).content
   end
 
   def show
