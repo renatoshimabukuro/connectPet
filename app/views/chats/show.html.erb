@@ -1,5 +1,7 @@
 <div class="chat-subnav">
-  <i class="fa-solid fa-chevron-left"></i>
+  <%= link_to user_chats_path(@user) do %>
+    <i class="fa-solid fa-chevron-left"></i>
+  <% end %>
   <% if @user == @chat.owner %>
     <%= @chat.vet.clinic.clinic_name %>
   <% else %>
