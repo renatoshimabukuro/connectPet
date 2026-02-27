@@ -6,7 +6,7 @@ export default class extends Controller {
     const slideCount = this.element.querySelectorAll('.splide__slide').length;
 
     const splide = new Splide(this.element, {
-      type   : 'slide',
+      type   : 'loop',
       perPage: 3,
       focus  : 'center',
       trimSpace: false,
