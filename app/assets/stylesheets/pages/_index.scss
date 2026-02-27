@@ -8,18 +8,18 @@
   align-items: center;
   background-color: #fdfaf5;
 
-  /* The main headers */
+
   .index-title, h3 {
     width: 90%;
     text-align: center;
     color: #2d3436;
-    font-weight: 600; /* Not too bold, just clean */
+    font-weight: 600;
     margin-bottom: 20px;
   }
 
   .index-title { font-size: 1.8rem; }
 
-  /* Pull the Vet section up closer */
+
   h3 {
     font-size: 1.4rem;
     margin-top: 15px !important;

@@ -14,34 +14,30 @@
   align-items: center !important;
   gap: 8px !important;
 
-  /* COLOR FIX: Force the text to be white */
   color: white !important;
   text-decoration: none !important;
   font-weight: 700 !important;
 
-  /* CLIPPING FIX: Ensure 'c' and 't' are fully visible */
   white-space: nowrap !important;
   min-width: max-content !important;
   overflow: visible !important;
 
-  /* Removing any blue/green focus borders */
   outline: none !important;
   border: none !important;
   box-shadow: none !important;
 
-  /* Ensures the paw icon inside the brand is also white */
   i {
     color: white !important;
   }
 }
 
-  /* Make sure the hamburger is visible but doesn't push the logo */
+
   .nav-link-custom {
     flex: 0 0 auto !important;
     i.fa-bars { color: white !important; font-size: 1.5rem; }
   }
 }
-  /* Hamburger Dropdown Menu */
+
 .dropdown-menu {
   background-color: white !important;
   border-radius: 12px;
@@ -49,7 +45,7 @@
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
   padding: 8px 0;
 
-  /* Ensures the menu opens correctly on mobile */
+
   position: absolute;
   right: 0;
 
@@ -64,7 +60,7 @@
       color: #4a6755 !important;
     }
 
-    /* Dark Red Log out */
+
     &.text-danger {
       color: #b33939 !important;
 

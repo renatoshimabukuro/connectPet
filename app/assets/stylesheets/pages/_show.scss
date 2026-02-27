@@ -58,3 +58,9 @@ turbo-frame#pet_details {
   width: 100%;
   flex-wrap: wrap;
 }
+
+.pet-details-container h2, .pet-show-container h2 {
+  font-weight: 500 !important;
+  font-size: 1.4rem;
+  margin-top: 25px;
+}

@@ -4,21 +4,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden; /* Prevents side-scrolling on mobile */
+  overflow: hidden;
 }
 
 .splide {
   width: 100% !important;
-  max-width: 500px; /* Optional: prevents it from getting too wide on desktop */
+  max-width: 500px;
   margin: 0 auto;
 }
 
 .splide__track {
   padding: 60px 0 !important;
-  overflow: visible !important; /* Let the 'Jade' center avatar grow */
+  overflow: visible !important;
 }
 
-/* THE CIRCLE FIX */
 .avatar-wrapper {
   display: block;
   width: 80px;
@@ -34,22 +33,19 @@
 .avatar-img {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important; /* Keeps the cat's face from stretching */
+  object-fit: cover !important;
   border-radius: 50% !important;
 }
 
-/* GROW THE CENTER PET */
 .splide__slide.is-active .avatar-wrapper {
-  transform: scale(1.5); /* Makes the center pet look like the 'Main' one */
+  transform: scale(1.5);
   z-index: 5;
 }
 
-/* 1. The Container: Keep it simple so Splide can do its job */
 .splide__arrows {
   pointer-events: none;
 }
 
-/* 2. The Buttons: One single source of truth */
 .splide__arrow {
   pointer-events: auto;
   background: rgba(255, 255, 255, 0.9) !important;
@@ -59,11 +55,11 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Adds depth */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   border: none !important;
   opacity: 1 !important;
 
-  /* Critical: Stop the 'jumping' by locking the transform */
+
   transition: background 0.2s ease !important;
   transform: translateY(-50%) !important;
 
@@ -73,10 +69,9 @@
 
   &:active, &:focus {
     outline: none !important;
-    transform: translateY(-50%) scale(1) !important; /* Keep it centered and still */
+    transform: translateY(-50%) scale(1) !important;
   }
 
-  /* The Chevron Arrow */
   &::after {
     content: '';
     display: inline-block;

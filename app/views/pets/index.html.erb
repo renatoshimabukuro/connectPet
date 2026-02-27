@@ -14,12 +14,13 @@
           <div class="name-section-wrapper">
             <h2 class="pet-name-index"><%= pet.name %></h2>
           </div>
-          <i class="fa-solid fa-calendar-plus"></i>
+          <i class="fa-solid fa-calendar-plus"
+             onclick="event.preventDefault(); window.location.href='<%= new_user_pet_log_path(current_user, pet) %>';">
+          </i>
         </div>
       <% end %>
-    <% end %> <%# Loop ends here, BEFORE the Vet section %>
+    <% end %>
   </div>
-  <%# Moving the Vet section OUTSIDE the pet loop so it only appears once %>
   <h3 class="mt-4">Your Connected Veterinarians</h3>
   <div class="vet-card-custom">
     <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg", class: "avatar-vet" %>

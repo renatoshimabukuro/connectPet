@@ -1,5 +1,4 @@
 <div class="pet-show-container">
-  <%# --- HERO SECTION --- %>
   <div class="pet-hero-section">
     <% all_pets = [@pet] + @other_pets.to_a %>
     <div class="splide" data-controller="carousel">
@@ -11,7 +10,6 @@
                 <% if pet.photo.attached? %>
                   <%= cl_image_tag pet.photo.key, crop: :fill, class: "avatar-img" %>
                 <% else %>
-                  <%# Use a dedicated class for the carousel placeholder %>
                   <div class="avatar-img placeholder-show">
                     <i class="fa-solid fa-paw"></i>
                   </div>
@@ -27,7 +25,6 @@
       </div>
     </div>
   </div>
-  <%# --- TURBO FRAME (Everything inside here swaps when you click an avatar) --- %>
   <%= turbo_frame_tag "pet_details" do %>
     <div class="text-center">
       <h1 class="pet-name-title"><%= @pet.name %></h1>
@@ -45,35 +42,30 @@
           <span class="card-label">Date of Birth:</span>
           <span class="card-value"><%= @pet.dob.strftime("%Y/%m/%d") if @pet.dob %></span>
         </div>
-        <%# Vaccines %>
         <div class="vital-card">
           <i class="fa-solid fa-pencil edit-pencil"></i>
           <i class="fa-solid fa-syringe card-icon"></i>
           <span class="card-label">Vaccines:</span>
           <span class="card-value"><%= @pet.vacc_status %></span>
         </div>
-        <%# Microchip %>
         <div class="vital-card">
           <i class="fa-solid fa-pencil edit-pencil"></i>
           <i class="fa-solid fa-microchip card-icon"></i>
           <span class="card-label">Microchip:</span>
           <span class="card-value"><%= @pet.microchip.presence || "None" %></span>
         </div>
-        <%# Weight %>
         <div class="vital-card">
           <i class="fa-solid fa-pencil edit-pencil"></i>
           <i class="fa-solid fa-weight-hanging card-icon"></i>
           <span class="card-label">Weight:</span>
           <span class="card-value"><%= @pet.weight %> kg</span>
         </div>
-        <%# Medications %>
         <div class="vital-card">
           <i class="fa-solid fa-pencil edit-pencil"></i>
           <i class="fa-solid fa-capsules card-icon"></i>
           <span class="card-label">Medications:</span>
           <span class="card-value"><%= @pet.current_meds.presence || "None" %></span>
         </div>
-        <%# Notes %>
         <div class="vital-card">
           <i class="fa-solid fa-pencil edit-pencil"></i>
           <i class="fa-solid fa-note-sticky card-icon"></i>

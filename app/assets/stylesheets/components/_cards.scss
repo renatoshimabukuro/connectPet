@@ -1,4 +1,4 @@
-// --- SHOW PAGE: VITAL STATS ---
+// SHOW PAGE
 .vital-card {
   background-color: #a3b899;
   border-radius: 22px;
@@ -17,7 +17,7 @@
   .edit-pencil { position: absolute; top: 15px; right: 15px; background: rgba(255, 255, 255, 0.25); padding: 6px; border-radius: 50%; }
 }
 
-// --- INDEX PAGE: CONSOLIDATED PET & VET CARDS ---
+// INDEX PAGE
 .card-index, .vet-card-custom {
   background-color: #a3b899;
   border-radius: 28px;
@@ -30,9 +30,8 @@
   margin: 0 auto 15px auto;
   box-sizing: border-box;
   text-decoration: none !important;
-  gap: 15px !important; /* Keeps photos, names, and icons separated */
+  gap: 15px !important;
 
-  /* THE PHOTO FIX: Re-inserting these hard limits */
   .avatar-index-large, .avatar-vet {
     width: 85px !important;
     height: 85px !important;
@@ -52,16 +51,14 @@
   display: flex;
   flex-direction: column;
 
-  /* THE FINAL FIX: This creates a physical 35px wall the name cannot cross */
   margin-right: 35px !important;
 
   .pet-name-index {
     color: white !important;
-    /* Slightly smaller font to ensure it fits mobile screens better */
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
-    white-space: nowrap !important; /* Keeps Gabby on one line */
+    white-space: nowrap !important;
     overflow: visible !important;
   }
 
@@ -71,7 +68,7 @@
     font-weight: 700;
     margin: 0;
     line-height: 1.1;
-    white-space: normal !important; /* Patrick Gregory House still wraps */
+    white-space: normal !important;
     word-break: break-word !important;
   }
 
@@ -85,13 +82,11 @@
 
   i.fa-solid {
     flex-shrink: 0 !important;
-    margin-left: auto !important; /* Keeps icon on the far right */
+    margin-left: auto !important;
     color: white !important;
     font-size: 1.4rem;
   }
 }
-
-/* app/assets/stylesheets/components/_cards.scss */
 
 .avatar-index-large.placeholder, .placeholder-show {
   display: flex !important;
@@ -108,7 +103,6 @@
   }
 }
 
-/* INDEX PAGE: Small circles (Already working, just keeping it safe) */
 .avatar-index-large.placeholder {
   background-color: rgba(255, 255, 255, 0.2) !important;
   border: 3px solid rgba(255, 255, 255, 0.4) !important;
@@ -118,11 +112,10 @@
   }
 }
 
-/* SHOW PAGE: Large Carousel circles */
 .placeholder-show {
   width: 150px !important;
   height: 150px !important;
-  background-color: #f1f3f0 !important; /* Very light sage/grey */
+  background-color: #f1f3f0 !important;
   border: 3px solid #a3b899 !important;
   display: flex !important;
   align-items: center !important;
@@ -131,7 +124,6 @@
 
   i {
     color: #a3b899 !important;
-    /* THE SIZE FIX: Shrinking it from 5rem to 3.5rem */
     font-size: 3.5rem !important;
     margin: 0 !important;
     line-height: 1 !important;
@@ -142,10 +134,9 @@
   font-size: 1rem;
   color: #666;
 
-  /* THE SPACE FIX: This adds a gap between the Name and the Subtitle */
   margin-top: 15px !important;
 
-  margin-bottom: 25px; /* Adds space before the "Details" title */
+  margin-bottom: 25px;
   line-height: 1.6;
   font-weight: 500;
   text-align: center;
@@ -166,4 +157,14 @@
   font-size: 2.2rem;
   color: #333;
 }
+}
+
+.fa-calendar-plus {
+  cursor: pointer !important;
+}
+
+.pet-details-container h2, .pet-show-container h2 {
+  font-weight: 500 !important;
+  font-size: 1.4rem;
+  margin-top: 25px;
 }
