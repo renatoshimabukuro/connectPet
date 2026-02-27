@@ -44,23 +44,56 @@
   z-index: 5;
 }
 
-/* FIX THE ARROWS */
+/* 1. The Container: Keep it simple so Splide can do its job */
 .splide__arrows {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
   pointer-events: none;
 }
 
-.custom-carousel-control {
+/* 2. The Buttons: One single source of truth */
+.splide__arrow {
   pointer-events: auto;
-  background: white !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  width: 40px !important;
+  height: 40px !important;
   border-radius: 50% !important;
-  width: 35px;
-  height: 35px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Adds depth */
+  border: none !important;
+  opacity: 1 !important;
+
+  /* Critical: Stop the 'jumping' by locking the transform */
+  transition: background 0.2s ease !important;
+  transform: translateY(-50%) !important;
+
+  &:hover {
+    background: white !important;
+  }
+
+  &:active, &:focus {
+    outline: none !important;
+    transform: translateY(-50%) scale(1) !important; /* Keep it centered and still */
+  }
+
+  /* The Chevron Arrow */
+  &::after {
+    content: '';
+    display: inline-block;
+    border-style: solid;
+    border-width: 2.5px 2.5px 0 0;
+    height: 9px;
+    width: 9px;
+    color: #4a6755;
+  }
+
+  &--prev {
+    left: 10px !important;
+    &::after { transform: rotate(-135deg); margin-left: 3px; }
+  }
+
+  &--next {
+    right: 10px !important;
+    &::after { transform: rotate(45deg); margin-right: 3px; }
+  }
 }

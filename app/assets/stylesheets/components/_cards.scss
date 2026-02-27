@@ -1,63 +1,139 @@
-// VITAL DETAILS GRID & CARDS - Used to display pet-specific data like DOB, Weight, etc
-
-
-
-/**
- * Individual Detail Card
- * A flexible container that holds an icon, label, value, and edit trigger
- */
+// --- SHOW PAGE: VITAL STATS ---
 .vital-card {
-  background-color: $sage-leaf;
+  background-color: #a3b899;
   border-radius: 22px;
   padding: 20px;
-  position: relative; // Necessary for absolute positioning of the edit pencil
+  position: relative;
   color: white;
   display: flex;
-  flex-direction: column; // Stacks the icon, label, and value vertically
-  justify-content: flex-end; // Anchors text content to the bottom of the card
-  min-height: 125px; // Ensures consistent height across the grid
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 125px;
   box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-  transition: transform 0.2s ease; // Smooth lift effect on hover
 
-  // Interactive lift effect
-  &:hover {
-    transform: translateY(-3px);
+  .card-icon { font-size: 1.8rem; margin-bottom: auto; color: white; }
+  .card-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+  .card-value { font-size: 1.05rem; font-weight: 600; }
+  .edit-pencil { position: absolute; top: 15px; right: 15px; background: rgba(255, 255, 255, 0.25); padding: 6px; border-radius: 50%; }
+}
+
+// --- INDEX PAGE: CONSOLIDATED PET & VET CARDS ---
+.card-index, .vet-card-custom {
+  background-color: #a3b899;
+  border-radius: 28px;
+  padding: 15px 20px;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  width: 92% !important;
+  max-width: 450px;
+  margin: 0 auto 15px auto;
+  box-sizing: border-box;
+  text-decoration: none !important;
+  gap: 15px !important; /* Keeps photos, names, and icons separated */
+
+  /* THE PHOTO FIX: Re-inserting these hard limits */
+  .avatar-index-large, .avatar-vet {
+    width: 85px !important;
+    height: 85px !important;
+    min-width: 85px !important;
+    max-width: 85px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+    border: 3px solid rgba(255,255,255,0.4);
   }
 
-  // Top-aligned icon
-  .card-icon {
-    font-size: 1.8rem;
-    margin-bottom: auto; // Pushes text to the bottom while keeping the icon at the top
-    color: white;
-    opacity: 0.9;
-  }
+  .name-section-wrapper {
+  flex: 1 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
 
-  // Small, capitalized header for the data type
-  .card-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
+  /* THE FINAL FIX: This creates a physical 35px wall the name cannot cross */
+  margin-right: 35px !important;
+
+  .pet-name-index {
+    color: white !important;
+    /* Slightly smaller font to ensure it fits mobile screens better */
+    font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: 0.8px;
-    margin-bottom: 4px;
-    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    white-space: nowrap !important; /* Keeps Gabby on one line */
+    overflow: visible !important;
   }
 
-  // Main data display (e.g., "Neutered" or "12kg")
-  .card-value {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: white;
+  .vet-name-index {
+    color: white !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+    white-space: normal !important; /* Patrick Gregory House still wraps */
+    word-break: break-word !important;
   }
 
-  // Floating edit trigger positioned in the top-right corner
-  .edit-pencil {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 0.85rem;
-    background: rgba(255, 255, 255, 0.25);
-    padding: 6px;
-    border-radius: 50%;
-    color: white;
+    .vet-languages {
+      color: white !important;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-top: 4px;
+    }
+  }
+
+  i.fa-solid {
+    flex-shrink: 0 !important;
+    margin-left: auto !important; /* Keeps icon on the far right */
+    color: white !important;
+    font-size: 1.4rem;
+  }
+}
+
+/* app/assets/stylesheets/components/_cards.scss */
+
+.avatar-index-large.placeholder, .placeholder-show {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+
+  i {
+    margin: 0 !important;
+    line-height: 1 !important;
+    display: block !important;
+  }
+}
+
+/* INDEX PAGE: Small circles (Already working, just keeping it safe) */
+.avatar-index-large.placeholder {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border: 3px solid rgba(255, 255, 255, 0.4) !important;
+  i {
+    color: white !important;
+    font-size: 2.2rem !important;
+  }
+}
+
+/* SHOW PAGE: Large Carousel circles */
+.placeholder-show {
+  width: 150px !important;
+  height: 150px !important;
+  background-color: #f1f3f0 !important; /* Very light sage/grey */
+  border: 3px solid #a3b899 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+
+  i {
+    color: #a3b899 !important;
+    /* THE SIZE FIX: Shrinking it from 5rem to 3.5rem */
+    font-size: 3.5rem !important;
+    margin: 0 !important;
+    line-height: 1 !important;
   }
 }

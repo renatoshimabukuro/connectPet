@@ -1,7 +1,6 @@
 <div class="pet-show-container">
-  <%# --- HERO SECTION (Outside the frame so it stays still) --- %>
+  <%# --- HERO SECTION --- %>
   <div class="pet-hero-section">
-    <%# Create the list for the carousel once %>
     <% all_pets = [@pet] + @other_pets.to_a %>
     <div class="splide" data-controller="carousel">
       <div class="splide__track">
@@ -9,7 +8,14 @@
           <% all_pets.each do |pet| %>
             <li class="splide__slide">
               <%= link_to user_pet_path(@user, pet), class: "avatar-wrapper" do %>
-                <%= cl_image_tag pet.photo.key, crop: :fill, class: "avatar-img" if pet.photo.attached? %>
+                <% if pet.photo.attached? %>
+                  <%= cl_image_tag pet.photo.key, crop: :fill, class: "avatar-img" %>
+                <% else %>
+                  <%# Use a dedicated class for the carousel placeholder %>
+                  <div class="avatar-img placeholder-show">
+                    <i class="fa-solid fa-paw"></i>
+                  </div>
+                <% end %>
               <% end %>
             </li>
           <% end %>

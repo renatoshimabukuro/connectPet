@@ -1,23 +1,78 @@
-.navbar-connectpet {
+  .navbar-connectpet {
   display: flex !important;
-  justify-content: space-between !important; /* Pushes items to the far edges */
+  justify-content: space-between !important;
   align-items: center !important;
   width: 100% !important;
   padding: 10px 20px;
-  background-color: #4a6755; /* Your green */
+  background-color: #4a6755;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-sizing: border-box;
 
   .navbar-brand {
-    margin: 0 !important; /* Resets any default Bootstrap centering */
-  }
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
 
-  .hamburger-menu, .navbar-toggler {
-    margin: 0 !important;
-    display: flex;
-    align-items: center;
+  /* COLOR FIX: Force the text to be white */
+  color: white !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+
+  /* CLIPPING FIX: Ensure 'c' and 't' are fully visible */
+  white-space: nowrap !important;
+  min-width: max-content !important;
+  overflow: visible !important;
+
+  /* Removing any blue/green focus borders */
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  /* Ensures the paw icon inside the brand is also white */
+  i {
+    color: white !important;
+  }
+}
+
+  /* Make sure the hamburger is visible but doesn't push the logo */
+  .nav-link-custom {
+    flex: 0 0 auto !important;
+    i.fa-bars { color: white !important; font-size: 1.5rem; }
+  }
+}
+  /* Hamburger Dropdown Menu */
+.dropdown-menu {
+  background-color: white !important;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  padding: 8px 0;
+
+  /* Ensures the menu opens correctly on mobile */
+  position: absolute;
+  right: 0;
+
+  .dropdown-item {
+    color: #2d3436 !important;
+    font-weight: 600;
+    padding: 10px 20px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #f8f9fa !important;
+      color: #4a6755 !important;
+    }
+
+    /* Dark Red Log out */
+    &.text-danger {
+      color: #b33939 !important;
+
+      &:hover {
+        background-color: #fff5f5 !important;
+        color: #d63031 !important;
+      }
+    }
   }
 }
 
