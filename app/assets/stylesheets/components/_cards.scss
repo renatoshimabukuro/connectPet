@@ -137,3 +137,33 @@
     line-height: 1 !important;
   }
 }
+
+.pet-subtitle {
+  font-size: 1rem;
+  color: #666;
+
+  /* THE SPACE FIX: This adds a gap between the Name and the Subtitle */
+  margin-top: 15px !important;
+
+  margin-bottom: 25px; /* Adds space before the "Details" title */
+  line-height: 1.6;
+  font-weight: 500;
+  text-align: center;
+
+  i {
+    margin-left: 2px !important;
+
+    font-size: 1.1rem;
+    vertical-align: middle;
+
+    &.fa-mars { color: #89a5df !important; }
+    &.fa-venus { color: #df89b5 !important; }
+}
+
+.pet-name-title {
+  margin-bottom: 0 !important;
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: #333;
+}
+}

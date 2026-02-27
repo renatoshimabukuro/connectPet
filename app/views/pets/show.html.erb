@@ -29,59 +29,65 @@
   </div>
   <%# --- TURBO FRAME (Everything inside here swaps when you click an avatar) --- %>
   <%= turbo_frame_tag "pet_details" do %>
-    <h1 class="mt-3 text-center"><%= @pet.name %></h1>
-    <h2 class="details-title"><%= @pet.name %>’s Details</h2>
-    <div class="vital-grid">
-      <%# DOB %>
-      <div class="vital-card">
-        <i class="fa-solid fa-pencil edit-pencil"></i>
-        <i class="fa-solid fa-calendar-days card-icon"></i>
-        <span class="card-label">Date of Birth:</span>
-        <span class="card-value"><%= @pet.dob.strftime("%Y/%m/%d") if @pet.dob %></span>
+    <div class="text-center">
+      <h1 class="pet-name-title"><%= @pet.name %></h1>
+      <p class="pet-subtitle">
+        <%= @pet.species %> • <%= @pet.breed %> • <%= @pet.gender %><% if @pet.gender == 'Male' %><i class="fa-solid fa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
+        <br>
+        <%= @pet.fixed ? (@pet.gender == 'Male' ? 'Neutered' : 'Spayed') : 'Intact' %>
+      </p>
+      <h2 class="details-title"><%= @pet.name %>’s Details</h2>
+      <div class="vital-grid">
+        <%# DOB %>
+        <div class="vital-card">
+          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <i class="fa-solid fa-calendar-days card-icon"></i>
+          <span class="card-label">Date of Birth:</span>
+          <span class="card-value"><%= @pet.dob.strftime("%Y/%m/%d") if @pet.dob %></span>
+        </div>
+        <%# Vaccines %>
+        <div class="vital-card">
+          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <i class="fa-solid fa-syringe card-icon"></i>
+          <span class="card-label">Vaccines:</span>
+          <span class="card-value"><%= @pet.vacc_status %></span>
+        </div>
+        <%# Microchip %>
+        <div class="vital-card">
+          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <i class="fa-solid fa-microchip card-icon"></i>
+          <span class="card-label">Microchip:</span>
+          <span class="card-value"><%= @pet.microchip.presence || "None" %></span>
+        </div>
+        <%# Weight %>
+        <div class="vital-card">
+          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <i class="fa-solid fa-weight-hanging card-icon"></i>
+          <span class="card-label">Weight:</span>
+          <span class="card-value"><%= @pet.weight %> kg</span>
+        </div>
+        <%# Medications %>
+        <div class="vital-card">
+          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <i class="fa-solid fa-capsules card-icon"></i>
+          <span class="card-label">Medications:</span>
+          <span class="card-value"><%= @pet.current_meds.presence || "None" %></span>
+        </div>
+        <%# Notes %>
+        <div class="vital-card">
+          <i class="fa-solid fa-pencil edit-pencil"></i>
+          <i class="fa-solid fa-note-sticky card-icon"></i>
+          <span class="card-label">Notes:</span>
+          <span class="card-value"><%= @pet.notes.presence || "No notes yet" %></span>
+        </div>
       </div>
-      <%# Vaccines %>
-      <div class="vital-card">
-        <i class="fa-solid fa-pencil edit-pencil"></i>
-        <i class="fa-solid fa-syringe card-icon"></i>
-        <span class="card-label">Vaccines:</span>
-        <span class="card-value"><%= @pet.vacc_status %></span>
+      <div class="pet-actions-footer">
+        <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
+          <i class="fa-solid fa-book-open"></i> View <%= @pet.name %>’s Logs
+        <% end %>
+        <%= link_to new_user_pet_log_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
+          <i class="fa-solid fa-plus"></i> Add New Log
+        <% end %>
       </div>
-      <%# Microchip %>
-      <div class="vital-card">
-        <i class="fa-solid fa-pencil edit-pencil"></i>
-        <i class="fa-solid fa-microchip card-icon"></i>
-        <span class="card-label">Microchip:</span>
-        <span class="card-value"><%= @pet.microchip.presence || "None" %></span>
-      </div>
-      <%# Weight %>
-      <div class="vital-card">
-        <i class="fa-solid fa-pencil edit-pencil"></i>
-        <i class="fa-solid fa-weight-hanging card-icon"></i>
-        <span class="card-label">Weight:</span>
-        <span class="card-value"><%= @pet.weight %> kg</span>
-      </div>
-      <%# Medications %>
-      <div class="vital-card">
-        <i class="fa-solid fa-pencil edit-pencil"></i>
-        <i class="fa-solid fa-capsules card-icon"></i>
-        <span class="card-label">Medications:</span>
-        <span class="card-value"><%= @pet.current_meds.presence || "None" %></span>
-      </div>
-      <%# Notes %>
-      <div class="vital-card">
-        <i class="fa-solid fa-pencil edit-pencil"></i>
-        <i class="fa-solid fa-note-sticky card-icon"></i>
-        <span class="card-label">Notes:</span>
-        <span class="card-value"><%= @pet.notes.presence || "No notes yet" %></span>
-      </div>
-    </div>
-    <div class="pet-actions-footer">
-      <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
-        <i class="fa-solid fa-book-open"></i> View <%= @pet.name %>’s Logs
-      <% end %>
-      <%= link_to new_user_pet_log_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
-        <i class="fa-solid fa-plus"></i> Add New Log
-      <% end %>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
