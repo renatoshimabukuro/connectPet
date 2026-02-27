@@ -25,17 +25,16 @@
 }
 
 .splide {
-  visibility: visible !important; /* Forces it to show even if Splide is slow to load */
+  visibility: visible !important; 
   width: 100%;
   position: relative;
 }
 
 .splide__track {
-  padding: 60px 0 !important; /* Increase padding so the 'scaled up' cat isn't cut off */
-  overflow: visible !important; /* Allows the center avatar to grow outside the box */
+  padding: 60px 0 !important; 
+  overflow: visible !important; 
 }
 
 .avatar-wrapper {
-  /* ... your existing code ... */
-  flex-shrink: 0; /* Prevents the circle from becoming an oval */
+  flex-shrink: 0; 
 }
