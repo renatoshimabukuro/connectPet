@@ -13,15 +13,12 @@
   </div>
 </div>
 <div class="container mt-4">
-  <h2>Chat about: <%= @chat.pet.name %></h2>
   <div id="chat-messages">
     <% @messages.each do |message| %>
       <% if message.user == @user %>
         <div class="row mx-2 justify-content-center">
           <div class="msg msg-right col-10">
-            <p>
-              <%= message.contents %>
-            </p>
+            <p> <%= message.contents %> </p>
           </div>
           <div class="col-2">
             <%= image_tag @chat.pet.photo,
@@ -213,9 +210,9 @@
 
   .chat-subnav {
   position: fixed;
-  top: 4rem; /* height of your main navbar */
+  top: 4rem;
   z-index: 9;
-  width: 100vw;
+  width: 500px;
 
   background: #ffffff;
   border-bottom: 0.0625rem solid #e5e7eb;
@@ -231,10 +228,9 @@
     });
   }
 
-    document.addEventListener("turbo:load", scrollToBottomSmooth);
+  document.addEventListener("turbo:load", scrollToBottomSmooth);
 
-    document.addEventListener("turbo:submit-end", (event) => {
-    // Only react to your chat form
+  document.addEventListener("turbo:submit-end", (event) => {
     if (!event.target.closest("form")) return;
 
     scrollToBottomSmooth();
