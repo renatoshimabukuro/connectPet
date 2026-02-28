@@ -1,13 +1,50 @@
-<div class="container mt-5 pt-5">
-  <%= simple_form_for [@user, @chat] do |f| %>
-    <%= f.association :pet,
-        collection: @user.pets,
-        prompt: "Select a pet" %>
-    <%= f.input :vet_id,
-        collection: User.where(role: "vet"),
-        label_method: :name,
-        value_method: :id,
-        prompt: "Select a vet" %>
-    <%= f.button :submit %>
+<div class="chat-page">
+  <div class="chat-subnav row">
+    <div class="col-1">
+      <%= link_to user_chats_path(@user) do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
+    </div>
+  </div>
+  <%= simple_form_for [@user, @chat],
+        url: user_chats_path(@user),
+        html: { class: "chat-form" } do |f| %>
+    <% if current_user.role == "owner" %>
+      <div class="selection">
+        <%= f.input :vet_id,
+          collection: User.where(role: "vet"),
+          label_method: ->(vet) { "#{vet.clinic&.clinic_name} (#{vet.name})" },
+          value_method: :id,
+          prompt: "Choose a vet" %>
+        <%= f.input :pet_id,
+          collection: @user.pets,
+          label_method: :name,
+          value_method: :id,
+          prompt: "Choose a pet" %>
+      </div>
+    <% else %>
+      <div class="selection">
+        <%= f.input :pet_id,
+          collection: Pet.all,
+          label_method: :name,
+          value_method: :id,
+          prompt: "Choose a pet" %>
+      </div>
+    <% end %>
+    <!-- messages spacer -->
+    <div class="chat-messages"></div>
+    <!-- input -->
+    <div class="new-msg">
+      <%= f.simple_fields_for :messages do |m| %>
+        <%= m.input :contents,
+          as: :text,
+          label: false,
+          placeholder: "Type a message...",
+          input_html: { rows: 2 } %>
+      <% end %>
+      <button type="submit" class="send-btn" aria-label="Send message">
+        <i class="fa-solid fa-arrow-up"></i>
+      </button>
+    </div>
   <% end %>
 </div>
