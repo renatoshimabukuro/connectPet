@@ -1,62 +1,52 @@
-<div class="container mt-5 pt-5">
-  <h2>Chat about: <%= @chat.pet.name %></h2>
-  <div>
+<div class="chat-subnav row">
+  <div class="col-1">
+    <%= link_to user_chats_path(@user) do %>
+      <i class="fa-solid fa-chevron-left"></i>
+    <% end %>
+  </div>
+  <div class="col-11">
+    <% if @user == @chat.owner %>
+      <%= @chat.vet.clinic.clinic_name %>
+    <% else %>
+      <%= @chat.owner.name %>: <%= @chat.pet.name %>
+    <% end %>
+  </div>
+</div>
+<div class="msg-container-wrapper">
+  <div class="msg-container" id="chat-messages" data-controller="scroll">
     <% @messages.each do |message| %>
       <% if message.user == @user %>
-        <div class="row">
-          <div class="right-message col-10">
-            <p>
-              <strong><%= message.user.name %>:</strong>
-              <%= message.contents %>
-            </p>
+        <div class="row mx-2 justify-content-center">
+          <div class="msg msg-right col-10">
+            <p> <%= message.contents %> </p>
           </div>
           <div class="col-2">
             <%= image_tag @chat.pet.photo,
-              class: "avatar-small right-avatar",
-              style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
+                class: "avatar-small right-avatar",
+                style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
           </div>
         </div>
       <% else %>
-        <div class="row">
+        <div class="row mx-2 justify-content-center">
           <div class="col-2">
-            <%# placeholder %>
+            <%# Image placeholder %>
             <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg",
-              class: "avatar-small", style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
+                class: "avatar-small left-avatar", style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
           </div>
-          <div class="col-10 left-message">
+          <div class="msg msg-left col-10">
             <p>
-              <strong><%= message.user.name %>:</strong>
               <%= message.contents %>
             </p>
           </div>
         </div>
       <% end %>
-    </div>
+    <% end %>
+    <div class="chat-bottom"> </div>
+  </div>
+  <%= form_with model: [@user, @chat, @message] do |f| %>
+    <%= f.text_area :contents %>
+    <button type="submit" class="send-btn" aria-label="Send message">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
   <% end %>
 </div>
-<hr>
-<%= form_with model: [@user, @chat, @message] do |f| %>
-  <%= f.text_area :contents %>
-  <%= f.submit "Send" %>
-<% end %>
-</div>
-</div>
-<style>
-  .right-message {
-    border: 2px solid blue;
-    margin-bottom: 10px;
-  }
-
-  .left-message {
-    border: 2px solid green;
-    margin-bottom: 10px;
-  }
-
-  .right-avatar{
-    border: 2px solid blue;
-  }
-
-  .left-avatar{
-    border: 2px solid green;
-  }
-</style>

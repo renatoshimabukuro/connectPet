@@ -23,11 +23,21 @@ Rails.application.routes.draw do
   resources :clinics, only: [:index, :show] #showing the clinics to all
   resources :users, only: [:show, :new, :create] do
     resources :pets, only: [:show, :new, :create, :index] do
-      resources :logs, only: [:index, :new, :create, :edit, :update, :show]
+      resources :logs, only: [:index, :new, :create, :edit, :update, :show] do
+        collection do
+          post :export
+        end
+      end
     end
     resources :clinics, except: [:index, :show]
     resources :friendships, except: [:destroy]
     resources :chats, except: [:destroy] do
+      member do
+        # Add route /users/:user_id/chats/:id/archive
+        patch :archive
+        # /users/:user_id/chats/:id/unarchive
+        patch :unarchive
+      end
       resources :messages, except: [:destroy]
     end
   end

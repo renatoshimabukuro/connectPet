@@ -1,11 +1,16 @@
+require 'open-uri'
+
 puts "Cleaning database..."
 
-Log.destroy_all
-Message.destroy_all
-Chat.destroy_all
-Clinic.destroy_all
-Pet.destroy_all
-User.destroy_all
+# Wipes all data from the tables, resets auto-incrementing IDs, and bypasses foreign key constraints.
+# Instead of asking Rails to destroy objects one by one, send a command directly to the database engine.
+connection = ActiveRecord::Base.connection
+# TRUNCATE: Removes all records from a table without processing each one individually(fast).
+# RESTART IDENTITY: Clears all data, resets IDs to 1.
+# CASCADE: Ignores link errors between tables.
+connection.execute("TRUNCATE messages, logs, friendships, chats, pets, clinics, users RESTART IDENTITY CASCADE")
+
+puts "Database cleaned! Creating new data..."
 
 puts "Creating users..."
 katie = User.create!(
@@ -70,8 +75,9 @@ raye = Pet.create!(
 )
 
 raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/44856863-8493-4139-9498-22b38045ad1f_1.jpg"
-raye.photo.attach(io: URI.open(raye_url), filename: "raye.png", content_type: "image/png")
+raye.photo.attach(io: URI.open(raye_url), filename: "raye.jpg", content_type: "image/jpg")
 raye.save!
+puts "Raye created"
 
 percy = Pet.create!(
   user: katie,
@@ -89,8 +95,9 @@ percy = Pet.create!(
 )
 
 percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/4cdbca27-d28f-4a0f-938b-d543347b384e_1.jpg"
-percy.photo.attach(io: URI.open(percy_url), filename: "percy.png", content_type: "image/png")
+percy.photo.attach(io: URI.open(percy_url), filename: "percy.jpg", content_type: "image/jpg")
 percy.save!
+puts "Percy created"
 
 cory = Pet.create!(
   user: katie,
@@ -107,8 +114,38 @@ cory = Pet.create!(
 )
 
 cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/fa4678a3-74b6-470c-ab7d-adecf92b4dcf_1.jpg"
-cory.photo.attach(io: URI.open(cory_url), filename: "cory.png", content_type: "image/png")
+cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "image/jpg")
 cory.save!
+puts "Cory created"
+
+big_tex = Pet.create!(
+  user: katie,
+  name: "Big Tex",
+  dob: Date.new(2022, 5, 10),
+  species: "Horse",
+  breed: "Polamino",
+  weight: 3.5,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Female",
+  attr1: "Food",
+  attr2: "Toilet",
+)
+
+
+jonathan = Pet.create!(
+  user: katie,
+  name: "Jonathan",
+  dob: Date.new(2023, 1, 15),
+  species: "Dragon",
+  breed: "Western Red",
+  weight: 4.2,
+  vacc_status: "Vaccinated",
+  fixed: true,
+  gender: "Female",
+  attr1: "Food",
+  attr2: "Toilet",
+)
 
 maple = Pet.create!(
   user: renato,
@@ -125,6 +162,7 @@ maple = Pet.create!(
 maple_url = "https://res.cloudinary.com/rts1307/image/upload/v1771497608/development/3qil42klx2nl1isfom3yeg90g3n4.png"
 maple.photo.attach(io: URI.open(maple_url), filename: "maple.png", content_type: "image/png")
 maple.save!
+puts "Maple created"
 
 gabby = Pet.create!(
   user: troy,
@@ -138,9 +176,10 @@ gabby = Pet.create!(
   gender: "Male",
 )
 
-gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1771583181/development/gyla6lp4g4disamp18okxmgpwb4k.jpg"
-gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.png", content_type: "image/png")
+gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105196/development/miikco4bamlfkje265ulnl7yaro1.jpg"
+gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
 gabby.save!
+puts "Gabby created"
 
 jade = Pet.create!(
   user: troy,
@@ -154,9 +193,10 @@ jade = Pet.create!(
   gender: "Female",
 )
 
-jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1771584198/development/tqpjatpdi3kvgg2tmr8xad1eav71.jpg"
-jade.photo.attach(io: URI.open(jade_url), filename: "jade.png", content_type: "image/png")
+jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105201/development/e9xpwkhk9hjejadsqiixurbhw7ie.jpg"
+jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
 jade.save!
+puts "Jade created"
 
 puts "Making clinics"
 
@@ -192,13 +232,25 @@ Log.create!(pet: raye,
   attr1: "Food", attr1_value: "3", attr1_memo: "50g",
   attr2: "Vomit", attr2_value: "", attr2_memo: "Threw up in the cat room!",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning",
-  date: Date.today)
+  date: Date.parse("2026-02-10"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "4", attr1_memo: "45g",
   attr2: "Vomit", attr2_value: "0", attr2_memo: "",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
+  date: Date.parse("2026-02-20"))
+
+Log.create!(pet: raye,
+  attr1: "Food", attr1_value: "3", attr1_memo: "45g",
+  attr2: "Vomit", attr2_value: "0", attr2_memo: "Threw up in the cat room again!",
+  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
   date: Date.yesterday)
+
+Log.create!(pet: maple,
+  attr1: "Food", attr1_value: "3", attr1_memo: "45g",
+  attr2: "Vomit", attr2_value: "0", attr2_memo: "",
+  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
+  date: Date.parse("2026-02-23"))
 
 puts "Created #{Log.count} logs"
 
@@ -210,19 +262,22 @@ puts "Creating chats..."
 chat1 = Chat.create!(
   owner: katie,
   vet: vet01,
-  pet: raye
+  pet: raye,
+  archived: false
 )
 
 chat2 = Chat.create!(
   owner: renato,
   vet: vet01,
-  pet: maple
+  pet: maple,
+  archived: false
 )
 
 chat3 = Chat.create!(
   owner: katie,
   vet: vet01,
-  pet: percy
+  pet: percy,
+  archived: false
 )
 
 puts "Creating messages..."

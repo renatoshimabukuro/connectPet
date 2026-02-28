@@ -1,90 +1,66 @@
-@import "config/fonts";
-
-/* PET SHOW PAGE (LAYOUT and GLUE)
-   Handles the arrangement of components on the Pet Profile view, such as the hero section, vital stats grid, and action buttons. It does NOT style individual components like cards or buttons (see _cards.scss and _buttons.scss)
-
-/**
- * Global Page Wrapper
- * Sets the background color and ensures it spans the full viewport.
- */
 .pet-show-container {
   width: 100%;
-  background-color: $soft-cream;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 60px;
-  padding-top: 80px;
+  background-color: #fdfaf5;
+  padding-top: 20px;
 }
-/**
- * Hero Section
- * Styles the pet's name and secondary species/gender info.
- */
+
 .pet-hero-section {
-  width: 90%;
-  max-width: 800px;
+  width: 100%;
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 0 !important;
+  margin-bottom: 0px;
 
-  h1 {
-    font-size: 2.8rem;
-    color: $dark-text;
-    margin-top: 10px;
-  }
 
-  .pet-subtitle {
-    color: #636e72;
-    font-size: 1.1rem;
-    margin-top: 8px;
-    i { color: $forest-moss; } // Highlights icons (paw, mars, venus)
+  .splide {
+    margin-top: 0;
   }
 }
 
-/**
- * Section Titles
- * e.g., "Raye's Details" header above the grid.
- */
+turbo-frame#pet_details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .details-title {
   font-size: 1.4rem;
   font-weight: 700;
   color: $dark-text;
-  margin-top: 15px;
-  margin-bottom: 35px;
+  margin-top: 5px;
+  margin-bottom: 25px;
 }
 
-/**
- * Vital Stats Grid Layout
- * Defines how cards are positioned, NOT how they look (see _cards.scss)
- */
 .vital-grid {
   display: grid;
   width: 90%;
   max-width: 1000px;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 20px auto;
   gap: 15px;
-
-  // Mobile-first: 2 columns
   grid-template-columns: 1fr 1fr;
 
-  // Desktop: 3 columns
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 25px;
   }
 }
 
-/**
- * Actions Footer Layout
- * Positions the Share and Log buttons at the bottom.
- */
 .pet-actions-footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 16px;
-  margin: 40px auto;
+  margin: 20px auto;
   width: 100%;
   flex-wrap: wrap;
+}
+
+.pet-details-container h2, .pet-show-container h2 {
+  font-weight: 500 !important;
+  font-size: 1.4rem;
+  margin-top: 25px;
 }

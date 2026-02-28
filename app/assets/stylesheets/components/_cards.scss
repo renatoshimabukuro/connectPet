@@ -1,80 +1,170 @@
-// VITAL DETAILS GRID & CARDS - Used to display pet-specific data like DOB, Weight, etc
+// SHOW PAGE
+.vital-card {
+  background-color: #a3b899;
+  border-radius: 22px;
+  padding: 20px;
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 125px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
 
-/**
- * Grid Container
- * Controls the responsive layout of the detail cards.
- */
-.vital-grid {
-  display: grid;
-  width: 90%;
-  max-width: 1000px;
-  margin: 0 auto 40px auto; // Centers the grid and adds spacing below
-  gap: 15px;
-  // Mobile: 2-column layout with smaller gaps for compactness
-  grid-template-columns: 1fr 1fr;
-// On larger screens, switch to a 3-column layout and increase the gap for better spacing
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 25px;
+  .card-icon { font-size: 1.8rem; margin-bottom: auto; color: white; }
+  .card-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+  .card-value { font-size: 1.05rem; font-weight: 600; }
+  .edit-pencil { position: absolute; top: 15px; right: 15px; background: rgba(255, 255, 255, 0.25); padding: 6px; border-radius: 50%; }
+}
+
+// INDEX PAGE
+.card-index, .vet-card-custom {
+  background-color: #a3b899;
+  border-radius: 28px;
+  padding: 15px 20px;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  width: 92% !important;
+  max-width: 450px;
+  margin: 0 auto 15px auto;
+  box-sizing: border-box;
+  text-decoration: none !important;
+  gap: 15px !important;
+
+  .avatar-index-large, .avatar-vet {
+    width: 85px !important;
+    height: 85px !important;
+    min-width: 85px !important;
+    max-width: 85px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+    border: 3px solid rgba(255,255,255,0.4);
+  }
+
+  .name-section-wrapper {
+  flex: 1 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+
+  margin-right: 35px !important;
+
+  .pet-name-index {
+    color: white !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
+
+  .vet-name-index {
+    color: white !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+    .vet-languages {
+      color: white !important;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-top: 4px;
+    }
+  }
+
+  i.fa-solid {
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+    color: white !important;
+    font-size: 1.4rem;
   }
 }
 
-/**
- * Individual Detail Card
- * A flexible container that holds an icon, label, value, and edit trigger
- */
-.vital-card {
-  background-color: $sage-leaf;
-  border-radius: 22px;
-  padding: 20px;
-  position: relative; // Necessary for absolute positioning of the edit pencil
-  color: white;
-  display: flex;
-  flex-direction: column; // Stacks the icon, label, and value vertically
-  justify-content: flex-end; // Anchors text content to the bottom of the card
-  min-height: 125px; // Ensures consistent height across the grid
-  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-  transition: transform 0.2s ease; // Smooth lift effect on hover
+.avatar-index-large.placeholder, .placeholder-show {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
 
-  // Interactive lift effect
-  &:hover {
-    transform: translateY(-3px);
+  i {
+    margin: 0 !important;
+    line-height: 1 !important;
+    display: block !important;
   }
+}
 
-  // Top-aligned icon
-  .card-icon {
-    font-size: 1.8rem;
-    margin-bottom: auto; // Pushes text to the bottom while keeping the icon at the top
-    color: white;
-    opacity: 0.9;
+.avatar-index-large.placeholder {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border: 3px solid rgba(255, 255, 255, 0.4) !important;
+  i {
+    color: white !important;
+    font-size: 2.2rem !important;
   }
+}
 
-  // Small, capitalized header for the data type
-  .card-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    margin-bottom: 4px;
-    color: rgba(255, 255, 255, 0.9);
-  }
+.placeholder-show {
+  width: 150px !important;
+  height: 150px !important;
+  background-color: #f1f3f0 !important;
+  border: 3px solid #a3b899 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
 
-  // Main data display (e.g., "Neutered" or "12kg")
-  .card-value {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: white;
+  i {
+    color: #a3b899 !important;
+    font-size: 3.5rem !important;
+    margin: 0 !important;
+    line-height: 1 !important;
   }
+}
 
-  // Floating edit trigger positioned in the top-right corner
-  .edit-pencil {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 0.85rem;
-    background: rgba(255, 255, 255, 0.25);
-    padding: 6px;
-    border-radius: 50%;
-    color: white;
-  }
+.pet-subtitle {
+  font-size: 1rem;
+  color: #666;
+
+  margin-top: 15px !important;
+
+  margin-bottom: 25px;
+  line-height: 1.6;
+  font-weight: 500;
+  text-align: center;
+
+  i {
+    margin-left: 2px !important;
+
+    font-size: 1.1rem;
+    vertical-align: middle;
+
+    &.fa-mars { color: #89a5df !important; }
+    &.fa-venus { color: #df89b5 !important; }
+}
+
+.pet-name-title {
+  margin-bottom: 0 !important;
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: #333;
+}
+}
+
+.fa-calendar-plus {
+  cursor: pointer !important;
+}
+
+.pet-details-container h2, .pet-show-container h2 {
+  font-weight: 500 !important;
+  font-size: 1.4rem;
+  margin-top: 25px;
 }
