@@ -15,7 +15,7 @@
     <% if current_user.role == "owner" %>
       <%= f.input :vet_id,
         collection: User.where(role: "vet"),
-        label_method: :name,
+        label_method: ->(vet) { "#{vet.clinic&.clinic_name} (#{vet.name})"},
         value_method: :id,
         prompt: "Choose a vet"%>
       <%= f.input :pet_id, collection: @pets,

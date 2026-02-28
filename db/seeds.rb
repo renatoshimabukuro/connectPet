@@ -89,7 +89,7 @@ percy = Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
-  attr1: "Food",
+  attr1: "Nausea",
   attr2: "Vomit",
   attr3: "Toilet"
 )
@@ -218,8 +218,8 @@ Clinic.create!(
 
 Clinic.create!(
   field: ["Oncology"],
-  clinic_name:"SOS Pet",
-  contact: "contact@sospet.com",
+  clinic_name:"PetProtect",
+  contact: "contact@petprotect.com",
   species: ["cats", "dogs", "birds"],
   user: vet03
   )
