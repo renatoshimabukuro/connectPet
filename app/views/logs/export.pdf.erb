@@ -17,7 +17,7 @@
         <li>weight: <%= @pet.weight %> </li>
         <li>current medication(s): <%= @pet.current_meds %> </li>
         <li>vaccine status: <%= @pet.vacc_status %> </li>
-        <% if @pet.microchip! == "" %>
+        <% if @pet.microchip == "" %>
           <li>microchip status: none</li>
         <% else %>
           <li>microchip status: <%= @pet.microchip %> </li>

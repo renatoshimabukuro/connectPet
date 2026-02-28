@@ -36,7 +36,8 @@ class LogsController < ApplicationController
     CSV.open(filepath_name, "wb") do |csv|
       header = ["Date"]
       (1..5).each do |num|
-        attr_name = @pet.send("attr#{num}")
+        attr_name = @pet["attr#{num}"]
+
         if attr_name.present?
           header += [attr_name, "#{attr_name} Value", "#{attr_name} Memo"]
         end
@@ -49,10 +50,12 @@ class LogsController < ApplicationController
         row = [log.date]
         (1..5).each do |num|
 
-          if @pet.send("attr#{num}").present?
-            val_name = log.send("attr#{num}")
-            val_score = log.send("attr#{num}_value")
-            val_memo = log.send("attr#{num}_memo")
+          if @pet["attr#{num}"].present?
+            val_name = log
+            val_score = log["attr#{num}_value"]
+            val_memo = log["attr#{num}_memo"]
+
+            # add the attributes to the csv row
             row += [val_name, val_score, val_memo]
           end
         end
@@ -78,8 +81,11 @@ class LogsController < ApplicationController
     prompt = "Your job is to analyze data about #{@pet.name},a #{@pet.breed} #{@pet.species}.
     Provide any insights into their health based off the content of this summary and their CSV
     data in the attached document. This should include any recommended procedures at checkup or
-    annomolies you notice in their data.RETURN ALL DATA AS AN HTML DOCUMENT. DONT PUT INTO CODE BLOCKS.
-    Your info will be displayed at the bottom of a page in a AI Summary: space. Language of your summary should
+    annomolies you notice in their data. When reading CSV, all values are written 1 to 5. 5 indicates
+    the best of that state, with no problems. A 1 means the state of that field is the worst or that there
+    are major problems, read the suplemental notes for that field to read more about the issue
+    RETURN ALL DATA AS AN HTML DOCUMENT. DONT PUT INTO CODE BLOCKS. Your info will be displayed at
+    the bottom of a page in a AI Summary: space. Language of your summary should
     be in #{params[:language]}."
 
     @llm_output = gemini.ask(prompt, with:{csv:filepath_name}).content
