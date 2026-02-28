@@ -61,20 +61,27 @@ class LogsController < ApplicationController
     end
     # end of csv
     # add AI agent
-    gemini = RubyLLM.chat(model: "gemini-2.0-flash")
+    gemini = RubyLLM.chat(model: "gemini-2.5-flash")
 
     # set prompt for AI
+    # prompt = "Your job is to analyze data about #{@pet.name},a #{@pet.breed} #{@pet.species}.
+    # Provide any insights into their health based off the content of this summary and their CSV
+    # data in the attached document. This should include any recommended procedures at checkup or
+    # annomolies you notice in their data.RETURN ALL DATA AS AN HTML DOCUMENT. DONT PUT INTO CODE BLOCKS
+    # Summary:
+    # DOB: #{@pet.dob}, AGE(#{Date.today.year- @pet.dob.year})
+    # weight: #{@pet.weight}
+    # current medication(s) : #{@pet.current_meds}
+    # vaccine status: #{@pet.vacc_status}
+    # microchip status: #{@pet.microchip}
+    # "
     prompt = "Your job is to analyze data about #{@pet.name},a #{@pet.breed} #{@pet.species}.
     Provide any insights into their health based off the content of this summary and their CSV
     data in the attached document. This should include any recommended procedures at checkup or
-    annomolies you notice in their data.RETURN ALL DATA AS AN HTML DOCUMENT. DONT PUT INTO CODE BLOCKS
-    Summary:
-    DOB: #{@pet.dob}, AGE(#{Date.today.year- @pet.dob.year})
-    weight: #{@pet.weight}
-    current medication(s) : #{@pet.current_meds}
-    vaccine status: #{@pet.vacc_status}
-    microchip status: #{@pet.microchip}
-    "
+    annomolies you notice in their data.RETURN ALL DATA AS AN HTML DOCUMENT. DONT PUT INTO CODE BLOCKS.
+    Your info will be displayed at the bottom of a page in a AI Summary: space. Language of your summary should
+    be in #{params[:language]}."
+
     @llm_output = gemini.ask(prompt, with:{csv:filepath_name}).content
 
     # deletes CSV file from directory

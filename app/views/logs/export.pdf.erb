@@ -7,6 +7,27 @@
   <%= wicked_pdf_stylesheet_link_tag "pdf" %>
 </head>
 <body>
-  <%= @llm_output.html_safe %>
+  <div>
+    <h1><%= @pet.name %></h1>
+    <br>
+    <div>
+      <h1><%= @pet.name %>'s Summary Data</h1>
+      <ul>
+        <li>DOB: <%= @pet.dob %>, AGE: <%= Date.today.year - @pet.dob.year %></li>
+        <li>weight: <%= @pet.weight %> </li>
+        <li>current medication(s): <%= @pet.current_meds %> </li>
+        <li>vaccine status: <%= @pet.vacc_status %> </li>
+        <% if @pet.microchip! == "" %>
+          <li>microchip status: none</li>
+        <% else %>
+          <li>microchip status: <%= @pet.microchip %> </li>
+        <% end %>
+      </ul>
+    </div>
+    <div>
+      <%= @llm_output.html_safe %>
+    </div>
+  </div>
+
 </body>
 </html>

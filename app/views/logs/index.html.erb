@@ -24,5 +24,10 @@
     <%= f.date_field :end_date, id: "end-date", required: true %>
   </div>
 
-  <%= f.submit "Submit Date Range" %>
+  <div class="language-selector">
+    <%= f.label :language, "Language:" %>
+    <%= f.select :language, ["English", "日本語", "Português"]%>
+  </div>
+
+  <%= f.submit "Export Data" %>
 <% end %>
