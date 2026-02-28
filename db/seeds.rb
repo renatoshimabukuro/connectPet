@@ -71,7 +71,8 @@ raye = Pet.create!(
   gender: "Male",
   attr1: "Food",
   attr2: "Vomit",
-  attr3: "Toilet"
+  attr3: "Toilet",
+  microchip: "111 111 111 111 111"
 )
 
 raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/44856863-8493-4139-9498-22b38045ad1f_1.jpg"
@@ -91,7 +92,8 @@ percy = Pet.create!(
   gender: "Male",
   attr1: "Nausea",
   attr2: "Vomit",
-  attr3: "Toilet"
+  attr3: "Toilet",
+  microchip: "111 111 111 111 112"
 )
 
 percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/4cdbca27-d28f-4a0f-938b-d543347b384e_1.jpg"
@@ -110,7 +112,8 @@ cory = Pet.create!(
   fixed: true,
   gender: "Male",
   attr1: "Food",
-  attr2: "Toilet"
+  attr2: "Toilet",
+  microchip: "111 111 111 111 113"
 )
 
 cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/fa4678a3-74b6-470c-ab7d-adecf92b4dcf_1.jpg"
@@ -156,7 +159,7 @@ maple = Pet.create!(
   weight: 4.5,
   vacc_status: "Vaccinated",
   fixed: false,
-  gender: "Female",
+  gender: "Female"
 )
 
 maple_url = "https://res.cloudinary.com/rts1307/image/upload/v1771497608/development/3qil42klx2nl1isfom3yeg90g3n4.png"
