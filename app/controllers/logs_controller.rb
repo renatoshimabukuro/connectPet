@@ -67,7 +67,7 @@ class LogsController < ApplicationController
     prompt = "Your job is to analyze data about #{@pet.name},a #{@pet.breed} #{@pet.species}.
     Provide any insights into their health based off the content of this summary and their CSV
     data in the attached document. This should include any recommended procedures at checkup or
-    annomolies you notice in their data.
+    annomolies you notice in their data.RETURN ALL DATA AS AN HTML DOCUMENT. DONT PUT INTO CODE BLOCKS
     Summary:
     DOB: #{@pet.dob}, AGE(#{Date.today.year- @pet.dob.year})
     weight: #{@pet.weight}
@@ -75,7 +75,19 @@ class LogsController < ApplicationController
     vaccine status: #{@pet.vacc_status}
     microchip status: #{@pet.microchip}
     "
-    puts gemini.ask(prompt, with:{csv:filepath_name}).content
+    @llm_output = gemini.ask(prompt, with:{csv:filepath_name}).content
+
+    # deletes CSV file from directory
+    File.delete(filepath_name) if File.exist?(filepath_name)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@pet.name}_health_report",
+          template: "logs/export",
+          disposition: 'inline'
+      end
+    end
   end
 
   def show

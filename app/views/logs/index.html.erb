@@ -13,7 +13,7 @@
   <p>No logs yet.</p>
 <% end %>
 
-<%= form_with url: export_user_pet_logs_path, method: :post, local: true do |f| %>
+<%= form_with url: export_user_pet_logs_path(format: :pdf), method: :post, local: true do |f| %>
   <div class="date-range-selector">
     <%= f.label :start_date, "Start Date:" %>
     <%= f.date_field :start_date, id: "start-date", required: true %>
