@@ -1,25 +1,37 @@
-<div class="navbar-connectpet">
-  <div class="nav-items-left">
-    <% if user_signed_in? && current_user.present? %>
-      <% brand_link = user_pets_path(current_user) %>
-    <% else %>
-      <% brand_link = root_path %>
-    <% end %>
-    <%= link_to brand_link, class: "navbar-brand" do %>
-      connectPet <i class="fa-solid fa-paw"></i>
-    <% end %>
-  </div>
-  <div class="nav-items-right">
-    <% if user_signed_in? %>
-      <div class="dropdown">
-        <a href="#" class="nav-link-custom" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa-solid fa-bars" style="font-size: 1.5rem;"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <%= link_to "My Pets", user_pets_path(current_user), class: "dropdown-item" %>
-          <%= link_to "Add a New Pet", new_user_pet_path(current_user), class: "dropdown-item" %>
-          <%= link_to "Inbox", user_chats_path(current_user), class: "dropdown-item" %>
-          <% if @pet && @pet.id %>
+<div class="pet-nav-header">
+  <div class="nav-content">
+    <div class="nav-items-left">
+      <% if user_signed_in? && current_user.present? %>
+        <% brand_link = user_pets_path(current_user) %>
+      <% else %>
+        <% brand_link = root_path %>
+      <% end %>
+      <%= link_to brand_link, class: "nav-brand-text" do %>
+        connectPet <i class="fa-solid fa-paw"></i>
+      <% end %>
+    </div>
+    <div class="nav-items-right">
+      <% if user_signed_in? %>
+        <div class="dropdown">
+          <a href="#" class="nav-link-custom" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-bars" style="font-size: 1.5rem;"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <%= link_to "My Pets", user_pets_path(current_user), class: "dropdown-item" %>
+            <%= link_to "Add a New Pet", new_user_pet_path(current_user), class: "dropdown-item" %>
+            <%= link_to "Inbox", user_chats_path(current_user), class: "dropdown-item" %>
+
+            <%# Link to archived chats, if exist %>
+            <% if current_user.chats.archived.any? %>
+              <%= link_to "Archived Chats", user_chats_path(current_user, archived: true), class: "dropdown-item" %>
+            <% end %>
+
+            <%# Contextual links: only show if we are looking at a specific pet %>
+            <% if @pet && @pet.id %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Add Log for #{@pet.name}", new_user_pet_log_path(current_user, @pet), class: "dropdown-item" %>
+              <%= link_to "#{@pet.name}’s Logs", user_pet_logs_path(current_user, @pet), class: "dropdown-item" %>
+            <% end %>
             <div class="dropdown-divider"></div>
             <%= link_to "Add Log for #{@pet.name}", new_user_pet_log_path(current_user, @pet), class: "dropdown-item" %>
             <%= link_to "#{@pet.name}’s Logs", user_pet_logs_path(current_user, @pet), class: "dropdown-item" %>
