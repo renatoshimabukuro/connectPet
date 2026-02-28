@@ -20,12 +20,10 @@
             <%= link_to "My Pets", user_pets_path(current_user), class: "dropdown-item" %>
             <%= link_to "Add a New Pet", new_user_pet_path(current_user), class: "dropdown-item" %>
             <%= link_to "Inbox", user_chats_path(current_user), class: "dropdown-item" %>
-
             <%# Link to archived chats, if exist %>
             <% if current_user.chats.archived.any? %>
               <%= link_to "Archived Chats", user_chats_path(current_user, archived: true), class: "dropdown-item" %>
             <% end %>
-
             <%# Contextual links: only show if we are looking at a specific pet %>
             <% if @pet && @pet.id %>
               <div class="dropdown-divider"></div>
