@@ -21,7 +21,7 @@
 
   <div class="date-range-selector">
     <%= f.label :end_date, "End Date:" %>
-    <%= f.date_field :end_date, id: "end-date", required: true %>
+    <%= f.date_field :end_date, id: "end-date", required: true, max: Date.today %>
   </div>
 
   <div class="language-selector">
