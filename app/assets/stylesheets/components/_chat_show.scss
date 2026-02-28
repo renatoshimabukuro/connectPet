@@ -1,0 +1,158 @@
+.msg-container-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.msg-container {
+  margin-top: 1rem;
+  flex-grow: 1;
+  overflow: scroll;
+}
+
+// sub-nav bar
+
+.chat-subnav {
+  position: fixed;
+  top: 4rem;
+  z-index: 9;
+  width: 120vw;
+
+  background: #ffffff;
+  border-bottom: 0.0625rem solid #e5e7eb;
+
+  padding: 0.6rem 1rem;
+}
+
+.msg-container::-webkit-scrollbar {
+  display: none;
+}
+
+// messages
+
+.msg {
+  position: relative;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  max-width: 70%;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  z-index: 1;
+  font-weight: bold;
+}
+
+.msg-right {
+  background: #6aa98f;
+}
+
+.msg-right::after {
+  content: "";
+  position: absolute;
+  right: -5px;            /* move outside bubble */
+  top: 50%;               /* vertical center */
+  transform: translateY(-50%) rotate(150deg);
+  width: 12px;
+  height: 12px;
+  background: #6aa98f;
+  border-radius: 0 100% 100% 100%;
+  z-index: -1;
+}
+
+.msg-left {
+  background: #A3B899;
+}
+
+.msg-left::after{
+  content: "";
+  position: absolute;
+  left: -5px;            /* move outside bubble */
+  top: 50%;               /* vertical center */
+  transform: translateY(-50%) rotate(330deg);
+  width: 12px;
+  height: 12px;
+  background: #A3B899;
+  border-radius: 0 100% 100% 100%;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+.col-2:has(.left-avatar),
+.col-2:has(.right-avatar) {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.right-avatar{
+  margin-left: 0.75rem;
+}
+
+.left-avatar{
+  margin-right: 0.75rem;
+}
+
+// new message
+
+form {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+
+  background: #ffffff;
+  border-top: 0.0625rem solid #e5e7eb;
+
+  padding: 0.75rem 0.75rem 1rem;
+}
+
+form textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  max-height: 9rem;
+
+  padding: 0.6rem 2.75rem 0.6rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+
+  border-radius: 1.25rem;
+  border: 0.0625rem solid #d1d5db;
+  background: #f9fafb;
+}
+
+form textarea:focus {
+  background: #ffffff;
+  border-color: #6aa98f;
+  box-shadow: 0 0 0 0.15rem rgba(106, 169, 143, 0.25);
+}
+
+.send-btn {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 2.25rem;
+
+  width: 2.1rem;
+  height: 2.1rem;
+
+  border-radius: 50%;
+  border: none;
+
+  background: #6aa98f;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  padding: 0;
+}
+
+.send-btn i {
+  font-size: 0.9rem;
+}
+
+.send-btn:hover {
+  opacity: 0.9;
+}

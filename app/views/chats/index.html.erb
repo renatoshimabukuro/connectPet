@@ -1,11 +1,14 @@
-<div class="container mt-5 pt-5">
+<div class="container">
   <% @chats.each do |chat| %>
     <div class="row msg-card">
-      <div class="avatar-section col-2">
+      <div class="avatar-section col-4">
         <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg",
               class: "avatar-small", style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
+        <%= image_tag chat.pet.photo,
+              class: "avatar-small overlap",
+              style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
       </div>
-      <div class="col-7">
+      <div class="col-5">
         <%= link_to user_chat_path(@user, chat) do %>
           <h5> <%= chat.vet.clinic.clinic_name %> </h5>
           <h6> For: <%= chat.pet.name %> </h6>
@@ -17,7 +20,6 @@
         <% else %>
           <%= chat.messages.last.updated_at.strftime("%m/%e") %>
         <% end %>
-
         <% if chat.archived? %>
           <%# Unarchiving the chat %>
           <%= link_to unarchive_user_chat_path(current_user, chat), data: { turbo_method: :patch, turbo_confirm: "Unarchive this chat?"} do %>
@@ -29,9 +31,8 @@
             <h3><i class="fa-solid fa-box-archive" style="color:red"></i></h3>
           <% end %>
         <% end %>
-
       </div>
-      <div style="padding-left: 40px">
+      <div class="mb-2" style="padding-left: 40px">
         <% if chat.messages.last.user == @user %>
           <p> You: <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
         <% else %>
@@ -48,11 +49,24 @@
   </div>
 </div>
 <style>
-  .msg-card{
-    padding-right: 4%;
-  }
-
   hr {
     margin-top: 0px;
+  }
+
+  .avatar-small.overlap {
+  margin-left: -15px;
+  }
+
+  .col-4 {
+    padding: 0px;
+    padding-left: 4%;
+  }
+
+  .col-5 {
+    padding: 0px;
+  }
+
+  .col-3 {
+    padding: 0px;
   }
 </style>
