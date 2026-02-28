@@ -61,7 +61,7 @@ class LogsController < ApplicationController
     end
     # end of csv
     # add AI agent
-    gemini = RubyLLM.chat(model: "gemini-2.0-flash")
+    gemini = RubyLLM.chat(model: "gemini-2.5-flash")
 
     # set prompt for AI
     prompt = "Your job is to analyze data about #{@pet.name},a #{@pet.breed} #{@pet.species}.

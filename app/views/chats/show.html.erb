@@ -8,7 +8,7 @@
     <% if @user == @chat.owner %>
       <%= @chat.vet.clinic.clinic_name %>
     <% else %>
-      <%= @chat.owner.name %>: <%= @chat.pet.name %>
+      <%= @chat.owner.name %>: <%= @chat.pet.name || "Unknow pet"%>
     <% end %>
   </div>
 </div>
@@ -21,10 +21,18 @@
             <p> <%= message.contents %> </p>
           </div>
           <div class="col-2">
-            <%= image_tag @chat.pet.photo,
-                class: "avatar-small right-avatar",
-                style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
-          </div>
+
+            <%# Verifying if the pet exists and has a picture %>
+            <% if @chat.pet&.photo&.attached? %>
+              <%= image_tag @chat.pet.photo,
+                  class: "avatar-small right-avatar",
+                  style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
+            <% else %>
+              <div class="avatar-small overlap" style="width: 50px; height: 50px; border-radius: 50%; background: #eee; display: inline-flex; align-items: center; justify-content: center; border: 2px solid white;">
+                <i class="fa-solid fa-paw" style="color: #bbb;"></i>
+              </div>
+            <% end %>
+
         </div>
       <% else %>
         <div class="row mx-2 justify-content-center">

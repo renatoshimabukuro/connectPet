@@ -10,6 +10,7 @@ connection = ActiveRecord::Base.connection
 # CASCADE: Ignores link errors between tables.
 connection.execute("TRUNCATE messages, logs, friendships, chats, pets, clinics, users RESTART IDENTITY CASCADE")
 
+
 puts "Database cleaned! Creating new data..."
 
 puts "Creating users..."
@@ -176,7 +177,7 @@ gabby = Pet.create!(
   gender: "Male",
 )
 
-gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105196/development/miikco4bamlfkje265ulnl7yaro1.jpg"
+gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1771659086/production/1tlhgu9dftcnvq6cud2udvtvnqtp.jpg"
 gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
 gabby.save!
 puts "Gabby created"
@@ -193,7 +194,7 @@ jade = Pet.create!(
   gender: "Female",
 )
 
-jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105201/development/e9xpwkhk9hjejadsqiixurbhw7ie.jpg"
+jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1771659087/production/dcilz9atx3h6kstpsfg3deenkwmo.jpg"
 jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
 jade.save!
 puts "Jade created"
