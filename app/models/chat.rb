@@ -3,6 +3,7 @@ class Chat < ApplicationRecord
   belongs_to :vet, class_name: "User"
   belongs_to :pet
   has_many :messages, dependent: :destroy
+  accepts_nested_attributes_for :messages
 
   # Attribute archived is active by default
   attribute :archived, :boolean, default: false

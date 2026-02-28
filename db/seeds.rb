@@ -70,8 +70,9 @@ raye = Pet.create!(
   fixed: true,
   gender: "Male",
   attr1: "Food",
-  attr2: "Vomit",
-  attr3: "Toilet"
+  attr2: "Nausea",
+  attr3: "Toilet",
+  microchip: "111 111 111 111 111"
 )
 
 raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/44856863-8493-4139-9498-22b38045ad1f_1.jpg"
@@ -90,8 +91,9 @@ percy = Pet.create!(
   fixed: true,
   gender: "Male",
   attr1: "Food",
-  attr2: "Vomit",
-  attr3: "Toilet"
+  attr2: "Nausea",
+  attr3: "Toilet",
+  microchip: "111 111 111 111 112"
 )
 
 percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/4cdbca27-d28f-4a0f-938b-d543347b384e_1.jpg"
@@ -110,7 +112,8 @@ cory = Pet.create!(
   fixed: true,
   gender: "Male",
   attr1: "Food",
-  attr2: "Toilet"
+  attr2: "Toilet",
+  microchip: "111 111 111 111 113"
 )
 
 cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/fa4678a3-74b6-470c-ab7d-adecf92b4dcf_1.jpg"
@@ -156,7 +159,7 @@ maple = Pet.create!(
   weight: 4.5,
   vacc_status: "Vaccinated",
   fixed: false,
-  gender: "Female",
+  gender: "Female"
 )
 
 maple_url = "https://res.cloudinary.com/rts1307/image/upload/v1771497608/development/3qil42klx2nl1isfom3yeg90g3n4.png"
@@ -218,8 +221,8 @@ Clinic.create!(
 
 Clinic.create!(
   field: ["Oncology"],
-  clinic_name:"SOS Pet",
-  contact: "contact@sospet.com",
+  clinic_name:"PetProtect",
+  contact: "contact@petprotect.com",
   species: ["cats", "dogs", "birds"],
   user: vet03
   )
@@ -230,25 +233,25 @@ puts "Creating logs for Raye"
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "3", attr1_memo: "50g",
-  attr2: "Vomit", attr2_value: "", attr2_memo: "Threw up in the cat room!",
+  attr2: "Nausea", attr2_value: "", attr2_memo: "Threw up in the cat room!",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning",
   date: Date.parse("2026-02-10"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "4", attr1_memo: "45g",
-  attr2: "Vomit", attr2_value: "0", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "0", attr2_memo: "",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
   date: Date.parse("2026-02-20"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "3", attr1_memo: "45g",
-  attr2: "Vomit", attr2_value: "0", attr2_memo: "Threw up in the cat room again!",
+  attr2: "Nausea", attr2_value: "0", attr2_memo: "Threw up in the cat room again!",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
   date: Date.yesterday)
 
 Log.create!(pet: maple,
   attr1: "Food", attr1_value: "3", attr1_memo: "45g",
-  attr2: "Vomit", attr2_value: "0", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "0", attr2_memo: "",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
   date: Date.parse("2026-02-23"))
 
@@ -283,7 +286,7 @@ chat3 = Chat.create!(
 puts "Creating messages..."
 
 # Chat 1 conversation
-Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been coughing.")
+Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been heaving.")
 Message.create!(chat: chat1, user: vet01, contents: "How long has this been happening?")
 Message.create!(chat: chat1, user: katie, contents: "About two days.")
 Message.create!(chat: chat1, user: vet01, contents: "Any changes in appetite?")

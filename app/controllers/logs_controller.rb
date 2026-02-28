@@ -106,9 +106,6 @@ class LogsController < ApplicationController
   def show
     set_log
   end
-  #edit - To do
-  #
-  #update - To do
 
   private
 

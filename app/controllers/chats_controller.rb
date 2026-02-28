@@ -24,18 +24,34 @@ class ChatsController < ApplicationController
   end
 
   def new
-    #make a new chat - I want to refactor so you can make a new chat and new message at the same time
     @chat = Chat.new
+    @chat.messages.build
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @chat = Chat.new(chat_params)
-    @chat.owner = @user
+    if @user.role == "owner"
+      owner = @user
+      vet = User.find(chat_params[:vet_id])
+      pet = Pet.find(chat_params[:pet_id])
+    else
+      vet = @user
+      pet = Pet.find(chat_params[:pet_id])
+      owner = pet.user
+    end
 
-    if @chat.save
+    @chat = Chat.find_or_create_by!(
+      owner: owner,
+      vet: vet,
+      pet: pet
+    )
+
+    message_attrs = chat_params[:messages_attributes]&.values&.first
+    @message = @chat.messages.build(message_attrs.merge(user: current_user))
+
+    if @message.save
       redirect_to user_chat_path(@user, @chat)
     else
+      @chat.messages = [@message]
       render :new, status: :unprocessable_entity
     end
   end
@@ -66,6 +82,10 @@ class ChatsController < ApplicationController
   end
 
   def chat_params
-    params.require(:chat).permit(:vet_id, :pet_id)
+    params.require(:chat).permit(:vet_id, :pet_id, messages_attributes: [:contents])
+  end
+
+  def message_params
+    params.require(:chat).require(:messages_attributes).permit(:contents)
   end
 end
