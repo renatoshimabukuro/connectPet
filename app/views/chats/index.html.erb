@@ -1,0 +1,58 @@
+<div class="container mt-5 pt-5">
+  <% @chats.each do |chat| %>
+    <div class="row msg-card">
+      <div class="avatar-section col-2">
+        <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg",
+              class: "avatar-small", style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
+      </div>
+      <div class="col-7">
+        <%= link_to user_chat_path(@user, chat) do %>
+          <h5> <%= chat.vet.clinic.clinic_name %> </h5>
+          <h6> For: <%= chat.pet.name %> </h6>
+        <% end %>
+      </div>
+      <div class="col-3">
+        <% if chat.messages.last.updated_at.today? %>
+          <p> <%= chat.messages.last.updated_at.in_time_zone('Tokyo').strftime("%m:%M%p")%> </p>
+        <% else %>
+          <%= chat.messages.last.updated_at.strftime("%m/%e") %>
+        <% end %>
+
+        <% if chat.archived? %>
+          <%# Unarchiving the chat %>
+          <%= link_to unarchive_user_chat_path(current_user, chat), data: { turbo_method: :patch, turbo_confirm: "Unarchive this chat?"} do %>
+            <h3><i class="fa-solid fa-box-archive" style="color:blue"></i></h3>
+          <% end %>
+        <% else %>
+          <%# Archiving the chat %>
+          <%= link_to archive_user_chat_path(current_user, chat), data: { turbo_method: :patch, turbo_confirm: "Archive this chat?"} do %>
+            <h3><i class="fa-solid fa-box-archive" style="color:red"></i></h3>
+          <% end %>
+        <% end %>
+
+      </div>
+      <div style="padding-left: 40px">
+        <% if chat.messages.last.user == @user %>
+          <p> You: <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
+        <% else %>
+          <p> <%= chat.vet.clinic.clinic_name %>:  <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+  <div class="fixed-bottom d-flex justify-content-end p-3">
+    <%= link_to new_user_chat_path, method: :post do %>
+      <i class="fa-solid fa-plus" style="font-size: 40px"></i>
+    <% end %>
+  </div>
+</div>
+<style>
+  .msg-card{
+    padding-right: 4%;
+  }
+
+  hr {
+    margin-top: 0px;
+  }
+</style>

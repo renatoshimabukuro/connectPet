@@ -12,7 +12,7 @@ class PetsController < ApplicationController
   def show
     @log = Log.new
     # fetch the user's other pets except the current one, to show in the circles
-    @other_pets = @user.pets.where.not(id: @pet.id).limit(2)
+    @other_pets = @user.pets.where.not(id: @pet.id)
   end
 
   # GET /users/:user_id/pets/new
