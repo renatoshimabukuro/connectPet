@@ -26,15 +26,6 @@ class ChatsController < ApplicationController
   def new
     @chat = Chat.new
     @chat.messages.build
-    #
-    #@message = Message.new
-
-    # if current_user.role == "owner"
-    #   @vets = User.where(role: "vet").all
-    #   @pets = current_user.pets
-    # else
-    #   @pets = Pet.joins(:owner).distinct
-    # end
   end
 
   def create
@@ -54,33 +45,15 @@ class ChatsController < ApplicationController
       pet: pet
     )
 
-    # @message = @chat.messages.build(message_params.merge(user: @user))
-    #
-  message_attrs = chat_params[:messages_attributes]&.values&.first
-  @message = @chat.messages.build(message_attrs.merge(user: current_user))
+    message_attrs = chat_params[:messages_attributes]&.values&.first
+    @message = @chat.messages.build(message_attrs.merge(user: current_user))
 
-
-    # @message = @chat.messages.build(
-    #   chat_params[:messages_attributes]&.values&.first
-    # )
-
-
-  if @message.save
-    redirect_to user_chat_path(@user, @chat)
-  else
-    @chat.messages = [@message]
-    render :new, status: :unprocessable_entity
-  end
-
-    # @user = User.find(params[:user_id])
-    # @chat = Chat.new(chat_params)
-    # @chat.owner = @user
-
-    # if @chat.save
-    #   redirect_to user_chat_path(@user, @chat)
-    # else
-    #   render :new, status: :unprocessable_entity
-    # end
+    if @message.save
+      redirect_to user_chat_path(@user, @chat)
+    else
+      @chat.messages = [@message]
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def archive

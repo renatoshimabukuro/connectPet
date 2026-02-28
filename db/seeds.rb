@@ -70,7 +70,7 @@ raye = Pet.create!(
   fixed: true,
   gender: "Male",
   attr1: "Food",
-  attr2: "Vomit",
+  attr2: "Nausea",
   attr3: "Toilet",
   microchip: "111 111 111 111 111"
 )
@@ -90,8 +90,8 @@ percy = Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
-  attr1: "Nausea",
-  attr2: "Vomit",
+  attr1: "Food",
+  attr2: "Nausea",
   attr3: "Toilet",
   microchip: "111 111 111 111 112"
 )
@@ -233,25 +233,25 @@ puts "Creating logs for Raye"
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "3", attr1_memo: "50g",
-  attr2: "Vomit", attr2_value: "", attr2_memo: "Threw up in the cat room!",
+  attr2: "Nausea", attr2_value: "", attr2_memo: "Threw up in the cat room!",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning",
   date: Date.parse("2026-02-10"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "4", attr1_memo: "45g",
-  attr2: "Vomit", attr2_value: "0", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "0", attr2_memo: "",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
   date: Date.parse("2026-02-20"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "3", attr1_memo: "45g",
-  attr2: "Vomit", attr2_value: "0", attr2_memo: "Threw up in the cat room again!",
+  attr2: "Nausea", attr2_value: "0", attr2_memo: "Threw up in the cat room again!",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
   date: Date.yesterday)
 
 Log.create!(pet: maple,
   attr1: "Food", attr1_value: "3", attr1_memo: "45g",
-  attr2: "Vomit", attr2_value: "0", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "0", attr2_memo: "",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
   date: Date.parse("2026-02-23"))
 
@@ -286,7 +286,7 @@ chat3 = Chat.create!(
 puts "Creating messages..."
 
 # Chat 1 conversation
-Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been coughing.")
+Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been heaving.")
 Message.create!(chat: chat1, user: vet01, contents: "How long has this been happening?")
 Message.create!(chat: chat1, user: katie, contents: "About two days.")
 Message.create!(chat: chat1, user: vet01, contents: "Any changes in appetite?")

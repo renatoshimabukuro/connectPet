@@ -25,7 +25,7 @@
     <% else %>
       <div class="selection">
         <%= f.input :pet_id,
-          collection: @user.pets,
+          collection: Pet.all,
           label_method: :name,
           value_method: :id,
           prompt: "Choose a pet" %>
@@ -48,88 +48,3 @@
     </div>
   <% end %>
 </div>
-<style>
-  /* Root container */
-  .chat-page {
-    height: 90vh;          /* exactly one viewport */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* Form fills remaining space */
-  .chat-form {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;          /* critical for flex scrolling */
-  }
-
-  /* Top selectors / header */
-  .selection,
-  .chat-subnav {
-    flex-shrink: 0;
-  }
-
-  /* Message list (scrollable middle) */
-  .chat-messages {
-    flex: 1;
-    overflow-y: auto;
-  }
-
-  /* New message bar */
-  .new-msg {
-    flex-shrink: 0;         /* never grow */
-    position: relative;
-  }
-
-  .new-msg textarea {
-  width: 100%;
-  min-height: 2.75rem;
-  max-height: 9rem;
-
-  padding: 0.6rem 2.75rem 0.6rem 0.9rem;
-  font-size: 0.9rem;
-  line-height: 1.45;
-
-  border-radius: 1.25rem;
-  border: 0.0625rem solid #d1d5db;
-  background: #f9fafb;
-  }
-
-  .new-msg textarea:focus {
-  background: #ffffff;
-  border-color: #6aa98f;
-  box-shadow: 0 0 0 0.15rem rgba(106, 169, 143, 0.25);
-  }
-
-  .send-btn {
-  position: absolute;
-  right: 1.0rem;
-  bottom: 2.0rem;
-
-  width: 2.1rem;
-  height: 2.1rem;
-
-  border-radius: 50%;
-  border: none;
-
-  background: #6aa98f;
-  color: #ffffff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-  padding: 0;
-  }
-
-  .send-btn i {
-  font-size: 0.9rem;
-  }
-
-  .send-btn:hover {
-  opacity: 0.9;
-  }
-</style>
