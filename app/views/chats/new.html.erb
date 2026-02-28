@@ -1,33 +1,135 @@
-<%# <div class="container mt-5 pt-5"> %>
-<%# <%= simple_form_for [@user, @chat] do |f| %>
-  <%# <%= f.association :pet,
-        collection: @user.pets,
-        prompt: "Select a pet" %>
-  <%# <%= f.input :vet_id,
-        collection: User.where(role: "vet"),
-        label_method: :name,
-        value_method: :id,
-        prompt: "Select a vet" %>
-  <%# <%= f.button :submit %>
-  <%# <% end %>
-  <%# </div> %>
-  <%= simple_form_for [@user, @chat], url: user_chats_path(@user) do |f| %>
+<div class="chat-page">
+  <div class="chat-subnav row">
+    <div class="col-1">
+      <%= link_to user_chats_path(@user) do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
+    </div>
+  </div>
+  <%= simple_form_for [@user, @chat],
+        url: user_chats_path(@user),
+        html: { class: "chat-form" } do |f| %>
     <% if current_user.role == "owner" %>
-      <%= f.input :vet_id,
-        collection: User.where(role: "vet"),
-        label_method: ->(vet) { "#{vet.clinic&.clinic_name} (#{vet.name})"},
-        value_method: :id,
-        prompt: "Choose a vet"%>
-      <%= f.input :pet_id, collection: @user.pets,
-        label_method: :name, value_method: :id,
-        prompt: "Choose a pet" %>
-    <% else %>
-      <%= f.input :pet_id, collection: @user.pets,
-          label_method: :name, value_method: :id,
+      <div class="selection">
+        <%= f.input :vet_id,
+          collection: User.where(role: "vet"),
+          label_method: ->(vet) { "#{vet.clinic&.clinic_name} (#{vet.name})" },
+          value_method: :id,
+          prompt: "Choose a vet" %>
+        <%= f.input :pet_id,
+          collection: @user.pets,
+          label_method: :name,
+          value_method: :id,
           prompt: "Choose a pet" %>
+      </div>
+    <% else %>
+      <div class="selection">
+        <%= f.input :pet_id,
+          collection: @user.pets,
+          label_method: :name,
+          value_method: :id,
+          prompt: "Choose a pet" %>
+      </div>
     <% end %>
-    <%= f.simple_fields_for :messages do |m| %>
-      <% m.input :contents, as: :text, label: false, placeholder: "Type a message...", input_html: { rows: 2 } %>
-    <% end %>
-    <%= f.button :submit, "Send" %>
+    <!-- messages spacer -->
+    <div class="chat-messages"></div>
+    <!-- input -->
+    <div class="new-msg">
+      <%= f.simple_fields_for :messages do |m| %>
+        <%= m.input :contents,
+          as: :text,
+          label: false,
+          placeholder: "Type a message...",
+          input_html: { rows: 2 } %>
+      <% end %>
+      <button type="submit" class="send-btn" aria-label="Send message">
+        <i class="fa-solid fa-arrow-up"></i>
+      </button>
+    </div>
   <% end %>
+</div>
+<style>
+  /* Root container */
+  .chat-page {
+    height: 90vh;          /* exactly one viewport */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Form fills remaining space */
+  .chat-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;          /* critical for flex scrolling */
+  }
+
+  /* Top selectors / header */
+  .selection,
+  .chat-subnav {
+    flex-shrink: 0;
+  }
+
+  /* Message list (scrollable middle) */
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  /* New message bar */
+  .new-msg {
+    flex-shrink: 0;         /* never grow */
+    position: relative;
+  }
+
+  .new-msg textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  max-height: 9rem;
+
+  padding: 0.6rem 2.75rem 0.6rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+
+  border-radius: 1.25rem;
+  border: 0.0625rem solid #d1d5db;
+  background: #f9fafb;
+  }
+
+  .new-msg textarea:focus {
+  background: #ffffff;
+  border-color: #6aa98f;
+  box-shadow: 0 0 0 0.15rem rgba(106, 169, 143, 0.25);
+  }
+
+  .send-btn {
+  position: absolute;
+  right: 1.0rem;
+  bottom: 2.0rem;
+
+  width: 2.1rem;
+  height: 2.1rem;
+
+  border-radius: 50%;
+  border: none;
+
+  background: #6aa98f;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  padding: 0;
+  }
+
+  .send-btn i {
+  font-size: 0.9rem;
+  }
+
+  .send-btn:hover {
+  opacity: 0.9;
+  }
+</style>

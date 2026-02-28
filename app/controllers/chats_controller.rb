@@ -54,18 +54,23 @@ class ChatsController < ApplicationController
       pet: pet
     )
 
-    @message = @chat.messages.build(message_params.merge(user: @user))
+    # @message = @chat.messages.build(message_params.merge(user: @user))
+    #
+  message_attrs = chat_params[:messages_attributes]&.values&.first
+  @message = @chat.messages.build(message_attrs.merge(user: current_user))
+
 
     # @message = @chat.messages.build(
-    #   content: chat_params[:content], user: @user
+    #   chat_params[:messages_attributes]&.values&.first
     # )
 
-    if @message.save
-      redirect_to user_chat_path(@user, @chat)
-    else
-      @chat.messages = [@message]
-      render :new, status: :unprocessable_entity
-    end
+
+  if @message.save
+    redirect_to user_chat_path(@user, @chat)
+  else
+    @chat.messages = [@message]
+    render :new, status: :unprocessable_entity
+  end
 
     # @user = User.find(params[:user_id])
     # @chat = Chat.new(chat_params)
@@ -104,10 +109,10 @@ class ChatsController < ApplicationController
   end
 
   def chat_params
-    params.require(:chat).permit(:vet_id, :pet_id, :content)
+    params.require(:chat).permit(:vet_id, :pet_id, messages_attributes: [:contents])
   end
 
   def message_params
-    params.require(:chat).require(:messages_attributes).first.permit(:content)
+    params.require(:chat).require(:messages_attributes).permit(:contents)
   end
 end
