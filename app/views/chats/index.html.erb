@@ -32,7 +32,7 @@
           <% end %>
         <% end %>
       </div>
-      <div style="padding-left: 40px">
+      <div class="mb-2" style="padding-left: 40px">
         <% if chat.messages.last.user == @user %>
           <p> You: <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
         <% else %>
