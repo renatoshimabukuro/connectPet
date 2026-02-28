@@ -26,10 +26,10 @@
         <% end %>
       </div>
       <div class="col-3">
-        <% if chat.messages.last.updated_at.today? %>
+        <% if chat.messages.last&.updated_at&.today? %>
           <p> <%= chat.messages.last.updated_at.in_time_zone('Tokyo').strftime("%m:%M%p")%> </p>
         <% else %>
-          <%= chat.messages.last.updated_at.strftime("%m/%e") %>
+          <%= chat.messages.last&.updated_at&.strftime("%m/%e") %>
         <% end %>
         <% if chat.archived? %>
           <%# Unarchiving the chat %>
