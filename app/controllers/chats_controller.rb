@@ -25,20 +25,57 @@ class ChatsController < ApplicationController
 
   def new
     @chat = Chat.new
-    @message = Message.new
+    @chat.messages.build
+    #
+    #@message = Message.new
 
+    # if current_user.role == "owner"
+    #   @vets = User.where(role: "vet").all
+    #   @pets = current_user.pets
+    # else
+    #   @pets = Pet.joins(:owner).distinct
+    # end
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @chat = Chat.new(chat_params)
-    @chat.owner = @user
+    if @user.role == "owner"
+      owner = @user
+      vet = User.find(chat_params[:vet_id])
+      pet = Pet.find(chat_params[:pet_id])
+    else
+      vet = @user
+      pet = Pet.find(chat_params[:pet_id])
+      owner = pet.user
+    end
 
-    if @chat.save
+    @chat = Chat.find_or_create_by!(
+      owner: owner,
+      vet: vet,
+      pet: pet
+    )
+
+    @message = @chat.messages.build(message_params.merge(user: @user))
+
+    # @message = @chat.messages.build(
+    #   content: chat_params[:content], user: @user
+    # )
+
+    if @message.save
       redirect_to user_chat_path(@user, @chat)
     else
+      @chat.messages = [@message]
       render :new, status: :unprocessable_entity
     end
+
+    # @user = User.find(params[:user_id])
+    # @chat = Chat.new(chat_params)
+    # @chat.owner = @user
+
+    # if @chat.save
+    #   redirect_to user_chat_path(@user, @chat)
+    # else
+    #   render :new, status: :unprocessable_entity
+    # end
   end
 
   def archive
@@ -67,6 +104,10 @@ class ChatsController < ApplicationController
   end
 
   def chat_params
-    params.require(:chat).permit(:vet_id, :pet_id)
+    params.require(:chat).permit(:vet_id, :pet_id, :content)
+  end
+
+  def message_params
+    params.require(:chat).require(:messages_attributes).first.permit(:content)
   end
 end

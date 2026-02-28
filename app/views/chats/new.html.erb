@@ -1,13 +1,31 @@
-<div class="container mt-5 pt-5">
-  <%= simple_form_for [@user, @chat] do |f| %>
-    <%= f.association :pet,
+<%# <div class="container mt-5 pt-5"> %>
+<%# <%= simple_form_for [@user, @chat] do |f| %>
+  <%# <%= f.association :pet,
         collection: @user.pets,
         prompt: "Select a pet" %>
-    <%= f.input :vet_id,
+  <%# <%= f.input :vet_id,
         collection: User.where(role: "vet"),
         label_method: :name,
         value_method: :id,
         prompt: "Select a vet" %>
-    <%= f.button :submit %>
+  <%# <%= f.button :submit %>
+  <%# <% end %>
+  <%# </div> %>
+  <%= simple_form_for [@user, @chat], url: user_chats_path(@user) do |f| %>
+    <% if current_user.role == "owner" %>
+      <%= f.input :vet_id, collection: @vets,
+        label_method: :name, value_method: :id,
+        prompt: "Choose a vet"%>
+      <%= f.input :pet_id, collection: @pets,
+        label_method: :name, value_method: :id,
+        prompt: "Choose a pet" %>
+    <% else %>
+      <%= f.input :pet_id, collection: @pets,
+          label_method: :name, value_method: :id,
+          prompt: "Choose a pet" %>
+    <% end %>
+    <%= f.simple_fields_for :messages do |m| %>
+      <% m.input :content, as: :text, label: false, placeholder: "Type a message...", input_html: { rows: 2 } %>
+    <% end %>
+    <%= f.button :submit, "Send" %>
   <% end %>
-</div>
