@@ -18,11 +18,11 @@
         label_method: ->(vet) { "#{vet.clinic&.clinic_name} (#{vet.name})"},
         value_method: :id,
         prompt: "Choose a vet"%>
-      <%= f.input :pet_id, collection: @pets,
+      <%= f.input :pet_id, collection: @user.pets,
         label_method: :name, value_method: :id,
         prompt: "Choose a pet" %>
     <% else %>
-      <%= f.input :pet_id, collection: @pets,
+      <%= f.input :pet_id, collection: @user.pets,
           label_method: :name, value_method: :id,
           prompt: "Choose a pet" %>
     <% end %>
