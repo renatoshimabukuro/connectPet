@@ -1,7 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["button"]
+  static targets = ["input", "modal"]
+
   static values = {
     text: String
   }
@@ -11,12 +12,36 @@ export default class extends Controller {
   }
 
   select(event) {
-    event.preventDefault();
+    event.preventDefault()
+
     const button = event.currentTarget
-    const value = button.innerText
-    const attribute = this.buttonTarget.dataset.ratingTextValue.split(" ")[1]
+    const value = button.dataset.ratingTextValue.split(" ")[0]
+    const attribute = button.dataset.ratingTextValue.split(" ")[1]
+
     const formField = document.getElementById(`log_${attribute}_value`)
     formField.value = value
-    button.classList.toggle("rating-btn-active")
+
+    this._setActive(button)
+  }
+
+  _setActive(clickedButton) {
+    const buttons =
+      clickedButton.closest(".rating-btns").querySelectorAll(".rating-btn")
+
+    buttons.forEach(
+      btn => btn.classList.remove("rating-btn-active")
+    )
+    clickedButton.classList.add("rating-btn-active")
+  }
+
+  openModal(event) {
+    event.preventDefault()
+    console.log("Opening modal")
+    this.modalTarget.classList.toggle("d-none")
+  }
+
+  closeModal(event) {
+    event.preventDefault()
+    this.modalTarget.classList.add("d-none")
   }
 }
