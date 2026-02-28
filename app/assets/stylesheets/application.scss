@@ -20,6 +20,8 @@
 @import "components/layout";
 @import "pages/show";
 @import "components/log_rating";
+@import "components/avatar_carousel";
+@import "components/chat_show";
 
 .auth-container {
   padding-top: 100px;
@@ -28,3 +30,5 @@
   background-color: $soft-cream;
   min-height: 100vh;
 }
+
+// comment

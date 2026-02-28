@@ -1,15 +1,13 @@
-<%= simple_form_for [@user, @chat] do |f| %>
-
-  <%= f.association :pet,
+<div class="container mt-5 pt-5">
+  <%= simple_form_for [@user, @chat] do |f| %>
+    <%= f.association :pet,
         collection: @user.pets,
         prompt: "Select a pet" %>
-
-  <%= f.input :vet_id,
+    <%= f.input :vet_id,
         collection: User.where(role: "vet"),
         label_method: :name,
         value_method: :id,
         prompt: "Select a vet" %>
-
-  <%= f.button :submit %>
-
-<% end %>
+    <%= f.button :submit %>
+  <% end %>
+</div>

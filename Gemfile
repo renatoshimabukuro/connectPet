@@ -54,6 +54,11 @@ gem "pundit"
 
 gem "cloudinary"
 
+# Creates PDF files
+gem 'wicked_pdf'
+# Underlying binary needed for previous gem
+gem 'wkhtmltopdf-binary'
+
 group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
