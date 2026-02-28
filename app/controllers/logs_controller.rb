@@ -98,7 +98,7 @@ class LogsController < ApplicationController
       format.pdf do
         render pdf: "#{@pet.name}_health_report",
           template: "logs/export",
-          disposition: 'inline'
+          disposition: 'attachment'
       end
     end
   end
