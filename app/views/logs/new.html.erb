@@ -16,26 +16,31 @@
   </section>
   <div>
     <%= simple_form_for [@user, @pet, @log] do |f| %>
-      <%= f.input :date, as: :date %>
+      <%= f.input :date, as: :date,
+        use_short_month: true %>
       <% (1..5).each do |i| %>
         <!-- Recieve the attribute names -->
         <% title = @pet.read_attribute("attr#{i}") %>
         <!-- Skip if blank -->
         <% next if title.blank? %>
-        <div data-controller="rating">
-          <h5> <%= title %> </h5>
-          <!-- Make buttons for rating -->
-          <% (1..5).each do |value| %>
-            <button class="rating-btn"
-              data-rating-text-value="<%= "#{value} attr#{i}" %>"
-              data-action="click->rating#select"
-              data-rating-target="button">
-              <%= value %>
+        <div data-controller="rating" class="rating">
+          <div class="d-flex">
+            <h5> <%= title %> </h5>
+            <button data-action="click->rating#openModal" class="btn modal-btn">
+              <i class="fa-regular fa-pen-to-square"></i>
             </button>
-          <% end %>
-          <%# <button data-action="click->rating#select">
-            +
-          </button> %>
+          </div>
+          <!-- Make buttons for rating -->
+          <div class="rating-btns">
+            <% (1..5).each do |value| %>
+              <button class="rating-btn"
+                data-rating-text-value="<%= "#{value} attr#{i}" %>"
+                data-action="click->rating#select"
+                data-rating-target="button">
+                <%= value %>
+              </button>
+            <% end %>
+          </div>
           <%= f.input "attr#{i}",
             as: :hidden,
             input_html: { value: @pet.read_attribute("attr#{i}") } %>
@@ -44,14 +49,23 @@
             input_html: { data: { rating_target: "input" } },
             collection: 0..5,
             as: :hidden %>
-          <%= f.input "attr#{i}_memo", as: :text, label: "Memo" %>
+          <!-- Modal -->
+          <div class="memo-modal d-none" data-rating-target="modal">
+            <div class="memo-modal-content">
+              <button type="button" class="modal-close" data-action="click->rating#closeModal">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+              <%= f.input "attr#{i}_memo", as: :text,
+                  label: "Memo", input_html: { rows: 2 } %>
+            </div>
+          </div>
         </div>
       <% end %>
-      <%= f.button :submit, "Create Log", class: "btn btn-primary" %>
+      <div>
+        <%= link_to "Cancel", user_pet_logs_path(@user, @pet), class: 'btn btn-danger text-white' %>
+        <%= f.button :submit, "Save", class: "btn btn-primary" %>
+      </div>
     <% end %>
-    <%= link_to "View All Logs", user_pet_logs_path(@user, @pet), class: 'btn btn-primary mt-3' %>
-    <br>
-    <%= link_to "Back to #{@pet.name}’s Profile", user_pet_path(@user, @pet), class: 'btn btn-primary mt-2' %>
   </div>
   <hr>
   <style>
@@ -60,6 +74,24 @@
       background-color: #636e72;
     }
     .rating-btn {
+      width: 44px;
+      height: 44px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .modal-btn {
+      font-size: 16px;
+      border: none;
+      background-color: none;
+      padding: 0px;
+      margin: 0px;
+      margin-left: 5px;
+    }
+
+    .modal-close {
       width: 44px;
       height: 44px;
       font-size: 16px;
