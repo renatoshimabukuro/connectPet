@@ -33,12 +33,15 @@
               <%= link_to "#{@pet.name}’s Logs", user_pet_logs_path(current_user, @pet), class: "dropdown-item" %>
             <% end %>
             <div class="dropdown-divider"></div>
-            <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item text-danger" %>
-          </div>
+            <%= link_to "Add Log for #{@pet.name}", new_user_pet_log_path(current_user, @pet), class: "dropdown-item" %>
+            <%= link_to "#{@pet.name}’s Logs", user_pet_logs_path(current_user, @pet), class: "dropdown-item" %>
+          <% end %>
+          <div class="dropdown-divider"></div>
+          <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item text-danger" %>
         </div>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class: "nav-link-custom" %>
-      <% end %>
-    </div>
+      </div>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, class: "nav-link-custom" %>
+    <% end %>
   </div>
 </div>
