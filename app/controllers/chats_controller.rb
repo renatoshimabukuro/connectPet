@@ -24,8 +24,9 @@ class ChatsController < ApplicationController
   end
 
   def new
-    #make a new chat - I want to refactor so you can make a new chat and new message at the same time
     @chat = Chat.new
+    @message = Message.new
+
   end
 
   def create
