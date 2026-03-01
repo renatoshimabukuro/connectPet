@@ -179,8 +179,8 @@ gabby = Pet.create!(
   gender: "Male",
 )
 
-gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105196/development/miikco4bamlfkje265ulnl7yaro1.jpg"
-gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
+# gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105196/development/miikco4bamlfkje265ulnl7yaro1.jpg"
+# gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
 gabby.save!
 puts "Gabby created"
 
@@ -196,8 +196,8 @@ jade = Pet.create!(
   gender: "Female",
 )
 
-jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105201/development/e9xpwkhk9hjejadsqiixurbhw7ie.jpg"
-jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
+# jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1772105201/development/e9xpwkhk9hjejadsqiixurbhw7ie.jpg"
+# jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
 jade.save!
 puts "Jade created"
 
