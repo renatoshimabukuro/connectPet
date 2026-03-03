@@ -116,6 +116,7 @@ percy = Pet.create!(
 # cloudinary
 percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/percy.jpg"
 percy.photo.attach(io: URI.open(percy_url), filename: "percy.jpg", content_type: "image/jpg")
+puts "Accessing cloudinary for Percy's photo"
 percy.save!
 puts "Percy created"
 
@@ -302,7 +303,7 @@ puts "Jade created"
 
 puts "Making clinics"
 
-lewagon =Clinic.create!(
+lewagon = Clinic.create!(
   field: ["cardiology", "dentist"],
   clinic_name:"Le Wagon Pet Clinic",
   contact: "contact@pet_forest.com",
@@ -313,7 +314,7 @@ lewagon =Clinic.create!(
 # cloudinary
 lewagon_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466537/development/LewagonPetClinic.png"
 lewagon.photo.attach(io: URI.open(lewagon_url), filename: "lewagon.png", content_type: "image/png")
-puts "Accessing cloudinary for LeWagon's photo"
+puts "Accessing cloudinary for Le Wagon's photo"
 lewagon.save!
 puts "Le Wagon Clinic created"
 
