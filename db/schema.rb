@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_26_110448) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_03_113845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,7 +70,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_26_110448) do
     t.bigint "vet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "pet_id", null: false
     t.index ["owner_id"], name: "index_friendships_on_owner_id"
+    t.index ["pet_id"], name: "index_friendships_on_pet_id"
     t.index ["vet_id"], name: "index_friendships_on_vet_id"
   end
 
@@ -128,6 +130,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_26_110448) do
     t.string "attr3"
     t.string "attr4"
     t.string "attr5"
+    t.boolean "archived", default: false, null: false
     t.index ["user_id"], name: "index_pets_on_user_id"
   end
 
@@ -152,6 +155,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_26_110448) do
   add_foreign_key "chats", "users", column: "owner_id"
   add_foreign_key "chats", "users", column: "vet_id"
   add_foreign_key "clinics", "users"
+  add_foreign_key "friendships", "pets"
   add_foreign_key "friendships", "users", column: "owner_id"
   add_foreign_key "friendships", "users", column: "vet_id"
   add_foreign_key "logs", "pets"
