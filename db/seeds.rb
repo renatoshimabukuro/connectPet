@@ -313,7 +313,7 @@ lewagon =Clinic.create!(
 # cloudinary
 lewagon_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466537/development/LewagonPetClinic.png"
 lewagon.photo.attach(io: URI.open(lewagon_url), filename: "lewagon.png", content_type: "image/png")
-puts "Accessing cloudinary for Jade's photo"
+puts "Accessing cloudinary for LeWagon's photo"
 lewagon.save!
 puts "Le Wagon Clinic created"
 
@@ -370,7 +370,7 @@ pet_protect = Clinic.create!(
   # cloudinary
 pet_protect_url = "https://res.cloudinary.com/rts1307/image/upload/v1772466539/development/PetProtect.png"
 pet_protect.photo.attach(io: URI.open(pet_protect_url), filename: "pet_protect.png", content_type: "image/png")
-puts "Accessing cloudinary for SOS Pet's photo"
+puts "Accessing cloudinary for Pet Protect's photo"
 pet_protect.save!
 puts "Pet Protect Clinic created"
 
