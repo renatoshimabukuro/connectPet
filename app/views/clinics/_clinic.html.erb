@@ -1,8 +1,20 @@
 <div>
-<h1><%= @clinic.clinic_name %></h1>
-
-<p>Contact: <%= @clinic.contact  %></p>
-<p>Address: <%= @clinic.user.address  %></p>
-
-<p>Doctor: <%= @clinic.user.name  %></p>
-</div>
+  <h2><%= @clinic.clinic_name %></h2>
+  <%= cl_image_tag clinic.photo.key,
+      crop: :fill,
+      gravity: :auto,
+      class: "img-fluid w-100 @clinic-banner-mobile"
+  %>
+  <h4>We provide medical care for</h4>
+    <% @clinic.species.each do |specie| %>
+      <p><%= specie %></p>
+    <% end %>
+    <h4>Fields</h4>
+    <% @clinic.field.each do |field| %>
+      <p><%= field %></p>
+    <% end %>
+    <h4>Contact</h4>
+    <p><%= @clinic.contact %></p>
+    <h4>Address</h4>
+    <p><%= @clinic.user.address %></p>
+  </div>

@@ -1,0 +1,31 @@
+@import "home";
+
+.clinic-index-container {
+  padding-top: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fdfaf5;
+
+
+  .index-title, h3 {
+    width: 90%;
+    text-align: center;
+    color: #2d3436;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .index-title { font-size: 1.8rem; }
+
+
+  h3 {
+    font-size: 1.4rem;
+    margin-top: 15px !important;
+  }
+}
+
+.nav-container {
+  background-color: rgba(255, 255, 255, 0.8);
+}
