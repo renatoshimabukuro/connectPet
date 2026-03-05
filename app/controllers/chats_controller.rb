@@ -43,14 +43,32 @@ class ChatsController < ApplicationController
       owner = pet.user
     end
 
-    @chat = Chat.find_or_create_by!(
+    # @chat = Chat.find_or_create_by!(
+    #   owner: owner,
+    #   vet: vet,
+    #   pet: pet
+    # )
+    #
+    @chat = Chat.find_by(
       owner: owner,
       vet: vet,
       pet: pet
     )
-
-    message_attrs = chat_params[:messages_attributes]&.values&.first
-    @message = @chat.messages.build(message_attrs.merge(user: current_user))
+    if @chat
+      message_attrs = chat_params[:messages_attributes]&.values&.first
+      @message = @chat.messages.build(message_attrs.merge(user: current_user))
+    else
+      @chat = Chat.create!(
+        owner: owner,
+        vet: vet,
+        pet: pet
+      )
+      @friendship = Friendship.create!(
+        owner: owner,
+        pet: pet,
+        vet: vet
+      )
+    end
 
     if @message.save
       redirect_to user_chat_path(@user, @chat)

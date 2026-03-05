@@ -131,6 +131,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_03_113845) do
     t.string "attr4"
     t.string "attr5"
     t.boolean "archived", default: false, null: false
+    t.boolean "archived", default: false, null: false
     t.index ["user_id"], name: "index_pets_on_user_id"
   end
 
