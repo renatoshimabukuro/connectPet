@@ -24,7 +24,7 @@ class ChatsController < ApplicationController
     @messages = @chat.messages.includes(:user).order(:created_at)
     @message = @chat.messages.build
     @pet = @chat.pet
-    @friendship = Friendship.find_by(owner: @user, vet: @chat.vet, pet: @pet)
+    @friendship = Friendship.find_by(owner: @chat.owner, vet: @chat.vet, pet: @pet)
   end
 
   def new
@@ -43,12 +43,6 @@ class ChatsController < ApplicationController
       owner = pet.user
     end
 
-    # @chat = Chat.find_or_create_by!(
-    #   owner: owner,
-    #   vet: vet,
-    #   pet: pet
-    # )
-    #
     @chat = Chat.find_by(
       owner: owner,
       vet: vet,

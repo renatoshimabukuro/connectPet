@@ -26,17 +26,20 @@
     <%# Renders the messages partial %>
     <div class="chat-bottom"> </div>
   </div>
-  <% if @friendship.accepted %>
+  <% if @friendship.accepted == true %>
     <%= form_with model: [@user, @chat, @message] do |f| %>
       <%= f.text_area :contents %>
       <button type="submit" class="send-btn" aria-label="Send message">
         <i class="fa-solid fa-arrow-up"></i>
       </button>
     <% end %>
-  <% else %>
+  <% elsif @friendship.accepted == false && @user.role == "owner" %>
     <button>
       I DO SOMETHING TRUST ME
     </button>
+  <% else %>
+    <%# form for accepting friend request %>
+    <p>YOU ARE A VET</p>
   <% end %>
 
 
