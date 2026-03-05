@@ -19,7 +19,19 @@ class FriendshipsController < ApplicationController
       vet: vet,
       pet: pet
     )
+  end
 
+  def edit
+    @friendship = Friendship.find(params[:id])
+  end
+
+  def update
+    @friendship = Friendship.find(params[:id])
+    if @friendship.update(friendship_params)
+      redirect_to user_chat_path(@chat.owner, @chat.pet, @chat.vet)
+    else
+      render :show, status: :unprocessable_entity
+    end
   end
   private
   def set_user

@@ -39,7 +39,10 @@
     </button>
   <% else %>
     <%# form for accepting friend request %>
-    <p>YOU ARE A VET</p>
+    <%= form_with model: [@user, @friendship] do |f| %>
+      <%= f.submit "Reject" %>
+      <%= f.submit "Accept" %>
+    <% end %>
   <% end %>
 
 
