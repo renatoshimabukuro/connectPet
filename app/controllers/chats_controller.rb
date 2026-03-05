@@ -23,8 +23,8 @@ class ChatsController < ApplicationController
     #messages shown by order
     @messages = @chat.messages.includes(:user).order(:created_at)
     @message = @chat.messages.build
-
     @pet = @chat.pet
+    @friendship = Friendship.find_by(owner: @user, vet: @chat.vet, pet: @pet)
   end
 
   def new
@@ -67,9 +67,9 @@ class ChatsController < ApplicationController
       )
     end
 
-    if @chat.message.count == 0
+    # if @chat.message.count == 0
 
-    end
+    # end
     message_attrs = chat_params[:messages_attributes]&.values&.first
     @message = @chat.messages.build(message_attrs.merge(user: current_user))
 

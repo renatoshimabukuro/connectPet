@@ -26,12 +26,20 @@
     <%# Renders the messages partial %>
     <div class="chat-bottom"> </div>
   </div>
-  <%= form_with model: [@user, @chat, @message] do |f| %>
-    <%= f.text_area :contents %>
-    <button type="submit" class="send-btn" aria-label="Send message">
-      <i class="fa-solid fa-arrow-up"></i>
+  <% if @friendship.accepted %>
+    <%= form_with model: [@user, @chat, @message] do |f| %>
+      <%= f.text_area :contents %>
+      <button type="submit" class="send-btn" aria-label="Send message">
+        <i class="fa-solid fa-arrow-up"></i>
+      </button>
+    <% end %>
+  <% else %>
+    <button>
+      I DO SOMETHING TRUST ME
     </button>
   <% end %>
+
+
 </div>
 <style>
   .message-row {
