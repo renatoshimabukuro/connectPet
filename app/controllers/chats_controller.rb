@@ -54,10 +54,7 @@ class ChatsController < ApplicationController
       vet: vet,
       pet: pet
     )
-    if @chat
-      message_attrs = chat_params[:messages_attributes]&.values&.first
-      @message = @chat.messages.build(message_attrs.merge(user: current_user))
-    else
+    unless @chat
       @chat = Chat.create!(
         owner: owner,
         vet: vet,
@@ -69,6 +66,12 @@ class ChatsController < ApplicationController
         vet: vet
       )
     end
+
+    if @chat.message.count == 0
+
+    end
+    message_attrs = chat_params[:messages_attributes]&.values&.first
+    @message = @chat.messages.build(message_attrs.merge(user: current_user))
 
     if @message.save
       redirect_to user_chat_path(@user, @chat)
