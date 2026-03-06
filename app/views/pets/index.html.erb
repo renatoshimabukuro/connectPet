@@ -65,7 +65,10 @@
         <div class="vet-name-index">Patrick Gregory House</div>
         <div class="vet-languages">Languages: English, Spanish</div>
       </div>
-      <i class="fa-solid fa-comment"></i>
+      <i class="fa-solid fa-comment"
+         onclick="event.preventDefault();
+         window.location.href='<%= new_user_chat_path(current_user) %>';">
+      </i>
     </div>
   <% end %>
 </div>
