@@ -1,5 +1,6 @@
 require 'open-uri'
 
+ActionCable.server.config.cable = { "adapter" => "test" }
 puts "Cleaning database..."
 
 # Wipes all data from the tables, resets auto-incrementing IDs, and bypasses foreign key constraints.
