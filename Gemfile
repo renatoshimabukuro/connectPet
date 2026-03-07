@@ -53,6 +53,7 @@ gem "sassc-rails"
 gem "pundit"
 
 gem "cloudinary"
+gem "pg_search"
 
 # Creates PDF files
 gem 'wicked_pdf'
