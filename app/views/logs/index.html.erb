@@ -20,9 +20,25 @@
           <%= link_to "Date: #{log.date}", user_pet_log_path(@user, @pet, log) %>
           <table>
             <tr>
-              <th><%= log.attr1 if log.attr1 %></th>
-              <th><%= log.attr2 if log.attr2 %></th>
-              <th><%= log.attr3 if log.attr3 %></th>
+              <th>
+                <i class="fa-solid fa-bowl-food fa-1x"></i>
+              </th>
+              <th>
+                <% if @pet == "Raye" || if @pet == "Percy" %>
+                  <i class="fa-solid fa-n"></i>
+                <% elsif @pet == "Cory" %>
+                  <i class="fa-solid fa-toilet"></i>
+                <% else %>
+                  <%= log.attr2 if log.attr2 %>
+                <% end %>
+              </th>
+              <th>
+                <% if @pet == "Raye" || if @pet == "Percy" %>
+                  <i class="fa-solid fa-toilet"></i>
+                <% else %>
+                  <%= log.attr3 if log.attr3 %>
+                <% end %>
+              </th>
               <th><%= log.attr4 if log.attr4 %></th>
               <th><%= log.attr5 if log.attr5 %></th>
             </tr>
