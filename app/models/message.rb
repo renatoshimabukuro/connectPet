@@ -12,6 +12,7 @@ class Message < ApplicationRecord
   # broadcast_append_to() => Turbo Streams. Tells Rails to send the message to everyone subscribed to the chat.
 
   after_create_commit -> {
+    return if ENV['SKIP_BROADCASTS'].present?
     broadcast_append_to(
       # Sets the stream name -> each stream will have a unique identifier based on the DB id.
       "chat_#{chat.id}",
