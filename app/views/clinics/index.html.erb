@@ -1,24 +1,35 @@
-<div class="container">
-  <h1>Clinics</h1>
-  <div>
+<div class="clinic-index-container">
+  <h1 class="index-title">Clinics</h1>
+
+ <nav class="navbar navbar-custom">
+  <div class="nav-container container-fluid">
+    <form class="d-flex w-100">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+  <div class="vet-cards-wrapper">
     <% @clinics.each do |clinic| %>
-    <%= cl_image_tag clinic.photo.key,
-      crop: :fill,
-      gravity: :auto,
-      class: "img-fluid w-100 clinic-banner-mobile" %>
-      <h2><%= link_to clinic.clinic_name, clinic %></h2>
-      <h4>We provide medical care for</h4>
-      <% clinic.species.each do |specie| %>
-        <p><%= specie %></p>
+      <%= link_to clinic_path(clinic), class: "card-index-link h-100" do %>
+        <div class="card-index">
+          <%# Protecting view from nil data %>
+          <% if clinic&.photo&.attached? %>
+            <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large" %>
+          <% else %>
+            <div class="avatar-index-large placeholder">
+              <i class="fa-regular fa-hospital"></i>
+            </div>
+          <% end %>
+          <div class="name-section-wrapper">
+            <h2 class="vet-name-index"><%= clinic.clinic_name %></h2>
+          </div>
+
+        </div>
       <% end %>
-      <h4>Fields</h4>
-      <% clinic.field.each do |field| %>
-        <p><%= field %></p>
-      <% end %>
-      <h4>Contact</h4>
-      <p><%= clinic.contact %></p>
-      <h4>Address</h4>
-      <p><%= clinic.user.address %></p>
     <% end %>
   </div>
+
+
 </div>

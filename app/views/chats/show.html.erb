@@ -1,6 +1,6 @@
-<div class="chat-subnav row">
-  <div class="col-1">
-    <%= link_to user_chats_path(@user) do %>
+<div class="chat-subnav">
+  <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+    <%= link_to user_chats_path(@user), style: "color: #4a6755;" do %>
       <i class="fa-solid fa-chevron-left"></i>
     <% end %>
   </div>
