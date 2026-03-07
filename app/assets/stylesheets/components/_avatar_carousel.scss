@@ -12,11 +12,11 @@
   margin: 0 auto;
 }
 
-.splide__track {
-  padding: 60px 0 !important;
+.pet-hero-section .splide__track {
+  padding: 15px 0 10px 0 !important;
   overflow: visible !important;
   will-change: transform;
-  min-height: 240px;
+  min-height: 170px;
 }
 
 .avatar-wrapper {
@@ -60,10 +60,10 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   border: none !important;
   opacity: 1 !important;
-
+  top: 35px !important;
 
   transition: background 0.2s ease !important;
-  transform: translateY(-50%) !important;
+  transform: none !important;
 
   &:hover {
     background: white !important;
@@ -71,7 +71,7 @@
 
   &:active, &:focus {
     outline: none !important;
-    transform: translateY(-50%) scale(1) !important;
+    transform: none !important;
   }
 
   &::after {

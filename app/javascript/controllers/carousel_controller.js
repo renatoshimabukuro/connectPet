@@ -28,5 +28,18 @@ export default class extends Controller {
         wrapper.style.transition = '';
       });
     }, 50);
+
+
+    const slides = this.element.querySelectorAll('.splide__slide');
+    slides.forEach(slide => {
+      const link = slide.querySelector('a');
+      if (link) {
+        slide.addEventListener('click', (e) => {
+          if (!splide.state.is('dragging')) {
+            window.location.href = link.href;
+          }
+        });
+      }
+    });
   }
 }
