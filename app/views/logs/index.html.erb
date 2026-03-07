@@ -13,58 +13,86 @@
     <div class="loader"></div>
     <p style="margin-top: 15px; font-weight: bold;">Gemini is analyzing your data...</p>
   </div>
-  <div class="logs-all justify-content-center">
+  <div class="logs-all mx-auto">
     <% if @logs.any? %>
       <% @logs.each do |log| %>
-        <div class="card-logs mb-2 p-3">
+        <div class="card-logs mb-2 mx-auto">
           <%= link_to "Date: #{log.date}", user_pet_log_path(@user, @pet, log) %>
-          <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1em;"></i>
-          <table>
+          <table class="text-center">
             <tr>
+              <%# First heading %>
               <th>
                 <i class="iconify" data-icon="tabler:dog-bowl" style="font-size: 1em;"></i>
               </th>
-              <th>
-                <% if @pet.name == "Raye" || @pet.name == "Percy" %>
+              <%# Second heading %>
+              <% if @pet.name == "Raye" || @pet.name == "Percy" %>
+                <th>
                   <i class="iconify" data-icon="streamline:smiley-nauseas-solid" style="font-size: 1em;"></i>
-                <% elsif @pet.name == "Cory" %>
+                </th>
+              <% elsif @pet.name == "Cory" %>
+                <th>
                   <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em;"></i>
-                <% else %>
-                  <%= log.attr2 if log.attr2 %>
-                <% end %>
-              </th>
-              <th>
-                <% if @pet.name == "Raye" || @pet.name == "Percy" %>
+                </th>
+              <% elsif log.attr2 %>
+                <th>
+                  <%= log.attr2 %>
+                </th>
+              <% end %>
+              <%# Third heading %>
+              <% if @pet.name == "Raye" || @pet.name == "Percy" %>
+                <th>
                   <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em;"></i>
-                <% else %>
-                  <%= log.attr3 if log.attr3 %>
-                <% end %>
-              </th>
-              <th><%= log.attr4 if log.attr4 %></th>
-              <th><%= log.attr5 if log.attr5 %></th>
+                </th>
+              <% elsif log.attr3 %>
+                <th>
+                  <%= log.attr3 %>
+                </th>
+              <% end %>
+              <%# Fourth heading %>
+              <% if log.attr4 %>
+                <th>
+                  <%= log.attr4 %>
+                </th>
+              <% end %>
+              <%# Fifth heading %>
+              <% if log.attr5 %>
+                <th>
+                  <%= log.attr5 %>
+                </th>
+              <% end %>
             </tr>
             <tr>
-              <td><%= log.attr1_value if log.attr1 %></td>
-              <td><%= log.attr2_value if log.attr2 %></td>
-              <td><%= log.attr3_value if log.attr3 %></td>
-              <td><%= log.attr4_value if log.attr4 %></td>
-              <td><%= log.attr5_value if log.attr5 %></td>
+              <% if log.attr1 %>
+                <td> <%= log.attr1_value %> </td>
+              <% end %>
+              <% if log.attr2 %>
+                <td> <%= log.attr2_value %> </td>
+              <% end %>
+              <% if log.attr3 %>
+                <td> <%= log.attr3_value %> </td>
+              <% end %>
+              <% if log.attr4 %>
+                <td> <%= log.attr4_value %> </td>
+              <% end %>
+              <% if log.attr5 %>
+                <td> <%= log.attr5_value %> </td>
+              <% end %>
             </tr>
             <tr>
               <% if log.attr1_memo && log.attr1_memo != "" %>
-                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1em;"></i></td>
+                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
               <% end %>
               <% if log.attr2_memo && log.attr2_memo != "" %>
-                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1em;"></i></td>
+                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
               <% end %>
               <% if log.attr3_memo && log.attr3_memo != "" %>
-                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1em;"></i></td>
+                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
               <% end %>
               <% if log.attr4_memo && log.attr4_memo != "" %>
-                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1em;"></i></td>
+                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
               <% end %>
               <% if log.attr5_memo && log.attr5_memo != "" %>
-                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1em;"></i></td>
+                <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
               <% end %>
             </tr>
           </table>
@@ -92,9 +120,21 @@
 </div>
 <style>
   .card-logs{
-    border-radius: 8px;
+    /* border-radius: 8px;
     border: 2px solid black;
     width: 70%;
+    padding: 2px; */
+    background-color: #a3b899;
+    border-radius: 22px;
+    padding: 8px;
+    position: relative;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* min-height: 125px; */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+    width: 80%;
   }
 
   .logs-all{
