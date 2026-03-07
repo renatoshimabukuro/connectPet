@@ -40,8 +40,13 @@
   <% else %>
     <%# form for accepting friend request %>
     <%= form_with model: [@user, @friendship] do |f| %>
-      <%= f.submit "Reject" %>
-      <%= f.submit "Accept" %>
+      <%= f.button name: "friendship[accepted]", value: "false", class: "btn-reject" do %>
+        Reject
+      <% end %>
+
+      <%= f.button name: "friendship[accepted]", value: "true", class: "btn-accept" do %>
+        Accept
+      <% end %>
     <% end %>
   <% end %>
 

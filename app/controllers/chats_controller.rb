@@ -61,9 +61,6 @@ class ChatsController < ApplicationController
       )
     end
 
-    # if @chat.message.count == 0
-
-    # end
     message_attrs = chat_params[:messages_attributes]&.values&.first
     @message = @chat.messages.build(message_attrs.merge(user: current_user))
 
