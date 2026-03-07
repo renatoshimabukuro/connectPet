@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_03_104035) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_07_014453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,10 +45,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_03_104035) do
   create_table "chats", force: :cascade do |t|
     t.bigint "owner_id"
     t.bigint "vet_id"
-    t.bigint "pet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "archived", default: false, null: false
+    t.bigint "pet_id"
     t.index ["owner_id"], name: "index_chats_on_owner_id"
     t.index ["pet_id"], name: "index_chats_on_pet_id"
     t.index ["vet_id"], name: "index_chats_on_vet_id"
@@ -70,7 +70,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_03_104035) do
     t.bigint "vet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "pet_id", null: false
+    t.boolean "accepted", default: false, null: false
     t.index ["owner_id"], name: "index_friendships_on_owner_id"
+    t.index ["pet_id"], name: "index_friendships_on_pet_id"
     t.index ["vet_id"], name: "index_friendships_on_vet_id"
   end
 
@@ -153,6 +156,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_03_104035) do
   add_foreign_key "chats", "users", column: "owner_id"
   add_foreign_key "chats", "users", column: "vet_id"
   add_foreign_key "clinics", "users"
+  add_foreign_key "friendships", "pets"
   add_foreign_key "friendships", "users", column: "owner_id"
   add_foreign_key "friendships", "users", column: "vet_id"
   add_foreign_key "logs", "pets"
