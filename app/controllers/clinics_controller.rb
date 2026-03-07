@@ -1,7 +1,6 @@
 class ClinicsController < ApplicationController
 
   def index
-    @clinics = Clinic.all
     if params[:query].present?
       @clinics = Clinic.search_by_clinic(params[:query])
     else
