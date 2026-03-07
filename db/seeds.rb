@@ -337,7 +337,6 @@ chat3 = Chat.create!(
 # )
 
 puts "Creating messages..."
-ActiveSupport::Notifications.unsubscribe("transmit.turbo_streams") rescue nil
 
 # Chat 1 conversation
 Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been heaving.")
