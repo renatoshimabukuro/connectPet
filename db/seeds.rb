@@ -255,13 +255,25 @@ Log.create!(pet: raye,
   attr1: "Food", attr1_value: "3", attr1_memo: "45g",
   attr2: "Nausea", attr2_value: "1", attr2_memo: "Threw up in the cat room again!",
   attr3: "Toilet", attr3_value: "2", attr3_memo: "No poop",
-  date: Date.yesterday)
+  date: Date.parse("2026-02-24"))
 
 Log.create!(pet: maple,
   attr1: "Food", attr1_value: "4", attr1_memo: "45g",
   attr2: "Nausea", attr2_value: "5", attr2_memo: "",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
   date: Date.parse("2026-02-23"))
+
+Log.create!(pet: cory,
+  attr1: "Food", attr1_value: "5", attr1_memo: "",
+  attr2: "Toilet", attr2_value: "5", attr2_memo: "",
+  date: Date.parse("2026-02-23")
+  )
+
+Log.create!(pet: cory,
+  attr1: "Food", attr1_value: "5", attr1_memo: "",
+  attr2: "Toilet", attr2_value: "4", attr2_memo: "",
+  date: Date.parse("2026-02-24")
+  )
 
 puts "Created #{Log.count} logs"
 
