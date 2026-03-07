@@ -23,6 +23,7 @@
 @import "components/avatar_carousel";
 @import "components/chat_show";
 @import "components/chat_new";
+@import "components/modal";
 
 .auth-container {
   padding-top: 100px;
@@ -44,7 +45,7 @@
   visibility: hidden; /* Hidden by default */
 }
 
-/* The spinning circle */
+
 .loader {
   width: 50px;
   height: 50px;
