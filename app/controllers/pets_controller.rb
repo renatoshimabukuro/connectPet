@@ -46,7 +46,7 @@ class PetsController < ApplicationController
   def update
     @pet = @user.pets.find(params[:id])
     if @pet.update(pet_params)
-      redirect_to user_pet_path(@user, @pet), notice: "Updated!"
+      redirect_to user_pet_path(@user, @pet)
     else
       render :edit, status: :unprocessable_entity
     end

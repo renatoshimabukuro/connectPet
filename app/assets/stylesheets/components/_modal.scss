@@ -1,0 +1,154 @@
+turbo-frame#modal {
+  display: contents;
+}
+
+[data-controller="modal"] {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+
+
+  > div {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+  }
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+
+  > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    label {
+      font-weight: 600;
+      color: $dark-text;
+      font-size: 0.95rem;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $forest-moss;
+        box-shadow: 0 0 0 3px rgba(61, 107, 88, 0.1);
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+
+  > div:last-child {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 10px;
+
+    input[type="submit"],
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &[type="submit"] {
+        background-color: $forest-moss;
+        color: white;
+
+        &:hover {
+          background-color: darken($forest-moss, 5%);
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+
+      &[type="button"] {
+        background-color: #f0f0f0;
+        color: $dark-text;
+
+        &:hover {
+          background-color: #e0e0e0;
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+    }
+  }
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  [data-controller="modal"] {
+    padding: 10px;
+
+    > div {
+      padding: 20px;
+      max-width: 100%;
+      border-radius: 15px;
+    }
+  }
+
+  .modal-form {
+    > div:last-child {
+      flex-direction: column;
+
+      input[type="submit"],
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
