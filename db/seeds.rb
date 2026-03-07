@@ -337,7 +337,7 @@ chat3 = Chat.create!(
 # )
 
 puts "Creating messages..."
-Message.skip_callback(:commit, :after, :broadcast_append_to_message_stream) if Message.respond_to?(:skip_callback)
+ActiveSupport::Notifications.unsubscribe("transmit.turbo_streams") rescue nil
 
 # Chat 1 conversation
 Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been heaving.")
@@ -360,7 +360,5 @@ Message.create!(chat: chat3, user: vet01, contents: "That's concerning. Any othe
 Message.create!(chat: chat3, user: katie, contents: "His appetite is a little low.")
 Message.create!(chat: chat3, user: vet01, contents: "Alright, let's make an appointment for tomorrow. How is 3pm?")
 Message.create!(chat: chat3, user: katie, contents: "Perfect. Thank you.")
-
-Message.set_callback(:commit, :after, :broadcast_append_to_message_stream) if Message.respond_to?(:set_callback)
 
 puts "Finished! Created #{User.count} users, #{Pet.count} pets, #{Clinic.count} clinics, #{Log.count} logs, and #{Chat.count} chats with #{Message.count} messages."
