@@ -13,6 +13,7 @@ puts "Cleaning database..."
 Message.destroy_all
 Log.destroy_all
 Friendship.destroy_all
+# remove all the unscopes chats
 Chat.unscoped.destroy_all
 #delete the register in db and the file in cloudinary
 Clinic.all.each { |clinic| clinic.photo.purge }
