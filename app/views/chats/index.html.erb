@@ -44,10 +44,10 @@
         <% end %>
       </div>
       <div class="mb-2" style="padding-left: 40px">
-        <% if chat.messages.last.user == @user %>
+        <% if chat.messages&.last&.user == @user %>
           <p> You: <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
         <% else %>
-          <p> <%= chat.vet.clinic.clinic_name %>:  <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
+          <p> <%= chat.vet.clinic.clinic_name %>:  <%= truncate(chat.messages&.last&.contents, length: 27, separator: ' ') %> </p>
         <% end %>
       </div>
     </div>

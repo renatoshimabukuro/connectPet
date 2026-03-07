@@ -1,15 +1,15 @@
-<div class="chat-subnav"> 
+<div class="chat-subnav">
   <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
     <%= link_to user_chats_path(@user), style: "color: #4a6755;" do %>
       <i class="fa-solid fa-chevron-left"></i>
     <% end %>
-    <span style="font-weight: 600; font-size: 1.1rem;">
-      <% if @user == @chat.owner %>
-        <%= @chat.vet.clinic.clinic_name %>
-      <% else %>
-        <%= @chat.owner.name %>: <%= @chat.pet.name || "Unknown pet"%>
-      <% end %>
-    </span>
+  </div>
+  <div class="col-11">
+    <% if @user == @chat.owner %>
+      <%= @chat.vet.clinic.clinic_name %>
+    <% else %>
+      <%= @chat.owner.name %>: <%= @chat.pet.name || "Unknown pet"%>
+    <% end %>
   </div>
 </div>
 <div class="msg-container-wrapper">
@@ -26,12 +26,26 @@
     <%# Renders the messages partial %>
     <div class="chat-bottom"> </div>
   </div>
-  <%= form_with model: [@user, @chat, @message] do |f| %>
-    <%= f.text_area :contents %>
-    <button type="submit" class="send-btn" aria-label="Send message">
-      <i class="fa-solid fa-arrow-up"></i>
+  <% if @friendship.accepted == true %>
+    <%= form_with model: [@user, @chat, @message] do |f| %>
+      <%= f.text_area :contents %>
+      <button type="submit" class="send-btn" aria-label="Send message">
+        <i class="fa-solid fa-arrow-up"></i>
+      </button>
+    <% end %>
+  <% elsif @friendship.accepted == false && @user.role == "owner" %>
+    <button>
+      I DO SOMETHING TRUST ME
     </button>
+  <% else %>
+    <%# form for accepting friend request %>
+    <%= form_with model: [@user, @friendship] do |f| %>
+      <%= f.submit "Reject" %>
+      <%= f.submit "Accept" %>
+    <% end %>
   <% end %>
+
+
 </div>
 <style>
   .message-row {
