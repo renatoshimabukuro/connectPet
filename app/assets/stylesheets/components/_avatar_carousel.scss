@@ -1,4 +1,3 @@
-
 .pet-hero-section {
   width: 100% !important;
   display: flex;
@@ -16,6 +15,8 @@
 .splide__track {
   padding: 60px 0 !important;
   overflow: visible !important;
+  will-change: transform;
+  min-height: 240px;
 }
 
 .avatar-wrapper {
@@ -28,6 +29,7 @@
   background: white;
   transition: transform 0.3s ease;
   margin: 0 auto;
+  transform-origin: center;
 }
 
 .avatar-img {

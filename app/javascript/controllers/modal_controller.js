@@ -2,8 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    console.log("Modal controller connected");
-    document.body.classList.add("modal-open")
+    const modalFrame = document.getElementById("modal")
+    if (modalFrame && modalFrame.innerHTML.trim() !== "") {
+      document.body.classList.add("modal-open")
+      console.log("Modal controller connected");
+    }
   }
 
   close(e) {
