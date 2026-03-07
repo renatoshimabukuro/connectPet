@@ -135,37 +135,6 @@ cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "i
 cory.save!
 puts "Cory created"
 
-big_tex = Pet.create!(
-  user: katie,
-  name: "Big Tex",
-  dob: Date.new(2022, 5, 10),
-  species: "Horse",
-  breed: "Polamino",
-  weight: 3.5,
-  vacc_status: "Vaccinated",
-  fixed: true,
-  gender: "Female",
-  attr1: "Food",
-  attr2: "Toilet",
-)
-
-puts "Big Tex created"
-
-jonathan = Pet.create!(
-  user: katie,
-  name: "Jonathan",
-  dob: Date.new(2023, 1, 15),
-  species: "Dragon",
-  breed: "Western Red",
-  weight: 4.2,
-  vacc_status: "Vaccinated",
-  fixed: true,
-  gender: "Female",
-  attr1: "Food",
-  attr2: "Toilet",
-)
-puts "Jonathan created"
-
 maple = Pet.create!(
   user: renato,
   name: "Maple",
