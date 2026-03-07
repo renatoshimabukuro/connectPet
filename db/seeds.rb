@@ -136,37 +136,6 @@ cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "i
 cory.save!
 puts "Cory created"
 
-big_tex = Pet.create!(
-  user: katie,
-  name: "Big Tex",
-  dob: Date.new(2022, 5, 10),
-  species: "Horse",
-  breed: "Polamino",
-  weight: 3.5,
-  vacc_status: "Vaccinated",
-  fixed: true,
-  gender: "Female",
-  attr1: "Food",
-  attr2: "Toilet",
-)
-
-puts "Big Tex created"
-
-jonathan = Pet.create!(
-  user: katie,
-  name: "Jonathan",
-  dob: Date.new(2023, 1, 15),
-  species: "Dragon",
-  breed: "Western Red",
-  weight: 4.2,
-  vacc_status: "Vaccinated",
-  fixed: true,
-  gender: "Female",
-  attr1: "Food",
-  attr2: "Toilet",
-)
-puts "Jonathan created"
-
 maple = Pet.create!(
   user: renato,
   name: "Maple",
@@ -176,7 +145,10 @@ maple = Pet.create!(
   weight: 4.5,
   vacc_status: "Vaccinated",
   fixed: false,
-  gender: "Female"
+  gender: "Female",
+  attr1: "Food",
+  attr2: "Nausea",
+  attr3: "Toilet"
 )
 
 # cloudinary
@@ -194,7 +166,7 @@ gabby = Pet.create!(
   weight: 5,
   vacc_status: "Vaccinated",
   fixed: true,
-  gender: "Male",
+  gender: "Male"
 )
 
 # cloudinary
@@ -212,7 +184,7 @@ jade = Pet.create!(
   weight: 4,
   vacc_status: "Vaccinated",
   fixed: true,
-  gender: "Female",
+  gender: "Female"
 )
 
 # cloudinary
@@ -226,7 +198,7 @@ puts "Making clinics"
 lewagon = Clinic.create!(
   field: ["cardiology", "dentist"],
   clinic_name:"Le Wagon Pet Clinic",
-  contact: "contact@pet_forest.com",
+  contact: "contact@lewagonvet.com",
   species: ["cats", "dogs", "horses"],
   user: vet01
   )
@@ -270,31 +242,42 @@ puts "Finished making clinics"
 puts "Creating logs for Raye"
 
 Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "3", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "", attr2_memo: "Threw up in the cat room!",
-  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning",
+  attr1: "Food", attr1_value: "5", attr1_memo: "50g",
+  attr2: "Nausea", attr2_value: "1", attr2_memo: "Threw up in the cat room!",
+  attr3: "Toilet", attr3_value: "5", attr3_memo: "Poop in the morning",
   date: Date.parse("2026-02-10"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "4", attr1_memo: "45g",
-  attr2: "Nausea", attr2_value: "0", attr2_memo: "",
-  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
+  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
+  attr3: "Toilet", attr3_value: "5", attr3_memo: "",
   date: Date.parse("2026-02-20"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "3", attr1_memo: "45g",
-  attr2: "Nausea", attr2_value: "0", attr2_memo: "Threw up in the cat room again!",
-  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
-  date: Date.yesterday)
+  attr2: "Nausea", attr2_value: "1", attr2_memo: "Threw up in the cat room again!",
+  attr3: "Toilet", attr3_value: "2", attr3_memo: "No poop",
+  date: Date.parse("2026-02-24"))
 
 Log.create!(pet: maple,
-  attr1: "Food", attr1_value: "3", attr1_memo: "45g",
-  attr2: "Nausea", attr2_value: "0", attr2_memo: "",
+  attr1: "Food", attr1_value: "4", attr1_memo: "45g",
+  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
   attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
   date: Date.parse("2026-02-23"))
 
-puts "Created #{Log.count} logs"
+Log.create!(pet: cory,
+  attr1: "Food", attr1_value: "5", attr1_memo: "",
+  attr2: "Toilet", attr2_value: "5", attr2_memo: "",
+  date: Date.parse("2026-02-23")
+  )
 
+Log.create!(pet: cory,
+  attr1: "Food", attr1_value: "5", attr1_memo: "",
+  attr2: "Toilet", attr2_value: "4", attr2_memo: "",
+  date: Date.parse("2026-02-24")
+  )
+
+puts "Created #{Log.count} logs"
 
 puts "Finished! Created #{User.count} users and #{Pet.count} pets."
 

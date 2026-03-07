@@ -2,7 +2,6 @@
   <h1 class="index-title"><%= @title %></h1>
   <div class="pet-cards-wrapper">
     <% @pets.each do |pet| %>
-
       <%# Defining card content to not repeat %>
       <% card_content = capture do %>
         <div class="card-index">
@@ -13,19 +12,29 @@
               <i class="fa-solid fa-paw"></i>
             </div>
           <% end %>
-
           <div class="name-section-wrapper">
             <h2 class="pet-name-index"><%= pet.name %></h2>
             <% case pet.name %>
             <% when "Raye"%>
               <p> Tracking: </p>
-              <div class="tracked_attributes"> <i class="fa-solid fa-bowl-food fa-1x"></i><i class="fa-solid fa-n"></i><i class="fa-solid fa-toilet"></i> </div>
+              <div class="tracked_attributes">
+                <i class="iconify" data-icon="mdi:silverware-fork-knife" style="font-size: 1em; color: white;"></i>
+                <i class="iconify" data-icon="streamline:smiley-nauseas-solid" style="font-size: 1em; color: white;"></i>
+                <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em; color: white;"></i>
+              </div>
             <% when "Percy"%>
               <p> Tracking: </p>
-              <div class="tracked_attributes"> <i class="fa-solid fa-bowl-food"></i><i class="fa-solid fa-n"></i><i class="fa-solid fa-toilet"></i></div>
+              <div class="tracked_attributes">
+                <i class="iconify" data-icon="mdi:silverware-fork-knife" style="font-size: 1em; color: white;"></i>
+                <i class="iconify" data-icon="streamline:smiley-nauseas-solid" style="font-size: 1em; color: white;"></i>
+                <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em; color: white;"></i>
+              </div>
             <% when "Cory"%>
               <p> Tracking: </p>
-              <div class="tracked_attributes"> <i class="fa-solid fa-bowl-food"></i><i class="fa-solid fa-toilet"></i></div>
+              <div class="tracked_attributes">
+                <i class="iconify" data-icon="mdi:silverware-fork-knife" style="font-size: 1em; color: white;"></i>
+                <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em; color: white;"></i>
+              </div>
             <% end %>
           </div>
           <% if @title == "Your Pets!" %>
@@ -45,7 +54,6 @@
           <% end %>
         </div>
       <% end %>
-
       <%# If the pet is not in the heart gallery, there is a link to profile %>
       <% if @title == "Your Pets!" %>
         <%= link_to user_pet_path(current_user, pet), class: "card-index-link" do %>
@@ -54,7 +62,6 @@
       <% else %>
         <%= card_content %>
       <% end %>
-
     <% end %>
   </div>
   <% if @title == "Your Pets!" %>
@@ -72,3 +79,8 @@
     </div>
   <% end %>
 </div>
+<style>
+  p {
+    margin-bottom: 0px;
+  }
+</style>
