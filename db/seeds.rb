@@ -265,7 +265,6 @@ Log.create!(pet: maple,
 
 puts "Created #{Log.count} logs"
 
-
 puts "Finished! Created #{User.count} users and #{Pet.count} pets."
 
 puts "Creating chats..."
