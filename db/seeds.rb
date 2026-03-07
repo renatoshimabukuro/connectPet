@@ -320,22 +320,28 @@ chat3 = Chat.create!(
   archived: false
 )
 
-# puts "Creating friendship"
+puts "Creating friendships"
 
-# friendship1 = Friendship.create!(
-#   owner: katie,
-#   vet: vet01
-# )
+Friendship.create!(
+  owner: katie,
+  vet: vet01,
+  pet: raye,
+  accepted: true
+)
 
-# friendship2 = Friendship.create!(
-#   owner: renato,
-#   vet: vet01
-# )
+Friendship.create!(
+  owner: renato,
+  vet: vet01,
+  pet: maple,
+  accepted: true
+)
 
-# friendship3 = Friendship.create!(
-#   owner: katie,
-#   vet: vet01
-# )
+Friendship.create!(
+  owner: katie,
+  vet: vet01,
+  pet: percy,
+  accepted: true
+)
 
 puts "Creating messages..."
 
