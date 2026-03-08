@@ -6,7 +6,7 @@ module ApplicationHelper
 
     index = sorts.index(column)
 
-    # - > ↑ > ↓ ⇅
+    # ⇅ > ↑ > ↓ > ⇅
   if index
     if column == "date"
       dirs[index] = dirs[index] == "asc" ? "desc" : "asc"
