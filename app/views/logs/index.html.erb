@@ -61,21 +61,38 @@
                 </th>
               <% end %>
             </tr>
+            <%# Adding values %>
+            <% reactions = ["fa-face-tired", "fa-face-frown", "fa-face-meh", "fa-face-smile", "fa-face-grin-wide"]%>
             <tr>
               <% if log.attr1 %>
-                <td> <%= log.attr1_value %> </td>
+                <% value = log.attr1_value %>
+                <td>
+                  <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                </td>
               <% end %>
               <% if log.attr2 %>
-                <td> <%= log.attr2_value %> </td>
+                <% value = log.attr2_value %>
+                <td>
+                  <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                </td>
               <% end %>
               <% if log.attr3 %>
-                <td> <%= log.attr3_value %> </td>
+                <% value = log.attr3_value %>
+                <td>
+                  <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                </td>
               <% end %>
               <% if log.attr4 %>
-                <td> <%= log.attr4_value %> </td>
+                <% value = log.attr4_value %>
+                <td>
+                  <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                </td>
               <% end %>
               <% if log.attr5 %>
-                <td> <%= log.attr5_value %> </td>
+                <% value = log.attr5_value %>
+                <td>
+                  <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                </td>
               <% end %>
             </tr>
             <tr>
