@@ -1,0 +1,96 @@
+.logs-index-container{
+  padding-top: 0px;
+  width: 100%;
+  background-color: #fdfaf5;
+}
+
+.logs-index-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.logs-index-headbar {
+  position: sticky;
+  top: 66px;
+  background: white;
+  z-index: 500;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  width: 90%;
+  // margin: 0 auto;
+}
+
+.logs-index-headbar .my-3 table {
+  margin: 0 auto;
+}
+
+.sort-none {
+    border: 2px solid #666;
+    border-radius: 8px;
+    padding: 2px;
+    color: #666;
+    text-decoration: none;
+    margin-right: 5px;
+  }
+
+  .sort-asc {
+    border: 2px solid #2a7ae2;
+    border-radius: 8px;
+    padding: 2px;
+    color: #2a7ae2;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .sort-desc {
+    border: 2px solid #e5533d;
+    border-radius: 8px;
+    padding: 2px;
+    color: #e5533d;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .card-logs{
+    background-color: #a3b899;
+    border-radius: 22px;
+    padding: 8px;
+    position: relative;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+    width: 80%;
+  }
+
+  .logs-all{
+    width: 100%;
+    padding-bottom: 300px !important;
+  }
+
+  .export-logs-card {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    background: white;
+    padding: 10px 0;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    form {
+      background: none;
+
+      input, select {
+        margin-left: 5%;
+      }
+    }
+  }
