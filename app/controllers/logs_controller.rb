@@ -8,9 +8,9 @@ class LogsController < ApplicationController
   def index
     @logs = @pet.logs
     # @logs = @pet.logs.order(date: :desc)
-    ## logs = logs.where(pet: @pet)
-    #
+
     #sort_column: params[:sort_column]
+    @logs = @logs.order(date: params[:date_sort]) if params[:date_sort].present?
     #sort_direction: params[:sort_direction]
     #
     #if column is allowed
