@@ -6,24 +6,24 @@ module ApplicationHelper
 
     index = sorts.index(column)
 
-    if index
-      dirs[index] = dirs[index] == "asc" ? "desc" : "asc"
-    else
-      sorts << column
-      dirs << "asc"
+    # - > ↑ > ↓ ⇅
+  if index
+    case dirs[index]
+    when "asc"
+      dirs[index] = "desc"
+    when "desc"
+      sorts.delete_at(index)
+      dirs.delete_at(index)
     end
-
-    # link_to label,
-    #   user_pet_logs_path(
-    #     params[:user_id],
-    #     params[:pet_id],
-    #     sort: sorts,
-    #     dir: dirs
-    #   )
+  else
+    # first click adds ascending sort
+    sorts << column
+    dirs << "asc"
+  end
 
     # determine arrow + class
     current_index = Array(params[:sort]).index(column)
-    arrow = ""
+    arrow = "⇅"
     css_class = "sort-none"
 
     if current_index
@@ -42,7 +42,6 @@ module ApplicationHelper
       params.permit(:user_id, :pet_id, sort: [], dir: [])
             .merge(sort: sorts, dir: dirs),
       class: css_class
-      end
 
-
+  end
 end
