@@ -8,20 +8,22 @@ module ApplicationHelper
 
     # - > ↑ > ↓ ⇅
   if index
-    case dirs[index]
-    when "asc"
-      dirs[index] = "desc"
-    when "desc"
-      sorts.delete_at(index)
-      dirs.delete_at(index)
+    if column == "date"
+      dirs[index] = dirs[index] == "asc" ? "desc" : "asc"
+    else
+      case dirs[index]
+      when "asc"
+        dirs[index] = "desc"
+      when "desc"
+        sorts.delete_at(index)
+        dirs.delete_at(index)
+      end
     end
   else
-    # first click adds ascending sort
     sorts << column
     dirs << "asc"
   end
 
-    # determine arrow + class
     current_index = Array(params[:sort]).index(column)
     arrow = "⇅"
     css_class = "sort-none"

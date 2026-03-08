@@ -12,6 +12,11 @@ class LogsController < ApplicationController
 
     orders = []
 
+    if params[:sort].blank?
+      params[:sort] = ["date"]
+      params[:dir] = ["desc"]
+    end
+
     if params[:sort].present?
       params[:sort].each_with_index do |c, i|
         if allowed_columns.include?(c)
@@ -25,15 +30,6 @@ class LogsController < ApplicationController
     logs = logs.order(orders.join(",")) if orders.any?
 
     @logs = logs
-
-
-    # @logs = @logs.order(date: params[:date_sort]) if params[:date_sort].present?
-    # @logs = @logs.order(attr1_value: params[:attr1_sort]) if params[:attr1_sort].present?
-    # @logs = @logs.order(attr2_value: params[:attr2_sort]) if params[:attr2_sort].present?
-    # @logs = @logs.order(attr3_value: params[:attr3_sort]) if params[:attr3_sort].present?
-    # @logs = @logs.order(attr4_value: params[:attr4_sort]) if params[:attr4_sort].present?
-    # @logs = @logs.order(attr5_value: params[:attr5_sort]) if params[:attr5_sort].present?
-
   end
 
   def new
