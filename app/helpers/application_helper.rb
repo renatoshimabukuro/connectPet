@@ -20,8 +20,8 @@ module ApplicationHelper
       end
     end
   else
-    sorts << column
-    dirs << "asc"
+    sorts.unshift(column)
+    dirs.unshift("asc")
   end
 
     current_index = Array(params[:sort]).index(column)
