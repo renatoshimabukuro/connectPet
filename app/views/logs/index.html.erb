@@ -11,73 +11,18 @@
   </div>
   <%# End of title here, start of search function %>
   <div>
-    Date & low - high | each Attr & low - high |
-    <%# Form with method GET %>
-    <%= form_with url: user_pet_logs_path(@user, @pet), method: :get, local:true, class: "d-flex gap-2" do |f| %>
-      <%# select date_sort %>
-      <div>
-        <%= label_tag :date_sort, "Date" %>
-        <%= select_tag :date_sort, options_for_select([
-            ["None", nil],
-            ["Newest", "desc"],
-            ["Oldest", "asc"],
-            ], params[:date_sort])%>
-      </div>
-      <%# select attr1_sort %>
-      <div>
-        <%= label_tag :attr1_sort, "#{@pet.attr1}" %>
-        <%= select_tag :attr1_sort, options_for_select([
-            ["None", nil],
-            ["Highest", "desc"],
-            ["Lowest", "asc"],
-            ], params[:attr1_sort])%>
-      </div>
-      <%# select attr2_sort %>
-      <% if @pet.attr2 %>
-        <div>
-          <%= label_tag :attr2_sort, "#{@pet.attr2}" %>
-          <%= select_tag :attr2_sort, options_for_select([
-                  ["None", nil],
-                  ["Highest", "desc"],
-                  ["Lowest", "asc"],
-                  ], params[:attr2_sort])%>
-        </div>
-      <% end %>
-      <%# select attr3_sort %>
-      <% if @pet.attr3 %>
-        <div>
-          <%= label_tag :attr3_sort, "#{@pet.attr3}" %>
-          <%= select_tag :attr3_sort, options_for_select([
-                  ["None", nil],
-                  ["Highest", "desc"],
-                  ["Lowest", "asc"],
-                  ], params[:attr3_sort])%>
-        </div>
-      <% end %>
-      <%# select attr4_sort %>
-      <% if @pet.attr4 %>
-        <div>
-          <%= label_tag :attr4_sort, "#{@pet.attr4}" %>
-          <%= select_tag :attr4_sort, options_for_select([
-                  ["None", nil],
-                  ["Highest", "desc"],
-                  ["Lowest", "asc"],
-                  ], params[:attr4_sort])%>
-        </div>
-      <% end %>
-      <%# select attr5_sort %>
-      <% if @pet.attr5 %>
-        <div>
-          <%= label_tag :attr5_sort, "#{@pet.attr5}" %>
-          <%= select_tag :attr5_sort, options_for_select([
-                  ["Highest", "desc"],
-                  ["Lowest", "asc"],
-                  ], params[:attr5_sort])%>
-        </div>
-      <% end %>
-      <%# Submit %>
-      <%= submit_tag "Filter" %>
-    <% end %>
+    <table>
+      <th> <%= multi_sortable("date","Date") %> </th>
+      <th> <%= multi_sortable("attr1_value", "#{@pet.attr1}") %> </th>
+      <th> <%= multi_sortable("attr2_value", "#{@pet.attr2}") %> </th>
+      <th> <%= multi_sortable("attr3_value", "#{@pet.attr3}") %> </th>
+      <th> <%= multi_sortable("attr4_value", "#{@pet.attr4}") %> </th>
+      <th> <%= multi_sortable("attr5_value", "#{@pet.attr5}") %> </th>
+      <th> <%= link_to user_pet_logs_path(@user, @pet) do %>
+          <i class="fa-solid fa-arrow-rotate-left"></i>
+        <% end %>
+      </th>
+    </table>
   </div>
   <%# End of search function here, start of logs %>
   <div id="loading-overlay">

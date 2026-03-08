@@ -6,16 +6,33 @@ class LogsController < ApplicationController
   before_action :set_pet
 
   def index
-    @logs = @pet.logs
-    # @logs = @pet.logs.order(date: :desc)
+    logs = @pet.logs
 
-    #sort_column: params[:sort_column]
-    @logs = @logs.order(date: params[:date_sort]) if params[:date_sort].present?
-    @logs = @logs.order(attr1_value: params[:attr1_sort]) if params[:attr1_sort].present?
-    @logs = @logs.order(attr2_value: params[:attr2_sort]) if params[:attr2_sort].present?
-    @logs = @logs.order(attr3_value: params[:attr3_sort]) if params[:attr3_sort].present?
-    @logs = @logs.order(attr4_value: params[:attr4_sort]) if params[:attr4_sort].present?
-    @logs = @logs.order(attr5_value: params[:attr5_sort]) if params[:attr5_sort].present?
+    allowed_columns = %w[date attr1_value attr2_value attr3_value attr4_value attr5_value]
+
+    orders = []
+
+    if params[:sort].present?
+      params[:sort].each_with_index do |c, i|
+        if allowed_columns.include?(c)
+          direction = params[:dir][i] == "asc" ? "asc" : "desc"
+
+          orders << "#{c} #{direction} NULLS LAST"
+        end
+      end
+    end
+
+    logs = logs.order(orders.join(",")) if orders.any?
+
+    @logs = logs
+
+
+    # @logs = @logs.order(date: params[:date_sort]) if params[:date_sort].present?
+    # @logs = @logs.order(attr1_value: params[:attr1_sort]) if params[:attr1_sort].present?
+    # @logs = @logs.order(attr2_value: params[:attr2_sort]) if params[:attr2_sort].present?
+    # @logs = @logs.order(attr3_value: params[:attr3_sort]) if params[:attr3_sort].present?
+    # @logs = @logs.order(attr4_value: params[:attr4_sort]) if params[:attr4_sort].present?
+    # @logs = @logs.order(attr5_value: params[:attr5_sort]) if params[:attr5_sort].present?
 
   end
 
