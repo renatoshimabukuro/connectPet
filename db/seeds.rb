@@ -196,10 +196,11 @@ puts "Jade created"
 puts "Making clinics"
 
 lewagon = Clinic.create!(
-  field: ["cardiology", "dentist"],
+  field: ["general practice", "cardiology", "gastroenterology"],
   clinic_name:"Le Wagon Pet Clinic",
   contact: "contact@lewagonvet.com",
-  species: ["cats", "dogs", "horses"],
+  species: ["cats", "dogs", "monkeys"],
+  languages: ["english", "japanese", "portuguese"],
   user: vet01
   )
 
@@ -210,10 +211,11 @@ lewagon.save!
 puts "Le Wagon Clinic created"
 
 sos_pet = Clinic.create!(
-  field: ["Oncology","surgery"],
+  field: ["general practice"],
   clinic_name:"SOS Pet",
   contact: "contact@sospet.com",
   species: ["cats", "dogs", "birds"],
+  languages: ["english", "japanese"],
   user: vet02
   )
 
@@ -227,11 +229,12 @@ pet_protect = Clinic.create!(
   field: ["Oncology"],
   clinic_name:"PetProtect",
   contact: "contact@petprotect.com",
-  species: ["cats", "dogs", "birds"],
+  species: ["cats", "dogs", "squirrels"],
+  languages: ["japanese"],
   user: vet03
   )
 
-  # cloudinary
+# cloudinary
 pet_protect_url = "https://res.cloudinary.com/rts1307/image/upload/v1772465818/original/PetProtect.png"
 pet_protect.photo.attach(io: URI.open(pet_protect_url), filename: "pet_protect.png", content_type: "image/png")
 pet_protect.save!
