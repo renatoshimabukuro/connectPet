@@ -18,6 +18,7 @@
       <div>
         <%= label_tag :date_sort, "Date" %>
         <%= select_tag :date_sort, options_for_select([
+            ["None", nil],
             ["Newest", "desc"],
             ["Oldest", "asc"],
             ], params[:date_sort])%>
@@ -26,6 +27,7 @@
       <div>
         <%= label_tag :attr1_sort, "#{@pet.attr1}" %>
         <%= select_tag :attr1_sort, options_for_select([
+            ["None", nil],
             ["Highest", "desc"],
             ["Lowest", "asc"],
             ], params[:attr1_sort])%>
@@ -35,6 +37,7 @@
         <div>
           <%= label_tag :attr2_sort, "#{@pet.attr2}" %>
           <%= select_tag :attr2_sort, options_for_select([
+                  ["None", nil],
                   ["Highest", "desc"],
                   ["Lowest", "asc"],
                   ], params[:attr2_sort])%>
@@ -45,6 +48,7 @@
         <div>
           <%= label_tag :attr3_sort, "#{@pet.attr3}" %>
           <%= select_tag :attr3_sort, options_for_select([
+                  ["None", nil],
                   ["Highest", "desc"],
                   ["Lowest", "asc"],
                   ], params[:attr3_sort])%>
@@ -55,6 +59,7 @@
         <div>
           <%= label_tag :attr4_sort, "#{@pet.attr4}" %>
           <%= select_tag :attr4_sort, options_for_select([
+                  ["None", nil],
                   ["Highest", "desc"],
                   ["Lowest", "asc"],
                   ], params[:attr4_sort])%>

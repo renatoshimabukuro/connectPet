@@ -11,12 +11,9 @@ class LogsController < ApplicationController
 
     #sort_column: params[:sort_column]
     @logs = @logs.order(date: params[:date_sort]) if params[:date_sort].present?
-    #sort_direction: params[:sort_direction]
+    @logs = @logs.order(attr1_value: params[:attr1_sort]) if params[:attr1_sort].present?
     #
-    #if column is allowed
-    # logs = logs.order("#{sort_column} #{sort_direction}")
-    #
-    #
+
 
   end
 
