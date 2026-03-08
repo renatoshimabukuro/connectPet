@@ -18,31 +18,58 @@
       <div>
         <%= label_tag :date_sort, "Date" %>
         <%= select_tag :date_sort, options_for_select([
-            ["Newest first", "desc"],
-            ["Oldest first", "asc"],
+            ["Newest", "desc"],
+            ["Oldest", "asc"],
             ], params[:date_sort])%>
       </div>
-      <%# newest first %>
-      <%# oldest first %>
       <%# select attr1_sort %>
-      <%# high to low %>
-      <%# low to high %>
-      <%# if attr 2%>
+      <div>
+        <%= label_tag :attr1_sort, "#{@pet.attr1}" %>
+        <%= select_tag :attr1_sort, options_for_select([
+            ["Highest", "desc"],
+            ["Lowest", "asc"],
+            ], params[:attr1_sort])%>
+      </div>
       <%# select attr2_sort %>
-      <%# high to low %>
-      <%# low to high %>
-      <%# if attr 3%>
+      <% if @pet.attr2 %>
+        <div>
+          <%= label_tag :attr2_sort, "#{@pet.attr2}" %>
+          <%= select_tag :attr2_sort, options_for_select([
+                  ["Highest", "desc"],
+                  ["Lowest", "asc"],
+                  ], params[:attr2_sort])%>
+        </div>
+      <% end %>
       <%# select attr3_sort %>
-      <%# high to low %>
-      <%# low to high %>
-      <%# if attr 4%>
+      <% if @pet.attr3 %>
+        <div>
+          <%= label_tag :attr3_sort, "#{@pet.attr3}" %>
+          <%= select_tag :attr3_sort, options_for_select([
+                  ["Highest", "desc"],
+                  ["Lowest", "asc"],
+                  ], params[:attr3_sort])%>
+        </div>
+      <% end %>
       <%# select attr4_sort %>
-      <%# high to low %>
-      <%# low to high %>
-      <%# if attr 5%>
+      <% if @pet.attr4 %>
+        <div>
+          <%= label_tag :attr4_sort, "#{@pet.attr4}" %>
+          <%= select_tag :attr4_sort, options_for_select([
+                  ["Highest", "desc"],
+                  ["Lowest", "asc"],
+                  ], params[:attr4_sort])%>
+        </div>
+      <% end %>
       <%# select attr5_sort %>
-      <%# high to low %>
-      <%# low to high %>
+      <% if @pet.attr5 %>
+        <div>
+          <%= label_tag :attr5_sort, "#{@pet.attr5}" %>
+          <%= select_tag :attr5_sort, options_for_select([
+                  ["Highest", "desc"],
+                  ["Lowest", "asc"],
+                  ], params[:attr5_sort])%>
+        </div>
+      <% end %>
       <%# Submit %>
       <%= submit_tag "Filter" %>
     <% end %>

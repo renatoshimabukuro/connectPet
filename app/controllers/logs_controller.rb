@@ -6,7 +6,18 @@ class LogsController < ApplicationController
   before_action :set_pet
 
   def index
-    @logs = @pet.logs.order(date: :desc)
+    @logs = @pet.logs
+    # @logs = @pet.logs.order(date: :desc)
+    ## logs = logs.where(pet: @pet)
+    #
+    #sort_column: params[:sort_column]
+    #sort_direction: params[:sort_direction]
+    #
+    #if column is allowed
+    # logs = logs.order("#{sort_column} #{sort_direction}")
+    #
+    #
+
   end
 
   def new
