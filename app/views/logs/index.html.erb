@@ -10,14 +10,22 @@
     </div>
   </div>
   <%# End of title here, start of search function %>
-  <div>
+  <div class="mb-3">
     <table>
       <th> <%= multi_sortable("date","Date") %> </th>
       <th> <%= multi_sortable("attr1_value", "#{@pet.attr1}") %> </th>
-      <th> <%= multi_sortable("attr2_value", "#{@pet.attr2}") %> </th>
-      <th> <%= multi_sortable("attr3_value", "#{@pet.attr3}") %> </th>
-      <th> <%= multi_sortable("attr4_value", "#{@pet.attr4}") %> </th>
-      <th> <%= multi_sortable("attr5_value", "#{@pet.attr5}") %> </th>
+      <% if @pet.attr2 %>
+        <th> <%= multi_sortable("attr2_value", "#{@pet.attr2}") %> </th>
+      <% end %>
+      <% if @pet.attr3 %>
+        <th> <%= multi_sortable("attr3_value", "#{@pet.attr3}") %> </th>
+      <% end %>
+      <% if @pet.attr4 %>
+        <th> <%= multi_sortable("attr4_value", "#{@pet.attr4}") %> </th>
+      <% end %>
+      <% if @pet.attr5 %>
+        <th> <%= multi_sortable("attr5_value", "#{@pet.attr5}") %> </th>
+      <% end %>
       <th> <%= link_to user_pet_logs_path(@user, @pet) do %>
           <i class="fa-solid fa-arrow-rotate-left"></i>
         <% end %>
@@ -137,6 +145,33 @@
   </div>
 </div>
 <style>
+  .sort-none {
+    border: 2px solid #666;
+    border-radius: 8px;
+    padding: 2px;
+    color: #666;
+    text-decoration: none;
+    margin-right: 5px;
+  }
+
+  .sort-asc {
+    border: 2px solid #2a7ae2;
+    border-radius: 8px;
+    padding: 2px;
+    color: #2a7ae2;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .sort-desc {
+    border: 2px solid #e5533d;
+    border-radius: 8px;
+    padding: 2px;
+    color: #e5533d;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
   .card-logs{
     /* border-radius: 8px;
     border: 2px solid black;
