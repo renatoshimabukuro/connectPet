@@ -6,7 +6,30 @@ class LogsController < ApplicationController
   before_action :set_pet
 
   def index
-    @logs = @pet.logs.order(date: :desc)
+    logs = @pet.logs
+
+    allowed_columns = %w[date attr1_value attr2_value attr3_value attr4_value attr5_value]
+
+    orders = []
+
+    if params[:sort].blank?
+      params[:sort] = ["date"]
+      params[:dir] = ["desc"]
+    end
+
+    if params[:sort].present?
+      params[:sort].each_with_index do |c, i|
+        if allowed_columns.include?(c)
+          direction = params[:dir][i] == "asc" ? "asc" : "desc"
+
+          orders << "#{c} #{direction} NULLS LAST"
+        end
+      end
+    end
+
+    logs = logs.order(orders.join(",")) if orders.any?
+
+    @logs = logs
   end
 
   def new

@@ -13,6 +13,7 @@
 @import "components/index";
 @import "pages/index";
 @import "pages/clinics_index";
+@import "pages/logs_index";
 
 @import "components/navbar";
 @import "components/avatar";
@@ -24,6 +25,7 @@
 @import "components/chat_show";
 @import "components/chat_new";
 @import "components/modal";
+
 
 .auth-container {
   padding-top: 100px;
