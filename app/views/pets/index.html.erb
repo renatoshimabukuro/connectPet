@@ -82,10 +82,7 @@
           <%= link_to clinic_path(clinic), class: "card-index-link" do %>
             <div class="vet-name-index"><%= clinic.clinic_name %> </div>
           <% end %>
-          <div class="vet-languages">Pets: <%= clinic.species.join(", ") %></div>
-          <div class="vet-languages">Languages: <%= clinic.languages.join(", ") %></div>
-          <div class="vet-languages">Specialties: <%= clinic.field.join(", ") %></div>
-          <div class="vet-languages">Address: <%= clinic.user.address %></div>
+          <p class="clinic-address"><%= clinic.user.address %></p>
         </div>
         <i class="fa-solid fa-comment"
            onclick="event.preventDefault();
@@ -94,8 +91,9 @@
       </div>
     <% end %>
   <% end %>
-  <%= link_to "Search for Vets", clinics_path, class: 'btn btn-danger text-white' %>
-  <%= f.button :submit, "Save", class: "btn btn-primary" %>
+  <%= link_to clinics_path, class: "btn-log mb-3", data: { turbo_frame: "_top" } do %>
+    <i class="fa-solid fa-plus"></i> Search for Clinics
+  <% end %>
 </div>
 <style>
   p {

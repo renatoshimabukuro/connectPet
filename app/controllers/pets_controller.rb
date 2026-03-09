@@ -12,7 +12,7 @@ class PetsController < ApplicationController
       @pets = @user.pets
       @title = "Your Pets!"
     end
-
+    # show connect veterinarians in index page
      @my_clinics = current_user.clinics.where(friendships: {accepted: true}).distinct
   end
 

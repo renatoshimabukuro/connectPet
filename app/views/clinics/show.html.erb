@@ -1,5 +1,12 @@
-<div class="container">
+<div class="container pb-3">
   <%= render @clinic %>
 
-  <%= link_to "Back to clinics", clinics_path %>
+  <div class="d-flex justify-content-between align-items-center w-100 mt-4 px-2">
+    <%= link_to "Back to clinics", clinics_path, class: "btn-log" %>
+
+
+    <%= link_to clinics_path, class: "btn-log", data: { turbo_frame: "_top" } do %>
+      <i class="fa-solid fa-plus"></i> Add Vet(in progress)
+    <% end %>
+  </div>
 </div>
