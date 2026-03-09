@@ -19,6 +19,8 @@ class User < ApplicationRecord
   has_many :friendships, foreign_key: :owner_id, dependent: :destroy
   # owner has clinics through friendship
   has_many :clinics, through: :friendships, source: :clinic
+  # to make the clinic's photo appears on chat index and chat messages
+  delegate :photo, to: :clinic, allow_nil: true
 
   # Method to get all chats of a user
   def chats

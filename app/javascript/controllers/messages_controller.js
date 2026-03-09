@@ -5,6 +5,7 @@ export default class extends Controller {
     // Finds the viewer ID and pet photo URL from the
     this.viewerId = this.element.dataset.viewerId
     this.petPhotoUrl = this.element.dataset.petPhotoUrl
+    this.vetPhotoUrl = this.element.dataset.vetPhotoUrl
 
     // Runs the applyPerspective method on connect
     this.applyPerspective()
@@ -60,7 +61,7 @@ export default class extends Controller {
     // Sets image of the vet (House) or the pet's image depending on role
     const avatarSrc =
       senderRole === "vet"
-        ? "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg"
+        ? this.vetPhotoUrl
         : this.petPhotoUrl
 
     // Interpolates HTML and adds to the DOM
