@@ -34,63 +34,92 @@
     margin-right: 5px;
   }
 
-  .sort-asc {
-    border: 2px solid #A3B899;
-    border-radius: 8px;
-    padding: 2px;
-    color: #A3B899;
-    font-weight: bold;
-    margin-right: 5px;
-  }
+.sort-asc {
+  border: 2px solid #A3B899;
+  border-radius: 8px;
+  padding: 2px;
+  color: #A3B899;
+  font-weight: bold;
+  margin-right: 5px;
+}
 
-  .sort-desc {
-    border: 2px solid #3D6B58;
-    border-radius: 8px;
-    padding: 2px;
-    color: #3D6B58;
-    font-weight: bold;
-    margin-right: 5px;
-  }
+.sort-desc {
+  border: 2px solid #3D6B58;
+  border-radius: 8px;
+  padding: 2px;
+  color: #3D6B58;
+  font-weight: bold;
+  margin-right: 5px;
+}
 
-  .card-logs{
-    background-color: #a3b899;
-    border-radius: 22px;
-    padding: 8px;
-    position: relative;
-    color: white;
+.card-logs{
+  background-color: #a3b899;
+  border-radius: 22px;
+  padding: 8px;
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  width: 80%;
+}
+
+.logs-all{
+  width: 100%;
+  padding-bottom: 300px !important;
+}
+
+.export-logs-card {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  background: white;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+    // align-items: center;
+    // gap: 20px;
+
+  form {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
-    width: 80%;
-  }
-
-  .logs-all{
-    width: 100%;
-    padding-bottom: 300px !important;
-  }
-
-  .export-logs-card {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-
-    background: white;
-    padding: 10px 0;
-    box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-    z-index: 1000;
-
-    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
 
-    form {
-      background: none;
+    .date-range-selector, .language-selector {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 120px;
+      font-size: 0.9rem;
+    }
 
-      input, select {
-        margin-left: 5%;
-      }
+    .date-range-selector label, .language-selector label {
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    input, select {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      width: 100%;
+      max-width: 100%;
     }
   }
+}
+
+.export-logs-submit {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.export-logs-submit:hover {
+  background-color: #d5d3d3;
+}
