@@ -20,7 +20,8 @@
   id="chat-messages"
   data-controller="scroll messages"
   data-viewer-id="<%= current_user.id %>"
-  data-pet-photo-url="<%= url_for(@chat.pet.photo) %>">
+  data-pet-photo-url="<%= url_for(@chat.pet.photo) %>"
+  data-vet-photo-url="<%= url_for(@chat.vet.photo) %>">
     <%# data-controller adds controllers for both "scroll" and "messages" %>
     <%= render @messages, viewer_id: current_user.id %>
     <%# Renders the messages partial %>

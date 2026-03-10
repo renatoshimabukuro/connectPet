@@ -1,20 +1,65 @@
-<div>
-  <h2><%= @clinic.clinic_name %></h2>
-  <%= cl_image_tag clinic.photo.key,
-      crop: :fill,
-      gravity: :auto,
-      class: "img-fluid w-100 @clinic-banner-mobile"
-  %>
-  <h4>We provide medical care for</h4>
-    <% @clinic.species.each do |specie| %>
-      <p><%= specie %></p>
-    <% end %>
-    <h4>Fields</h4>
-    <% @clinic.field.each do |field| %>
-      <p><%= field %></p>
-    <% end %>
-    <h4>Contact</h4>
-    <p><%= @clinic.contact %></p>
-    <h4>Address</h4>
-    <p><%= @clinic.user.address %></p>
+<div class="clinic-container">
+  <h2 class="clinic-name mt-2 text-center"><%= @clinic.clinic_name %></h2>
+
+  <% if @clinic.photo.attached? %>
+    <%= cl_image_tag @clinic.photo.key, crop: :fill, class: "img-fluid w-100 clinic-banner mb-4" %>
+  <% end %>
+
+  <div class="row g-3 px-3"> <%# space between cards %>
+
+    <div class="col-12">
+      <div class="vital-card">
+        <div class="card-header-row">
+          <div class="card-label card-blue-text">We care for</div>
+          <i class="fa-solid fa-paw card-icon-inline"></i>
+        </div>
+        <div class="card-value">
+          <%= @clinic.species.join(", ") %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="vital-card">
+        <div class="card-header-row">
+          <div class="card-label">Fields</div>
+          <i class="fa-solid fa-stethoscope card-icon"></i>
+        </div>
+        <div class="card-value">
+          <%= @clinic.field.join(", ") %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="vital-card" style="min-height: 100px;">
+        <div class="card-header-row">
+          <div class="card-label">Contact</div>
+          <i class="fa-regular fa-envelope"></i>
+        </div>
+        <div class="card-value"><%= @clinic.contact %></div>
+      </div>
+    </div>
+
+        <div class="col-12">
+      <div class="vital-card" style="min-height: 100px;">
+        <div class="card-header-row">
+          <div class="card-label">Languages</div>
+          <i class="fa-solid fa-language"></i>
+        </div>
+        <div class="card-value"><%= @clinic.languages.join(", ") %></div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="vital-card" style="min-height: 100px;">
+        <div class="card-header-row">
+          <div class="card-label">Address</div>
+          <i class="fa-solid fa-location-dot card-icon"></i>
+        </div>
+        <div class="card-value"><%= @clinic.user.address %></div>
+      </div>
+    </div>
+
   </div>
+</div>

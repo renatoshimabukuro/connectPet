@@ -2,12 +2,12 @@
   <h1 class="index-title">Clinics</h1>
 
 
-    <%= form_tag clinics_path, method: :get, class: "d-flex my-3" do %>
+    <%= form_tag clinics_path, method: :get, class: "search-form d-flex my-3" do %>
       <%= label_tag :query, "Search veterinarians", class: "visually-hidden" %>
       <%= text_field_tag :query,
           params[:query],
           class: "form-control",
-          placeholder: "Type a keyword"
+          placeholder: "Address, specialty, species..."
       %>
       <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
     <% end %>
@@ -19,9 +19,7 @@
       </div>
     <% end %>
 
-
-
-  <div class="vet-cards-wrapper">
+  <div class="vet-cards-wrapper ms-4">
     <% @clinics.each do |clinic| %>
       <%= link_to clinic_path(clinic), class: "card-index-link h-100" do %>
         <div class="card-index">
@@ -35,12 +33,12 @@
           <% end %>
           <div class="name-section-wrapper">
             <h2 class="vet-name-index"><%= clinic.clinic_name %></h2>
+            <p><%= clinic.user.address %></p>
           </div>
-
         </div>
       <% end %>
     <% end %>
   </div>
 
-
+ <%= link_to "Back to My Pets!", user_pets_path(current_user), class: "btn-log my-3", data: { turbo_frame: "_top" }%>
 </div>
