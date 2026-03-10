@@ -12,7 +12,8 @@ class MessagesController < ApplicationController
       redirect_to user_chat_path(@user, @chat)
     else
       @messages = @chat.messages.includes(:user)
-      render "chats/show"
+      @friendship = Friendship.find_by(owner: @chat.owner, vet: @chat.vet)
+      render "chats/show", status: :unprocessable_entity
     end
   end
 

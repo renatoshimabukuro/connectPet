@@ -4,7 +4,7 @@ class Message < ApplicationRecord
 
   has_one_attached :file
 
-  validates :contents, presence: true
+  validate :content_or_file_present
 
   def from?(user)
     self.user_id == user.id
@@ -31,4 +31,12 @@ class Message < ApplicationRecord
       Rails.logger.warn "Redis connection failed, skipping broadcast."
     end
   }
+
+  private
+
+  def content_or_file_present
+    if contents.blank? && !file.attached?
+      errors.add(:base, "Message must have text or a file")
+    end
+  end
 end

@@ -28,8 +28,13 @@
     <div class="chat-bottom"> </div>
   </div>
   <% if @friendship.accepted == true %>
-    <%= form_with model: [@user, @chat, @message], html: { multipart: true }, data: { controller: "file-preview" } do |f| %>
-      <%= f.text_area :contents %>
+    <%= form_with model: [@user, @chat, @message],
+      html: { multipart: true },
+      data: { controller: "file-preview message-guard" } do |f| %>
+      <%= f.text_area :contents, data:{
+        message_guard_target: "text",
+        action: "input->message-guard#check"
+        } %>
       <%= f.file_field :file, id: "file-upload", class: "file-input-hidden",
         data: {
           action: "change->file-preview#show",
@@ -46,7 +51,8 @@
           </button>
         </div>
         <div class="col-2">
-          <button type="submit" class="send-btn" aria-label="Send message">
+          <button type="submit" class="send-btn"
+            aria-label="Send message" data-message-guard-target="send">
             <i class="fa-solid fa-arrow-up"></i>
           </button>
         </div>
