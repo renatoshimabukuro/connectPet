@@ -63,6 +63,12 @@
   justify-content: flex-end;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
   width: 80%;
+  max-width: 500px;
+
+  table{
+    width: 100%;
+    table-layout: fixed;
+  }
 }
 
 .logs-all{

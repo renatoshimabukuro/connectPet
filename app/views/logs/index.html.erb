@@ -49,7 +49,7 @@
       <% if @logs.any? %>
         <% @logs.each do |log| %>
           <div class="card-logs mb-2 mx-auto">
-            <%= link_to "Date: #{log.date}", user_pet_log_path(@user, @pet, log) %>
+            <%= link_to "#{log.date}", user_pet_log_path(@user, @pet, log) %>
             <table class="text-center">
               <tr>
                 <%# First heading %>
