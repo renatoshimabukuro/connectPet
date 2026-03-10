@@ -69,11 +69,23 @@
     width: 100%;
     table-layout: fixed;
   }
+
+  form{
+    background: none;
+    padding: 0px;
+    border: none;
+  }
 }
 
 .logs-all{
   width: 100%;
   padding-bottom: 160px !important;
+}
+
+.log-trash{
+  color: white;
+  padding: 0px;
+
 }
 
 .export-logs-card {

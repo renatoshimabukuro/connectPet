@@ -49,102 +49,115 @@
       <% if @logs.any? %>
         <% @logs.each do |log| %>
           <div class="card-logs mb-2 mx-auto">
-            <%= link_to "#{log.date}", user_pet_log_path(@user, @pet, log) %>
-            <table class="text-center">
-              <tr>
-                <%# First heading %>
-                <th>
-                  <i class="iconify" data-icon="mdi:silverware-fork-knife" style="font-size: 1em;"></i>
-                </th>
-                <%# Second heading %>
-                <% if @pet.name == "Raye" || @pet.name == "Percy" %>
+            <%= link_to user_pet_log_path(@user, @pet, log) do %>
+              <div class="row">
+                <div class="col-9">
+                  <%= log.date %>
+                </div>
+                <div class="col-3">
+                  <%= button_to user_pet_log_path(@user, @pet, log), method: :delete,
+                    class: "btn btn-link p-0 log-trash",
+                    data: { turbo_confirm: "Delete this log?" } do %>
+                    <i class="fa-solid fa-trash"></i>
+                  <% end %>
+                </div>
+              </div>
+              <table class="text-center">
+                <tr>
+                  <%# First heading %>
                   <th>
-                    <i class="iconify" data-icon="streamline:smiley-nauseas-solid" style="font-size: 1em;"></i>
+                    <i class="iconify" data-icon="mdi:silverware-fork-knife" style="font-size: 1em;"></i>
                   </th>
-                <% elsif @pet.name == "Cory" %>
-                  <th>
-                    <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em;"></i>
-                  </th>
-                <% elsif log.attr2 %>
-                  <th>
-                    <%= log.attr2 %>
-                  </th>
-                <% end %>
-                <%# Third heading %>
-                <% if @pet.name == "Raye" || @pet.name == "Percy" %>
-                  <th>
-                    <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em;"></i>
-                  </th>
-                <% elsif log.attr3 %>
-                  <th>
-                    <%= log.attr3 %>
-                  </th>
-                <% end %>
-                <%# Fourth heading %>
-                <% if log.attr4 %>
-                  <th>
-                    <%= log.attr4 %>
-                  </th>
-                <% end %>
-                <%# Fifth heading %>
-                <% if log.attr5 %>
-                  <th>
-                    <%= log.attr5 %>
-                  </th>
-                <% end %>
-              </tr>
-              <%# Adding values %>
-              <% reactions = ["fa-face-tired", "fa-face-frown", "fa-face-meh", "fa-face-smile", "fa-face-grin-wide"]%>
-              <tr>
-                <% if log.attr1 %>
-                  <% value = log.attr1_value %>
-                  <td>
-                    <i class="fa-regular <%=reactions[value - 1]%>"></i>
-                  </td>
-                <% end %>
-                <% if log.attr2 %>
-                  <% value = log.attr2_value %>
-                  <td>
-                    <i class="fa-regular <%=reactions[value - 1]%>"></i>
-                  </td>
-                <% end %>
-                <% if log.attr3 %>
-                  <% value = log.attr3_value %>
-                  <td>
-                    <i class="fa-regular <%=reactions[value - 1]%>"></i>
-                  </td>
-                <% end %>
-                <% if log.attr4 %>
-                  <% value = log.attr4_value %>
-                  <td>
-                    <i class="fa-regular <%=reactions[value - 1]%>"></i>
-                  </td>
-                <% end %>
-                <% if log.attr5 %>
-                  <% value = log.attr5_value %>
-                  <td>
-                    <i class="fa-regular <%=reactions[value - 1]%>"></i>
-                  </td>
-                <% end %>
-              </tr>
-              <tr>
-                <% if log.attr1_memo && log.attr1_memo != "" %>
-                  <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
-                <% end %>
-                <% if log.attr2_memo && log.attr2_memo != "" %>
-                  <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
-                <% end %>
-                <% if log.attr3_memo && log.attr3_memo != "" %>
-                  <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
-                <% end %>
-                <% if log.attr4_memo && log.attr4_memo != "" %>
-                  <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
-                <% end %>
-                <% if log.attr5_memo && log.attr5_memo != "" %>
-                  <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
-                <% end %>
-              </tr>
-            </table>
+                  <%# Second heading %>
+                  <% if @pet.name == "Raye" || @pet.name == "Percy" %>
+                    <th>
+                      <i class="iconify" data-icon="streamline:smiley-nauseas-solid" style="font-size: 1em;"></i>
+                    </th>
+                  <% elsif @pet.name == "Cory" %>
+                    <th>
+                      <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em;"></i>
+                    </th>
+                  <% elsif log.attr2 %>
+                    <th>
+                      <%= log.attr2 %>
+                    </th>
+                  <% end %>
+                  <%# Third heading %>
+                  <% if @pet.name == "Raye" || @pet.name == "Percy" %>
+                    <th>
+                      <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em;"></i>
+                    </th>
+                  <% elsif log.attr3 %>
+                    <th>
+                      <%= log.attr3 %>
+                    </th>
+                  <% end %>
+                  <%# Fourth heading %>
+                  <% if log.attr4 %>
+                    <th>
+                      <%= log.attr4 %>
+                    </th>
+                  <% end %>
+                  <%# Fifth heading %>
+                  <% if log.attr5 %>
+                    <th>
+                      <%= log.attr5 %>
+                    </th>
+                  <% end %>
+                </tr>
+                <%# Adding values %>
+                <% reactions = ["fa-face-tired", "fa-face-frown", "fa-face-meh", "fa-face-smile", "fa-face-grin-wide"]%>
+                <tr>
+                  <% if log.attr1 %>
+                    <% value = log.attr1_value %>
+                    <td>
+                      <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                    </td>
+                  <% end %>
+                  <% if log.attr2 %>
+                    <% value = log.attr2_value %>
+                    <td>
+                      <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                    </td>
+                  <% end %>
+                  <% if log.attr3 %>
+                    <% value = log.attr3_value %>
+                    <td>
+                      <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                    </td>
+                  <% end %>
+                  <% if log.attr4 %>
+                    <% value = log.attr4_value %>
+                    <td>
+                      <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                    </td>
+                  <% end %>
+                  <% if log.attr5 %>
+                    <% value = log.attr5_value %>
+                    <td>
+                      <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                    </td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <% if log.attr1_memo && log.attr1_memo != "" %>
+                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
+                  <% end %>
+                  <% if log.attr2_memo && log.attr2_memo != "" %>
+                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
+                  <% end %>
+                  <% if log.attr3_memo && log.attr3_memo != "" %>
+                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
+                  <% end %>
+                  <% if log.attr4_memo && log.attr4_memo != "" %>
+                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
+                  <% end %>
+                  <% if log.attr5_memo && log.attr5_memo != "" %>
+                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
+                  <% end %>
+                </tr>
+              </table>
+            <% end %>
           </div>
         <% end %>
       <% else %>
