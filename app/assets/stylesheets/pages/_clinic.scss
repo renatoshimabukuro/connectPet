@@ -1,0 +1,40 @@
+.vital-card {
+  background-color: #a3b899 !important;
+  border-radius: 22px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+  min-height: 110px;
+  gap: 4px;
+
+  .card-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .card-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: white !important;
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  .card-icon-inline {
+    font-size: 1.2rem;
+    color: white !important;
+  }
+
+  .card-value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #3D6B58 !important;
+    word-break: break-word;
+    margin-top: 2px;
+  }
+}

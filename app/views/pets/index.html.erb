@@ -64,19 +64,35 @@
       <% end %>
     <% end %>
   </div>
-  <% if @title == "Your Pets!" %>
+
+  <%# Users connections %>
+  <% if @title == "Your Pets!" && @my_clinics.any? %>
     <h3 class="mt-4">Your Connected Veterinarians</h3>
-    <div class="vet-card-custom">
-      <%= image_tag "https://res.cloudinary.com/rts1307/image/upload/v1771606859/development/gregoryhouse.jpg", class: "avatar-vet" %>
-      <div class="name-section-wrapper">
-        <div class="vet-name-index">Patrick Gregory House</div>
-        <div class="vet-languages">Languages: English, Spanish</div>
+
+    <% @my_clinics.each do |clinic| %>
+      <div class="vet-card-custom">
+        <% if clinic&.photo&.attached? %>
+          <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large" %>
+        <% else %>
+          <div class="avatar-index-large placeholder">
+            <i class="fa-regular fa-hospital"></i>
+          </div>
+        <% end %>
+        <div class="name-section-wrapper">
+          <%= link_to clinic_path(clinic), class: "card-index-link" do %>
+            <div class="vet-name-index"><%= clinic.clinic_name %> </div>
+          <% end %>
+          <p class="clinic-address"><%= clinic.user.address %></p>
+        </div>
+        <i class="fa-solid fa-comment"
+           onclick="event.preventDefault();
+           window.location.href='<%= new_user_chat_path(current_user) %>';">
+        </i>
       </div>
-      <i class="fa-solid fa-comment"
-         onclick="event.preventDefault();
-         window.location.href='<%= new_user_chat_path(current_user) %>';">
-      </i>
-    </div>
+    <% end %>
+  <% end %>
+  <%= link_to clinics_path, class: "btn-log mb-3", data: { turbo_frame: "_top" } do %>
+    <i class="fa-solid fa-plus"></i> Search for Clinics
   <% end %>
 </div>
 <style>

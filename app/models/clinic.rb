@@ -10,6 +10,9 @@ include PgSearch::Model
 
   pg_search_scope :search_by_clinic,
   against: [ :clinic_name, :species, :field ],
+  associated_against: {
+    user: [ :address]
+  },
   using: {
     tsearch: { prefix: true }
   }

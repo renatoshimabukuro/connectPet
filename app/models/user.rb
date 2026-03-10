@@ -13,7 +13,14 @@ class User < ApplicationRecord
   # has many messages regardless of role and messages are dependent on chat to persist
   has_many :messages, dependent: :destroy
   has_many :pets, dependent: :destroy
+
+  # vet has one clinic
   has_one :clinic, dependent: :destroy
+  has_many :friendships, foreign_key: :owner_id, dependent: :destroy
+  # owner has clinics through friendship
+  has_many :clinics, through: :friendships, source: :clinic
+  # to make the clinic's photo appears on chat index and chat messages
+  delegate :photo, to: :clinic, allow_nil: true
 
   # Method to get all chats of a user
   def chats
