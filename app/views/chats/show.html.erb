@@ -28,14 +28,19 @@
     <div class="chat-bottom"> </div>
   </div>
   <% if @friendship.accepted == true %>
-    <%= form_with model: [@user, @chat, @message], html: { multipart: true } do |f| %>
+    <%= form_with model: [@user, @chat, @message], html: { multipart: true }, data: { controller: "file-preview" } do |f| %>
       <%= f.text_area :contents %>
-      <%= f.file_field :file, id: "file-upload", class: "file-input-hidden" %>
+      <%= f.file_field :file, id: "file-upload", class: "file-input-hidden",
+        data: {
+          action: "change->file-preview#show",
+          file_preview_target: "input"
+          }%>
       <div class="row justify-content-between">
-        <div class="col-2">
+        <div class="col-10 align-items-center">
           <label for="file-upload" class="paperclip-btn">
             <i class="fa-solid fa-paperclip"></i>
           </label>
+          <span class="file-name" data-file-preview-target="name"></span>
         </div>
         <div class="col-2">
           <button type="submit" class="send-btn" aria-label="Send message">

@@ -6,7 +6,7 @@
         <%# clinics avatar %>
         <% if chat.vet&.clinic&.photo&.attached? %>
           <%= image_tag chat.vet.photo,
-              class: "avatar-small overlap",
+              class: "avatar-small overlap ms-1",
               style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
         <% else %>
           <div class="avatar-small overlap" style="width: 50px; height: 50px; border-radius: 50%; background: #eee; display: inline-flex; align-items: center; justify-content: center; border: 2px solid white;">

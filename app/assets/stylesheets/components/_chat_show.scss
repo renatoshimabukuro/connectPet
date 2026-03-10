@@ -61,22 +61,6 @@ body {
   margin-right: 0.75rem;
 }
 
-.file-input-hidden{
-  display: none;
-}
-
-.paperclip-btn{
-  font-size: 18px;
-  color: #4a6755;
-  cursor: pointer;
-  margin-left: 8px;
-}
-
-.paperclip-btn:hover{
-  color: #2e4437;
-}
-
-
 .message {
   display: flex;
   align-items: flex-end;
@@ -209,4 +193,32 @@ form textarea:focus {
 
 .send-btn:hover {
   opacity: 0.9;
+}
+
+
+.file-input-hidden{
+  display: none;
+}
+
+.paperclip-btn{
+  font-size: 1.4rem;
+  color: #4a6755;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.paperclip-btn:hover{
+  color: #2e4437;
+}
+
+.file-name {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-left: 6px;
+  max-width: 120px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
 }
