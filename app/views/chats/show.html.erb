@@ -35,23 +35,36 @@
       </button>
     <% end %>
   <% elsif @friendship.accepted == false && @user.role == "owner" %>
-    <button>
-      I DO SOMETHING TRUST ME
-    </button>
+    <div class="info-card">
+      <div class="info-card__header">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <h4>Request Pending</h4>
+      </div>
+      <div class="info-card__body">
+        <p>You are waiting for <strong><%= @chat.vet.clinic.clinic_name %></strong> to accept your request.</p>
+        <p class="info-card__label">If you need immediate help:</p>
+        <%= link_to clinic_path(@chat.vet.clinic), class: "info-card__button" do %>
+          <i class="fa-solid fa-info-circle"></i>
+          <%= @chat.vet.clinic.clinic_name %> Contact Details
+        <% end %>
+        <div class="info-card__footer">
+          <p>
+            <strong>In an emergency:</strong> Please call the clinic directly or visit in person.
+          </p>
+        </div>
+      </div>
+    </div>
   <% else %>
     <%# form for accepting friend request %>
     <%= form_with model: [@user, @friendship] do |f| %>
       <%= f.button name: "friendship[accepted]", value: "false", class: "btn-reject" do %>
         Reject
       <% end %>
-
       <%= f.button name: "friendship[accepted]", value: "true", class: "btn-accept" do %>
         Accept
       <% end %>
     <% end %>
   <% end %>
-
-
 </div>
 <style>
   .message-row {
