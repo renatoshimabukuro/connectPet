@@ -13,4 +13,14 @@ export default class extends Controller {
 
     this.sendTarget.disabled = !(text || file)
   }
+
+  sending() {
+    this.sendTarget.disabled = true
+    this.sendTarget.innerHTML = "..."
+  }
+
+  reset() {
+    this.sendTarget.innerHTML = '<i class="fa-solid fa-arrow-up"></i>'
+    this.check()
+  }
 }

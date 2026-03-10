@@ -30,7 +30,10 @@
   <% if @friendship.accepted == true %>
     <%= form_with model: [@user, @chat, @message],
       html: { multipart: true },
-      data: { controller: "file-preview message-guard" } do |f| %>
+      data: {
+        controller: "file-preview message-guard",
+        action: "turbo:submit-start->message-guard#sending turbo:submit-end->message-guard#reset"
+        } do |f| %>
       <%= f.text_area :contents, data:{
         message_guard_target: "text",
         action: "input->message-guard#check"
