@@ -7,7 +7,10 @@
   <div class="col-10 msg">
     <p><%= message.contents %></p>
     <% if message.file.attached? %>
-      <%= link_to "Download file", url_for(message.file) %>
+      <div class="attachment">
+        <i class="fa-solid fa-paperclip"></i>
+        <%= link_to truncate(message.file.filename.to_s, length: 20, separator: ' '), url_for(message.file) %>
+      </div>
     <% end %>
   </div>
 </div>
