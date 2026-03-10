@@ -6,5 +6,11 @@
   <div class="col-2 avatar-col avatar-slot"></div>
   <div class="col-10 msg">
     <p><%= message.contents %></p>
+    <% if message.file.attached? %>
+      <div class="attachment">
+        <i class="fa-solid fa-paperclip"></i>
+        <%= link_to truncate(message.file.filename.to_s, length: 20, separator: ' '), url_for(message.file) %>
+      </div>
+    <% end %>
   </div>
 </div>
