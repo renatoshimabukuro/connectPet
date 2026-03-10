@@ -118,6 +118,12 @@ class LogsController < ApplicationController
     set_log
   end
 
+  def destroy
+    set_log
+    @log.destroy
+    redirect_to user_pet_logs_path(@user, @pet), status: :see_other
+  end
+
   private
 
   def set_user

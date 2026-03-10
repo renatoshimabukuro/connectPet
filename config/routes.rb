@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         # /users/:user_id/pets/:id/unarchive
         patch :unarchive
       end
-      resources :logs, only: [:index, :new, :create, :edit, :update, :show] do
+      resources :logs do
         collection do
           post :export
         end
