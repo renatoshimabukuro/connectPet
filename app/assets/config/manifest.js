@@ -5,3 +5,4 @@
 //= link popper.js
 //= link bootstrap.min.js
 //= link pdf.css
+//= link manifest.json
