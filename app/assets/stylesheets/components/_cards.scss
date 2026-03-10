@@ -22,6 +22,16 @@
   width: 80%;
 }
 
+.card-index {
+  width: 100%;
+  max-width: 500px;
+}
+
+.vet-card-custom {
+  width: 90%;
+  max-width: 600px;
+}
+
 
 
 .card-index, .vet-card-custom {
@@ -31,7 +41,6 @@
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  width: 90%;
   max-width: none;
   margin-bottom: 15px;
   // margin: 0 auto 15px auto;
