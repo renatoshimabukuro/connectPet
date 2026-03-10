@@ -39,6 +39,44 @@ body {
 
 // messages
 
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.message-row.msg-right {
+  flex-direction: row-reverse;
+}
+
+.message-row.msg-left {
+  flex-direction: row;
+}
+
+.message-row.msg-right .avatar-chat {
+  margin-left: 0.75rem;
+}
+
+.message-row.msg-left .avatar-chat {
+  margin-right: 0.75rem;
+}
+
+.file-input-hidden{
+  display: none;
+}
+
+.paperclip-btn{
+  font-size: 18px;
+  color: #4a6755;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.paperclip-btn:hover{
+  color: #2e4437;
+}
+
+
 .message {
   display: flex;
   align-items: flex-end;
@@ -148,10 +186,6 @@ form textarea:focus {
 }
 
 .send-btn {
-  position: absolute;
-  right: 1.5rem;
-  bottom: 2.25rem;
-
   width: 2.1rem;
   height: 2.1rem;
 

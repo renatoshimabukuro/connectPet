@@ -30,10 +30,19 @@
   <% if @friendship.accepted == true %>
     <%= form_with model: [@user, @chat, @message], html: { multipart: true } do |f| %>
       <%= f.text_area :contents %>
-      <%= f.file_field :file %>
-      <button type="submit" class="send-btn" aria-label="Send message">
-        <i class="fa-solid fa-arrow-up"></i>
-      </button>
+      <%= f.file_field :file, id: "file-upload", class: "file-input-hidden" %>
+      <div class="row justify-content-between">
+        <div class="col-2">
+          <label for="file-upload" class="paperclip-btn">
+            <i class="fa-solid fa-paperclip"></i>
+          </label>
+        </div>
+        <div class="col-2">
+          <button type="submit" class="send-btn" aria-label="Send message">
+            <i class="fa-solid fa-arrow-up"></i>
+          </button>
+        </div>
+      </div>
     <% end %>
   <% elsif @friendship.accepted == false && @user.role == "owner" %>
     <button>
@@ -52,28 +61,5 @@
   <% end %>
 </div>
 <style>
-  .message-row {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 10px;
-  }
-
   /* RIGHT (from me) */
-  .message-row.msg-right {
-    flex-direction: row-reverse;
-  }
-
-  /* LEFT (from them) */
-  .message-row.msg-left {
-    flex-direction: row;
-  }
-
-  /* spacing */
-  .message-row.msg-right .avatar-chat {
-    margin-left: 0.75rem;
-  }
-
-  .message-row.msg-left .avatar-chat {
-    margin-right: 0.75rem;
-  }
 </style>
