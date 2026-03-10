@@ -28,8 +28,9 @@
     <div class="chat-bottom"> </div>
   </div>
   <% if @friendship.accepted == true %>
-    <%= form_with model: [@user, @chat, @message] do |f| %>
+    <%= form_with model: [@user, @chat, @message], html: { multipart: true } do |f| %>
       <%= f.text_area :contents %>
+      <%= f.file_field :file %>
       <button type="submit" class="send-btn" aria-label="Send message">
         <i class="fa-solid fa-arrow-up"></i>
       </button>
@@ -44,14 +45,11 @@
       <%= f.button name: "friendship[accepted]", value: "false", class: "btn-reject" do %>
         Reject
       <% end %>
-
       <%= f.button name: "friendship[accepted]", value: "true", class: "btn-accept" do %>
         Accept
       <% end %>
     <% end %>
   <% end %>
-
-
 </div>
 <style>
   .message-row {

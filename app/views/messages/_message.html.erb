@@ -6,5 +6,8 @@
   <div class="col-2 avatar-col avatar-slot"></div>
   <div class="col-10 msg">
     <p><%= message.contents %></p>
+    <% if message.file.attached? %>
+      <%= link_to "Download file", url_for(message.file) %>
+    <% end %>
   </div>
 </div>

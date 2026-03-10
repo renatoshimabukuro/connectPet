@@ -2,6 +2,8 @@ class Message < ApplicationRecord
   belongs_to :chat
   belongs_to :user
 
+  has_one_attached :file
+
   validates :contents, presence: true
 
   def from?(user)
