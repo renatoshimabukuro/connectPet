@@ -200,7 +200,7 @@ lewagon = Clinic.create!(
   clinic_name:"Le Wagon Pet Clinic",
   contact: "contact@lewagonvet.com",
   species: ["cats", "dogs", "monkeys"],
-  languages: ["english", "japanese", "portuguese"],
+  languages: ["english", "日本語", "português"],
   user: vet01
   )
 
@@ -215,7 +215,7 @@ sos_pet = Clinic.create!(
   clinic_name:"SOS Pet",
   contact: "contact@sospet.com",
   species: ["cats", "dogs", "birds"],
-  languages: ["english", "japanese"],
+  languages: ["english", "日本語"],
   user: vet02
   )
 
@@ -230,7 +230,7 @@ pet_protect = Clinic.create!(
   clinic_name:"PetProtect",
   contact: "contact@petprotect.com",
   species: ["cats", "dogs", "squirrels"],
-  languages: ["japanese"],
+  languages: ["日本語"],
   user: vet03
   )
 
