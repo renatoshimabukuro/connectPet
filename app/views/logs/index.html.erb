@@ -108,7 +108,7 @@
                 <%# Adding values %>
                 <% reactions = ["fa-face-tired", "fa-face-frown", "fa-face-meh", "fa-face-smile", "fa-face-grin-wide"]%>
                 <tr>
-                  <% if log.attr1 %>
+                  <% if log.attr1_value.present? %>
                     <% value = log.attr1_value %>
                     <td>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
@@ -117,7 +117,7 @@
                       <% end %>
                     </td>
                   <% end %>
-                  <% if log.attr2 %>
+                  <% if log.attr2_value.present? %>
                     <% value = log.attr2_value %>
                     <td>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
@@ -126,7 +126,7 @@
                       <% end %>
                     </td>
                   <% end %>
-                  <% if log.attr3 %>
+                  <% if log.attr3_value.present? %>
                     <% value = log.attr3_value %>
                     <td>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
@@ -135,7 +135,7 @@
                       <% end %>
                     </td>
                   <% end %>
-                  <% if log.attr4 %>
+                  <% if log.attr4_value.present? %>
                     <% value = log.attr4_value %>
                     <td>
                       <% if log.attr4_memo && log.attr4_memo != "" %>
@@ -144,7 +144,7 @@
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
                     </td>
                   <% end %>
-                  <% if log.attr5 %>
+                  <% if log.attr5_value.present? %>
                     <% value = log.attr5_value %>
                     <td>
                       <% if log.attr5_memo && log.attr5_memo != "" %>
