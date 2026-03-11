@@ -19,25 +19,44 @@
       </div>
     <% end %>
 
-  <div class="vet-cards-wrapper ms-4">
+  <div class="vet-cards-wrapper w-100 d-flex flex-column align-items-center">
     <% @clinics.each do |clinic| %>
-      <%= link_to clinic_path(clinic), class: "card-index-link h-100" do %>
-        <div class="card-index">
-          <%# Protecting view from nil data %>
-          <% if clinic&.photo&.attached? %>
-            <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large" %>
-          <% else %>
-            <div class="avatar-index-large placeholder">
-              <i class="fa-regular fa-hospital"></i>
-            </div>
-          <% end %>
-          <div class="name-section-wrapper">
-            <h2 class="vet-name-index"><%= clinic.clinic_name %></h2>
-            <p><%= clinic.user.address %></p>
+      <div class="vet-card-custom align-items-start px-3 py-3">
+        <% if clinic&.photo&.attached? %>
+          <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large" %>
+        <% else %>
+          <div class="avatar-index-large placeholder">
+            <i class="fa-regular fa-hospital"></i>
+          </div>
+        <% end %>
+
+        <div class="name-section-wrapper w-100">
+          <div class="d-flex justify-content-between align-items-start w-100">
+            <%= link_to clinic_path(clinic), class: "card-index-link" do %>
+              <div class="vet-name-index"><%= clinic.clinic_name %></div>
+            <% end %>
+
+          </div>
+          <p class="clinic-address mb-2 mt-1"><%= clinic.user.address %></p>
+
+          <div class="card-value d-flex flex-wrap gap-2 mt-1">
+            <% clinic.species.each do |specie| %>
+              <span class="pets-languages-fields-tag px-2 py-1"><%= specie %></span>
+            <% end %>
+          </div>
+          <div class="card-value d-flex flex-wrap gap-2 mt-1">
+            <% clinic.field.each do |f| %>
+              <span class="pets-languages-fields-tag px-2 py-1"><%= f %></span>
+            <% end %>
+          </div>
+          <div class="card-value d-flex flex-wrap gap-2 mt-3">
+            <% clinic.languages.each do |lang| %>
+              <span class="pets-languages-fields-tag px-2 py-1"><%= lang %></span>
+            <% end %>
           </div>
         </div>
-      <% end %>
-    <% end %>
+      </div>
+  <% end %>
   </div>
 
  <%= link_to "Back to My Pets!", user_pets_path(current_user), class: "btn-log my-3", data: { turbo_frame: "_top" }%>
