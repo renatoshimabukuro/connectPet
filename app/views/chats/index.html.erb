@@ -27,7 +27,7 @@
       </div>
       <div class="col-5">
         <%= link_to user_chat_path(@user, chat) do %>
-          <h5> <%= chat.vet.clinic.clinic_name %> </h5>
+          <h2> <%= chat.vet.clinic.clinic_name %> </h2>
           <h6> For: <%= chat.pet&.name || "Unknown Pet" %> </h6>
         <% end %>
       </div>
