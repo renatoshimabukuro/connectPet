@@ -150,8 +150,8 @@
   font-size: 1rem;
   color: #666;
 
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
 
   margin-bottom: 25px;
   line-height: 1.6;
@@ -166,14 +166,17 @@
 
     &.fa-mars { color: #89a5df !important; }
     &.fa-venus { color: #df89b5 !important; }
-}
+  }
 
-.pet-name-title {
-  margin-bottom: 0 !important;
-  font-weight: 800;
-  font-size: 2.2rem;
-  color: #333;
-}
+  .pet-name-title {
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: #333;
+
+    h1 {
+      margin-bottom: 0px !important;
+    }
+  }
 }
 
 .fa-calendar-plus {
