@@ -200,7 +200,7 @@ lewagon = Clinic.create!(
   clinic_name:"Le Wagon Pet Clinic",
   contact: "contact@lewagonvet.com",
   species: ["cats", "dogs", "monkeys"],
-  languages: ["english", "日本語", "português"],
+  languages: ["English", "日本語", "Português"],
   user: vet01
   )
 
@@ -215,7 +215,7 @@ sos_pet = Clinic.create!(
   clinic_name:"SOS Pet",
   contact: "contact@sospet.com",
   species: ["cats", "dogs", "birds"],
-  languages: ["english", "日本語"],
+  languages: ["English", "日本語"],
   user: vet02
   )
 
@@ -356,7 +356,9 @@ chat1 = Chat.create!(
   owner: katie,
   vet: vet01,
   pet: raye,
-  archived: false
+  archived: false,
+  created_at: Date.parse("2026-02-24"),
+  updated_at: Date.parse("2026-02-24")
 )
 
 chat2 = Chat.create!(
@@ -370,7 +372,9 @@ chat3 = Chat.create!(
   owner: katie,
   vet: vet01,
   pet: percy,
-  archived: false
+  archived: false,
+  created_at: Date.parse("2026-01-30"),
+  updated_at: Date.parse("2026-01-30")
 )
 
 puts "Creating friendships"

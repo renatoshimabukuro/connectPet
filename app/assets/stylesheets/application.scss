@@ -25,6 +25,7 @@
 @import "components/avatar_carousel";
 @import "components/chat_show";
 @import "components/chat_new";
+@import "components/chat_index";
 @import "components/modal";
 
 
@@ -72,6 +73,14 @@ h1 {
   font-size: 1.5rem;
   margin-top: 0.5rem;
   margin-bottom: 0px;
+}
+
+h2 {
+  font-size: 1.3rem;
+}
+
+h3 {
+  font-size: 1.2rem;
 }
 
 p {
