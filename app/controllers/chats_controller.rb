@@ -98,7 +98,7 @@ class ChatsController < ApplicationController
   end
 
   def chat_params
-    params.require(:chat).permit(:vet_id, :pet_id, messages_attributes: [:contents])
+    params.require(:chat).permit(:vet_id, :pet_id, messages_attributes: [:contents, :file])
   end
 
   def message_params
