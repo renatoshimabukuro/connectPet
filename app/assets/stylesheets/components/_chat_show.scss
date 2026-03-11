@@ -4,15 +4,14 @@ body {
 }
 
 .msg-container-wrapper {
-  height: calc(100vh - 66px);
+  height: calc(100vh - 3rem);
   display: flex;
   flex-direction: column;
   background-color: #fdfaf5;
 }
 
 .msg-container {
-  margin-top: 50px;
-  padding: 1rem;
+  margin-top: 44px;
   flex: 1;
   overflow-y: auto;
   min-height: 0;
@@ -22,7 +21,7 @@ body {
 
 .chat-subnav {
   position: fixed;
-  top: 66px;
+  top: 3rem;
   left: 0;
   z-index: 9;
   width: 100%;
@@ -129,6 +128,7 @@ body {
 .col-2:has(.left-avatar) {
   padding-left: 0;
   padding-right: 0;
+  margin-right: 5px;
 }
 
 .col-2:has(.right-avatar) {
