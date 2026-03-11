@@ -103,10 +103,10 @@
   </div>
   <div class="pet-actions-footer">
     <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
-      <i class="fa-solid fa-book-open"></i> View <%= @pet.name %>’s Logs
+      <i class="fa-solid fa-book-open"></i> View history
     <% end %>
     <%= link_to new_user_pet_log_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
-      <i class="fa-solid fa-plus"></i> Add New Log
+      <i class="fa-solid fa-plus"></i> Today's info
     <% end %>
   </div>
 </div>
