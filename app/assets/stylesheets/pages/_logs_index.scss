@@ -31,6 +31,7 @@
     color: #666;
     text-decoration: none;
     margin-right: 5px;
+    font-size: 0.7rem;
   }
 
 .sort-asc {
@@ -40,6 +41,7 @@
   color: #A3B899;
   font-weight: bold;
   margin-right: 5px;
+  font-size: 0.7rem;
 }
 
 .sort-desc {
@@ -49,6 +51,7 @@
   color: #3D6B58;
   font-weight: bold;
   margin-right: 5px;
+  font-size: 0.7rem;
 }
 
 .card-logs{
@@ -112,7 +115,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 
     .date-range-selector, .language-selector {
       display: flex;
@@ -124,6 +127,7 @@
     .date-range-selector label, .language-selector label {
       margin-bottom: 4px;
       font-weight: 500;
+      font-size: 0.8rem;
     }
 
     input, select {
@@ -140,6 +144,7 @@
   padding: 8px 16px;
   cursor: pointer;
   transition: 0.2s;
+  font-size: 0.9rem;
 }
 
 .export-logs-submit:hover {
