@@ -22,7 +22,11 @@
   <div>
     <%= simple_form_for [@user, @pet, @log] do |f| %>
       <%= f.input :date, as: :date,
-        use_short_month: true %>
+        use_short_month: true,
+        label: "Date",
+        required: false,
+        input_html: { style: "width: 300px;" },
+        wrapper_html: { style: "max-width: 320px;" } %>
       <% (1..5).each do |i| %>
         <!-- Recieve the attribute names -->
         <% title = @pet.read_attribute("attr#{i}") %>
@@ -61,9 +65,6 @@
               <div class="memo-modal-content">
                 <div class="memo-modal-header">
                   <h5><%= title %> Notes</h5>
-                  <button type="button" class="memo-modal-close" data-action="click->rating#cancelMemo">
-                    <i class="fa-solid fa-xmark"></i>
-                  </button>
                 </div>
                 <textarea class="memo-textarea" id="memo_attr#{i}_temp" rows="4" placeholder="Add notes..."></textarea>
                 <div class="memo-modal-actions">
