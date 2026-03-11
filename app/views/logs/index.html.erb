@@ -48,11 +48,11 @@
     <div class="logs-all">
       <% if @logs.any? %>
         <% @logs.each do |log| %>
-          <div class="card-logs mb-2 mx-auto">
+          <div class="card-logs mb-2 mx-auto <%= "card-log-today" if log.date === Date.today%>">
             <%= link_to user_pet_log_path(@user, @pet, log) do %>
               <div class="row">
                 <div class="col-10">
-                  <%= log.date %>
+                  <%= log.date == Date.today ? "Today" : log.date %>
                 </div>
                 <div class="col-2">
                   <%= button_to user_pet_log_path(@user, @pet, log), method: :delete,
@@ -112,48 +112,46 @@
                     <% value = log.attr1_value %>
                     <td>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                      <% if log.attr1_memo && log.attr1_memo != "" %>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                      <% end %>
                     </td>
                   <% end %>
                   <% if log.attr2 %>
                     <% value = log.attr2_value %>
                     <td>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                      <% if log.attr2_memo && log.attr2_memo != "" %>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                      <% end %>
                     </td>
                   <% end %>
                   <% if log.attr3 %>
                     <% value = log.attr3_value %>
                     <td>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
+                      <% if log.attr3_memo && log.attr3_memo != "" %>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                      <% end %>
                     </td>
                   <% end %>
                   <% if log.attr4 %>
                     <% value = log.attr4_value %>
                     <td>
+                      <% if log.attr4_memo && log.attr4_memo != "" %>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                      <% end %>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
                     </td>
                   <% end %>
                   <% if log.attr5 %>
                     <% value = log.attr5_value %>
                     <td>
+                      <% if log.attr5_memo && log.attr5_memo != "" %>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                      <% end %>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
                     </td>
-                  <% end %>
-                </tr>
-                <tr>
-                  <% if log.attr1_memo && log.attr1_memo != "" %>
-                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
-                  <% end %>
-                  <% if log.attr2_memo && log.attr2_memo != "" %>
-                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
-                  <% end %>
-                  <% if log.attr3_memo && log.attr3_memo != "" %>
-                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
-                  <% end %>
-                  <% if log.attr4_memo && log.attr4_memo != "" %>
-                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
-                  <% end %>
-                  <% if log.attr5_memo && log.attr5_memo != "" %>
-                    <td><i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i></td>
                   <% end %>
                 </tr>
               </table>

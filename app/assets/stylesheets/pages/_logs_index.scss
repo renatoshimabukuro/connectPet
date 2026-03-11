@@ -13,12 +13,11 @@
 
 .logs-index-headbar {
   position: sticky;
-  top: 66px;
+  top: 2rem;
   background: white;
   z-index: 500;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
   width: 90%;
-  // margin: 0 auto;
 }
 
 .logs-index-headbar .my-3 table {
@@ -57,7 +56,6 @@
   border-radius: 22px;
   padding: 8px;
   position: relative;
-  color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -78,8 +76,13 @@
   }
 }
 
+.card-log-today{
+  border: 2px solid #3D6B58;
+}
+
 .logs-all{
   width: 100%;
+  padding-top: 5px;
   padding-bottom: 160px !important;
 }
 
