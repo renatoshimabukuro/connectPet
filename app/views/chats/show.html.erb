@@ -28,80 +28,74 @@
     <div class="chat-bottom"> </div>
   </div>
   <% if @friendship.accepted == true || @messages.count > 1 %>
-    <%= form_with model: [@user, @chat, @message] do |f| %>
-      <%= f.text_area :contents %>
-      <button type="submit" class="send-btn" aria-label="Send message">
-        <i class="fa-solid fa-arrow-up"></i>
-      </button>
-      <% if @friendship.accepted == true %>
-        <%= form_with model: [@user, @chat, @message],
+    <%= form_with model: [@user, @chat, @message],
       html: { multipart: true },
       data: {
         controller: "file-preview message-guard",
         action: "turbo:submit-start->message-guard#sending turbo:submit-end->message-guard#reset"
         } do |f| %>
-          <%= f.text_area :contents, data:{
+      <%= f.text_area :contents, data:{
         message_guard_target: "text",
         action: "input->message-guard#check"
         } %>
-          <%= f.file_field :file, id: "file-upload", class: "file-input-hidden",
+      <%= f.file_field :file, id: "file-upload", class: "file-input-hidden",
         data: {
           action: "change->file-preview#show",
           file_preview_target: "input"
           }%>
-          <div class="row justify-content-between">
-            <div class="col-10 align-items-center">
-              <label for="file-upload" class="paperclip-btn">
-                <i class="fa-solid fa-paperclip"></i>
-              </label>
-              <span class="file-name" data-file-preview-target="name"></span>
-              <button type="button" class="btn btn-sm p-0 d-none" data-action="click->file-preview#remove" data-file-preview-target="remove">
-                X
-              </button>
-            </div>
-            <div class="col-2">
-              <button type="submit" class="send-btn"
-            aria-label="Send message" data-message-guard-target="send">
-                <i class="fa-solid fa-arrow-up"></i>
-              </button>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <% if @friendship.accepted == false && @user.role == "owner" && @messages.count == 1 %>
-        <div class="info-card">
-          <div class="info-card__header">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <h4>Request Pending</h4>
-          </div>
-          <div class="info-card__body">
-            <p>You are waiting for <strong><%= @chat.vet.clinic.clinic_name %></strong> to accept your request.</p>
-            <p class="info-card__label">If you need immediate help:</p>
-            <%= link_to clinic_path(@chat.vet.clinic), class: "info-card__button" do %>
-              <i class="fa-solid fa-info-circle"></i>
-              <%= @chat.vet.clinic.clinic_name %> Contact Details
-            <% end %>
-            <div class="info-card__footer">
-              <p>
-                <strong>In an emergency:</strong> Please call the clinic directly or visit in person.
-              </p>
-            </div>
-          </div>
+      <div class="row justify-content-between">
+        <div class="col-10 align-items-center">
+          <label for="file-upload" class="paperclip-btn">
+            <i class="fa-solid fa-paperclip"></i>
+          </label>
+          <span class="file-name" data-file-preview-target="name"></span>
+          <button type="button" class="btn btn-sm p-0 d-none" data-action="click->file-preview#remove" data-file-preview-target="remove">
+            X
+          </button>
         </div>
-      <% else %>
-        <%# form for accepting friend request - only for vets %>
-        <% if @user.role != "owner" %>
-          <%= form_with model: [@user, @friendship] do |f| %>
-            <%= f.button name: "friendship[accepted]", value: "false", class: "btn-reject" do %>
-              Reject
-            <% end %>
-            <%= f.button name: "friendship[accepted]", value: "true", class: "btn-accept" do %>
-              Accept
-            <% end %>
-          <% end %>
+        <div class="col-2">
+          <button type="submit" class="send-btn"
+            aria-label="Send message" data-message-guard-target="send">
+            <i class="fa-solid fa-arrow-up"></i>
+          </button>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <% if @friendship.accepted == false && @user.role == "owner" && @messages.count == 1 %>
+    <div class="info-card">
+      <div class="info-card__header">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <h4>Request Pending</h4>
+      </div>
+      <div class="info-card__body">
+        <p>You are waiting for <strong><%= @chat.vet.clinic.clinic_name %></strong> to accept your request.</p>
+        <p class="info-card__label">If you need immediate help:</p>
+        <%= link_to clinic_path(@chat.vet.clinic), class: "info-card__button" do %>
+          <i class="fa-solid fa-info-circle"></i>
+          <%= @chat.vet.clinic.clinic_name %> Contact Details
+        <% end %>
+        <div class="info-card__footer">
+          <p>
+            <strong>In an emergency:</strong> Please call the clinic directly or visit in person.
+          </p>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <%# form for accepting friend request - only for vets %>
+    <% if @user.role != "owner" %>
+      <%= form_with model: [@user, @friendship] do |f| %>
+        <%= f.button name: "friendship[accepted]", value: "false", class: "btn-reject" do %>
+          Reject
+        <% end %>
+        <%= f.button name: "friendship[accepted]", value: "true", class: "btn-accept" do %>
+          Accept
         <% end %>
       <% end %>
-    </div>
-    <style>
-      /* RIGHT (from me) */
-    </style>
+    <% end %>
+  <% end %>
+</div>
+<style>
+  /* RIGHT (from me) */
+</style>
