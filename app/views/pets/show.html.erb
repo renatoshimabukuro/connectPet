@@ -28,7 +28,7 @@
   <div class="text-center">
     <h1 class="pet-name-title"><%= @pet.name %></h1>
     <p class="pet-subtitle">
-      <%= @pet.species %> • <%= @pet.breed %> • <%= @pet.gender %><% if @pet.gender == 'Male' %><i class="fa-solid fa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
+      <%= @pet.species %> • <%= @pet.breed %> • <%= @pet.gender %><% if @pet.gender == 'Male' %><i class="fa-solidfa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
       <br>
       <%= @pet.fixed ? (@pet.gender == 'Male' ? 'Neutered' : 'Spayed') : 'Intact' %>
     </p>
@@ -65,49 +65,49 @@
         </div>
         <span class="card-label">Microchip:</span>
         <%# <span class="card-value"><%= @pet.microchip.presence || "None" %></span>
-      <span class="card-value"><%= truncate(@pet.microchip.gsub(/\S/, '*'), length: 15, separator: ' ', omission: '')  %> </span>
-    </div>
-    <%# Weight %>
-    <div class="vital-card">
-      <%= link_to edit_user_pet_path(@user, @pet, field: 'weight'), data: { turbo_frame: "modal" } do %>
-        <i class="fa-solid fa-pencil edit-pencil"></i>
-      <% end %>
-      <div class="pet-show-icon-wrapper">
-        <i class="fa-solid fa-weight-hanging card-icon"></i>
+        <span class="card-value"><%= truncate(@pet.microchip.gsub(/\S/, '*'), length: 15, separator: ' ', omission: '') %> </span>
       </div>
-      <span class="card-label">Weight:</span>
-      <span class="card-value"><%= @pet.weight %> kg</span>
-    </div>
-    <%# Medications %>
-    <div class="vital-card">
-      <%= link_to edit_user_pet_path(@user, @pet, field: 'current_meds'), data: { turbo_frame: "modal" } do %>
-        <i class="fa-solid fa-pencil edit-pencil"></i>
-      <% end %>
-      <div class="pet-show-icon-wrapper">
-        <i class="fa-solid fa-capsules card-icon"></i>
+      <%# Weight %>
+      <div class="vital-card">
+        <%= link_to edit_user_pet_path(@user, @pet, field: 'weight'), data: { turbo_frame: "modal" } do %>
+          <i class="fa-solid fa-pencil edit-pencil"></i>
+        <% end %>
+        <div class="pet-show-icon-wrapper">
+          <i class="fa-solid fa-weight-hanging card-icon"></i>
+        </div>
+        <span class="card-label">Weight:</span>
+        <span class="card-value"><%= @pet.weight %> kg</span>
       </div>
-      <span class="card-label">Medications:</span>
-      <span class="card-value"><%= truncate(@pet.current_meds.presence, length: 15, separator: ' ') || "None" %></span>
-    </div>
-    <%# Notes %>
-    <div class="vital-card">
-      <%= link_to edit_user_pet_path(@user, @pet, field: 'notes'), data: { turbo_frame: "modal" } do %>
-        <i class="fa-solid fa-pencil edit-pencil"></i>
-      <% end %>
-      <div class="pet-show-icon-wrapper">
-        <i class="fa-solid fa-note-sticky card-icon"></i>
+      <%# Medications %>
+      <div class="vital-card">
+        <%= link_to edit_user_pet_path(@user, @pet, field: 'current_meds'), data: { turbo_frame: "modal" } do %>
+          <i class="fa-solid fa-pencil edit-pencil"></i>
+        <% end %>
+        <div class="pet-show-icon-wrapper">
+          <i class="fa-solid fa-capsules card-icon"></i>
+        </div>
+        <span class="card-label">Medications:</span>
+        <span class="card-value"><%= truncate(@pet.current_meds.presence, length: 15, separator: ' ') || "None" %></span>
       </div>
-      <span class="card-label">Notes:</span>
-      <span class="card-value"><%= truncate(@pet.notes.presence, length: 15, separator: ' ') || "No notes" %></span>
+      <%# Notes %>
+      <div class="vital-card">
+        <%= link_to edit_user_pet_path(@user, @pet, field: 'notes'), data: { turbo_frame: "modal" } do %>
+          <i class="fa-solid fa-pencil edit-pencil"></i>
+        <% end %>
+        <div class="pet-show-icon-wrapper">
+          <i class="fa-solid fa-note-sticky card-icon"></i>
+        </div>
+        <span class="card-label">Notes:</span>
+        <span class="card-value"><%= truncate(@pet.notes.presence, length: 15, separator: ' ') || "No notes" %></span>
+      </div>
+    </div>
+    <div class="pet-actions-footer">
+      <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
+        <i class="fa-solid fa-book-open"></i> View history
+      <% end %>
+      <%= link_to new_user_pet_log_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
+        <i class="fa-solid fa-plus"></i> Today's info
+      <% end %>
     </div>
   </div>
-  <div class="pet-actions-footer">
-    <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
-      <i class="fa-solid fa-book-open"></i> View history
-    <% end %>
-    <%= link_to new_user_pet_log_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>
-      <i class="fa-solid fa-plus"></i> Today's info
-    <% end %>
-  </div>
-</div>
 </div>
