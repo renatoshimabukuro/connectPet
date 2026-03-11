@@ -28,7 +28,7 @@
   <div class="text-center">
     <h1 class="pet-name-title"><%= @pet.name %></h1>
     <p class="pet-subtitle">
-      <%= @pet.species %> • <%= @pet.breed %> • <%= @pet.gender %><% if @pet.gender == 'Male' %><i class="fa-solidfa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
+      <%= @pet.species %> • <%= @pet.breed %> • <%= @pet.gender %><% if @pet.gender == 'Male' %><i class="fa-solid fa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
       <br>
       <%= @pet.fixed ? (@pet.gender == 'Male' ? 'Neutered' : 'Spayed') : 'Intact' %>
     </p>
