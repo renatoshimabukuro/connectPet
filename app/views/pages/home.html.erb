@@ -1,9 +1,12 @@
-<div class="auth-container">
+<div class="auth-container ">
   <%# Placeholder Page %>
+  <div class="mb-3 text-center">
   <h1>Welcome Home</h1>
-  <% if user_signed_in? %>
-    <%= link_to "My Pets", user_pets_path(current_user)%>
-  <% else %>
-    <%= link_to "Login to see your pets", new_user_session_path%>
-  <% end %>
+    <% if user_signed_in? %>
+      <%= link_to "My Pets", user_pets_path(current_user)%>
+    <% else %>
+      <%= link_to "Login to see your pets", new_user_session_path%>
+    <% end %>
+  </div>
+  <%= cl_image_tag "connectPet_banner_e2tee1", crop: :fill, class: "img-fluid w-100 mb-4" %>
 </div>
