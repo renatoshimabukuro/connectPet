@@ -13,12 +13,11 @@
 
 .logs-index-headbar {
   position: sticky;
-  top: 66px;
+  top: 2rem;
   background: white;
   z-index: 500;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
   width: 90%;
-  // margin: 0 auto;
 }
 
 .logs-index-headbar .my-3 table {
@@ -32,6 +31,7 @@
     color: #666;
     text-decoration: none;
     margin-right: 5px;
+    font-size: 0.7rem;
   }
 
 .sort-asc {
@@ -41,6 +41,7 @@
   color: #A3B899;
   font-weight: bold;
   margin-right: 5px;
+  font-size: 0.7rem;
 }
 
 .sort-desc {
@@ -50,6 +51,7 @@
   color: #3D6B58;
   font-weight: bold;
   margin-right: 5px;
+  font-size: 0.7rem;
 }
 
 .card-logs{
@@ -57,7 +59,6 @@
   border-radius: 22px;
   padding: 8px;
   position: relative;
-  color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -78,8 +79,13 @@
   }
 }
 
+.card-log-today{
+  border: 2px solid #3D6B58;
+}
+
 .logs-all{
   width: 100%;
+  padding-top: 5px;
   padding-bottom: 160px !important;
 }
 
@@ -109,7 +115,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 
     .date-range-selector, .language-selector {
       display: flex;
@@ -121,6 +127,7 @@
     .date-range-selector label, .language-selector label {
       margin-bottom: 4px;
       font-weight: 500;
+      font-size: 0.8rem;
     }
 
     input, select {
@@ -137,6 +144,7 @@
   padding: 8px 16px;
   cursor: pointer;
   transition: 0.2s;
+  font-size: 0.9rem;
 }
 
 .export-logs-submit:hover {
