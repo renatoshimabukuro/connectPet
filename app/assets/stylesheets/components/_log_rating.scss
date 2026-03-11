@@ -1,3 +1,14 @@
+.rating-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  h5 {
+    margin: 0;
+    flex: 1;
+  }
+}
+
 .rating-btn.rating-btn-active {
   background-color: #2c3e50 !important;
   color: white !important;
@@ -29,16 +40,30 @@
 }
 
 .modal-btn {
-  font-size: 16px;
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
-  padding: 0;
+  border: none;
+  padding: 4px 8px;
   margin: 0;
-  margin-left: 5px;
   cursor: pointer;
   color: inherit;
+  transition: opacity 0.2s ease;
+
+  i {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   &:hover {
     opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.5;
   }
 }
