@@ -27,14 +27,15 @@
     <%# Renders the messages partial %>
     <div class="chat-bottom"> </div>
   </div>
-  <% if @friendship.accepted == true %>
+  <% if @friendship.accepted == true || @messages.count > 1 %>
     <%= form_with model: [@user, @chat, @message] do |f| %>
       <%= f.text_area :contents %>
       <button type="submit" class="send-btn" aria-label="Send message">
         <i class="fa-solid fa-arrow-up"></i>
       </button>
     <% end %>
-  <% elsif @friendship.accepted == false && @user.role == "owner" %>
+  <% end %>
+  <% if @friendship.accepted == false && @user.role == "owner" && @messages.count == 1 %>
     <div class="info-card">
       <div class="info-card__header">
         <i class="fa-solid fa-clock-rotate-left"></i>
@@ -55,13 +56,15 @@
       </div>
     </div>
   <% else %>
-    <%# form for accepting friend request %>
-    <%= form_with model: [@user, @friendship] do |f| %>
-      <%= f.button name: "friendship[accepted]", value: "false", class: "btn-reject" do %>
-        Reject
-      <% end %>
-      <%= f.button name: "friendship[accepted]", value: "true", class: "btn-accept" do %>
-        Accept
+    <%# form for accepting friend request - only for vets %>
+    <% if @user.role != "owner" %>
+      <%= form_with model: [@user, @friendship] do |f| %>
+        <%= f.button name: "friendship[accepted]", value: "false", class: "btn-reject" do %>
+          Reject
+        <% end %>
+        <%= f.button name: "friendship[accepted]", value: "true", class: "btn-accept" do %>
+          Accept
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
