@@ -9,6 +9,12 @@
   }
 }
 
+.rating-btns {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
 .rating-btn.rating-btn-active {
   background-color: #2c3e50 !important;
   color: white !important;
