@@ -64,11 +64,9 @@
       <% end %>
     <% end %>
   </div>
-
   <%# Users connections %>
   <% if @title == "Your Pets!" && @my_clinics.any? %>
-    <h3 class="mt-4">Your Connected Veterinarians</h3>
-
+    <h1 class=" index-title mt-4">Your Connected Vets</h3>
     <% @my_clinics.each do |clinic| %>
       <div class="vet-card-custom">
         <% if clinic&.photo&.attached? %>
