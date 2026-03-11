@@ -10,7 +10,7 @@ class PetsController < ApplicationController
       @title = "Heart Gallery"
     else
       @pets = @user.pets
-      @title = "Your Pets!"
+      @title = "Your Pets"
     end
     # show connect veterinarians in index page
      @my_clinics = current_user.clinics.where(friendships: {accepted: true}).distinct

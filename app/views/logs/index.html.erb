@@ -66,16 +66,16 @@
                 <tr>
                   <%# First heading %>
                   <th>
-                    <i class="iconify" data-icon="mdi:silverware-fork-knife" style="font-size: 1em;"></i>
+                    <i class="iconify" data-icon="mdi:silverware-fork-knife" style="font-size: 1.5rem;"></i>
                   </th>
                   <%# Second heading %>
                   <% if @pet.name == "Raye" || @pet.name == "Percy" %>
                     <th>
-                      <i class="iconify" data-icon="streamline:smiley-nauseas-remix" style="font-size: 1em;"></i>
+                      <i class="iconify" data-icon="streamline:smiley-nauseas-remix" style="font-size: 1.5rem;"></i>
                     </th>
                   <% elsif @pet.name == "Cory" %>
                     <th>
-                      <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em;"></i>
+                      <i class="iconify" data-icon="mdi:toilet" style="font-size: 1.5rem;"></i>
                     </th>
                   <% elsif log.attr2 %>
                     <th>
@@ -85,7 +85,7 @@
                   <%# Third heading %>
                   <% if @pet.name == "Raye" || @pet.name == "Percy" %>
                     <th>
-                      <i class="iconify" data-icon="mdi:toilet" style="font-size: 1em;"></i>
+                      <i class="iconify" data-icon="mdi:toilet" style="font-size: 1.5rem;"></i>
                     </th>
                   <% elsif log.attr3 %>
                     <th>
@@ -113,7 +113,7 @@
                     <td>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
                       <% if log.attr1_memo && log.attr1_memo != "" %>
-                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1rem;"></i>
                       <% end %>
                     </td>
                   <% end %>
@@ -122,7 +122,7 @@
                     <td>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
                       <% if log.attr2_memo && log.attr2_memo != "" %>
-                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1rem;"></i>
                       <% end %>
                     </td>
                   <% end %>
@@ -131,7 +131,7 @@
                     <td>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
                       <% if log.attr3_memo && log.attr3_memo != "" %>
-                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1rem;"></i>
                       <% end %>
                     </td>
                   <% end %>
@@ -139,7 +139,7 @@
                     <% value = log.attr4_value %>
                     <td>
                       <% if log.attr4_memo && log.attr4_memo != "" %>
-                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1rem;"></i>
                       <% end %>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
                     </td>
@@ -148,7 +148,7 @@
                     <% value = log.attr5_value %>
                     <td>
                       <% if log.attr5_memo && log.attr5_memo != "" %>
-                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 20px;"></i>
+                        <i class="iconify" data-icon="material-symbols:export-notes-outline" style="font-size: 1rem;"></i>
                       <% end %>
                       <i class="fa-regular <%=reactions[value - 1]%>"></i>
                     </td>

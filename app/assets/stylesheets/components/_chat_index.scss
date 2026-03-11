@@ -1,0 +1,37 @@
+hr {
+  margin-top: 0px;
+}
+
+.avatar-small.overlap {
+  margin-left: -15px;
+}
+
+.col-4 {
+  padding: 0px;
+  padding-left: 0px;
+}
+
+.col-5 {
+  padding: 0px;
+}
+
+.col-3 {
+  padding: 0px;
+}
+
+.chat-avatars {
+  .overlap-left {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 5px;
+  }
+
+  .overlap-right {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
