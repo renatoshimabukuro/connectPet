@@ -30,9 +30,12 @@
 .vet-card-custom {
   width: 90%;
   max-width: 600px;
+
+  .row {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 }
-
-
 
 .card-index, .vet-card-custom {
   background-color: #a3b899;
