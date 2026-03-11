@@ -17,7 +17,7 @@
         <%# When a pet goes to Heart Gallery, the chat picture is not available %>
         <% if chat.pet&.photo&.attached? %>
           <%= image_tag chat.pet.photo,
-              class: "avatar-small overlap",
+              class: "avatar-small overlap me-1",
               style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
         <% else %>
           <div class="avatar-small overlap" style="width: 50px; height: 50px; border-radius: 50%; background: #eee; display: inline-flex; align-items: center; justify-content: center; border: 2px solid white;">
@@ -51,39 +51,44 @@
       </div>
       <div class="mb-2" style="padding-left: 40px">
         <% if chat.messages&.last&.user == @user %>
-          <p> You: <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
-        <% else %>
-          <p> <%= chat.vet.clinic.clinic_name %>:  <%= truncate(chat.messages&.last&.contents, length: 27, separator: ' ') %> </p>
-        <% end %>
+          <% if chat.messages.last.contents != ""%>
+            <p> You: <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>
+          <% else %>
+            <p> You: <i class="fa-solid fa-paperclip"></i>
+              <%= truncate(chat.messages.last.file.filename.to_s, length: 20, separator: ' ') %>
+            <% end %>
+          <% else %>
+            <p> <%= chat.vet.clinic.clinic_name %>:  <%= truncate(chat.messages&.last&.contents, length: 27, separator: ' ') %> </p>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <hr>
-  <% end %>
-  <div class="fixed-bottom d-flex justify-content-end p-3">
-    <%= link_to new_user_chat_path, method: :post do %>
-      <i class="fa-solid fa-plus" style="font-size: 40px"></i>
+      <hr>
     <% end %>
+    <div class="fixed-bottom d-flex justify-content-end p-3">
+      <%= link_to new_user_chat_path, method: :post do %>
+        <i class="fa-solid fa-plus" style="font-size: 40px"></i>
+      <% end %>
+    </div>
   </div>
-</div>
-<style>
-  hr {
-    margin-top: 0px;
-  }
+  <style>
+    hr {
+      margin-top: 0px;
+    }
 
-  .avatar-small.overlap {
-  margin-left: -15px;
-  }
+    .avatar-small.overlap {
+    margin-left: -15px;
+    }
 
-  .col-4 {
-    padding: 0px;
-    padding-left: 4%;
-  }
+    .col-4 {
+      padding: 0px;
+      padding-left: 4%;
+    }
 
-  .col-5 {
-    padding: 0px;
-  }
+    .col-5 {
+      padding: 0px;
+    }
 
-  .col-3 {
-    padding: 0px;
-  }
-</style>
+    .col-3 {
+      padding: 0px;
+    }
+  </style>
