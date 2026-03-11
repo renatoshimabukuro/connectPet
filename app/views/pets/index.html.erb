@@ -66,37 +66,51 @@
   </div>
   <%# Users connections %>
   <% if @title == "Your Pets" && @my_clinics.any? %>
-    <h1 class=" index-title mt-2">Your Connected Vets</h3>
+    <h1 class=" index-title mt-2">Your Connected Vets</h1>
     <% @my_clinics.each do |clinic| %>
-      <div class="vet-card-custom align-items-start px-3 py-3">
-        <% if clinic&.photo&.attached? %>
-          <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large" %>
-        <% else %>
-          <div class="avatar-index-large placeholder">
-            <i class="fa-regular fa-hospital"></i>
-          </div>
-        <% end %>
-        <div class="name-section-wrapper w-100">
-          <div class="d-flex justify-content-between align-items-start w-100">
-            <%= link_to clinic_path(clinic), class: "card-index-link" do %>
-              <div class="vet-name-index"><%= clinic.clinic_name %></div>
-            <% end %>
-            <%# Chat icon %>
-            <i class="fa-solid fa-comment chat-icon-top"
-               onclick="event.preventDefault(); window.location.href='<%= new_user_chat_path(current_user) %>';">
-            </i>
-          </div>
-          <p class="clinic-address mb-2 mt-1"><%= clinic.user.address %></p>
-          <div class="card-value d-flex flex-wrap gap-2 mt-1">
-            <% clinic.field.each do |f| %>
-              <span class="pets-languages-fields-tag px-2 py-1"><%= f %></span>
+      <div class="vet-card align-items-start px-3 py-3">
+        <div class="row">
+          <div class="col-4 d-flex justify-content-center align-items-center">
+            <% if clinic&.photo&.attached? %>
+              <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large" %>
+            <% else %>
+              <div class="avatar-index-large placeholder">
+                <i class="fa-regular fa-hospital"></i>
+              </div>
             <% end %>
           </div>
-          <div class="card-value d-flex flex-wrap gap-2 mt-3">
-            <% clinic.languages.each do |lang| %>
-              <span class="pets-languages-fields-tag px-2 py-1"><%= lang %></span>
-            <% end %>
+          <div class="col-8">
+            <div class="row">
+              <div class="col-9">
+                <div class="name-section-wrapper w-100">
+                  <div class="d-flex justify-content-between align-items-start w-100">
+                    <%= link_to clinic_path(clinic), class: "card-index-link" do %>
+                      <div class="vet-name-index"><%= clinic.clinic_name %></div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <%# Chat icon %>
+              <div class="col-3">
+                <i class="fa-solid fa-comment chat-icon-top"
+                  onclick="event.preventDefault(); window.location.href='<%= new_user_chat_path(current_user) %>';">
+                </i>
+              </div>
+            </div>
+            <div class="row">
+              <p class="clinic-address mb-2 mt-1"><%= clinic.user.address %></p>
+            </div>
           </div>
+        </div>
+        <div class="row justify-content-center align-items-center">
+          <% clinic.field.each do |f| %>
+            <span class="vet-tags px-2 py-1"><%= f %></span>
+          <% end %>
+        </div>
+        <div class="row justify-content-center align-items-center">
+          <% clinic.languages.each do |lang| %>
+            <span class="vet-tags px-2 py-1"><%= lang %></span>
+          <% end %>
         </div>
       </div>
     <% end %>
