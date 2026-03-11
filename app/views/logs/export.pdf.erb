@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
   <%= wicked_pdf_stylesheet_link_tag "pdf" %>
 </head>
 <body>
-  <div>
+  <div class="output">
     <h1><%= @pet.name %></h1>
     <br>
     <div>
@@ -20,7 +20,7 @@
         <% if @pet.microchip == "" %>
           <li>microchip status: none</li>
         <% else %>
-          <li>microchip status: <%= @pet.microchip %> </li>
+          <li>microchip status: <%= @pet.microchip %> パトリックと申します。</li>
         <% end %>
       </ul>
     </div>

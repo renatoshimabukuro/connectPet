@@ -4,17 +4,5 @@
 
 import { application } from "controllers/application"
 
-import CarouselController from "controllers/carousel_controller"
-application.register("carousel", CarouselController)
-
-import HelloController from "controllers/hello_controller"
-application.register("hello", HelloController)
-
-import ModalController from "controllers/modal_controller"
-application.register("modal", ModalController)
-
-import RatingController from "controllers/rating_controller"
-application.register("rating", RatingController)
-
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 eagerLoadControllersFrom("controllers", application)
