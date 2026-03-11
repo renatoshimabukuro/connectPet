@@ -2,36 +2,35 @@
   <h1 class="index-title mb-3" style="text-align: center";><%= @chat_title %></h1>
   <% @chats.each do |chat| %>
     <div class="row msg-card">
-      <div class="avatar-section col-4">
+      <div class="avatar-section col-5">
         <%# clinics avatar %>
-        <% if chat.vet&.clinic&.photo&.attached? %>
-          <%= image_tag chat.vet.photo,
-              class: "avatar-small overlap ms-1",
-              style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
-        <% else %>
-          <div class="avatar-small overlap" style="width: 50px; height: 50px; border-radius: 50%; background: #eee; display: inline-flex; align-items: center; justify-content: center; border: 2px solid white;">
-            <i class="fa-solid fa-paw" style="color: #bbb;"></i>
-          </div>
-        <% end %>
-        <%# If a pet doesn't have a picture, a paw icon will be used %>
-        <%# When a pet goes to Heart Gallery, the chat picture is not available %>
-        <% if chat.pet&.photo&.attached? %>
-          <%= image_tag chat.pet.photo,
-              class: "avatar-small overlap me-1",
-              style: "width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" %>
-        <% else %>
-          <div class="avatar-small overlap" style="width: 50px; height: 50px; border-radius: 50%; background: #eee; display: inline-flex; align-items: center; justify-content: center; border: 2px solid white;">
-            <i class="fa-solid fa-paw" style="color: #bbb;"></i>
-          </div>
-        <% end %>
+        <div class="chat-avatars d-flex justify-content-center align-items-center">
+          <% if chat.vet&.clinic&.photo&.attached? %>
+            <%= image_tag chat.vet.photo,
+                class: "avatar-small overlap overlap-left"%>
+          <% else %>
+            <div class="avatar-small overlap overlap-left">
+              <i class="fa-solid fa-paw" style="color: #bbb;"></i>
+            </div>
+          <% end %>
+          <%# If a pet doesn't have a picture, a paw icon will be used %>
+          <%# When a pet goes to Heart Gallery, the chat picture is not available %>
+          <% if chat.pet&.photo&.attached? %>
+            <%= image_tag chat.pet.photo,
+                class: "avatar-small overlap overlap-right"%>
+          <% else %>
+            <div class="avatar-small overlap overlap-right">
+              <i class="fa-solid fa-paw" style="color: #bbb;"></i>
+            </div>
+          <% end %>
+        </div>
       </div>
       <div class="col-5">
         <%= link_to user_chat_path(@user, chat) do %>
-          <h2> <%= chat.vet.clinic.clinic_name %> </h2>
-          <h6> For: <%= chat.pet&.name || "Unknown Pet" %> </h6>
+          <h3> <%= chat.vet.clinic.clinic_name %> </h3>
         <% end %>
       </div>
-      <div class="col-3">
+      <div class="col-2">
         <% if chat.messages.last&.updated_at&.today? %>
           <p> <%= chat.messages.last.updated_at.in_time_zone('Tokyo').strftime("%m:%M%p")%> </p>
         <% else %>
@@ -70,25 +69,3 @@
       <% end %>
     </div>
   </div>
-  <style>
-    hr {
-      margin-top: 0px;
-    }
-
-    .avatar-small.overlap {
-    margin-left: -15px;
-    }
-
-    .col-4 {
-      padding: 0px;
-      padding-left: 4%;
-    }
-
-    .col-5 {
-      padding: 0px;
-    }
-
-    .col-3 {
-      padding: 0px;
-    }
-  </style>
