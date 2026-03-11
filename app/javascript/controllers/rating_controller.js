@@ -36,12 +36,53 @@ export default class extends Controller {
 
   openModal(event) {
     event.preventDefault()
-    console.log("Opening modal")
-    this.modalTarget.classList.toggle("d-none")
+    const ratingDiv = event.currentTarget.closest(".rating")
+    const modal = ratingDiv.querySelector(".memo-modal")
+    const tempTextarea = modal.querySelector(".memo-textarea")
+    const hiddenInput = ratingDiv.querySelector("[id$='_memo_hidden']")
+
+    if (hiddenInput && tempTextarea) {
+      tempTextarea.value = hiddenInput.value || ""
+    }
+
+    modal.classList.toggle("d-none")
+  }
+
+  saveMemo(event) {
+    event.preventDefault()
+    const ratingDiv = event.currentTarget.closest(".rating")
+    const modal = ratingDiv.querySelector(".memo-modal")
+    const tempTextarea = modal.querySelector(".memo-textarea")
+    const hiddenInput = ratingDiv.querySelector("[id$='_memo_hidden']")
+
+    if (hiddenInput && tempTextarea) {
+      hiddenInput.value = tempTextarea.value
+    }
+
+    modal.classList.add("d-none")
+  }
+
+  cancelMemo(event) {
+    event.preventDefault()
+    const ratingDiv = event.currentTarget.closest(".rating")
+    const modal = ratingDiv.querySelector(".memo-modal")
+    const tempTextarea = modal.querySelector(".memo-textarea")
+
+    if (tempTextarea) {
+      tempTextarea.value = ""
+    }
+
+    modal.classList.add("d-none")
   }
 
   closeModal(event) {
     event.preventDefault()
     this.modalTarget.classList.add("d-none")
+  }
+
+  closeBackground(event) {
+    if (event.target === this.element) {
+      this.closeModal(event)
+    }
   }
 }
