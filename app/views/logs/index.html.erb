@@ -51,8 +51,8 @@
           <div class="card-logs mb-2 mx-auto <%= "card-log-today" if log.date === Date.today%>">
             <%= link_to user_pet_log_path(@user, @pet, log) do %>
               <div class="row">
-                <div class="col-10">
-                  <%= log.date == Date.today ? "Today" : log.date %>
+                <div class="col-9 ms-2">
+                  <p> <%= log.date == Date.today ? "Today" : log.date %> </p>
                 </div>
                 <div class="col-2">
                   <%= button_to user_pet_log_path(@user, @pet, log), method: :delete,
@@ -71,7 +71,7 @@
                   <%# Second heading %>
                   <% if @pet.name == "Raye" || @pet.name == "Percy" %>
                     <th>
-                      <i class="iconify" data-icon="streamline:smiley-nauseas-solid" style="font-size: 1em;"></i>
+                      <i class="iconify" data-icon="streamline:smiley-nauseas-remix" style="font-size: 1em;"></i>
                     </th>
                   <% elsif @pet.name == "Cory" %>
                     <th>
