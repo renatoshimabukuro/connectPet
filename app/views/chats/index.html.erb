@@ -2,7 +2,7 @@
   <h1 class="index-title mb-3" style="text-align: center";><%= @chat_title %></h1>
   <% @chats.each do |chat| %>
     <div class="row msg-card">
-      <div class="avatar-section col-5">
+      <div class="avatar-section col-4">
         <%# clinics avatar %>
         <div class="chat-avatars d-flex justify-content-center align-items-center">
           <% if chat.vet&.clinic&.photo&.attached? %>
@@ -30,7 +30,7 @@
           <h3> <%= chat.vet.clinic.clinic_name %> </h3>
         <% end %>
       </div>
-      <div class="col-2">
+      <div class="col-3">
         <% if chat.messages.last&.updated_at&.today? %>
           <p> <%= chat.messages.last.updated_at.in_time_zone('Tokyo').strftime("%m:%M%p")%> </p>
         <% else %>
@@ -48,7 +48,7 @@
           <% end %>
         <% end %>
       </div>
-      <div class="mb-2" style="padding-left: 40px">
+      <div class="mb-1" style="padding-left: 20px">
         <% if chat.messages&.last&.user == @user %>
           <% if chat.messages.last.contents != ""%>
             <p> You: <%= truncate(chat.messages.last.contents, length: 27, separator: ' ') %> </p>

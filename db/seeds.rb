@@ -356,7 +356,9 @@ chat1 = Chat.create!(
   owner: katie,
   vet: vet01,
   pet: raye,
-  archived: false
+  archived: false,
+  created_at: Date.parse("2026-02-24"),
+  updated_at: Date.parse("2026-02-24")
 )
 
 chat2 = Chat.create!(
@@ -370,7 +372,9 @@ chat3 = Chat.create!(
   owner: katie,
   vet: vet01,
   pet: percy,
-  archived: false
+  archived: false,
+  created_at: Date.parse("2026-01-30"),
+  updated_at: Date.parse("2026-01-30")
 )
 
 puts "Creating friendships"
