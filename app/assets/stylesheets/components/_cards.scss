@@ -30,9 +30,51 @@
 .vet-card-custom {
   width: 90%;
   max-width: 600px;
+
+  .row {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 }
 
+.vet-card {
+  background-color: #a3b899;
+  border-radius: 28px;
+  padding: 10px 15px;
+  width: 90%;
+  max-width: 900px;
+  margin-bottom: 10px;
 
+  .avatar-index-large, .avatar-vet {
+    width: 85px !important;
+    height: 85px !important;
+    min-width: 85px !important;
+    max-width: 85px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+    border: 3px solid rgba(255,255,255,0.4);
+  }
+
+  i.fa-solid {
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+    color: white !important;
+    font-size: 1.4rem;
+  }
+
+  .vet-tags {
+    color: white !important;
+    opacity: 0.9;
+    margin-top: 4px;
+    width: auto !important;
+    background-color: #3D6B58;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.6rem !important;
+    font-weight: 500;
+  }
+}
 
 .card-index, .vet-card-custom {
   background-color: #a3b899;
@@ -49,10 +91,10 @@
   gap: 15px !important;
 
   .avatar-index-large, .avatar-vet {
-    width: 85px !important;
-    height: 85px !important;
-    min-width: 85px !important;
-    max-width: 85px !important;
+    width: 75px !important;
+    height: 75px !important;
+    min-width: 75px !important;
+    max-width: 75px !important;
     border-radius: 50% !important;
     object-fit: cover !important;
     flex-shrink: 0 !important;
