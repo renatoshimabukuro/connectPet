@@ -29,6 +29,8 @@ class ChatsController < ApplicationController
 
   def new
     @chat = Chat.new
+    @chat.vet_id = params[:vet_id] if params[:vet_id].present?
+    @clinic_id = params[:clinic_id] if params[:clinic_id].present?
     @chat.messages.build
   end
 
