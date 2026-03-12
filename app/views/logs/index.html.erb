@@ -42,7 +42,7 @@
     <%# End of search function here, start of loader %>
     <div id="loading-overlay">
       <div class="loader"></div>
-      <p style="margin-top: 15px; font-weight: bold;">Gemini is analyzing your data...</p>
+      <p style="margin-top: 15px; font-weight: bold;">connectPet is analyzing your data...</p>
     </div>
     <%# End of loader, start of all logs/ filtered logs %>
     <div class="logs-all">
@@ -168,7 +168,7 @@
         <div class="row">
           <div class="date-range-selector col-6">
             <%= f.label :start_date, "Start Date:" %>
-            <%= f.date_field :start_date, id: "start-date", required: true %>
+            <%= f.date_field :start_date, id: "start-date", required: true, value: (Date.today - 7.days) %>
           </div>
           <div class="date-range-selector col-6">
             <%= f.label :end_date, "End Date:" %>

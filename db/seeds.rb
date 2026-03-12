@@ -246,13 +246,13 @@ puts "Creating logs for Raye"
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "5", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "1", attr2_memo: "Threw up in the cat room!",
+  attr2: "Nausea", attr2_value: "1", attr2_memo: "Threw up in the cat room",
   attr3: "Toilet", attr3_value: "5", attr3_memo: "Poop in the morning",
   date: Date.parse("2026-02-26"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "4", attr1_memo: "45g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "2", attr2_memo: "",
   attr3: "Toilet", attr3_value: "5", attr3_memo: "",
   date: Date.parse("2026-02-27"))
 
@@ -264,19 +264,19 @@ Log.create!(pet: raye,
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "5", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "3", attr2_memo: "",
   attr3: "Toilet", attr3_value: "4", attr3_memo: "Small poop",
   date: Date.parse("2026-03-01"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "3", attr1_memo: "35g",
-  attr2: "Nausea", attr2_value: "2", attr2_memo: "Hacking, no vomit",
+  attr2: "Nausea", attr2_value: "4", attr2_memo: "Hacking, no vomit",
   attr3: "Toilet", attr3_value: "4", attr3_memo: "",
   date: Date.parse("2026-03-02"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "4", attr1_memo: "40g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "3", attr2_memo: "",
   attr3: "Toilet", attr3_value: "5", attr3_memo: "",
   date: Date.parse("2026-03-03"))
 
@@ -288,13 +288,13 @@ Log.create!(pet: raye,
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "5", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "2", attr2_memo: "",
   attr3: "Toilet", attr3_value: "5", attr3_memo: "",
   date: Date.parse("2026-03-05"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "5", attr1_memo: "55g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "3", attr2_memo: "",
   attr3: "Toilet", attr3_value: "5", attr3_memo: "Healthy poop",
   date: Date.parse("2026-03-06"))
 
