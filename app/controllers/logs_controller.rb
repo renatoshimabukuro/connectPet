@@ -110,6 +110,7 @@ class LogsController < ApplicationController
         render pdf: "#{@pet.name}_health_report",
           template: "logs/export",
           disposition: 'attachment',
+          encoding: "UTF-8",
           enable_local_file_access: true
       end
     end
