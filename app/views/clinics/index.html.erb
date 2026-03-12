@@ -1,63 +1,65 @@
 <div class="clinic-index-container">
-  <h1 class="index-title">Clinics</h1>
-
-
-    <%= form_tag clinics_path, method: :get, class: "search-form d-flex my-3" do %>
+  <h1 class="index-title">Clinics near you</h1>
+  <div class="clinic-search-bar">
+    <%= form_tag clinics_path, method: :get, class: "search-form d-flex" do %>
       <%= label_tag :query, "Search veterinarians", class: "visually-hidden" %>
       <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          placeholder: "Address, specialty, species..."
-      %>
+            params[:query],
+            class: "form-control",
+            placeholder: "Address, specialty, species..."
+        %>
       <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
     <% end %>
-
-    <% if @clinics.empty? && params[:query].present? %>
-      <div class="alert alert-warning mt-3">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        No results found for "<strong><%= params[:query] %></strong>".
-      </div>
-    <% end %>
-
+  </div>
+  <% if @clinics.empty? && params[:query].present? %>
+    <div class="alert alert-warning mt-3">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      No results found for "<strong><%= params[:query] %></strong>".
+    </div>
+  <% end %>
   <div class="vet-cards-wrapper w-100 d-flex flex-column align-items-center">
     <% @clinics.each do |clinic| %>
-      <div class="vet-card-custom align-items-start px-3 py-3">
-        <% if clinic&.photo&.attached? %>
-          <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large" %>
-        <% else %>
-          <div class="avatar-index-large placeholder">
-            <i class="fa-regular fa-hospital"></i>
-          </div>
-        <% end %>
-
-        <div class="name-section-wrapper w-100">
-          <div class="d-flex justify-content-between align-items-start w-100">
-            <%= link_to clinic_path(clinic), class: "card-index-link" do %>
-              <div class="vet-name-index"><%= clinic.clinic_name %></div>
-            <% end %>
-
-          </div>
-          <p class="clinic-address mb-2 mt-1"><%= clinic.user.address %></p>
-
-          <div class="card-value d-flex flex-wrap gap-2 mt-1">
-            <% clinic.species.each do |specie| %>
-              <span class="pets-languages-fields-tag px-2 py-1"><%= specie %></span>
+      <%= link_to clinic_path(clinic), class: "vet-card px-3 py-3" do%>
+        <div class="row">
+          <div class="col-4">
+            <% if clinic&.photo&.attached? %>
+              <%= cl_image_tag clinic.photo.key, crop: :fill, class: "avatar-index-large", style: "height: 75px !important; width: 75px !important;" %>
+            <% else %>
+              <div class="avatar-index-large placeholder">
+                <i class="fa-regular fa-hospital"></i>
+              </div>
             <% end %>
           </div>
-          <div class="card-value d-flex flex-wrap gap-2 mt-1">
-            <% clinic.field.each do |f| %>
-              <span class="pets-languages-fields-tag px-2 py-1"><%= f %></span>
-            <% end %>
-          </div>
-          <div class="card-value d-flex flex-wrap gap-2 mt-3">
-            <% clinic.languages.each do |lang| %>
-              <span class="pets-languages-fields-tag px-2 py-1"><%= lang %></span>
-            <% end %>
+          <div class="col-8">
+            <div class="row">
+              <div class="vet-name-index">
+                <div class="" style="color: white !important;">
+                  <div class="vet-name-index"><%= clinic.clinic_name %></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <p class="clinic-address mb-2 mt-1"><%= clinic.user.address %></p>
+            </div>
+            <div class="row">
+              <% clinic.species.each do |specie| %>
+                <span class="vet-tags px-2 py-1"><%= specie %></span>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-  <% end %>
+        <div class="row justify-content-center align-items-center">
+          <% clinic.field.each do |f| %>
+            <span class="vet-tags px-2 py-1"><%= f %></span>
+          <% end %>
+        </div>
+        <div class="row justify-content-center align-items-center">
+          <% clinic.languages.each do |lang| %>
+            <span class="vet-tags px-2 py-1"><%= lang %></span>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
-
- <%= link_to "Back to My Pets!", user_pets_path(current_user), class: "btn-log my-3", data: { turbo_frame: "_top" }%>
+  <%= link_to "Back to My Pets!", user_pets_path(current_user), class: "btn-log my-3", data: { turbo_frame: "_top" }%>
 </div>
