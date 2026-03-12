@@ -18,6 +18,10 @@
   flex-shrink: 0;
 }
 
+.selection select {
+  --bs-form-select-bg-icon: none !important;
+}
+
 .chat-messages {
   flex: 1;
   overflow-y: auto;
