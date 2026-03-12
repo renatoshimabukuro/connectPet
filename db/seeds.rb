@@ -50,7 +50,7 @@ vet01 = User.create!(
   name: "Patrick Gregory House",
   email: "patrick@vet.com",
   password: "password123",
-  address: "123-4567 Tokyo, Meguro Higashi-Meguro 1-2-3",
+  address: "123-4567 Ehime, Matsuyama 1-2-3",
   role: "vet"
 )
 
@@ -58,7 +58,7 @@ vet02 = User.create!(
   name: "James Hetfield",
   email: "james@vet.com",
   password: "password123",
-  address: "456-7890 Tokyo Machida, Kanamori 1-2-3",
+  address: "456-7890 Ehime, Tobe 1-2-3",
   role: "vet"
 )
 
@@ -66,7 +66,7 @@ vet03 = User.create!(
   name: "John Sykes",
   email: "john@vet.com",
   password: "password123",
-  address: "234-5678 Kanagawa Yokohama, Kanai 1-2-3",
+  address: "234-5678 Ehime, Toon, Kanai 1-2-3",
   role: "vet"
 )
 
@@ -200,7 +200,7 @@ lewagon = Clinic.create!(
   clinic_name:"Le Wagon Pet Clinic",
   contact: "contact@lewagonvet.com",
   species: ["cats", "dogs", "monkeys"],
-  languages: ["English", "日本語", "Português"],
+  languages: ["日本語", "Português"],
   user: vet01
   )
 
@@ -226,7 +226,7 @@ sos_pet.save!
 puts "SOS Pet Clinic created"
 
 pet_protect = Clinic.create!(
-  field: ["Oncology"],
+  field: ["oncology"],
   clinic_name:"PetProtect",
   contact: "contact@petprotect.com",
   species: ["cats", "dogs", "squirrels"],
@@ -354,7 +354,7 @@ puts "Creating chats..."
 
 chat1 = Chat.create!(
   owner: katie,
-  vet: vet01,
+  vet: vet02,
   pet: raye,
   archived: false,
   created_at: Date.parse("2026-02-24"),
@@ -370,7 +370,7 @@ chat2 = Chat.create!(
 
 chat3 = Chat.create!(
   owner: katie,
-  vet: vet01,
+  vet: vet02,
   pet: percy,
   archived: false,
   created_at: Date.parse("2026-01-30"),
@@ -381,7 +381,7 @@ puts "Creating friendships"
 
 Friendship.create!(
   owner: katie,
-  vet: vet01,
+  vet: vet02,
   pet: raye,
   accepted: true
 )
@@ -395,7 +395,7 @@ Friendship.create!(
 
 Friendship.create!(
   owner: katie,
-  vet: vet01,
+  vet: vet02,
   pet: percy,
   accepted: true
 )
@@ -403,12 +403,12 @@ Friendship.create!(
 puts "Creating messages..."
 
 # Chat 1 conversation
-Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been heaving.")
-Message.create!(chat: chat1, user: vet01, contents: "How long has this been happening?")
-Message.create!(chat: chat1, user: katie, contents: "About two days.")
-Message.create!(chat: chat1, user: vet01, contents: "Any changes in appetite?")
-Message.create!(chat: chat1, user: katie, contents: "No, appetite is normal.")
-Message.create!(chat: chat1, user: vet01, contents: "Please bring Raye in tomorrow at 10am.")
+Message.create!(chat: chat1, user: katie, contents: "Hello Doctor, Raye has been heaving.", created_at: Time.zone.parse('2026-02-24 10:00:00'), updated_at: Time.zone.parse('2026-02-24 10:00:00'))
+Message.create!(chat: chat1, user: vet02, contents: "How long has this been happening?", created_at: Time.zone.parse('2026-02-24 10:05:00'), updated_at: Time.zone.parse('2026-02-24 10:05:00'))
+Message.create!(chat: chat1, user: katie, contents: "About two days.", created_at: Time.zone.parse('2026-02-24 10:15:00'), updated_at: Time.zone.parse('2026-02-24 10:15:00'))
+Message.create!(chat: chat1, user: vet02, contents: "Any changes in appetite?", created_at: Time.zone.parse('2026-02-24 10:20:00'), updated_at: Time.zone.parse('2026-02-24 10:20:00'))
+Message.create!(chat: chat1, user: katie, contents: "No, appetite is normal.", created_at: Time.zone.parse('2026-02-24 10:30:00'), updated_at: Time.zone.parse('2026-02-24 10:30:00'))
+Message.create!(chat: chat1, user: vet02, contents: "Please bring Raye in tomorrow at 10am.", created_at: Time.zone.parse('2026-02-24 10:45:00'), updated_at: Time.zone.parse('2026-02-24 10:45:00'))
 
 # Chat 2 conversation
 Message.create!(chat: chat2, user: renato, contents: "Hi Doctor, Maple is not eating much.")
@@ -418,10 +418,10 @@ Message.create!(chat: chat2, user: vet01, contents: "Let's schedule a checkup th
 Message.create!(chat: chat2, user: renato, contents: "Thank you, that would be great.")
 
 # Chat 4 conversation
-Message.create!(chat: chat3, user: katie, contents: "Percy hasn't been going toilet very often")
-Message.create!(chat: chat3, user: vet01, contents: "That's concerning. Any other symptoms?")
-Message.create!(chat: chat3, user: katie, contents: "His appetite is a little low.")
-Message.create!(chat: chat3, user: vet01, contents: "Alright, let's make an appointment for tomorrow. How is 3pm?")
-Message.create!(chat: chat3, user: katie, contents: "Perfect. Thank you.")
+Message.create!(chat: chat3, user: katie, contents: "Percy hasn't been going toilet very often", created_at: Time.zone.parse('2026-01-30 10:00:00'), updated_at: Time.zone.parse('2026-01-30 10:00:00'))
+Message.create!(chat: chat3, user: vet02, contents: "That's concerning. Any other symptoms?", created_at: Time.zone.parse('2026-01-30 10:10:00'), updated_at: Time.zone.parse('2026-01-30 10:10:00'))
+Message.create!(chat: chat3, user: katie, contents: "His appetite is a little low.", created_at: Time.zone.parse('2026-01-30 11:00:00'), updated_at: Time.zone.parse('2026-01-30 11:00:00'))
+Message.create!(chat: chat3, user: vet02, contents: "Alright, let's make an appointment for tomorrow. How is 3pm?" , created_at: Time.zone.parse('2026-01-30 11:10:00'), updated_at: Time.zone.parse('2026-01-30 11:10:00'))
+Message.create!(chat: chat3, user: katie, contents: "Perfect. Thank you.", created_at: Time.zone.parse('2026-01-30 11:15:00'), updated_at: Time.zone.parse('2026-01-30 11:15:00'))
 
 puts "Finished! Created #{User.count} users, #{Pet.count} pets, #{Clinic.count} clinics, #{Log.count} logs, and #{Chat.count} chats with #{Message.count} messages."
