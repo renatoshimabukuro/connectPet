@@ -9,7 +9,7 @@
       <div class="avatar-secondary"></div>
       <div class="avatar-main">
         <% if @pet.photo.attached? %>
-          <%= image_tag @pet.photo, class: "avatar-large", style: "width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" %>
+          <%= image_tag @pet.photo, class: "avatar-large", style: "width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" %>
         <% else %>
           <i class="fa-solid fa-paw" style="font-size: 80px; color: rgba(255,255,255,0.5);"></i>
         <% end %>
@@ -17,9 +17,9 @@
       <div class="avatar-secondary"></div>
     </div>
     <h1> Hello, <%= @pet.name %></h1>
-    <h2> How are you feeling today? </h2>
+    <h2 class="mt-2"> How are you feeling today? </h2>
   </section>
-  <div>
+  <div class="form">
     <%= simple_form_for [@user, @pet, @log] do |f| %>
       <%= f.input :date, as: :date,
         use_short_month: true,
@@ -76,7 +76,7 @@
           </div>
         </div>
       <% end %>
-      <div>
+      <div class="d-flex justify-content-center align-items-center gap-3 ">
         <%= link_to "Cancel", user_pet_logs_path(@user, @pet), class: 'btn btn-danger text-white' %>
         <%= f.button :submit, "Save", class: "btn btn-primary" %>
       </div>
