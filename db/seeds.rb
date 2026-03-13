@@ -276,19 +276,19 @@ Log.create!(pet: raye,
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "4", attr1_memo: "40g",
-  attr2: "Nausea", attr2_value: "3", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
   attr3: "Toilet", attr3_value: "5", attr3_memo: "",
   date: Date.parse("2026-03-03"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "4", attr1_memo: "40g",
-  attr2: "Nausea", attr2_value: "1", attr2_memo: "Threw up after breakfast",
+  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
   attr3: "Toilet", attr3_value: "3", attr3_memo: "No poop",
   date: Date.parse("2026-03-04"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "5", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "2", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "2", attr2_memo: "Threw up after breakfast",
   attr3: "Toilet", attr3_value: "5", attr3_memo: "",
   date: Date.parse("2026-03-05"))
 
@@ -306,7 +306,7 @@ Log.create!(pet: raye,
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "4", attr1_memo: "45g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "2", attr2_memo: "",
   attr3: "Toilet", attr3_value: "4", attr3_memo: "",
   date: Date.parse("2026-03-08"))
 
@@ -318,13 +318,13 @@ Log.create!(pet: raye,
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "5", attr1_memo: "60g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "3", attr2_memo: "Hacking, no vomit",
   attr3: "Toilet", attr3_value: "5", attr3_memo: "",
   date: Date.parse("2026-03-11"))
 
 Log.create!(pet: raye,
   attr1: "Food", attr1_value: "5", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
+  attr2: "Nausea", attr2_value: "2", attr2_memo: "",
   attr3: "Toilet", attr3_value: "5", attr3_memo: "",
   date: Date.parse("2026-03-12"))
 
