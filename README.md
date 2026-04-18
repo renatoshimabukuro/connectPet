@@ -49,12 +49,12 @@ connectPet is a Ruby on Rails application that facilitates connections between p
 
 ## Team Members
 
-- Katie Wood
-- Renato Shimabukuro
-- James Newsom
-- Troy Zangara
-- Damien Joubert
-- Chantal Gervais
+- [Katie Wood](https://www.linkedin.com/in/katie-wood6319/)
+- [Renato Shimabukuro](https://www.linkedin.com/in/renato-shimabukuro-6b74a8112/)
+- [James Newsom](https://www.linkedin.com/in/james-newsom-a11351351/)
+- [Troy Zangara](https://www.linkedin.com/in/troyzangara/)
+- [Damien Joubert](https://www.linkedin.com/in/damienus-joubert/)
+- [Chantal Gervais](https://www.linkedin.com/in/chantal-gervais-143041160/)
 
 ## Contributing
 
