@@ -12,9 +12,11 @@ connectPet is a Ruby on Rails application that facilitates connections between p
 
 ## Screenshots
 
-<img src="screenshots/1773922691283.jpeg" width="300" alt="connectPet dashboard">
-<img src="screenshots/1773922762099.jpeg" width="300" alt="Individual pet page - track issues by date">
-<img src="screenshots/1773923120856.jpeg" width="300" alt="Pet health history">
+<div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+  <img src="screenshots/1773922691283.jpeg" width="280" alt="connectPet dashboard">
+  <img src="screenshots/1773922762099.jpeg" width="280" alt="Individual pet page - track issues by date">
+  <img src="screenshots/1773923120856.jpeg" width="280" alt="Pet health history">
+</div>
 
 ---
 
