@@ -4,6 +4,10 @@ connectPet is a Ruby on Rails application that facilitates connections between p
 
 **[View Live App](https://www.connectpet.online/)**
 
+**[Watch Presentation](https://youtu.be/-bB-0kQLatw?t=493)** — Le Wagon Tokyo Demo Day at Google for Startups Campus, March 13 2026
+
+> **Note:** This application is designed with a **mobile-first approach**. Desktop layout optimization is in progress.
+
 ---
 
 ## Features
