@@ -10,6 +10,16 @@ connectPet is a Ruby on Rails application that facilitates connections between p
 
 ---
 
+## Screenshots
+
+![connectPet dashboard](screenshots/1773922691283.jpeg)
+
+![Individual pet page - track issues by date](screenshots/1773922762099.jpeg)
+
+![Pet health history](screenshots/1773923120856.jpeg)
+
+---
+
 ## Features
 
 - **User Authentication** — Secure registration and login with Devise
