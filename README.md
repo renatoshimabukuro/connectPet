@@ -2,9 +2,9 @@
 
 connectPet is a Ruby on Rails application that facilitates connections between pet owners and veterinarians. The app allows users to track pet health data, connect with veterinarians, and generate AI-powered insights with multilingual support.
 
-**[View Live App](https://www.connectpet.online/)**
+**<a href="https://www.connectpet.online/" target="_blank">View Live App</a>**
 
-**[Watch Presentation](https://youtu.be/-bB-0kQLatw?t=493)** — Le Wagon Tokyo Demo Day at Google for Startups Campus, March 13 2026
+**<a href="https://youtu.be/-bB-0kQLatw?t=493" target="_blank">Watch Presentation</a>** — Le Wagon Tokyo Demo Day at Google for Startups Campus, March 13, 2026
 
 **Note:** This application is designed with a **mobile-first approach**. Desktop layout optimization is in progress.
 
