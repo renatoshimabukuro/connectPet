@@ -6,17 +6,15 @@ connectPet is a Ruby on Rails application that facilitates connections between p
 
 **[Watch Presentation](https://youtu.be/-bB-0kQLatw?t=493)** — Le Wagon Tokyo Demo Day at Google for Startups Campus, March 13 2026
 
-> **Note:** This application is designed with a **mobile-first approach**. Desktop layout optimization is in progress.
+**Note:** This application is designed with a **mobile-first approach**. Desktop layout optimization is in progress.
 
 ---
 
 ## Screenshots
 
-![connectPet dashboard](screenshots/1773922691283.jpeg)
-
-![Individual pet page - track issues by date](screenshots/1773922762099.jpeg)
-
-![Pet health history](screenshots/1773923120856.jpeg)
+<img src="screenshots/1773922691283.jpeg" width="300" alt="connectPet dashboard">
+<img src="screenshots/1773922762099.jpeg" width="300" alt="Individual pet page - track issues by date">
+<img src="screenshots/1773923120856.jpeg" width="300" alt="Pet health history">
 
 ---
 
