@@ -47,6 +47,25 @@ connectPet is a Ruby on Rails application that facilitates connections between p
 | **Caching** | Redis |
 | **Deployment** | Heroku |
 
+## Team Members
+
+- Katie Wood
+- Renato Shimabukuro
+- James Newsom
+- Troy Zangara
+- Damien Joubert
+- Chantal Gervais
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Open an issue to discuss your proposed changes
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
 ## Getting Started
 
 ### Prerequisites
@@ -80,6 +99,8 @@ connectPet is a Ruby on Rails application that facilitates connections between p
    CLOUDINARY_URL=your_cloudinary_url_key
    ```
 
+   ⚠️ **Important:** Make sure `.env` is in your `.gitignore` to avoid committing sensitive credentials.
+
    Set up the database:
    ```bash
    rails db:create
@@ -93,25 +114,6 @@ connectPet is a Ruby on Rails application that facilitates connections between p
    ```
 
 Visit `http://localhost:3000` in your browser.
-
-## Team Members
-
-- Katie Wood
-- Renato Shimabukuro
-- James Newsom
-- Troy Zangara
-- Damien Joubert
-- Chantal Gervais
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Open an issue to discuss your proposed changes
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## License
 
