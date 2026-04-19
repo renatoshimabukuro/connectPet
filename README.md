@@ -117,4 +117,4 @@ Visit `http://localhost:3000` in your browser.
 
 ## License
 
-This project is open source and provided as-is, not for monetization. Feel free to use, modify, and learn from the codebase.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. Feel free to use, modify, and learn from the codebase.
