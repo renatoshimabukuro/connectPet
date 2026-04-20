@@ -43,12 +43,13 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_20_041313) do
   end
 
   create_table "attribute_definitions", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "icon"
-    t.integer "value_type"
+    t.integer "value_type", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "name"], name: "index_attribute_definitions_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_attribute_definitions_on_user_id"
   end
 
@@ -96,6 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_20_041313) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["log_id", "pet_attribute_id"], name: "index_log_values_uniqueness", unique: true
     t.index ["log_id"], name: "index_log_values_on_log_id"
     t.index ["pet_attribute_id"], name: "index_log_values_on_pet_attribute_id"
   end
@@ -140,6 +142,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_20_041313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["attribute_definition_id"], name: "index_pet_attributes_on_attribute_definition_id"
+    t.index ["pet_id", "attribute_definition_id"], name: "index_pet_attributes_uniqueness", unique: true
     t.index ["pet_id"], name: "index_pet_attributes_on_pet_id"
   end
 

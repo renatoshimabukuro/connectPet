@@ -7,5 +7,8 @@ class CreatePetAttributes < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+
+    add_index :pet_attributes, [:pet_id, :attribute_definition_id],
+      unique: true, name: "index_pet_attributes_uniqueness"
   end
 end
