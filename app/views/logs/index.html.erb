@@ -1,7 +1,7 @@
 <div class="logs-index-container">
   <div class="logs-index-wrapper">
     <div class="logs-index-headbar">
-      <div class="row">
+      <div class="row pt-2">
         <div class="col-10">
           <h1 class="ms-4"><%= @pet.name %>'s History</h1>
         </div>
@@ -51,17 +51,15 @@
         <% @logs.each do |log| %>
           <div class="card-logs mb-2 mx-auto <%= "card-log-today" if log.date === Date.today%>">
             <%= link_to user_pet_log_path(@user, @pet, log) do %>
-              <div class="row">
-                <div class="col-9 ms-2">
-                  <p> <%= log.date == Date.today ? "Today" : log.date %> </p>
-                </div>
-                <div class="col-2">
-                  <%= button_to user_pet_log_path(@user, @pet, log), method: :delete,
-                    class: "btn btn-link p-0 log-trash",
-                    data: { turbo_confirm: "Delete this log?" } do %>
-                    <i class="fa-solid fa-trash"></i>
-                  <% end %>
-                </div>
+              <div class="d-flex justify-content-between align-items-center ps-3">
+                <p class="mb-0">
+                  <%= log.date == Date.today ? "Today" : log.date %>
+                </p>
+                <%= link_to user_pet_log_path(@user, @pet, log),
+                  data: { turbo_method: :delete, turbo_confirm: "Delete this log?" },
+                  class: "log-trash" do %>
+                  <i class="iconify" data-icon="akar-icons:trash-can" style="font-size: 1.5rem"></i>
+                <% end %>
               </div>
               <table class="text-center">
                 <tr>
