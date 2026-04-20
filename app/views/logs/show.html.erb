@@ -1,21 +1,43 @@
-<div style="display: flex; justify-content: center; width: 100%;">
-  <div class="card card-index p-2" style="margin-top:20%; width:90%; border: 1px; border-radius: 8px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <h2><%= @pet.name %>'s <%= @log.date %> Health Log</h2>
-
-    <% if @log.attr1 %>
-      <h3><%= @log.attr1 %>: <%= @log.attr1_value %></h3>
-    <% end %>
-    <% if @log.attr2 %>
-      <h3><%= @log.attr2 %>: <%= @log.attr2_value %></h3>
-    <% end %>
-    <% if @log.attr3 %>
-      <h3><%= @log.attr3 %>: <%= @log.attr3_value %></h3>
-    <% end %>
-    <% if @log.attr4 %>
-      <h3><%= @log.attr4 %>: <%= @log.attr4_value %></h3>
-    <% end %>
-    <% if @log.attr5 %>
-      <h3><%= @log.attr5 %>: <%= @log.attr5_value %></h3>
-  <% end %>
+<div class="container">
+  <div class="log-show-container">
+    <h1><%= @pet.name %> - <%= @log.date == Date.today ? "Today" : @log.date %></h1>
+    <div class="log-show-card">
+      <% @pet.pet_attributes.each do |pa| %>
+        <% lv = @log_values_by_attr[pa.id] %>
+        <div class="log-row mb-3 p-3 border rounded">
+          <!-- Attribute Name -->
+          <h5 class="mb-2">
+            <i class="iconify" data-icon="<%= pa.attribute_definition.icon %>" style="font-size: 1.5rem"></i>
+            <%= pa.attribute_definition.name %>
+          </h5>
+          <!-- Value -->
+          <div class="mb-2">
+            <% if lv.present? %>
+              <% if pa.attribute_definition.range? && lv.range_value.present? %>
+                <% reactions = ["fa-face-tired", "fa-face-frown", "fa-face-meh", "fa-face-smile", "fa-face-grin-wide"] %>
+                <i class="fa-regular <%= reactions[lv.range_value - 1] %>"></i>
+              <% elsif pa.attribute_definition.boolean? && !lv.boolean_value.nil? %>
+                <% if lv.boolean_value %>
+                  <span class="fw-bold">Yes</span>
+                <% else %>
+                  <span class="fw-bold">No</span>
+                <% end %>
+              <% end %>
+            <% else %>
+              <span class="text-muted">No data</span>
+            <% end %>
+          </div>
+          <!-- Memo -->
+          <% if lv&.memo.present? %>
+            <div class="memo-box p-2 bg-light rounded">
+              <strong>Memo:</strong>
+              <p class="mb-0"><%= lv.memo %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <!-- Back button -->
+    <%= link_to "← Back to logs", user_pet_logs_path(@user, @pet), class: "btn btn-secondary mt-3" %>
   </div>
 </div>

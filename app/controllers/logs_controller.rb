@@ -155,6 +155,7 @@ class LogsController < ApplicationController
 
   def set_log
     @log = @pet.logs.find(params[:id])
+    @log_values_by_attr = @log.log_values.index_by(&:pet_attribute_id)
   end
 
   def log_params
