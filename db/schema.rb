@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_20_041313) do
     t.string "name", null: false
     t.string "icon"
     t.integer "value_type", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "name"], name: "index_attribute_definitions_on_user_id_and_name", unique: true

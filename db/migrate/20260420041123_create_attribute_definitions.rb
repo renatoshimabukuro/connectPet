@@ -4,7 +4,7 @@ class CreateAttributeDefinitions < ActiveRecord::Migration[7.1]
       t.string :name, null: false
       t.string :icon
       t.integer :value_type, null: false
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: true, foreign_key: true
 
       t.timestamps
     end

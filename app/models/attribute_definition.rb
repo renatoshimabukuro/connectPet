@@ -1,7 +1,7 @@
 class AttributeDefinition < ApplicationRecord
   belongs_to :user, optional: true
 
-  has_many :pet_attributes, dependent: destroy
+  has_many :pet_attributes, dependent: :destroy
 
   enum value_type: {
     boolean: 0,

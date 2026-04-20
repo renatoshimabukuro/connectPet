@@ -10,14 +10,21 @@ puts "Cleaning database..."
 # RESTART IDENTITY: Clears all data, resets IDs to 1.
 # CASCADE: Ignores link errors between tables.
 # connection.execute("TRUNCATE messages, logs, friendships, chats, pets, clinics, users RESTART IDENTITY CASCADE")
+LogValue.destroy_all
+PetAttribute.destroy_all
+AttributeDefinition.destroy_all
+
 Message.destroy_all
 Log.destroy_all
 Friendship.destroy_all
 # remove all the unscopes chats
 Chat.unscoped.destroy_all
+
+
 #delete the register in db and the file in cloudinary
 Clinic.all.each { |clinic| clinic.photo.purge }
 Pet.all.each { |pet| pet.photo.purge }
+
 Clinic.destroy_all
 Pet.destroy_all
 User.destroy_all
@@ -81,9 +88,6 @@ raye = Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
-  attr1: "Food",
-  attr2: "Nausea",
-  attr3: "Toilet",
   microchip: "111 111 111 111 111"
 )
 
@@ -103,9 +107,6 @@ percy = Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
-  attr1: "Food",
-  attr2: "Nausea",
-  attr3: "Toilet",
   microchip: "111 111 111 111 112"
 )
 
@@ -125,8 +126,6 @@ cory = Pet.create!(
   vacc_status: "Vaccinated",
   fixed: true,
   gender: "Male",
-  attr1: "Food",
-  attr2: "Toilet",
   microchip: "111 111 111 111 113"
 )
 
@@ -145,10 +144,7 @@ maple = Pet.create!(
   weight: 4.5,
   vacc_status: "Vaccinated",
   fixed: false,
-  gender: "Female",
-  attr1: "Food",
-  attr2: "Nausea",
-  attr3: "Toilet"
+  gender: "Female"
 )
 
 # cloudinary
@@ -193,7 +189,164 @@ jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "i
 jade.save!
 puts "Jade created"
 
-puts "Making clinics"
+puts "Creating attribute definitions..."
+
+appetite = AttributeDefinition.find_or_create_by!(
+  name: "Appetite",
+  value_type: :range,
+  user: nil
+)
+
+nausea = AttributeDefinition.find_or_create_by!(
+  name: "Nausea",
+  value_type: :boolean,
+  user: nil
+)
+
+toilet = AttributeDefinition.find_or_create_by!(
+  name: "Toilet",
+  value_type: :boolean,
+  user: nil
+)
+
+puts "Attribute definitions created"
+
+puts "Assigning attributes to pets..."
+
+def assign_attrs(pet, attrs)
+  attrs.each do |attr|
+    PetAttribute.find_or_create_by!(
+      pet: pet,
+      attribute_definition: attr
+    )
+  end
+end
+
+assign_attrs(raye, [appetite, nausea, toilet])
+assign_attrs(percy, [appetite, nausea, toilet])
+assign_attrs(cory, [appetite, toilet])
+assign_attrs(maple, [appetite, nausea, toilet])
+
+puts "Attributes assigned to Raye, Percy, Cory, and Maple"
+
+puts "Adding log helper"
+
+def create_logs_with_values(pet:, date:, values:)
+  log = Log.create!(pet: pet, date: date)
+
+  values.each do |attr_name, data|
+    attr_def = AttributeDefinition.find_by!(name: attr_name)
+
+    pet_attr = PetAttribute.find_by!(pet: pet, attribute_definition: attr_def)
+
+    LogValue.create!(
+      log: log,
+      pet_attribute: pet_attr,
+      range_value: attr_def.range? ? data[:value] : nil,
+      boolean_value: attr_def.boolean? ? data[:value] : nil,
+      memo: data[:memo]
+    )
+  end
+
+  log
+end
+
+start_date = 1.week.ago.to_date
+
+puts "Creating logs for pets..."
+
+create_logs_with_values(
+  pet: raye,
+  date: start_date,
+  values: {
+    "Appetite" => { value: 5, memo: "50g" },
+    "Nausea" => { value: true, memo: "Threw up in the cat room" },
+    "Toilet" => { value: true, memo: "Poop in the morning" }
+  }
+)
+
+create_logs_with_values(
+  pet: raye,
+  date: start_date + 1,
+  values: {
+    "Appetite" => { value: 4, memo: "45g" },
+    "Nausea" => { value: false, memo: "" },
+    "Toilet" => { value: true, memo: "" }
+  }
+)
+
+create_logs_with_values(
+  pet: raye,
+  date: start_date + 2,
+  values: {
+    "Appetite" => { value: 3, memo: "40g" },
+    "Nausea" => { value: true, memo: "Threw up in the cat room" },
+    "Toilet" => { value: true, memo: "No poop" }
+  }
+)
+
+create_logs_with_values(
+  pet: raye,
+  date: start_date + 3,
+  values: {
+    "Appetite" => { value: 5, memo: "50g" },
+    "Nausea" => { value: false, memo: "" },
+    "Toilet" => { value: true, memo: "Small poop" }
+  }
+)
+
+create_logs_with_values(
+  pet: raye,
+  date: start_date + 4,
+  values: {
+    "Appetite" => { value: 3, memo: "35g" },
+    "Nausea" => { value: true, memo: "Hacking, no vomit" },
+    "Toilet" => { value: true, memo: "" }
+  }
+)
+
+create_logs_with_values(
+  pet: raye,
+  date: start_date + 5,
+  values: {
+    "Appetite" => { value: 3, memo: "40g" },
+    "Nausea" => { value: false, memo: "" },
+    "Toilet" => { value: true, memo: "" }
+  }
+)
+
+create_logs_with_values(
+  pet: raye,
+  date: start_date + 6,
+  values: {
+    "Appetite" => { value: 4, memo: "45g" },
+    "Nausea" => { value: false, memo: "" },
+    "Toilet" => { value: true, memo: "No poop" }
+  }
+)
+
+create_logs_with_values(
+  pet: cory,
+  date: start_date + 6,
+  values: {
+    "Appetite" => { value: 5, memo: "50g" },
+    "Toilet" => { value: true, memo: "" }
+  }
+)
+
+create_logs_with_values(
+  pet: maple,
+  date: start_date + 6,
+  values: {
+    "Appetite" => { value: 4, memo: "45g"},
+    "Nausea" => { value: false, memo: "" },
+    "Toilet" => { value: true, memo: "Poop in the morning!" }
+  }
+)
+
+puts "Created #{Log.count} logs"
+
+puts "Making clinics..."
 
 lewagon = Clinic.create!(
   field: ["general practice", "cardiology", "gastroenterology"],
@@ -241,112 +394,6 @@ pet_protect.save!
 puts "Pet Protect Clinic created"
 
 puts "Finished making clinics"
-
-puts "Creating logs for Raye"
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "5", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "1", attr2_memo: "Threw up in the cat room",
-  attr3: "Toilet", attr3_value: "5", attr3_memo: "Poop in the morning",
-  date: Date.parse("2026-02-26"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "4", attr1_memo: "45g",
-  attr2: "Nausea", attr2_value: "2", attr2_memo: "",
-  attr3: "Toilet", attr3_value: "5", attr3_memo: "",
-  date: Date.parse("2026-02-27"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "3", attr1_memo: "45g",
-  attr2: "Nausea", attr2_value: "1", attr2_memo: "Threw up in the cat room",
-  attr3: "Toilet", attr3_value: "2", attr3_memo: "No poop",
-  date: Date.parse("2026-02-28"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "5", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "3", attr2_memo: "",
-  attr3: "Toilet", attr3_value: "4", attr3_memo: "Small poop",
-  date: Date.parse("2026-03-01"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "3", attr1_memo: "35g",
-  attr2: "Nausea", attr2_value: "4", attr2_memo: "Hacking, no vomit",
-  attr3: "Toilet", attr3_value: "4", attr3_memo: "",
-  date: Date.parse("2026-03-02"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "4", attr1_memo: "40g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
-  attr3: "Toilet", attr3_value: "5", attr3_memo: "",
-  date: Date.parse("2026-03-03"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "4", attr1_memo: "40g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
-  attr3: "Toilet", attr3_value: "3", attr3_memo: "No poop",
-  date: Date.parse("2026-03-04"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "5", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "2", attr2_memo: "Threw up after breakfast",
-  attr3: "Toilet", attr3_value: "5", attr3_memo: "",
-  date: Date.parse("2026-03-05"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "5", attr1_memo: "55g",
-  attr2: "Nausea", attr2_value: "3", attr2_memo: "",
-  attr3: "Toilet", attr3_value: "5", attr3_memo: "Healthy poop",
-  date: Date.parse("2026-03-06"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "4", attr1_memo: "35g",
-  attr2: "Nausea", attr2_value: "3", attr2_memo: "Hacking, no vomit",
-  attr3: "Toilet", attr3_value: "3", attr3_memo: "Small poop",
-  date: Date.parse("2026-03-07"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "4", attr1_memo: "45g",
-  attr2: "Nausea", attr2_value: "2", attr2_memo: "",
-  attr3: "Toilet", attr3_value: "4", attr3_memo: "",
-  date: Date.parse("2026-03-08"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "4", attr1_memo: "40g",
-  attr2: "Nausea", attr2_value: "2", attr2_memo: "Small vomit in the morning",
-  attr3: "Toilet", attr3_value: "3", attr3_memo: "",
-  date: Date.parse("2026-03-09"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "5", attr1_memo: "60g",
-  attr2: "Nausea", attr2_value: "3", attr2_memo: "Hacking, no vomit",
-  attr3: "Toilet", attr3_value: "5", attr3_memo: "",
-  date: Date.parse("2026-03-11"))
-
-Log.create!(pet: raye,
-  attr1: "Food", attr1_value: "5", attr1_memo: "50g",
-  attr2: "Nausea", attr2_value: "2", attr2_memo: "",
-  attr3: "Toilet", attr3_value: "5", attr3_memo: "",
-  date: Date.parse("2026-03-12"))
-
-Log.create!(pet: maple,
-  attr1: "Food", attr1_value: "4", attr1_memo: "45g",
-  attr2: "Nausea", attr2_value: "5", attr2_memo: "",
-  attr3: "Toilet", attr3_value: "", attr3_memo: "Poop in the morning!",
-  date: Date.parse("2026-02-23"))
-
-Log.create!(pet: cory,
-  attr1: "Food", attr1_value: "5", attr1_memo: "",
-  attr2: "Toilet", attr2_value: "5", attr2_memo: "",
-  date: Date.parse("2026-02-23")
-  )
-
-Log.create!(pet: cory,
-  attr1: "Food", attr1_value: "5", attr1_memo: "",
-  attr2: "Toilet", attr2_value: "4", attr2_memo: "",
-  date: Date.parse("2026-02-24")
-  )
-
-puts "Created #{Log.count} logs"
 
 puts "Finished! Created #{User.count} users and #{Pet.count} pets."
 
