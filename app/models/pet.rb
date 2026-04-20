@@ -2,6 +2,9 @@ class Pet < ApplicationRecord
   belongs_to :user
   has_many :chats, dependent: :destroy
   has_many :logs, dependent: :destroy
+  has_many :pet_attributes, dependent: :destroy
+  has_many :attribute_definitions, through: :pet_attributes
+
   has_one_attached :photo
 
   validates :name, presence: true
