@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_08_141405) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_20_041313) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,16 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_08_141405) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "attribute_definitions", force: :cascade do |t|
+    t.string "name"
+    t.string "icon"
+    t.integer "value_type"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_attribute_definitions_on_user_id"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -78,6 +88,18 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_08_141405) do
     t.index ["vet_id"], name: "index_friendships_on_vet_id"
   end
 
+  create_table "log_values", force: :cascade do |t|
+    t.bigint "log_id", null: false
+    t.bigint "pet_attribute_id", null: false
+    t.boolean "boolean_value"
+    t.integer "range_value"
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["log_id"], name: "index_log_values_on_log_id"
+    t.index ["pet_attribute_id"], name: "index_log_values_on_pet_attribute_id"
+  end
+
   create_table "logs", force: :cascade do |t|
     t.bigint "pet_id", null: false
     t.date "date"
@@ -109,6 +131,16 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_08_141405) do
     t.bigint "user_id", null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "pet_attributes", force: :cascade do |t|
+    t.bigint "pet_id", null: false
+    t.bigint "attribute_definition_id", null: false
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attribute_definition_id"], name: "index_pet_attributes_on_attribute_definition_id"
+    t.index ["pet_id"], name: "index_pet_attributes_on_pet_id"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -153,6 +185,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_08_141405) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "attribute_definitions", "users"
   add_foreign_key "chats", "pets"
   add_foreign_key "chats", "users", column: "owner_id"
   add_foreign_key "chats", "users", column: "vet_id"
@@ -160,8 +193,12 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_08_141405) do
   add_foreign_key "friendships", "pets"
   add_foreign_key "friendships", "users", column: "owner_id"
   add_foreign_key "friendships", "users", column: "vet_id"
+  add_foreign_key "log_values", "logs"
+  add_foreign_key "log_values", "pet_attributes"
   add_foreign_key "logs", "pets"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
+  add_foreign_key "pet_attributes", "attribute_definitions"
+  add_foreign_key "pet_attributes", "pets"
   add_foreign_key "pets", "users"
 end
