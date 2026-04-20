@@ -194,19 +194,22 @@ puts "Creating attribute definitions..."
 appetite = AttributeDefinition.find_or_create_by!(
   name: "Appetite",
   value_type: :range,
-  user: nil
+  user: nil,
+  icon: "mdi:silverware-fork-knife"
 )
 
 nausea = AttributeDefinition.find_or_create_by!(
   name: "Nausea",
   value_type: :boolean,
-  user: nil
+  user: nil,
+  icon: "streamline:smiley-nauseas-remix"
 )
 
 toilet = AttributeDefinition.find_or_create_by!(
   name: "Toilet",
   value_type: :boolean,
-  user: nil
+  user: nil,
+  icon: "mdi:toilet"
 )
 
 puts "Attribute definitions created"
