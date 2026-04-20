@@ -34,6 +34,10 @@ class LogsController < ApplicationController
 
   def new
     @log = @pet.logs.build
+
+    @pet.pet_attributes.each do |pet_attr|
+      @log.log_values.build(pet_attribute: pet_attr)
+    end
   end
 
   def create
@@ -126,6 +130,19 @@ class LogsController < ApplicationController
     redirect_to user_pet_logs_path(@user, @pet), status: :see_other
   end
 
+
+  # Edit method - not in use yet && need update
+  # def edit
+  #   @log = Log.find(params[:id])
+  #   existing_attrs = @log.log_values.map(&:pet_attribute_id)
+  #
+  #   @pet.pet_attributes.each do |pet_attr|
+  #     unless existing_attrs.include?(pet_attr.id)
+  #       @log.log_values.build(pet_attribute: pet_attr)
+  #     end
+  #   end
+  # end
+
   private
 
   def set_user
@@ -142,10 +159,13 @@ class LogsController < ApplicationController
 
   def log_params
     params.require(:log).permit(:date,
-      :attr1, :attr1_value, :attr1_memo,
-      :attr2, :attr2_value, :attr2_memo,
-      :attr3, :attr3_value, :attr3_memo,
-      :attr4, :attr4_value, :attr4_memo,
-      :attr5, :attr5_value, :attr5_memo)
+      log_values_attributes: [
+        :id,
+        :pet_attribute_id,
+        :range_value,
+        :boolean_value,
+        :memo
+      ]
+    )
   end
 end

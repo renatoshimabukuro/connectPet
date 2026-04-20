@@ -34,6 +34,7 @@ class PetsController < ApplicationController
     @pet.user = @user
 
     if @pet.save
+      assign_attributes_to_pet
       redirect_to [@user, @pet], notice: 'Pet was successfully registered!'
     else
       render :new, status: :unprocessable_entity
@@ -96,5 +97,16 @@ class PetsController < ApplicationController
       :weight, :current_meds, :vacc_status, :notes,
       :insurance, :fixed, :gender, :photo
     )
+  end
+
+  def assign_attributes_to_pet
+    attribute_ids = params[:pet][:attribute_definition_ids] || []
+
+    attribute_ids.each do |attr_id|
+      PetAttribute.create!(
+        pet: @pet,
+        attribute_definition_id: attr_id
+      )
+    end
   end
 end
