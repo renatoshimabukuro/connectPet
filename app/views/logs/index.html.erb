@@ -14,9 +14,23 @@
       <%# End of title here, start of search function %>
       <div class="my-3">
         <table>
-          <th><%= multi_sortable("date", "Date") %></th>
+          <th class="pe-4">
+            <span class="d-none d-md-inline">
+              <%= multi_sortable("date", "Date") %>
+            </span>
+            <span class="d-inline d-md-none">
+              <i class="iconify" data-icon="material-symbols:calendar-month" style="font-size: 1.5rem"></i>
+            </span>
+          </th>
           <% @pet.pet_attributes.includes(:attribute_definition).each do |pa| %>
-            <th> <%= pa.attribute_definition.name %> </th>
+            <th class="pe-4">
+              <span class="d-none d-md-inline">
+                <%= pa.attribute_definition.name %>
+              </span>
+              <span class="d-inline d-md-none">
+                <i class="iconify" data-icon="<%= pa.attribute_definition.icon %>" style="font-size: 1.5rem"></i>
+              </span>
+            </th>
           <% end %>
           <th>
             <%= link_to user_pet_logs_path(@user, @pet) do %>
@@ -58,64 +72,65 @@
                       </span>
                       <span class="d-inline d-md-none">
                         <i class="iconify" data-icon="<%= pa.attribute_definition.icon %>" style="font-size: 1.5rem"></i>
-                      </th>
-                    <% end %>
-                  </tr>
-                  <% reactions = ["fa-face-tired", "fa-face-frown", "fa-face-meh", "fa-face-smile", "fa-face-grin-wide"] %>
-                  <tr>
-                    <% @pet.pet_attributes.each do |pa| %>
-                      <% lv = log.log_values.find { |v| v.pet_attribute_id == pa.id } %>
-                      <td>
-                        <% if lv.present? %>
-                          <% if pa.attribute_definition.range? && lv.range_value.present? %>
-                            <i class="fa-regular <%= reactions[lv.range_value - 1] %>"></i>
-                          <% elsif pa.attribute_definition.boolean? && !lv.boolean_value.nil? %>
-                            <% if lv.boolean_value %>
-                              <i class="iconify" data-icon="material-symbols:check" style="font-size: 1.5rem" >
-                              <% else %>
-                                <i class="iconify" data-icon="bitcoin-icons:cross-filled" style="font-size: 1.5rem">
-                                <% end %>
-                              <% end %>
-                              <% if lv.memo.present? %>
-                                <i class="iconify"
-                              data-icon="material-symbols:export-notes-outline"
-                              style="font-size: 1rem;"></i>
+                      </span>
+                    </th>
+                  <% end %>
+                </tr>
+                <% reactions = ["fa-face-tired", "fa-face-frown", "fa-face-meh", "fa-face-smile", "fa-face-grin-wide"] %>
+                <tr>
+                  <% @pet.pet_attributes.each do |pa| %>
+                    <% lv = log.log_values.find { |v| v.pet_attribute_id == pa.id } %>
+                    <td>
+                      <% if lv.present? %>
+                        <% if pa.attribute_definition.range? && lv.range_value.present? %>
+                          <i class="fa-regular <%= reactions[lv.range_value - 1] %>"></i>
+                        <% elsif pa.attribute_definition.boolean? && !lv.boolean_value.nil? %>
+                          <% if lv.boolean_value %>
+                            <i class="iconify" data-icon="material-symbols:check" style="font-size: 1.5rem" >
+                            <% else %>
+                              <i class="iconify" data-icon="bitcoin-icons:cross-filled" style="font-size: 1.5rem">
                               <% end %>
                             <% end %>
-                          </td>
-                        <% end %>
-                      </tr>
-                    </table>
-                  <% end %>
-                </div>
-              <% end %>
-            <% else %>
-              <p>No logs yet.</p>
-            <% end %>
-          </div>
-          <%# Exporting logs %>
-          <div class="export-logs-card">
-            <%= form_with url: export_user_pet_logs_path(format: :pdf), method: :post, html: { onsubmit: "const overlay = document.getElementById('loading-overlay'); overlay.style.visibility = 'visible'; setTimeout(() => {overlay.style.visibility = 'hidden'; }, 30000);" } do |f| %>
-              <div class="row">
-                <div class="date-range-selector col-6">
-                  <%= f.label :start_date, "Start Date:" %>
-                  <%= f.date_field :start_date, id: "start-date", required: true, value: (Date.today - 7.days) %>
-                </div>
-                <div class="date-range-selector col-6">
-                  <%= f.label :end_date, "End Date:" %>
-                  <%= f.date_field :end_date, id: "end-date", required: true, max: Date.today, value: Date.today %>
-                </div>
-              </div>
-              <div class="row align-items-end">
-                <div class="language-selector col-6">
-                  <%= f.label :language, "Language:" %>
-                  <%= f.select :language, ["English", "日本語", "Português"]%>
-                </div>
-                <div class="col-6">
-                  <%= f.submit "Export Data", class: "export-logs-submit"%>
-                </div>
+                            <% if lv.memo.present? %>
+                              <i class="iconify"
+                              data-icon="material-symbols:export-notes-outline"
+                              style="font-size: 1rem;"></i>
+                            <% end %>
+                          <% end %>
+                        </td>
+                      <% end %>
+                    </tr>
+                  </table>
+                <% end %>
               </div>
             <% end %>
-          </div>
+          <% else %>
+            <p>No logs yet.</p>
+          <% end %>
+        </div>
+        <%# Exporting logs %>
+        <div class="export-logs-card">
+          <%= form_with url: export_user_pet_logs_path(format: :pdf), method: :post, html: { onsubmit: "const overlay = document.getElementById('loading-overlay'); overlay.style.visibility = 'visible'; setTimeout(() => {overlay.style.visibility = 'hidden'; }, 30000);" } do |f| %>
+            <div class="row">
+              <div class="date-range-selector col-6">
+                <%= f.label :start_date, "Start Date:" %>
+                <%= f.date_field :start_date, id: "start-date", required: true, value: (Date.today - 7.days) %>
+              </div>
+              <div class="date-range-selector col-6">
+                <%= f.label :end_date, "End Date:" %>
+                <%= f.date_field :end_date, id: "end-date", required: true, max: Date.today, value: Date.today %>
+              </div>
+            </div>
+            <div class="row align-items-end">
+              <div class="language-selector col-6">
+                <%= f.label :language, "Language:" %>
+                <%= f.select :language, ["English", "日本語", "Português"]%>
+              </div>
+              <div class="col-6">
+                <%= f.submit "Export Data", class: "export-logs-submit"%>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
+    </div>
