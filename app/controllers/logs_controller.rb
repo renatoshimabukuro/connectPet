@@ -7,27 +7,27 @@ class LogsController < ApplicationController
 
   def index
     logs = @pet.logs
-
-    allowed_columns = %w[date attr1_value attr2_value attr3_value attr4_value attr5_value]
+    logs = logs.left_joins(:log_values)
 
     orders = []
 
-    if params[:sort].blank?
-      params[:sort] = ["date"]
-      params[:dir] = ["desc"]
-    end
+    (params[:sort] || ["date"]).each_with_index do |column, i|
+      direction = params[:dir]&.[](i) == "asc" ? "asc" : "desc"
 
-    if params[:sort].present?
-      params[:sort].each_with_index do |c, i|
-        if allowed_columns.include?(c)
-          direction = params[:dir][i] == "asc" ? "asc" : "desc"
+      if column == "date"
+        orders << "logs.date #{direction}"
 
-          orders << "#{c} #{direction} NULLS LAST"
-        end
+      elsif column.start_with?("attribute_")
+        attr_id = column.split("_").last
+
+        orders << sanitize_sql_for_order([
+          "MAX(CASE WHEN log_values.pet_attribute_id = ? THEN log_values.range_value END) #{direction} NULLS LAST",
+          attr_id
+        ])
       end
     end
 
-    logs = logs.order(orders.join(",")) if orders.any?
+    logs = logs.group("logs.id").order(Arel.sql(orders.join(", ")))
 
     @logs = logs
   end
