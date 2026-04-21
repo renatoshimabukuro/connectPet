@@ -7,33 +7,37 @@ class LogsController < ApplicationController
 
   def index
     logs = @pet.logs
-
-    allowed_columns = %w[date attr1_value attr2_value attr3_value attr4_value attr5_value]
+    logs = logs.left_joins(:log_values)
 
     orders = []
 
-    if params[:sort].blank?
-      params[:sort] = ["date"]
-      params[:dir] = ["desc"]
-    end
+    (params[:sort] || ["date"]).each_with_index do |column, i|
+      direction = params[:dir]&.[](i) == "asc" ? "asc" : "desc"
 
-    if params[:sort].present?
-      params[:sort].each_with_index do |c, i|
-        if allowed_columns.include?(c)
-          direction = params[:dir][i] == "asc" ? "asc" : "desc"
+      if column == "date"
+        orders << "logs.date #{direction}"
 
-          orders << "#{c} #{direction} NULLS LAST"
-        end
+      elsif column.start_with?("attribute_")
+        attr_id = column.split("_").last
+
+        orders << sanitize_sql_for_order([
+          "MAX(CASE WHEN log_values.pet_attribute_id = ? THEN log_values.range_value END) #{direction} NULLS LAST",
+          attr_id
+        ])
       end
     end
 
-    logs = logs.order(orders.join(",")) if orders.any?
+    logs = logs.group("logs.id").order(Arel.sql(orders.join(", ")))
 
     @logs = logs
   end
 
   def new
     @log = @pet.logs.build
+
+    @pet.pet_attributes.each do |pet_attr|
+      @log.log_values.build(pet_attribute: pet_attr)
+    end
   end
 
   def create
@@ -126,6 +130,19 @@ class LogsController < ApplicationController
     redirect_to user_pet_logs_path(@user, @pet), status: :see_other
   end
 
+
+  # Edit method - not in use yet && need update
+  # def edit
+  #   @log = Log.find(params[:id])
+  #   existing_attrs = @log.log_values.map(&:pet_attribute_id)
+  #
+  #   @pet.pet_attributes.each do |pet_attr|
+  #     unless existing_attrs.include?(pet_attr.id)
+  #       @log.log_values.build(pet_attribute: pet_attr)
+  #     end
+  #   end
+  # end
+
   private
 
   def set_user
@@ -138,14 +155,18 @@ class LogsController < ApplicationController
 
   def set_log
     @log = @pet.logs.find(params[:id])
+    @log_values_by_attr = @log.log_values.index_by(&:pet_attribute_id)
   end
 
   def log_params
     params.require(:log).permit(:date,
-      :attr1, :attr1_value, :attr1_memo,
-      :attr2, :attr2_value, :attr2_memo,
-      :attr3, :attr3_value, :attr3_memo,
-      :attr4, :attr4_value, :attr4_memo,
-      :attr5, :attr5_value, :attr5_memo)
+      log_values_attributes: [
+        :id,
+        :pet_attribute_id,
+        :range_value,
+        :boolean_value,
+        :memo
+      ]
+    )
   end
 end

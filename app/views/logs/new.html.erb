@@ -24,61 +24,87 @@
       <%= f.input :date, as: :date,
         use_short_month: true,
         label: "Date",
-        required: false,
-        input_html: { style: "width: 300px;" },
-        wrapper_html: { style: "max-width: 320px;" } %>
-      <% (1..5).each do |i| %>
-        <!-- Recieve the attribute names -->
-        <% title = @pet.read_attribute("attr#{i}") %>
-        <!-- Skip if blank -->
-        <% next if title.blank? %>
+        input_html: { style: "width: 300px;"},
+        wrapper_html: { style: "max-width: 320px;"} %>
+      <%#  %>
+      <%= f.simple_fields_for :log_values do |lv| %>
+        <% pet_attr = lv.object.pet_attribute %>
+        <% attr = pet_attr.attribute_definition %>
         <div data-controller="rating" class="rating">
-          <div class="rating-header">
-            <h5><%= title %></h5>
+          <div class= "rating-header">
+            <h5><%= attr.name%> </h5>
             <button data-action="click->rating#openModal" class="btn modal-btn">
-              <i class="iconify" data-icon="material-symbols-light:add-notes-outline" data-width="32" data-height="32"></i>
+              <i class="iconify"
+                data-icon="material-symbols-light:add-notes-outline"
+                data-width="32"
+                data-height="32"></i>
             </button>
           </div>
-          <!-- Make buttons for rating -->
-          <div class="rating-btns">
-            <% (1..5).each do |value| %>
-              <button class="rating-btn"
-                data-rating-text-value="<%= "#{value} attr#{i}" %>"
-                data-action="click->rating#select"
-                data-rating-target="button">
-                <i class="fa-regular <%=reactions[value - 1]%> fa-lg"></i>
+          <%#  %>
+          <%# If value is a range %>
+          <% if attr.range? %>
+            <div class="rating-btns">
+              <% (1..5).each do |value| %>
+                <button class="rating-btn"
+                  data-value="<%= value %>"
+                  data-action="click->rating#select"
+                  data-rating-target="button">
+                  <i class="fa-regular <%= reactions[value - 1] %> fa-lg"></i>
+                </button>
+              <% end %>
+            </div>
+            <%= lv.input :range_value, as: :hidden, input_html: { data: { rating_target: "input" } } %>
+          <% else %>
+            <%# If it's a boolean %>
+            <div class="rating-btns">
+              <button type="button"
+                class= "rating-btn"
+                data-action="click->rating#selectBoolean"
+                data-value="true">
+                Yes
               </button>
-            <% end %>
-          </div>
-          <%= f.input "attr#{i}",
-            as: :hidden,
-            input_html: { value: @pet.read_attribute("attr#{i}") } %>
-          <%= f.input "attr#{i}_value",
-            id: "attr#{i}value",
-            input_html: { data: { rating_target: "input" } },
-            collection: 0..5,
-            as: :hidden %>
-          <%= f.input "attr#{i}_memo", as: :hidden, input_html: { id: "log_attr#{i}_memo_hidden" } %>
-          <!-- Modal -->
+              <button type="button"
+                class= "rating-btn"
+                data-action="click->rating#selectBoolean"
+                data-value="false">
+                No
+              </button>
+            </div>
+            <%= lv.input :boolean_value, as: :hidden, input_html: { data: { rating_target: "input" } } %>
+          <% end %>
+          <%# Hidden fields %>
+          <%= lv.hidden_field :pet_attribute_id %>
+          <%= lv.input :memo, as: :hidden,
+            input_html: { id: "log_attr_#{pet_attr.id}_memo_hidden" } %>
+          <%# Modal %>
           <div class="memo-modal d-none">
             <div>
               <div class="memo-modal-content">
                 <div class="memo-modal-header">
-                  <h5><%= title %> Notes</h5>
+                  <h5> <%= attr.name %> Notes </h5>
                 </div>
-                <textarea class="memo-textarea" id="memo_attr#{i}_temp" rows="4" placeholder="Add notes..."></textarea>
+                <textarea class="memo-text-area"
+                  rows="4" placeholder="Add notes..."></textarea>
                 <div class="memo-modal-actions">
-                  <button type="button" class="btn btn-secondary" data-action="click->rating#cancelMemo">Cancel</button>
-                  <button type="button" class="btn btn-primary" data-action="click->rating#saveMemo">Save</button>
+                  <button type="button"
+                      class="btn btn-secondary"
+                      data-action="click->rating#cancelMemo">
+                    Cancel
+                  </button>
+                  <button type="button"
+                      class="btn btn-primary"
+                      data-action="click->rating#saveMemo">
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       <% end %>
-      <div class="d-flex justify-content-center align-items-center gap-3 ">
-        <%= link_to "Cancel", user_pet_logs_path(@user, @pet), class: 'btn btn-danger text-white' %>
+      <div class="d-flex justify-content-center align-items-center gap-3">
+        <%= link_to "Cancel", user_pet_logs_path(@user, @pet), class: "btn btn-danger text-white" %>
         <%= f.button :submit, "Save", class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
+</div>

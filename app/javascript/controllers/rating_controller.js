@@ -11,15 +11,36 @@ export default class extends Controller {
     console.log("Hi")
   }
 
+  // For range
   select(event) {
     event.preventDefault()
 
     const button = event.currentTarget
-    const value = button.dataset.ratingTextValue.split(" ")[0]
-    const attribute = button.dataset.ratingTextValue.split(" ")[1]
+    const value = button.dataset.value
 
-    const formField = document.getElementById(`log_${attribute}_value`)
-    formField.value = value
+    const ratingDiv = button.closest(".rating")
+    const input = ratingDiv.querySelector("[data-rating-target='input']")
+
+    if (input) {
+      input.value = value
+    }
+
+    this._setActive(button)
+  }
+
+  // For boolean
+    selectBoolean(event) {
+    event.preventDefault()
+
+    const button = event.currentTarget
+    const value = button.dataset.value
+
+    const ratingDiv = button.closest(".rating")
+    const input = ratingDiv.querySelector("[data-rating-target='input']")
+
+    if (input) {
+      input.value = value
+    }
 
     this._setActive(button)
   }
