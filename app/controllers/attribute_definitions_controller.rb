@@ -13,6 +13,6 @@ class AttributeDefinitionsController < ApplicationController
   private
 
   def attribute_params
-    params.require(:attribute_definitions).permit(Lname, :icon, :value_type)
+    params.require(:attribute_definitions).permit(:name, :icon, :value_type)
   end
 end
