@@ -11,6 +11,6 @@ class AttributeDefinition < ApplicationRecord
   validates :name, presence: true
 
   scope :available_for, ->(user) {
-    where(user_id: nill).or(where(user_id: user.id))
+    where(user_id: nil).or(where(user_id: user.id))
   }
 end
