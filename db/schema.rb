@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_20_082530) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_24_071459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_20_082530) do
     t.string "species", default: [], array: true
     t.string "field", default: [], array: true
     t.string "languages", default: [], array: true
+    t.string "address"
     t.index ["user_id"], name: "index_clinics_on_user_id"
   end
 
@@ -140,7 +141,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_20_082530) do
     t.string "microchip"
     t.float "weight"
     t.string "current_meds"
-    t.string "vacc_status"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -148,6 +148,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_20_082530) do
     t.boolean "fixed"
     t.string "gender"
     t.boolean "archived", default: false, null: false
+    t.string "vacc_status", default: [], array: true
     t.index ["user_id"], name: "index_pets_on_user_id"
   end
 
@@ -160,8 +161,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_20_082530) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role"
-    t.string "name"
-    t.string "address"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "country"
+    t.string "city"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
