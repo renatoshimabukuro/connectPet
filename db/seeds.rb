@@ -104,7 +104,7 @@ percy = Pet.create!(
   species: "Cat",
   breed: "Mixed orange",
   weight: 5,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Male",
   microchip: "111 111 111 111 112"
@@ -123,7 +123,7 @@ cory = Pet.create!(
   species: "Cat",
   breed: "Mixed black",
   weight: 5.2,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Male",
   microchip: "111 111 111 111 113"
@@ -142,7 +142,7 @@ maple = Pet.create!(
   species: "Dog",
   breed: "Toy poodle",
   weight: 4.5,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: false,
   gender: "Female"
 )
@@ -160,7 +160,7 @@ gabby = Pet.create!(
   species: "Cat",
   breed: "Exotic shorthair",
   weight: 5,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Male"
 )
@@ -178,7 +178,7 @@ jade = Pet.create!(
   species: "Cat",
   breed: "Exotic shorthair",
   weight: 4,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Female"
 )
