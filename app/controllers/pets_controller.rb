@@ -30,8 +30,7 @@ class PetsController < ApplicationController
 
   # POST /users/:user_id/pets
   def create
-    @pet = Pet.new(pet_params)
-    @pet.user = @user
+    @pet = current_user.pets.build(pet_params)
 
     if @pet.save
       assign_attributes_to_pet

@@ -13,12 +13,20 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.vet? && resource.clinic.nil?
-      new_clinic_path
-    elsif resource.owner? && resource.pets.empty?
-      new_pet_path
+    if resource.vet?
+      if resource.clinic.nil?
+        new_clinic_path
+      else
+        chats_path
+      end
+    elsif resource.owner?
+      if resource.pets.empty?
+        new_pet_path
+      else
+        user_pets_path(resource)
+      end
     else
-      user_pets_path(resource) # or chats_path
+      root_path
     end
   end
 
