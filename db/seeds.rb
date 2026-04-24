@@ -36,21 +36,27 @@ katie = User.create!(
   name: "Katie",
   email: "katie@owner.com",
   password: "password123",
-  role: "owner"
+  role: "owner",
+  country: "JP",
+  city: "Matsuyama"
 )
 
 renato = User.create!(
   name: "Renato",
   email: "renato@owner.com",
   password: "password123",
-  role: "owner"
+  role: "owner",
+  country: "JP",
+  city: "Tokyo"
 )
 
 troy = User.create!(
   name: "Troy",
   email: "troy@owner.com",
   password: "password123",
-  role: "owner"
+  role: "owner",
+  country: "JP",
+  city: "Osaka"
 )
 
 vet01 = User.create!(
@@ -58,7 +64,9 @@ vet01 = User.create!(
   email: "patrick@vet.com",
   password: "password123",
   address: "123-4567 Ehime, Matsuyama 1-2-3",
-  role: "vet"
+  role: "vet",
+  country: "JP",
+  city: "Matsuyama"
 )
 
 vet02 = User.create!(
@@ -66,7 +74,9 @@ vet02 = User.create!(
   email: "james@vet.com",
   password: "password123",
   address: "456-7890 Ehime, Tobe 1-2-3",
-  role: "vet"
+  role: "vet",
+  country: "JP",
+  city: "Matsuyama"
 )
 
 vet03 = User.create!(
@@ -74,7 +84,9 @@ vet03 = User.create!(
   email: "john@vet.com",
   password: "password123",
   address: "234-5678 Ehime, Toon, Kanai 1-2-3",
-  role: "vet"
+  role: "vet",
+  country: "JP",
+  city: "Matsuyama"
 )
 
 puts "Creating pets..."

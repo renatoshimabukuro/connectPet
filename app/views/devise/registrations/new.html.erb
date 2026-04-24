@@ -5,17 +5,21 @@
     <div class="form-inputs">
       <div class="row">
         <div class="col-6">
-          <%= f.input :first_name %>
+          <%= f.input :first_name,
+                  autofocus: true,
+                  required: true %>
         </div>
         <div class="col-6">
-          <%= f.input :last_name %>
+          <%= f.input :last_name,
+                  required: true %>
         </div>
       </div>
       <div class="row" data-controller="location">
         <div class="col-6">
           <div class="form-group">
             <%= f.label :country, "Country" %>
-            <%= f.country_select :country,
+            <div class="mt-2">
+              <%= f.country_select :country,
               { priority_countries: ["JP"] },
               {
                 class: "form-control",
@@ -24,6 +28,7 @@
                   action: "change->location#updateCities"
                 }
               } %>
+            </div>
           </div>
         </div>
         <div class="col-6">
@@ -40,6 +45,7 @@
       <div class="row">
         <%= f.input :role,
                 as: :radio_buttons,
+                label: "I am a...",
                 collection: ["Vet", "Pet owner"],
                 wrapper_html: { class: "row "},
                 item_wrapper_class: "col-6 mb-2",
@@ -48,7 +54,7 @@
       <div class="row">
         <%= f.input :email,
                 required: true,
-                autofocus: true,
+
                 input_html: { autocomplete: "email" }%>
       </div>
       <div class="row">
@@ -64,7 +70,7 @@
       </div>
     </div>
     <div class="form-actions">
-      <%= f.button :submit, "Sign up" %>
+      <%= f.button :submit, "Continue", class: "btn btn-primary" %>
     </div>
   <% end %>
   <%= render "devise/shared/links" %>
