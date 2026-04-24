@@ -62,6 +62,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', group: [:development, :test]
 gem 'wkhtmltopdf-heroku', group: :production
 gem 'redis'
+gem 'country_select'
 
 
 group :development, :test do

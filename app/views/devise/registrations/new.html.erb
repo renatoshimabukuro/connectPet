@@ -11,12 +11,30 @@
           <%= f.input :last_name %>
         </div>
       </div>
-      <div class="row">
+      <div class="row" data-controller="location">
         <div class="col-6">
-          <%= f.input :country, as: :string %>
+          <div class="form-group">
+            <%= f.label :country, "Country" %>
+            <%= f.country_select :country,
+              { priority_countries: ["JP"] },
+              {
+                class: "form-control",
+                data: {
+                  location_target: "country",
+                  action: "change->location#updateCities"
+                }
+              } %>
+          </div>
         </div>
         <div class="col-6">
-          <%= f.input :city %>
+          <%= f.input :city,
+                      as: :select,
+                      collection: ["Tokyo", "Osaka", "Kyoto", "Matsuyama"],
+                      input_html: {
+                        data: {
+                          location_target: "city"
+                        }
+                      } %>
         </div>
       </div>
       <div class="row">
