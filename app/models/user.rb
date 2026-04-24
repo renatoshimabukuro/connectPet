@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   #validations
   validates :role, presence: true, inclusion:{in:["vet", "owner"], allow_nil:false}
-  validates :name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   # has many owned chats where user is "owner"
   has_many :owned_chats, class_name: "Chat", foreign_key: :owner_id, dependent: :destroy
   # has many owned chats where user is "vet"
@@ -25,5 +26,9 @@ class User < ApplicationRecord
   # Method to get all chats of a user
   def chats
     Chat.where("owner_id = ? OR vet_id = ?", id, id)
+  end
+
+  def name
+    "#{first_name} #{last_name}"
   end
 end
