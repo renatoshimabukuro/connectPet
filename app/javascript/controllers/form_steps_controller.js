@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["step", "progressBar", "breedSelectContainer"]
+  static targets = ["step", "progressBar", "breedGrid"]
   static values = { current: Number }
 
   connect() {
@@ -39,32 +39,34 @@ export default class extends Controller {
 
   filterBreeds(event) {
   const speciesId = event.target.value
-
-  console.log("species selected:", speciesId)
+  const speciesIcon = event.target.closest("label")
+    ?.querySelector(".icon i")?.className || ""
 
   fetch(`/species/${speciesId}/breeds`)
     .then(res => res.json())
     .then(breeds => {
-      console.log("breeds received:", breeds)
+      const grid = this.breedGridTarget
+      grid.innerHTML = ""
 
-      const select = this.breedSelectContainerTarget.querySelector("select")
-
-      if (!breeds || breeds.length === 0) {
-        select.innerHTML = `<option value="">No breeds found</option>`
+      if (!breeds.length) {
+        grid.innerHTML = "<p>No breeds found</p>"
         return
       }
 
-      select.innerHTML = `<option value="">Select breed</option>`
-
       breeds.forEach(breed => {
-        const option = document.createElement("option")
-        option.value = breed.id
-        option.textContent = breed.name
-        select.appendChild(option)
+        const card = document.createElement("label")
+        card.classList.add("species-card")
+
+        card.innerHTML = `
+          <input type="radio" name="pet[breed_id]" value="${breed.id}" class="hidden" />
+          <div class="card-content">
+            <div class="icon"><i class="${speciesIcon}"></i></div>
+            <div class="name">${breed.name}</div>
+          </div>
+        `
+
+        grid.appendChild(card)
       })
-    })
-    .catch(err => {
-      console.error("breed fetch failed:", err)
     })
 }
 }

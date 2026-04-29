@@ -40,19 +40,20 @@
     <!-- STEP 3 -->
     <div data-form-steps-target="step" class="hidden">
       <h3>Select Breed</h3>
-      <div data-form-steps-target="breedSelectContainer">
-        <%= f.collection_select :breed_id, [], :id, :name,
-          { prompt: "Select breed" } %>
+      <div class="species-grid" data-form-steps-target="breedGrid"></div>
+      <div class="mt-2">
+        <button type="button" data-action="form-steps#prev">Back</button>
+        <button type="button" data-action="form-steps#next">Continue</button>
       </div>
-      <button type="button" data-action="form-steps#prev">Back</button>
-      <button type="button" data-action="form-steps#next">Continue</button>
     </div>
     <!-- STEP 4 -->
     <div data-form-steps-target="step" class="hidden">
       <h3>Details</h3>
       <%= f.input :fixed, as: :boolean %>
-      <button type="button" data-action="form-steps#prev">Back</button>
-      <button type="button" data-action="form-steps#next">Continue</button>
+      <div class="mt-2">
+        <button type="button" data-action="form-steps#prev">Back</button>
+        <button type="button" data-action="form-steps#next">Continue</button>
+      </div>
     </div>
     <!-- STEP 5 -->
     <div data-form-steps-target="step" class="hidden">
@@ -116,6 +117,11 @@
   }
 
   /* Selected state */
+  .species-card input:checked + .card-content {
+  border-color: #4caf50;
+  background: #f0fff4;
+  }
+
   .species-card input:checked + .card-content {
   border-color: #4caf50;
   background: #f0fff4;
