@@ -4,6 +4,10 @@ class UserPolicy < ApplicationPolicy
       scope.all
     end
 
+    # def show?
+    #   vet? || ownner?
+    # end
+
     private
 
     def owner?
