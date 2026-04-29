@@ -23,7 +23,8 @@
       <div class="species-grid">
         <% Species.all.each do |species| %>
           <label class="species-card">
-            <%= f.radio_button :species_id, species.id, class: "hidden" %>
+            <%= f.radio_button :species_id, species.id,
+              data: { action: "change->form-steps#filterBreeds", species_id: species.id } %>
             <div class="card-content">
               <div class="icon"><i class="<%= species.icon %>"></i></div>
               <div class="name"><%= species.name %></div>
@@ -38,8 +39,11 @@
     </div>
     <!-- STEP 3 -->
     <div data-form-steps-target="step" class="hidden">
-      <h3>Breed</h3>
-      <%= f.input :breed %>
+      <h3>Select Breed</h3>
+      <div data-form-steps-target="breedSelectContainer">
+        <%= f.collection_select :breed_id, [], :id, :name,
+          { prompt: "Select breed" } %>
+      </div>
       <button type="button" data-action="form-steps#prev">Back</button>
       <button type="button" data-action="form-steps#next">Continue</button>
     </div>
