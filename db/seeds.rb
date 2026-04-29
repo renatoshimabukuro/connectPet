@@ -44,7 +44,8 @@ puts "#{Species.count} species created."
 
 puts "Creating users..."
 katie = User.create!(
-  name: "Katie",
+  first_name: "Katie",
+  last_name: "Wood",
   email: "katie@owner.com",
   password: "password123",
   role: "owner",
@@ -53,7 +54,8 @@ katie = User.create!(
 )
 
 renato = User.create!(
-  name: "Renato",
+  first_name: "Renato",
+  last_name: "Shimabukuro",
   email: "renato@owner.com",
   password: "password123",
   role: "owner",
@@ -62,7 +64,8 @@ renato = User.create!(
 )
 
 troy = User.create!(
-  name: "Troy",
+  first_name: "Troy",
+  last_name: "Zangara",
   email: "troy@owner.com",
   password: "password123",
   role: "owner",
@@ -71,7 +74,8 @@ troy = User.create!(
 )
 
 vet01 = User.create!(
-  name: "Patrick Gregory House",
+  first_name: "Patrick Gregory",
+  last_name: "House",
   email: "patrick@vet.com",
   password: "password123",
   address: "123-4567 Ehime, Matsuyama 1-2-3",
@@ -81,7 +85,8 @@ vet01 = User.create!(
 )
 
 vet02 = User.create!(
-  name: "James Hetfield",
+  first_name: "James",
+  last_name: "Hetfield",
   email: "james@vet.com",
   password: "password123",
   address: "456-7890 Ehime, Tobe 1-2-3",
@@ -91,7 +96,8 @@ vet02 = User.create!(
 )
 
 vet03 = User.create!(
-  name: "John Sykes",
+  first_name: "John",
+  last_name: "Sykes",
   email: "john@vet.com",
   password: "password123",
   address: "234-5678 Ehime, Toon, Kanai 1-2-3",
