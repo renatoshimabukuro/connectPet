@@ -1,10 +1,17 @@
 class ChatPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
+    def initialize(user, scope)
+      @user  = user
+      @scope = scope
+    end
+
     def resolve
       scope.all
     end
 
-
+    def index?
+      owner? || vet?
+    end
 
   private
 
