@@ -1,8 +1,8 @@
 <div class="mobile-navbar">
-  <%= link_to 'Home', root_path %>
   <% if user_signed_in? %>
     <%= link_to "My Pets", user_pets_path(current_user) %>
-    <%= link_to "Add a New Pet", new_user_pet_path(current_user) %>
-    <%= link_to "Inbox", user_chats_path(current_user) %>
+    <%= link_to "Inbox", user_chats_path(current_user) do %>
+      <i class="fa-solid fa-message"></i>
+    <% end %>
   <% end %>
 </div>
