@@ -10,8 +10,6 @@ puts "Cleaning database..."
 # RESTART IDENTITY: Clears all data, resets IDs to 1.
 # CASCADE: Ignores link errors between tables.
 # connection.execute("TRUNCATE messages, logs, friendships, chats, pets, clinics, users RESTART IDENTITY CASCADE")
-Breed.destroy_all
-Species.destroy_all
 LogValue.destroy_all
 PetAttribute.destroy_all
 AttributeDefinition.destroy_all
@@ -30,6 +28,9 @@ Pet.all.each { |pet| pet.photo.purge }
 Clinic.destroy_all
 Pet.destroy_all
 User.destroy_all
+
+Breed.destroy_all
+Species.destroy_all
 
 puts "Database cleaned! Creating new data..."
 
