@@ -1,5 +1,6 @@
 class Pet < ApplicationRecord
   belongs_to :user
+  belongs_to :species
   has_many :chats, dependent: :destroy
   has_many :logs, dependent: :destroy
   has_many :pet_attributes, dependent: :destroy

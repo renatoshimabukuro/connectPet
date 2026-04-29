@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_24_071459) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_29_074329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -136,7 +136,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_24_071459) do
     t.bigint "user_id", null: false
     t.string "name"
     t.date "dob"
-    t.string "species"
     t.string "breed"
     t.string "microchip"
     t.float "weight"
@@ -149,7 +148,16 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_24_071459) do
     t.string "gender"
     t.boolean "archived", default: false, null: false
     t.string "vacc_status", default: [], array: true
+    t.bigint "species_id"
+    t.index ["species_id"], name: "index_pets_on_species_id"
     t.index ["user_id"], name: "index_pets_on_user_id"
+  end
+
+  create_table "species", force: :cascade do |t|
+    t.string "name"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -186,5 +194,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_24_071459) do
   add_foreign_key "messages", "users"
   add_foreign_key "pet_attributes", "attribute_definitions"
   add_foreign_key "pet_attributes", "pets"
+  add_foreign_key "pets", "species"
   add_foreign_key "pets", "users"
 end

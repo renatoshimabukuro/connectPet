@@ -10,6 +10,7 @@ puts "Cleaning database..."
 # RESTART IDENTITY: Clears all data, resets IDs to 1.
 # CASCADE: Ignores link errors between tables.
 # connection.execute("TRUNCATE messages, logs, friendships, chats, pets, clinics, users RESTART IDENTITY CASCADE")
+Species.destroy_all
 LogValue.destroy_all
 PetAttribute.destroy_all
 AttributeDefinition.destroy_all
@@ -30,6 +31,16 @@ Pet.destroy_all
 User.destroy_all
 
 puts "Database cleaned! Creating new data..."
+
+puts "Creating species..."
+
+dog = Species.find_or_create_by!(name: "dog", icon: "fa-solid fa-dog")
+cat = Species.find_or_create_by!(name: "cat", icon: "fa-solid fa-cat")
+Species.find_or_create_by!(name: "bird", icon: "fa-solid fa-crow")
+Species.find_or_create_by!(name: "horse", icon: "fa-solid fa-horse")
+Species.find_or_create_by!(name: "fish", icon: "fa-solid fa-fish")
+
+puts "#{Species.count} species created."
 
 puts "Creating users..."
 katie = User.create!(
@@ -94,7 +105,7 @@ raye = Pet.create!(
   user: katie,
   name: "Raye",
   dob: Date.new(2021, 8, 12),
-  species: "Cat",
+  species: cat,
   breed: "Mixed black",
   weight: 4.8,
   vacc_status: "Vaccinated",
@@ -113,7 +124,7 @@ percy = Pet.create!(
   user: katie,
   name: "Percy",
   dob: Date.new(2021, 8, 12),
-  species: "Cat",
+  species: cat,
   breed: "Mixed orange",
   weight: 5,
   vacc_status: ["Vaccinated on 2026 04 24"],
@@ -132,7 +143,7 @@ cory = Pet.create!(
   user: katie,
   name: "Cory",
   dob: Date.new(2024, 10, 22),
-  species: "Cat",
+  species: cat,
   breed: "Mixed black",
   weight: 5.2,
   vacc_status: ["Vaccinated on 2026 04 24"],
@@ -151,7 +162,7 @@ maple = Pet.create!(
   user: renato,
   name: "Maple",
   dob: Date.new(2025, 4, 30),
-  species: "Dog",
+  species: dog,
   breed: "Toy poodle",
   weight: 4.5,
   vacc_status: ["Vaccinated on 2026 04 24"],
@@ -169,7 +180,7 @@ gabby = Pet.create!(
   user: troy,
   name: "Gabby",
   dob: Date.new(2016, 5, 31),
-  species: "Cat",
+  species: cat,
   breed: "Exotic shorthair",
   weight: 5,
   vacc_status: ["Vaccinated on 2026 04 24"],
@@ -187,7 +198,7 @@ jade = Pet.create!(
   user: troy,
   name: "Jade",
   dob: Date.new(2020, 4, 5),
-  species: "Cat",
+  species: cat,
   breed: "Exotic shorthair",
   weight: 4,
   vacc_status: ["Vaccinated on 2026 04 24"],
