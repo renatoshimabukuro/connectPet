@@ -36,6 +36,7 @@ class PetsController < ApplicationController
       assign_attributes_to_pet
       redirect_to [@user, @pet], notice: 'Pet was successfully registered!'
     else
+raise @pet.errors.full_messages.inspect
       render :new, status: :unprocessable_entity
     end
   end
@@ -93,8 +94,8 @@ class PetsController < ApplicationController
   def pet_params
     params.require(:pet).permit(
       :name, :dob, :species_id, :breed_id, :microchip,
-      :weight, :current_meds, :vacc_status, :notes,
-      :insurance, :fixed, :gender, :photo
+      :weight, :current_meds, :notes,
+      :insurance, :fixed, :gender, :photo, vacc_status: []
     )
   end
 
