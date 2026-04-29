@@ -19,10 +19,22 @@
     </div>
     <!-- STEP 2 -->
     <div data-form-steps-target="step" class="hidden">
-      <h3>Species</h3>
-      <%= f.input :species %>
-      <button type="button" data-action="form-steps#prev">Back</button>
-      <button type="button" data-action="form-steps#next">Continue</button>
+      <h3>Select Species</h3>
+      <div class="species-grid">
+        <% Species.all.each do |species| %>
+          <label class="species-card">
+            <%= f.radio_button :species_id, species.id, class: "hidden" %>
+            <div class="card-content">
+              <div class="icon"><i class="<%= species.icon %>"></i></div>
+              <div class="name"><%= species.name %></div>
+            </div>
+          </label>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <button type="button" data-action="form-steps#prev">Back</button>
+        <button type="button" data-action="form-steps#next">Continue</button>
+      </div>
     </div>
     <!-- STEP 3 -->
     <div data-form-steps-target="step" class="hidden">
@@ -67,5 +79,41 @@
     width: 0%;
     background: #4caf50;
     transition: width 0.3s ease;
+  }
+  .species-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  }
+
+  .species-card {
+  cursor: pointer;
+  }
+
+  .species-card input {
+  display: none;
+  }
+
+  .card-content {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  transition: 0.2s;
+  }
+
+  .card-content .icon {
+  font-size: 32px;
+  }
+
+  .card-content .name {
+  margin-top: 6px;
+  font-size: 14px;
+  }
+
+  /* Selected state */
+  .species-card input:checked + .card-content {
+  border-color: #4caf50;
+  background: #f0fff4;
   }
 </style>

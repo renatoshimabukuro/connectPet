@@ -78,7 +78,7 @@ vet01 = User.create!(
   last_name: "House",
   email: "patrick@vet.com",
   password: "password123",
-  address: "123-4567 Ehime, Matsuyama 1-2-3",
+  # address: "123-4567 Ehime, Matsuyama 1-2-3",
   role: "vet",
   country: "JP",
   city: "Matsuyama"
@@ -89,7 +89,7 @@ vet02 = User.create!(
   last_name: "Hetfield",
   email: "james@vet.com",
   password: "password123",
-  address: "456-7890 Ehime, Tobe 1-2-3",
+  # address: "456-7890 Ehime, Tobe 1-2-3",
   role: "vet",
   country: "JP",
   city: "Matsuyama"
@@ -100,7 +100,7 @@ vet03 = User.create!(
   last_name: "Sykes",
   email: "john@vet.com",
   password: "password123",
-  address: "234-5678 Ehime, Toon, Kanai 1-2-3",
+  # address: "234-5678 Ehime, Toon, Kanai 1-2-3",
   role: "vet",
   country: "JP",
   city: "Matsuyama"
@@ -114,7 +114,7 @@ raye = Pet.create!(
   species: cat,
   breed: "Mixed black",
   weight: 4.8,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated"],
   fixed: true,
   gender: "Male",
   microchip: "111 111 111 111 111"
