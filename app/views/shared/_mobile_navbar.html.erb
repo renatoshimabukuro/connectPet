@@ -1,7 +1,7 @@
 <div class="mobile-navbar">
   <% if user_signed_in? %>
     <%= link_to "My Pets", user_pets_path(current_user) %>
-    <%= link_to "Inbox", user_chats_path(current_user) do %>
+    <%= link_to user_chats_path(current_user) do %>
       <i class="fa-solid fa-message"></i>
     <% end %>
   <% end %>
