@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_29_074329) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_29_081651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,14 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_29_074329) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "name"], name: "index_attribute_definitions_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_attribute_definitions_on_user_id"
+  end
+
+  create_table "breeds", force: :cascade do |t|
+    t.string "name"
+    t.bigint "species_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["species_id"], name: "index_breeds_on_species_id"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -136,7 +144,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_29_074329) do
     t.bigint "user_id", null: false
     t.string "name"
     t.date "dob"
-    t.string "breed"
     t.string "microchip"
     t.float "weight"
     t.string "current_meds"
@@ -149,6 +156,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_29_074329) do
     t.boolean "archived", default: false, null: false
     t.string "vacc_status", default: [], array: true
     t.bigint "species_id"
+    t.bigint "breed_id"
+    t.index ["breed_id"], name: "index_pets_on_breed_id"
     t.index ["species_id"], name: "index_pets_on_species_id"
     t.index ["user_id"], name: "index_pets_on_user_id"
   end
@@ -180,6 +189,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_29_074329) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attribute_definitions", "users"
+  add_foreign_key "breeds", "species"
   add_foreign_key "chats", "pets"
   add_foreign_key "chats", "users", column: "owner_id"
   add_foreign_key "chats", "users", column: "vet_id"
@@ -194,6 +204,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_29_074329) do
   add_foreign_key "messages", "users"
   add_foreign_key "pet_attributes", "attribute_definitions"
   add_foreign_key "pet_attributes", "pets"
+  add_foreign_key "pets", "breeds"
   add_foreign_key "pets", "species"
   add_foreign_key "pets", "users"
 end
