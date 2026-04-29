@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
       end
     elsif resource.owner?
       if resource.pets.empty?
-        new_pet_path
+        new_user_pet_path(resource)
       else
         user_pets_path(resource)
       end
