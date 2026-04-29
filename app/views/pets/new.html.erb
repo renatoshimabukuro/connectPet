@@ -1,3 +1,14 @@
-<h1>Add a new pet</h1>
-<p>Enter your pet's details below</p>
-<%= render "form", user: @user, pet: @pet %>
+<div class="container mt-3">
+  <%= simple_form_for ([@user, @pet]) do |f| %>
+    <%= f.input :name, label: "Your pet's name", error: 'Pet name is mandatory' %>
+    <%= f.input :dob, placeholder: 'date of birth.' %>
+    <%= f.input :species, placeholder: 'cat, dog.' %>
+    <%= f.input :breed, placeholder: 'breed.' %>
+    <%= f.input :weight, placeholder: 'weight' %>
+    <%= f.input :vacc_status, placeholder: 'vaccine' %>
+    <%= f.input :fixed, placeholder: 'fixed' %>
+    <%= f.input :gender, placeholder: 'gender' %>
+    <%= f.input :photo, as: :file %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
