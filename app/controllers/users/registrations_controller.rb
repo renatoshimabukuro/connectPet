@@ -52,7 +52,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    super(resource)
+    if resource.owner?
+      new_user_pet_path(resource)
+    else
+      super
+    end
+  end
+
+  def after_sign_in_path_for(resource)
+    if resource.owner? && resource.pets.empty?
+      new_user_pet_path(resource)
+    else
+      super
+    end
   end
 
   # The path used after sign up for inactive accounts.

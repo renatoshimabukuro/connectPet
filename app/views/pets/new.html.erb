@@ -1,14 +1,68 @@
 <div class="container mt-3">
-  <%= simple_form_for ([@user, @pet]) do |f| %>
-    <%= f.input :name, label: "Your pet's name", error: 'Pet name is mandatory' %>
-    <%= f.input :dob, placeholder: 'date of birth.' %>
-    <%= f.input :species, placeholder: 'cat, dog.' %>
-    <%= f.input :breed, placeholder: 'breed.' %>
-    <%= f.input :weight, placeholder: 'weight' %>
-    <%= f.input :vacc_status, placeholder: 'vaccine' %>
-    <%= f.input :fixed, placeholder: 'fixed' %>
-    <%= f.input :gender, placeholder: 'gender' %>
-    <%= f.input :photo, as: :file %>
-    <%= f.button :submit %>
+  <%= form_with model: [@user, @pet], html: { multipart: true },
+      data: { controller: "form-steps", form_steps_current_value: 0 } do |f| %>
+    <!-- Progress bar -->
+    <div class="progress">
+      <div class="progress-bar" data-form-steps-target="progressBar"></div>
+    </div>
+    <!-- STEP 1 -->
+    <div data-form-steps-target="step">
+      <h2>Add a new pet</h2>
+      <%= f.file_field :picture %>
+      <%= f.text_field :name, placeholder: "Name" %>
+      <%= f.radio_button :gender, "male" %> Male
+      <%= f.radio_button :gender, "female" %> Female
+      <%= f.date_select :dob %>
+      <button type="button" data-action="form-steps#next">Continue</button>
+    </div>
+    <!-- STEP 2 -->
+    <div data-form-steps-target="step" class="hidden">
+      <h3>Species</h3>
+      <%= f.text_field :species %>
+      <button type="button" data-action="form-steps#prev">Back</button>
+      <button type="button" data-action="form-steps#next">Continue</button>
+    </div>
+    <!-- STEP 3 -->
+    <div data-form-steps-target="step" class="hidden">
+      <h3>Breed</h3>
+      <%= f.text_field :breed %>
+      <button type="button" data-action="form-steps#prev">Back</button>
+      <button type="button" data-action="form-steps#next">Continue</button>
+    </div>
+    <!-- STEP 4 -->
+    <div data-form-steps-target="step" class="hidden">
+      <h3>Details</h3>
+      <%= f.check_box :fixed %> Fixed?
+      <button type="button" data-action="form-steps#prev">Back</button>
+      <button type="button" data-action="form-steps#next">Continue</button>
+    </div>
+    <!-- STEP 5 -->
+    <div data-form-steps-target="step" class="hidden">
+      <h3>Health</h3>
+      <%= f.number_field :weight %>
+      <%= f.text_field :microchip %>
+      <%= f.text_area :notes %>
+      <button type="button" data-action="form-steps#prev">Back</button>
+      <%= f.submit "Create Pet" %>
+    </div>
   <% end %>
-</div>
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    .progress {
+      width: 100%;
+      height: 8px;
+      background: #eee;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #4caf50;
+      transition: width 0.3s ease;
+    }
+  </style>
