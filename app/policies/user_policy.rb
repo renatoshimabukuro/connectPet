@@ -4,12 +4,9 @@ class UserPolicy < ApplicationPolicy
       scope.all
     end
 
-    # def show?
-    #   vet? || ownner?
-    # end
-
     private
 
+    # logic for distinguishing between owner and vet
     def owner?
     user&.respond_to?(:role) && user.role == "owner"
     end
