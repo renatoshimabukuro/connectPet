@@ -1,6 +1,12 @@
 <div class="pet-nav-header">
   <div class="nav-content">
     <div class="nav-items-left">
+      <% is_home = request.path == "/" || (user_signed_in? && request.path.match?(%r{^/users/\d+/pets$})) %>
+      <% unless is_home %>
+        <%= link_to :back, class: "nav-link-custom me-3" do %>
+          <i class="fa-solid fa-arrow-left me-2"></i>Back
+        <% end %>
+      <% end %>
       <% if user_signed_in? && current_user.present? %>
         <% brand_link = user_pets_path(current_user) %>
       <% else %>
