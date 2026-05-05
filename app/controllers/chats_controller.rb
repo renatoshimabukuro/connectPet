@@ -5,7 +5,8 @@ class ChatsController < ApplicationController
 
   def index
     # Make it so we can only see chats where the user is either owner or vet -> could be made better with pundit?
-    @chats = Chat.where("owner_id = ? OR vet_id = ?", @user.id, @user.id).includes(:pet)
+    # @chats = Chat.where("owner_id = ? OR vet_id = ?", @user.id, @user.id).includes(:pet)
+    @chats = policy_scope(Chat).includes(:pet)
 
     if params[:archived] == "true"
       @chats = @chats.archived
@@ -19,8 +20,8 @@ class ChatsController < ApplicationController
   end
 
   def show
-    #After set chat
-    #messages shown by order
+    # after set chat
+    # messages shown by order
     @messages = @chat.messages.includes(:user).order(:created_at)
     @message = @chat.messages.build
     @pet = @chat.pet
@@ -88,7 +89,7 @@ class ChatsController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = policy_scope(User).find(params[:user_id])
   end
 
   def set_chat
