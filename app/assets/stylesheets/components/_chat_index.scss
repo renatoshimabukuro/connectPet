@@ -35,3 +35,29 @@ hr {
     object-fit: cover;
   }
 }
+
+.new-chat-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: $sage-leaf;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    font-size: 40px;
+    color: $forest-moss;
+  }
+}
+
+@media (max-width: 600px) {
+  .new-chat-button{
+    position: fixed;
+    bottom: 4rem;
+    right: 0.8rem;
+  }
+}
