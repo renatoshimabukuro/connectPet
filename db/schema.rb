@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_29_081651) do
+ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_29_081651) do
     t.string "species", default: [], array: true
     t.string "field", default: [], array: true
     t.string "languages", default: [], array: true
-    t.string "address"
+    t.string "address", default: "", null: false
     t.index ["user_id"], name: "index_clinics_on_user_id"
   end
 
