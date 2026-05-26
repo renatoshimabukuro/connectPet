@@ -34,27 +34,130 @@ Species.destroy_all
 
 puts "Database cleaned! Creating new data..."
 
-puts "Creating species..."
+puts "Creating species and breeds..."
 
 dog = Species.find_or_create_by!(name: "dog", icon: "fa-solid fa-dog")
-cat = Species.find_or_create_by!(name: "cat", icon: "fa-solid fa-cat")
-Species.find_or_create_by!(name: "bird", icon: "fa-solid fa-crow")
-Species.find_or_create_by!(name: "horse", icon: "fa-solid fa-horse")
-Species.find_or_create_by!(name: "fish", icon: "fa-solid fa-fish")
-
-puts "#{Species.count} species created."
-
-puts "Creating breeds..."
-
-Breed.find_or_create_by!(name: "German Shepherd", species: dog)
+Breed.find_or_create_by!(name: "Labrador Retriever", species: dog)
+Breed.find_or_create_by!(name: "Golden Retriever", species: dog)
+Breed.find_or_create_by!(name: "Shiba Inu", species: dog)
 toy = Breed.find_or_create_by!(name: "Toy Poodle", species: dog)
+Breed.find_or_create_by!(name: "Miniature Dachshund", species: dog)
+Breed.find_or_create_by!(name: "Chihuahua", species: dog)
+Breed.find_or_create_by!(name: "French Bulldog", species: dog)
+Breed.find_or_create_by!(name: "Beagle", species: dog)
+Breed.find_or_create_by!(name: "Border Collie", species: dog)
+Breed.find_or_create_by!(name: "Corgi", species: dog)
+Breed.find_or_create_by!(name: "German Shepherd", species: dog)
+Breed.find_or_create_by!(name: "Pomeranian", species: dog)
+Breed.find_or_create_by!(name: "Maltese", species: dog)
+Breed.find_or_create_by!(name: "Siberian Husky", species: dog)
+Breed.find_or_create_by!(name: "Yorkshire Terrier", species: dog)
 
-Breed.find_or_create_by!(name: "British Shorthair", species: cat)
+puts "Created dogs with #{dog.breeds.count} breeds."
+
+cat = Species.find_or_create_by!(name: "cat", icon: "fa-solid fa-cat")
+Breed.find_or_create_by!(name: "Domestic Shorthair", species: cat)
+Breed.find_or_create_by!(name: "Scottish Fold", species: cat)
+Breed.find_or_create_by!(name: "American Shorthair", species: cat)
+Breed.find_or_create_by!(name: "Siamese", species: cat)
+Breed.find_or_create_by!(name: "Maine Coon", species: cat)
+Breed.find_or_create_by!(name: "Ragdoll", species: cat)
 Breed.find_or_create_by!(name: "Persian", species: cat)
+Breed.find_or_create_by!(name: "Bengal", species: cat)
+Breed.find_or_create_by!(name: "Russian Blue", species: cat)
+Breed.find_or_create_by!(name: "British Shorthair", species: cat)
+Breed.find_or_create_by!(name: "Sphynx", species: cat)
+Breed.find_or_create_by!(name: "Norwegian Forest Cat", species: cat)
 mixed = Breed.find_or_create_by!(name: "Mixed", species: cat)
 exotic = Breed.find_or_create_by!(name: "Exotic shorthair", species: cat)
 
-puts "#{Breed.count} breeds created"
+puts "Created cats with #{cat.breeds.count} breeds."
+
+rabbit = Species.find_or_create_by!(name: "rabbit", icon: "fa-solid fa-carrot")
+Breed.find_or_create_by!(name: "Holland Lop", species: rabbit)
+Breed.find_or_create_by!(name: "Netherland Dwarf", species: rabbit)
+Breed.find_or_create_by!(name: "Lionhead", species: rabbit)
+Breed.find_or_create_by!(name: "Mini Rex", species: rabbit)
+Breed.find_or_create_by!(name: "Flemish Giant", species: rabbit)
+Breed.find_or_create_by!(name: "English Lop", species: rabbit)
+Breed.find_or_create_by!(name: "Dutch Rabbit", species: rabbit)
+
+puts "Created rabbits with #{rabbit.breeds.count} breeds."
+
+bird = Species.find_or_create_by!(name: "bird", icon: "fa-solid fa-crow")
+Breed.find_or_create_by!(name: "Budgerigar", species: bird)
+Breed.find_or_create_by!(name: "Cockatiel", species: bird)
+Breed.find_or_create_by!(name: "Lovebird", species: bird)
+Breed.find_or_create_by!(name: "Canary", species: bird)
+Breed.find_or_create_by!(name: "Finch", species: bird)
+Breed.find_or_create_by!(name: "African Grey Parrot", species: bird)
+Breed.find_or_create_by!(name: "Conure", species: bird)
+Breed.find_or_create_by!(name: "Macaw", species: bird)
+
+puts "Created birds with #{bird.breeds.count} breeds."
+
+hamster = Species.find_or_create_by!(name: "hamster", icon: "fa-solid fa-paw")
+Breed.find_or_create_by!(name: "Syrian", species: hamster)
+Breed.find_or_create_by!(name: "Dwarf Campbell", species: hamster)
+Breed.find_or_create_by!(name: "Winter White", species: hamster)
+Breed.find_or_create_by!(name: "Roborovski", species: hamster)
+Breed.find_or_create_by!(name: "Chinese Hamster", species: hamster)
+
+puts "Created hamsters with #{hamster.breeds.count} breeds."
+
+guinea_pig = Species.find_or_create_by!(name: "guinea pig", icon: "fa-solid fa-paw")
+Breed.find_or_create_by!(name: "American", species: guinea_pig)
+Breed.find_or_create_by!(name: "Abyssinian", species: guinea_pig)
+Breed.find_or_create_by!(name: "Peruvian", species: guinea_pig)
+Breed.find_or_create_by!(name: "Teddy", species: guinea_pig)
+Breed.find_or_create_by!(name: "Silkie", species: guinea_pig)
+
+puts "Created guinea pigs with #{guinea_pig.breeds.count} breeds."
+
+fish = Species.find_or_create_by!(name: "fish", icon: "fa-solid fa-fish")
+Breed.find_or_create_by!(name: "Goldfish", species: fish)
+Breed.find_or_create_by!(name: "Betta", species: fish)
+Breed.find_or_create_by!(name: "Guppy", species: fish)
+Breed.find_or_create_by!(name: "Neon Tetra", species: fish)
+Breed.find_or_create_by!(name: "Angelfish", species: fish)
+Breed.find_or_create_by!(name: "Molly", species: fish)
+Breed.find_or_create_by!(name: "Platy", species: fish)
+Breed.find_or_create_by!(name: "Corydoras", species: fish)
+
+puts "Created fish with #{fish.breeds.count} breeds."
+
+reptile = Species.find_or_create_by!(name: "reptile", icon: "fa-solid fa-dragon")
+Breed.find_or_create_by!(name: "Leopard Gecko", species: reptile)
+Breed.find_or_create_by!(name: "Crested Gecko", species: reptile)
+Breed.find_or_create_by!(name: "Bearded Dragon", species: reptile)
+Breed.find_or_create_by!(name: "Corn Snake", species: reptile)
+Breed.find_or_create_by!(name: "Ball Python", species: reptile)
+Breed.find_or_create_by!(name: "Red-Eared Slider", species: reptile)
+
+puts "Created reptiles with #{reptile.breeds.count} breeds."
+
+Species.find_or_create_by!(name: "horse", icon: "fa-solid fa-horse")
+
+horse = Species.find_or_create_by!(name: "horse", icon: "fa-solid fa-horse")
+Breed.find_or_create_by!(name: "Thoroughbred", species: horse)
+Breed.find_or_create_by!(name: "Arabian", species: horse)
+Breed.find_or_create_by!(name: "Quarter Horse", species: horse)
+Breed.find_or_create_by!(name: "Appaloosa", species: horse)
+Breed.find_or_create_by!(name: "Paint Horse", species: horse)
+Breed.find_or_create_by!(name: "Morgan", species: horse)
+Breed.find_or_create_by!(name: "Friesian", species: horse)
+Breed.find_or_create_by!(name: "Shetland Pony", species: horse)
+Breed.find_or_create_by!(name: "Clydesdale", species: horse)
+Breed.find_or_create_by!(name: "Percheron", species: horse)
+Breed.find_or_create_by!(name: "Warmblood", species: horse)
+Breed.find_or_create_by!(name: "Miniature Horse", species: horse)
+Breed.find_or_create_by!(name: "Mixed Breed", species: horse)
+
+puts "Created horse with #{horse.breeds.count} breeds."
+
+
+puts "-------------------------------------------------------------------------"
+
 
 puts "Creating users..."
 katie = User.create!(
