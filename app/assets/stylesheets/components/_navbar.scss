@@ -17,15 +17,28 @@
     max-width: 1000px;
     padding: 0 25px;
     height: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+    gap: 8px;
 
     a {
       color: white;
       text-decoration: none;
       &:hover { color: rgba(255, 255, 255, 0.8); }
     }
+  }
+
+  .nav-items-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .nav-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .nav-brand-text {
@@ -44,6 +57,7 @@
   .nav-items-right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 15px;
   }
 
@@ -58,6 +72,24 @@
       font-size: 1.5rem;
       color: white;
       cursor: pointer;
+    }
+
+    &.back-button {
+      i.fa-arrow-left {
+        font-size: 1rem;
+        color: white;
+      }
+    }
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 576px) {
+    .nav-link-custom.back-button {
+      padding: 4px 8px;
+
+      i.fa-arrow-left {
+        font-size: 0.9rem;
+      }
     }
   }
 }

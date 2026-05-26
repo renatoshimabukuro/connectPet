@@ -53,14 +53,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
     t.index ["user_id"], name: "index_attribute_definitions_on_user_id"
   end
 
-  create_table "breeds", force: :cascade do |t|
-    t.string "name"
-    t.bigint "species_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["species_id"], name: "index_breeds_on_species_id"
-  end
-
   create_table "chats", force: :cascade do |t|
     t.bigint "owner_id"
     t.bigint "vet_id"
@@ -144,9 +136,12 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
     t.bigint "user_id", null: false
     t.string "name"
     t.date "dob"
+    t.string "species"
+    t.string "breed"
     t.string "microchip"
     t.float "weight"
     t.string "current_meds"
+    t.string "vacc_status"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -154,19 +149,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
     t.boolean "fixed"
     t.string "gender"
     t.boolean "archived", default: false, null: false
-    t.string "vacc_status", default: [], array: true
-    t.bigint "species_id"
-    t.bigint "breed_id"
-    t.index ["breed_id"], name: "index_pets_on_breed_id"
-    t.index ["species_id"], name: "index_pets_on_species_id"
     t.index ["user_id"], name: "index_pets_on_user_id"
-  end
-
-  create_table "species", force: :cascade do |t|
-    t.string "name"
-    t.string "icon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -178,10 +161,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role"
+    t.string "address"
     t.string "first_name"
     t.string "last_name"
-    t.string "country"
-    t.string "city"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -189,7 +171,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attribute_definitions", "users"
-  add_foreign_key "breeds", "species"
   add_foreign_key "chats", "pets"
   add_foreign_key "chats", "users", column: "owner_id"
   add_foreign_key "chats", "users", column: "vet_id"
@@ -204,7 +185,5 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
   add_foreign_key "messages", "users"
   add_foreign_key "pet_attributes", "attribute_definitions"
   add_foreign_key "pet_attributes", "pets"
-  add_foreign_key "pets", "breeds"
-  add_foreign_key "pets", "species"
   add_foreign_key "pets", "users"
 end
