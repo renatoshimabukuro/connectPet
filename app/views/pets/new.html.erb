@@ -46,16 +46,55 @@
     <!-- STEP 4 -->
     <div data-form-steps-target="step" class="d-none ">
       <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: true %>
-      <h3>Details:</h3>
+      <h3>Health and Security:</h3>
       <%= f.input :fixed, as: :boolean %>
       <div class="weight-field">
         <%= f.input :weight, label: "Weight", input_html: { step: 0.1 } %>
         <span class="suffix">kg</span>
       </div>
       <%= f.input :microchip, label: "Microchip number" %>
-      <%= f.input :vacc_status,
-        as: :check_boxes,
-        collection: ["Vaccinated", "Rabies", "Other"] %>
+      <div id="vaccinations-list">
+        <!-- JS will populate / or server-render later -->
+      </div>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vaccinationModal">
+        Add vaccination
+      </button>
+      <div class="modal fade" id="vaccinationModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Vaccination</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <%= form_with url: "#", method: :post, local: true do |f| %>
+                <!-- Vaccine dropdown -->
+                <div class="mb-3">
+                  <%= f.label :vaccine_definition_id, "Vaccine" %>
+                  <%= f.collection_select :vaccine_definition_id,
+              @pet.species.vaccine_definitions,
+              :id,
+              :name,
+              { prompt: "Select vaccine" },
+              class: "form-control"
+            %>
+                </div>
+                <!-- Date -->
+                <div class="mb-3">
+                  <%= f.label :administered_on %>
+                  <%= f.date_field :administered_on, class: "form-control" %>
+                </div>
+                <!-- Notes -->
+                <div class="mb-3">
+                  <%= f.label :notes %>
+                  <%= f.text_area :notes, class: "form-control" %>
+                </div>
+                <%= f.submit "Add", class: "btn btn-success" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
       <%= render "step_navigation", classes: "mt-2 d-none d-md-flex gap-2", show_back: true, show_continue: true %>
     </div>
     <!-- STEP 5 -->
