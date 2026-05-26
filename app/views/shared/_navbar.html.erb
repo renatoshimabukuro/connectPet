@@ -2,7 +2,6 @@
   <div class="nav-content">
     <% is_home = request.path == "/" || (user_signed_in? && request.path.match?(%r{^/users/\d+/pets$})) %>
     <% show_back = !is_home %>
-    <!-- Left: Back button or Logo -->
     <div class="nav-items-left">
       <% if show_back %>
         <%= link_to :back, class: "nav-link-custom back-button" do %>
@@ -19,7 +18,6 @@
         <% end %>
       <% end %>
     </div>
-    <!-- Center: Centered logo (only when back button shows) -->
     <% if show_back %>
       <div class="nav-center">
         <% if user_signed_in? && current_user.present? %>
@@ -34,7 +32,6 @@
     <% else %>
       <div class="nav-center"></div>
     <% end %>
-    <!-- Right: Menu -->
     <div class="nav-items-right">
       <% if user_signed_in? %>
         <div class="dropdown">
