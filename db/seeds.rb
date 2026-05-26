@@ -29,7 +29,32 @@ Clinic.destroy_all
 Pet.destroy_all
 User.destroy_all
 
+Breed.destroy_all
+Species.destroy_all
+
 puts "Database cleaned! Creating new data..."
+
+puts "Creating species..."
+
+dog = Species.find_or_create_by!(name: "dog", icon: "fa-solid fa-dog")
+cat = Species.find_or_create_by!(name: "cat", icon: "fa-solid fa-cat")
+Species.find_or_create_by!(name: "bird", icon: "fa-solid fa-crow")
+Species.find_or_create_by!(name: "horse", icon: "fa-solid fa-horse")
+Species.find_or_create_by!(name: "fish", icon: "fa-solid fa-fish")
+
+puts "#{Species.count} species created."
+
+puts "Creating breeds..."
+
+Breed.find_or_create_by!(name: "German Shepherd", species: dog)
+toy = Breed.find_or_create_by!(name: "Toy Poodle", species: dog)
+
+Breed.find_or_create_by!(name: "British Shorthair", species: cat)
+Breed.find_or_create_by!(name: "Persian", species: cat)
+mixed = Breed.find_or_create_by!(name: "Mixed", species: cat)
+exotic = Breed.find_or_create_by!(name: "Exotic shorthair", species: cat)
+
+puts "#{Breed.count} breeds created"
 
 puts "Creating users..."
 katie = User.create!(
@@ -37,7 +62,9 @@ katie = User.create!(
   last_name: "Wood",
   email: "katie@owner.com",
   password: "password123",
-  role: "owner"
+  role: "owner",
+  country: "JP",
+  city: "Matsuyama"
 )
 
 renato = User.create!(
@@ -45,7 +72,9 @@ renato = User.create!(
   last_name: "Shimabukuro",
   email: "renato@owner.com",
   password: "password123",
-  role: "owner"
+  role: "owner",
+  country: "JP",
+  city: "Tokyo"
 )
 
 troy = User.create!(
@@ -53,7 +82,9 @@ troy = User.create!(
   last_name: "Zangara",
   email: "troy@owner.com",
   password: "password123",
-  role: "owner"
+  role: "owner",
+  country: "JP",
+  city: "Osaka"
 )
 
 vet01 = User.create!(
@@ -61,8 +92,10 @@ vet01 = User.create!(
   last_name: "House",
   email: "patrick@vet.com",
   password: "password123",
-  address: "123-4567 Ehime, Matsuyama 1-2-3",
-  role: "vet"
+  # address: "123-4567 Ehime, Matsuyama 1-2-3",
+  role: "vet",
+  country: "JP",
+  city: "Matsuyama"
 )
 
 vet02 = User.create!(
@@ -70,8 +103,10 @@ vet02 = User.create!(
   last_name: "Hetfield",
   email: "james@vet.com",
   password: "password123",
-  address: "456-7890 Ehime, Tobe 1-2-3",
-  role: "vet"
+  # address: "456-7890 Ehime, Tobe 1-2-3",
+  role: "vet",
+  country: "JP",
+  city: "Matsuyama"
 )
 
 vet03 = User.create!(
@@ -79,8 +114,10 @@ vet03 = User.create!(
   last_name: "Sykes",
   email: "john@vet.com",
   password: "password123",
-  address: "234-5678 Ehime, Toon, Kanai 1-2-3",
-  role: "vet"
+  # address: "234-5678 Ehime, Toon, Kanai 1-2-3",
+  role: "vet",
+  country: "JP",
+  city: "Matsuyama"
 )
 
 puts "Creating pets..."
@@ -88,10 +125,10 @@ raye = Pet.create!(
   user: katie,
   name: "Raye",
   dob: Date.new(2021, 8, 12),
-  species: "Cat",
-  breed: "Mixed black",
+  species: cat,
+  breed: mixed,
   weight: 4.8,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated"],
   fixed: true,
   gender: "Male",
   microchip: "111 111 111 111 111"
@@ -107,10 +144,10 @@ percy = Pet.create!(
   user: katie,
   name: "Percy",
   dob: Date.new(2021, 8, 12),
-  species: "Cat",
-  breed: "Mixed orange",
+  species: cat,
+  breed: mixed,
   weight: 5,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Male",
   microchip: "111 111 111 111 112"
@@ -126,10 +163,10 @@ cory = Pet.create!(
   user: katie,
   name: "Cory",
   dob: Date.new(2024, 10, 22),
-  species: "Cat",
-  breed: "Mixed black",
+  species: cat,
+  breed: mixed,
   weight: 5.2,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Male",
   microchip: "111 111 111 111 113"
@@ -145,10 +182,10 @@ maple = Pet.create!(
   user: renato,
   name: "Maple",
   dob: Date.new(2025, 4, 30),
-  species: "Dog",
-  breed: "Toy poodle",
+  species: dog,
+  breed: toy,
   weight: 4.5,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: false,
   gender: "Female"
 )
@@ -163,10 +200,10 @@ gabby = Pet.create!(
   user: troy,
   name: "Gabby",
   dob: Date.new(2016, 5, 31),
-  species: "Cat",
-  breed: "Exotic shorthair",
+  species: cat,
+  breed: exotic,
   weight: 5,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Male"
 )
@@ -181,10 +218,10 @@ jade = Pet.create!(
   user: troy,
   name: "Jade",
   dob: Date.new(2020, 4, 5),
-  species: "Cat",
-  breed: "Exotic shorthair",
+  species: cat,
+  breed: exotic,
   weight: 4,
-  vacc_status: "Vaccinated",
+  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Female"
 )

@@ -1,3 +1,151 @@
-<h1>Add a new pet</h1>
-<p>Enter your pet's details below</p>
-<%= render "form", user: @user, pet: @pet %>
+<div class="container mt-3">
+  <%= simple_form_for [@user, @pet],
+        html: { multipart: true },
+        data: { controller: "form-steps", form_steps_current_value: 0 } do |f| %>
+    <!-- Progress bar -->
+    <div class="progress">
+      <div class="progress-bar" data-form-steps-target="progressBar"></div>
+    </div>
+    <!-- STEP 1 -->
+    <div data-form-steps-target="step">
+      <h2>Add a pet</h2>
+      <%= f.input :picture, as: :file, label: "Profile Picture" %>
+      <%= f.input :name %>
+      <%= f.input :gender, as: :radio_buttons, collection: ["male", "female"], wrapper_html: { class: "row "},
+                item_wrapper_class: "col-6 mb-2",
+                input_html: { class: "me-2" } %>
+      <%= f.input :dob, as: :date %>
+      <button type="button" data-action="form-steps#next" class="btn">Continue</button>
+    </div>
+    <!-- STEP 2 -->
+    <div data-form-steps-target="step" class="hidden">
+      <h3>Species:</h3>
+      <div class="species-grid">
+        <% Species.all.each do |species| %>
+          <label class="species-card">
+            <%= f.radio_button :species_id, species.id,
+              data: { action: "change->form-steps#filterBreeds", species_id: species.id } %>
+            <div class="card-content">
+              <div class="icon"><i class="<%= species.icon %>"></i></div>
+              <div class="name"><%= species.name %></div>
+            </div>
+          </label>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <button type="button" data-action="form-steps#prev" class="btn">Back</button>
+        <button type="button" data-action="form-steps#next" class="btn">Continue</button>
+      </div>
+    </div>
+    <!-- STEP 3 -->
+    <div data-form-steps-target="step" class="hidden">
+      <h3>Breed:</h3>
+      <div class="species-grid" data-form-steps-target="breedGrid"></div>
+      <div class="mt-2">
+        <button type="button" data-action="form-steps#prev" class="btn">Back</button>
+        <button type="button" data-action="form-steps#next" class="btn">Continue</button>
+      </div>
+    </div>
+    <!-- STEP 4 -->
+    <div data-form-steps-target="step" class="hidden">
+      <h3>Details</h3>
+      <%= f.input :fixed, as: :boolean %>
+      <div class="weight-field">
+        <%= f.input :weight, label: "Weight", input_html: { step: 0.1 } %>
+        <span class="suffix">kg</span>
+      </div>
+      <%= f.input :microchip %>
+      <%= f.input :vacc_status,
+        as: :check_boxes,
+        collection: ["Vaccinated", "Rabies", "Other"] %>
+      <div class="mt-2">
+        <button type="button" data-action="form-steps#prev" class="btn">Back</button>
+        <button type="button" data-action="form-steps#next" class="btn">Continue</button>
+      </div>
+    </div>
+    <!-- STEP 5 -->
+    <div data-form-steps-target="step" class="hidden">
+      <h3>Other</h3>
+      <%= f.input :notes %>
+      <button type="button" data-action="form-steps#prev" class="btn">Back</button>
+      <%= f.button :submit, "Create Pet" %>
+    </div>
+  <% end %>
+</div>
+<style>
+  .hidden {
+    display: none;
+  }
+
+  .progress {
+    width: 100%;
+    height: 8px;
+    background: #eee;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #4caf50;
+    transition: width 0.3s ease;
+  }
+  .species-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  }
+
+  .species-card {
+  cursor: pointer;
+  }
+
+  .species-card input {
+  display: none;
+  }
+
+  .card-content {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  transition: 0.2s;
+  }
+
+  .card-content .icon {
+  font-size: 32px;
+  }
+
+  .card-content .name {
+  margin-top: 6px;
+  font-size: 14px;
+  }
+
+  /* Selected state */
+  .species-card input:checked + .card-content {
+  border-color: #4caf50;
+  background: #f0fff4;
+  }
+
+  .species-card input:checked + .card-content {
+  border-color: #4caf50;
+  background: #f0fff4;
+  }
+
+  .weight-field {
+  position: relative;
+  }
+
+  .weight-field input {
+  padding-right: 35px;
+  }
+
+  .weight-field .suffix {
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  color: #888;
+  font-size: 14px;
+  }
+</style>
