@@ -1,5 +1,8 @@
 class Pet < ApplicationRecord
   belongs_to :user
+  belongs_to :species
+  belongs_to :breed
+
   has_many :chats, dependent: :destroy
   has_many :logs, dependent: :destroy
   has_many :pet_attributes, dependent: :destroy
@@ -12,7 +15,6 @@ class Pet < ApplicationRecord
   validates :name, presence: true
   validates :dob, presence: true
   validates :species, presence: true
-  validates :breed, presence: true
   validates :vacc_status, presence: true
 
   # Attribute archived is active by default

@@ -50,4 +50,7 @@ Rails.application.routes.draw do
 
     resources :attribute_definitions, only: [:create]
   end
+  resources :species do
+    resources :breeds, only: :index
+  end
 end

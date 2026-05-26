@@ -1,25 +1,77 @@
-<h2>Sign up</h2>
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-inputs">
-    <%= f.input :name,
-                required: true,
-                autofocus: true %>
-    <%= f.input :email,
+<div class="container mt-3">
+  <h2>Sign up</h2>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <div class="row">
+        <div class="col-6">
+          <%= f.input :first_name,
+                  autofocus: true,
+                  required: true %>
+        </div>
+        <div class="col-6">
+          <%= f.input :last_name,
+                  required: true %>
+        </div>
+      </div>
+      <div class="row" data-controller="location">
+        <div class="col-6">
+          <div class="form-group">
+            <%= f.label :country, "Country" %>
+            <div class="mt-2">
+              <%= f.country_select :country,
+              { priority_countries: ["JP"] },
+              {
+                class: "form-control",
+                data: {
+                  location_target: "country",
+                  action: "change->location#updateCities"
+                }
+              } %>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <%= f.input :city,
+                      as: :select,
+                      collection: ["Tokyo", "Osaka", "Kyoto", "Matsuyama"],
+                      input_html: {
+                        data: {
+                          location_target: "city"
+                        }
+                      } %>
+        </div>
+      </div>
+      <div class="row">
+        <%= f.input :role,
+                as: :radio_buttons,
+
+                collection: ["vet", "owner"],
+                wrapper_html: { class: "row "},
+                item_wrapper_class: "col-6 mb-2",
+                input_html: { class: "me-2" } %>
+      </div>
+      <div class="row">
+        <%= f.input :email,
                 required: true,
 
                 input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
+      </div>
+      <div class="row">
+        <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
+      </div>
+      <div class="row">
+        <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
-    <%= f.input :role, required: true %>
-  </div>
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-<%= render "devise/shared/links" %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, "Continue", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  <%= render "devise/shared/links" %>
+</div>
