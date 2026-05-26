@@ -25,6 +25,8 @@ Chat.unscoped.destroy_all
 Clinic.all.each { |clinic| clinic.photo.purge }
 Pet.all.each { |pet| pet.photo.purge }
 
+VaccineDefinition.destroy_all
+PetVacc.destroy_all
 Clinic.destroy_all
 Pet.destroy_all
 User.destroy_all
@@ -159,6 +161,74 @@ puts "Created horse with #{horse.breeds.count} breeds."
 puts "-------------------------------------------------------------------------"
 
 
+
+
+# Dog
+#
+VaccineDefinition.find_or_create_by!(name: "rabies", species: dog) do |vacc|
+  vacc.default_duration_days = 365
+end
+
+VaccineDefinition.find_or_create_by!(name: "DHPP", species: dog) do |vacc|
+  vacc.default_duration_days = 365
+end
+
+VaccineDefinition.find_or_create_by!(name: "Leptospirosis", species: dog ) do |vacc|
+  vacc.default_duration_days = 365
+end
+
+VaccineDefinition.find_or_create_by!(name: "Bordetella", species: dog) do |vacc|
+  vacc.default_duration_days = 365
+end
+
+VaccineDefinition.find_or_create_by!(name: "Canine Influenza", species: dog) do |vacc|
+  vacc.default_duration_days = 365
+end
+
+# Cat
+
+VaccineDefinition.find_or_create_by!(name: "3-way Combination Vaccine (FVRCP)", species: cat) do |vacc|
+  vacc.default_duration_days = 365
+end
+
+VaccineDefinition.find_or_create_by!(name: "5-way Combination Vaccine", species: cat) do |vacc|
+  vacc.default_duration_days = 365
+end
+
+VaccineDefinition.find_or_create_by!(name: "Rabies", species: cat) do |vacc|
+  vacc.default_duration_days = 365
+end
+
+VaccineDefinition.find_or_create_by!(name: "FeLV", species: cat) do |vacc|
+  vacc.default_duration_days = 365
+end
+
+# # Rabbit
+
+# VaccineDefinition.find_or_create_by!(name: "Rabbit Hemorrhagic Disease (RHDV2)", species: rabbit) do |vacc|
+#   vacc.default_duration_days = 365
+# end
+
+# # Bird
+
+# VaccineDefinition.find_or_create_by!(name: "Polyomavirus", species: bird) do |vacc|
+#   vacc.default_duration_days = 365
+# end
+
+# # Horse
+
+# VaccineDefinition.find_or_create_by!(name: "Equine Influenza", species: horse) do |vacc|
+#   vacc.default_duration_days = 365
+# end
+
+# VaccineDefinition.find_or_create_by!(name: "Tetanus", species: horse) do |vacc|
+#   vacc.default_duration_days = 365
+# end
+
+# VaccineDefinition.find_or_create_by!(name: "Japanese Encephalitis", species: horse) do |vacc|
+#   vacc.default_duration_days = 365
+# end
+
 puts "Creating users..."
 katie = User.create!(
   first_name: "Katie",
@@ -231,10 +301,18 @@ raye = Pet.create!(
   species: cat,
   breed: mixed,
   weight: 4.8,
-  vacc_status: ["Vaccinated"],
   fixed: true,
   gender: "Male",
   microchip: "111 111 111 111 111"
+)
+
+raye.pet_vaccs.create!(
+  vaccine_definition: VaccineDefinition.find_by!(
+    name: "3-way Combination Vaccine (FVRCP)",
+    species: raye.species
+  ),
+  administered_on: Date.today,
+  expires_on: Date.today + 365.days
 )
 
 # cloudinary
@@ -250,10 +328,18 @@ percy = Pet.create!(
   species: cat,
   breed: mixed,
   weight: 5,
-  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Male",
   microchip: "111 111 111 111 112"
+)
+
+percy.pet_vaccs.create!(
+  vaccine_definition: VaccineDefinition.find_by!(
+    name: "3-way Combination Vaccine (FVRCP)",
+    species: percy.species
+  ),
+  administered_on: Date.today,
+  expires_on: Date.today + 365.days
 )
 
 # cloudinary
@@ -269,10 +355,18 @@ cory = Pet.create!(
   species: cat,
   breed: mixed,
   weight: 5.2,
-  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Male",
   microchip: "111 111 111 111 113"
+)
+
+cory.pet_vaccs.create!(
+  vaccine_definition: VaccineDefinition.find_by!(
+    name: "3-way Combination Vaccine (FVRCP)",
+    species: cory.species
+  ),
+  administered_on: Date.today,
+  expires_on: Date.today + 365.days
 )
 
 # cloudinary
@@ -288,7 +382,6 @@ maple = Pet.create!(
   species: dog,
   breed: toy,
   weight: 4.5,
-  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: false,
   gender: "Female"
 )
@@ -306,7 +399,6 @@ gabby = Pet.create!(
   species: cat,
   breed: exotic,
   weight: 5,
-  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Male"
 )
@@ -324,7 +416,6 @@ jade = Pet.create!(
   species: cat,
   breed: exotic,
   weight: 4,
-  vacc_status: ["Vaccinated on 2026 04 24"],
   fixed: true,
   gender: "Female"
 )
