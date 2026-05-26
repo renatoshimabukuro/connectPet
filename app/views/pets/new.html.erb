@@ -40,37 +40,61 @@
     <!-- STEP 3 -->
     <div data-form-steps-target="step" class="hidden">
       <h3>Breed:</h3>
-      <div class="species-grid" data-form-steps-target="breedGrid"></div>
-      <div class="mt-2">
-        <button type="button" data-action="form-steps#prev" class="btn">Back</button>
-        <button type="button" data-action="form-steps#next" class="btn">Continue</button>
-      </div>
+      <div
+        class="species-grid"
+        data-form-steps-target="breedGrid"
+      ></div>
+      <button
+  type="button"
+  class="btn d-none"
+  data-action="form-steps#prevBreedPage"
+  data-form-steps-target="breedPrevButton"
+>
+        Previous breeds
+      </button>
+      <button
+  type="button"
+  class="btn d-none"
+  data-action="form-steps#nextBreedPage"
+  data-form-steps-target="breedNextButton"
+>
+        More breeds
+      </button>
     </div>
-    <!-- STEP 4 -->
-    <div data-form-steps-target="step" class="hidden">
-      <h3>Details:</h3>
-      <%= f.input :fixed, as: :boolean %>
-      <div class="weight-field">
-        <%= f.input :weight, label: "Weight", input_html: { step: 0.1 } %>
-        <span class="suffix">kg</span>
-      </div>
-      <%= f.input :microchip %>
-      <%= f.input :vacc_status,
+    <div class="mt-2">
+      <button type="button" data-action="form-steps#prev" class="btn">
+        Back
+      </button>
+      <button type="button" data-action="form-steps#next" class="btn">
+        Continue
+      </button>
+    </div>
+  </div>
+  <!-- STEP 4 -->
+  <div data-form-steps-target="step" class="hidden">
+    <h3>Details:</h3>
+    <%= f.input :fixed, as: :boolean %>
+    <div class="weight-field">
+      <%= f.input :weight, label: "Weight", input_html: { step: 0.1 } %>
+      <span class="suffix">kg</span>
+    </div>
+    <%= f.input :microchip %>
+    <%= f.input :vacc_status,
         as: :check_boxes,
         collection: ["Vaccinated", "Rabies", "Other"] %>
-      <div class="mt-2">
-        <button type="button" data-action="form-steps#prev" class="btn">Back</button>
-        <button type="button" data-action="form-steps#next" class="btn">Continue</button>
-      </div>
-    </div>
-    <!-- STEP 5 -->
-    <div data-form-steps-target="step" class="hidden">
-      <h3>Other</h3>
-      <%= f.input :notes %>
+    <div class="mt-2">
       <button type="button" data-action="form-steps#prev" class="btn">Back</button>
-      <%= f.button :submit, "Create Pet" %>
+      <button type="button" data-action="form-steps#next" class="btn">Continue</button>
     </div>
-  <% end %>
+  </div>
+  <!-- STEP 5 -->
+  <div data-form-steps-target="step" class="hidden">
+    <h3>Other</h3>
+    <%= f.input :notes %>
+    <button type="button" data-action="form-steps#prev" class="btn">Back</button>
+    <%= f.button :submit, "Create Pet" %>
+  </div>
+<% end %>
 </div>
 <style>
   .hidden {
