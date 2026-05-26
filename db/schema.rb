@@ -82,11 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_26_092750) do
     t.string "species", default: [], array: true
     t.string "field", default: [], array: true
     t.string "languages", default: [], array: true
-<<<<<<< HEAD
-    t.string "address"
-=======
     t.string "address", default: "", null: false
->>>>>>> 130dbe4258b6b633cb65945b9f1ecf6105c69aa5
     t.index ["user_id"], name: "index_clinics_on_user_id"
   end
 

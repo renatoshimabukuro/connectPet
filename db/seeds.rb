@@ -100,31 +100,31 @@ VaccineDefinition.find_or_create_by!(name: "FeLV", species: cat) do |vacc|
   vacc.default_duration_days = 365
 end
 
-# Rabbit
+# # Rabbit
 
-VaccineDefinition.find_or_create_by!(name: "Rabbit Hemorrhagic Disease (RHDV2)", species: rabbit) do |vacc|
-  vacc.default_duration_days = 365
-end
+# VaccineDefinition.find_or_create_by!(name: "Rabbit Hemorrhagic Disease (RHDV2)", species: rabbit) do |vacc|
+#   vacc.default_duration_days = 365
+# end
 
-# Bird
+# # Bird
 
-VaccineDefinition.find_or_create_by!(name: "Polyomavirus", species: bird) do |vacc|
-  vacc.default_duration_days = 365
-end
+# VaccineDefinition.find_or_create_by!(name: "Polyomavirus", species: bird) do |vacc|
+#   vacc.default_duration_days = 365
+# end
 
-# Horse
+# # Horse
 
-VaccineDefinition.find_or_create_by!(name: "Equine Influenza", species: horse) do |vacc|
-  vacc.default_duration_days = 365
-end
+# VaccineDefinition.find_or_create_by!(name: "Equine Influenza", species: horse) do |vacc|
+#   vacc.default_duration_days = 365
+# end
 
-VaccineDefinition.find_or_create_by!(name: "Tetanus", species: horse) do |vacc|
-  vacc.default_duration_days = 365
-end
+# VaccineDefinition.find_or_create_by!(name: "Tetanus", species: horse) do |vacc|
+#   vacc.default_duration_days = 365
+# end
 
-VaccineDefinition.find_or_create_by!(name: "Japanese Encephalitis", species: horse) do |vacc|
-  vacc.default_duration_days = 365
-end
+# VaccineDefinition.find_or_create_by!(name: "Japanese Encephalitis", species: horse) do |vacc|
+#   vacc.default_duration_days = 365
+# end
 
 puts "Creating users..."
 katie = User.create!(
@@ -203,10 +203,10 @@ raye = Pet.create!(
   microchip: "111 111 111 111 111"
 )
 
-raye.PetVacc.create!(
+raye.pet_vaccs.create!(
   vaccine_definition: VaccineDefinition.find_by!(
     name: "3-way Combination Vaccine (FVRCP)",
-    species: pet.species
+    species: raye.species
   ),
   administered_on: Date.today,
   expires_on: Date.today + 365.days
@@ -230,10 +230,10 @@ percy = Pet.create!(
   microchip: "111 111 111 111 112"
 )
 
-percy.PetVacc.create!(
+percy.pet_vaccs.create!(
   vaccine_definition: VaccineDefinition.find_by!(
     name: "3-way Combination Vaccine (FVRCP)",
-    species: pet.species
+    species: percy.species
   ),
   administered_on: Date.today,
   expires_on: Date.today + 365.days
@@ -257,10 +257,10 @@ cory = Pet.create!(
   microchip: "111 111 111 111 113"
 )
 
-cory.PetVacc.create!(
+cory.pet_vaccs.create!(
   vaccine_definition: VaccineDefinition.find_by!(
     name: "3-way Combination Vaccine (FVRCP)",
-    species: pet.species
+    species: cory.species
   ),
   administered_on: Date.today,
   expires_on: Date.today + 365.days
