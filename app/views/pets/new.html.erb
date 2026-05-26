@@ -14,7 +14,7 @@
       <%= f.input :gender, as: :radio_buttons, collection: ["male", "female"], wrapper_html: { class: "row "},
                 item_wrapper_class: "col-6 mb-2",
                 input_html: { class: "me-2" } %>
-      <%= f.input :dob, as: :date %>
+      <%= f.input :dob, as: :date, label: "Date of birth", start_year: Date.current.year - 30, end_year: Date.current.year %>
       <button type="button" data-action="form-steps#next" class="btn">Continue</button>
     </div>
     <!-- STEP 2 -->
@@ -48,7 +48,7 @@
     </div>
     <!-- STEP 4 -->
     <div data-form-steps-target="step" class="hidden">
-      <h3>Details</h3>
+      <h3>Details:</h3>
       <%= f.input :fixed, as: :boolean %>
       <div class="weight-field">
         <%= f.input :weight, label: "Weight", input_html: { step: 0.1 } %>
