@@ -52,7 +52,7 @@
         <%= f.input :weight, label: "Weight", input_html: { step: 0.1 } %>
         <span class="suffix">kg</span>
       </div>
-      <%= f.input :microchip %>
+      <%= f.input :microchip, label: "Microchip number" %>
       <%= f.input :vacc_status,
         as: :check_boxes,
         collection: ["Vaccinated", "Rabies", "Other"] %>
