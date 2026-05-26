@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
+ActiveRecord::Schema[7.1].define(version: 2026_05_26_092750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -140,6 +140,19 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
     t.index ["pet_id"], name: "index_pet_attributes_on_pet_id"
   end
 
+  create_table "pet_vaccs", force: :cascade do |t|
+    t.bigint "pet_id", null: false
+    t.bigint "vaccine_definition_id", null: false
+    t.date "administered_on"
+    t.date "expires_on"
+    t.text "notes"
+    t.datetime "reminder_sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pet_id"], name: "index_pet_vaccs_on_pet_id"
+    t.index ["vaccine_definition_id"], name: "index_pet_vaccs_on_vaccine_definition_id"
+  end
+
   create_table "pets", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
@@ -154,7 +167,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
     t.boolean "fixed"
     t.string "gender"
     t.boolean "archived", default: false, null: false
-    t.string "vacc_status", default: [], array: true
     t.bigint "species_id"
     t.bigint "breed_id"
     t.index ["breed_id"], name: "index_pets_on_breed_id"
@@ -186,6 +198,15 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vaccine_definitions", force: :cascade do |t|
+    t.string "name"
+    t.bigint "species_id", null: false
+    t.integer "default_duration_days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["species_id"], name: "index_vaccine_definitions_on_species_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attribute_definitions", "users"
@@ -204,7 +225,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_19_110355) do
   add_foreign_key "messages", "users"
   add_foreign_key "pet_attributes", "attribute_definitions"
   add_foreign_key "pet_attributes", "pets"
+  add_foreign_key "pet_vaccs", "pets"
+  add_foreign_key "pet_vaccs", "vaccine_definitions"
   add_foreign_key "pets", "breeds"
   add_foreign_key "pets", "species"
   add_foreign_key "pets", "users"
+  add_foreign_key "vaccine_definitions", "species"
 end

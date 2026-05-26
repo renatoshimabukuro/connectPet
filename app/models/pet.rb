@@ -7,13 +7,14 @@ class Pet < ApplicationRecord
   has_many :logs, dependent: :destroy
   has_many :pet_attributes, dependent: :destroy
   has_many :attribute_definitions, through: :pet_attributes
+  has_many :pet_vaccs, dependent: :destroy
+  has_many :vaccine_definitions, through: :pet_vaccs
 
   has_one_attached :photo
 
   validates :name, presence: true
   validates :dob, presence: true
   validates :species, presence: true
-  validates :vacc_status, presence: true
 
   # Attribute archived is active by default
   attribute :archived, :boolean, default: false
