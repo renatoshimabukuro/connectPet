@@ -30,13 +30,13 @@ class PetsController < ApplicationController
 
   # POST /users/:user_id/pets
   def create
-    @pet = Pet.new(pet_params)
-    @pet.user = @user
+    @pet = current_user.pets.build(pet_params)
 
     if @pet.save
       assign_attributes_to_pet
       redirect_to [@user, @pet], notice: 'Pet was successfully registered!'
     else
+raise @pet.errors.full_messages.inspect
       render :new, status: :unprocessable_entity
     end
   end
@@ -93,9 +93,9 @@ class PetsController < ApplicationController
 
   def pet_params
     params.require(:pet).permit(
-      :name, :dob, :species, :breed, :microchip,
-      :weight, :current_meds, :vacc_status, :notes,
-      :insurance, :fixed, :gender, :photo
+      :name, :dob, :species_id, :breed_id, :microchip,
+      :weight, :current_meds, :notes,
+      :insurance, :fixed, :gender, :photo, vacc_status: []
     )
   end
 

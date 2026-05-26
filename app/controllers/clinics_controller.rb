@@ -21,11 +21,15 @@ class ClinicsController < ApplicationController
   end
 
   def create
-      @clinic = Clinic.new(clinic_params)
-      @clinic.save
+    if current_user.clinic.present?
+      redirect_to chats_path, alert: "You already have a clinic"
+      return
+    end
+
+    @clinic = current_user.build_clinic(clinic_params)
 
       if @clinic.save
-        redirect_to @clinic, notice: "Clinic was registered successfully"
+        redirect_to chats_path, notice: "Clinic was registered successfully"
       else
         render :new, status: :unprocessable_entity
       end

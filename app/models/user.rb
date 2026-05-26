@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   #validations
-  validates :role, presence: true, inclusion:{in:["vet", "owner"], allow_nil:false}
   validates :first_name, presence: true
   validates :last_name, presence: true
   # has many owned chats where user is "owner"
@@ -14,6 +13,9 @@ class User < ApplicationRecord
   # has many messages regardless of role and messages are dependent on chat to persist
   has_many :messages, dependent: :destroy
   has_many :pets, dependent: :destroy
+
+  enum role: { owner: "owner", vet: "vet"}
+  validates :role, presence: true
 
   # vet has one clinic
   has_one :clinic, dependent: :destroy
@@ -29,6 +31,6 @@ class User < ApplicationRecord
   end
 
   def name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".strip
   end
 end
