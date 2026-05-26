@@ -1,12 +1,9 @@
 <div class="clinic-container">
   <h2 class="clinic-name mt-2 text-center"><%= @clinic.clinic_name %></h2>
-
   <% if @clinic.photo.attached? %>
     <%= cl_image_tag @clinic.photo.key, crop: :fill, class: "img-fluid w-100 clinic-banner mb-4" %>
   <% end %>
-
   <div class="row g-3 px-3"> <%# space between cards %>
-
     <div class="col-12">
       <div class="vital-card px-3 py-3">
         <div class="card-header-row">
@@ -20,8 +17,6 @@
         </div>
       </div>
     </div>
-
-
     <div class="col-12">
       <div class="vital-card px-3 py-3">
         <div class="card-header-row">
@@ -35,7 +30,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-12">
       <div class="vital-card px-3 py-3">
         <div class="card-header-row">
@@ -49,8 +43,7 @@
         </div>
       </div>
     </div>
-
-        <div class="col-12">
+    <div class="col-12">
       <div class="vital-card px-3 py-3" style="min-height: 100px;">
         <div class="card-header-row">
           <div class="card-label">Contact</div>
@@ -59,16 +52,14 @@
         <div class="card-value"><%= @clinic.contact %></div>
       </div>
     </div>
-
     <div class="col-12">
       <div class="vital-card px-3 py-3" style="min-height: 100px;">
         <div class="card-header-row">
           <div class="card-label">Address</div>
           <i class="fa-solid fa-location-dot card-icon"></i>
         </div>
-        <div class="card-value"><%= @clinic.user.address %></div>
+        <div class="card-value"><%= @clinic.address %></div>
       </div>
     </div>
-
   </div>
 </div>
