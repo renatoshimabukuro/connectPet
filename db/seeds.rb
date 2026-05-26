@@ -164,7 +164,7 @@ raye = Pet.create!(
   microchip: "111 111 111 111 111"
 )
 
-raye.pet_vaccinations.create!(
+raye.PetVacc.create!(
   vaccine_definition: VaccineDefinition.find_by!(
     name: "3-way Combination Vaccine (FVRCP)",
     species: pet.species
@@ -191,7 +191,7 @@ percy = Pet.create!(
   microchip: "111 111 111 111 112"
 )
 
-percy.pet_vaccinations.create!(
+percy.PetVacc.create!(
   vaccine_definition: VaccineDefinition.find_by!(
     name: "3-way Combination Vaccine (FVRCP)",
     species: pet.species
@@ -218,7 +218,7 @@ cory = Pet.create!(
   microchip: "111 111 111 111 113"
 )
 
-cory.pet_vaccinations.create!(
+cory.PetVacc.create!(
   vaccine_definition: VaccineDefinition.find_by!(
     name: "3-way Combination Vaccine (FVRCP)",
     species: pet.species

@@ -4,6 +4,8 @@ class Pet < ApplicationRecord
   has_many :logs, dependent: :destroy
   has_many :pet_attributes, dependent: :destroy
   has_many :attribute_definitions, through: :pet_attributes
+  has_many :pet_vaccs, dependent: :destroy
+  has_many :vaccine_definitions, dependent: :destroy
 
   has_one_attached :photo
 
