@@ -8,6 +8,7 @@
     </div>
     <!-- STEP 1 -->
     <div data-form-steps-target="step">
+      <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: false, show_continue: true %>
       <h2>Add a pet</h2>
       <%= f.input :picture, as: :file, label: "Profile Picture" %>
       <%= f.input :name %>
@@ -15,10 +16,11 @@
                 item_wrapper_class: "col-6 mb-2",
                 input_html: { class: "me-2" } %>
       <%= f.input :dob, as: :date, label: "Date of birth", start_year: Date.current.year - 30, end_year: Date.current.year %>
-      <button type="button" data-action="form-steps#next" class="btn">Continue</button>
+      <%= render "step_navigation", classes: "mt-2 d-none d-md-flex", show_back: false, show_continue: true %>
     </div>
     <!-- STEP 2 -->
     <div data-form-steps-target="step" class="d-none">
+      <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: true %>
       <h3>Species:</h3>
       <div class="species-grid">
         <% Species.all.each do |species| %>
@@ -32,38 +34,18 @@
           </label>
         <% end %>
       </div>
-      <div class="mt-2">
-        <button type="button" data-action="form-steps#prev" class="btn"> Back </button>
-        <button type="button" data-action="form-steps#next" class="btn"> Continue </button>
-      </div>
+      <%= render "step_navigation", classes: "mt-2 d-none d-md-flex gap-2", show_back: true, show_continue: true %>
     </div>
     <!-- STEP 3 -->
-    <!-- STEP 3 -->
     <div data-form-steps-target="step" class="d-none">
+      <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: true %>
       <h3>Breed:</h3>
-      <div
-    class="species-grid"
-    data-form-steps-target="breedGrid"
-  ></div>
-      <div class="mt-2">
-        <button
-      type="button"
-      data-action="form-steps#prev"
-      class="btn"
-    >
-          Back
-        </button>
-        <button
-      type="button"
-      data-action="form-steps#next"
-      class="btn"
-    >
-          Continue
-        </button>
-      </div>
+      <div class="species-grid" data-form-steps-target="breedGrid"></div>
+      <%= render "step_navigation", classes: "mt-2 d-none d-md-flex gap-2", show_back: true, show_continue: true %>
     </div>
     <!-- STEP 4 -->
     <div data-form-steps-target="step" class="d-none ">
+      <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: true %>
       <h3>Details:</h3>
       <%= f.input :fixed, as: :boolean %>
       <div class="weight-field">
@@ -74,16 +56,14 @@
       <%= f.input :vacc_status,
         as: :check_boxes,
         collection: ["Vaccinated", "Rabies", "Other"] %>
-      <div class="mt-2">
-        <button type="button" data-action="form-steps#prev" class="btn"> Back </button>
-        <button type="button" data-action="form-steps#next" class="btn"> Continue </button>
-      </div>
+      <%= render "step_navigation", classes: "mt-2 d-none d-md-flex gap-2", show_back: true, show_continue: true %>
     </div>
     <!-- STEP 5 -->
     <div data-form-steps-target="step" class="d-none">
+      <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: false %>
       <h3>Other</h3>
       <%= f.input :notes %>
-      <button type="button" data-action="form-steps#prev" class="btn"> Back </button>
+      <%= render "step_navigation", classes: "mt-2 d-none d-md-flex gap-2", show_back: true, show_continue: false %>
       <%= f.button :submit, "Create Pet" %>
     </div>
   <% end %>
