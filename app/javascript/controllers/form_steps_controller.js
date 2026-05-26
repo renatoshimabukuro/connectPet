@@ -1,8 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["step", "progressBar", "breedGrid", "breedPrevButton",
-  "breedNextButton"]
+  static targets = ["step", "progressBar", "breedGrid"]
   static values = { current: Number }
 
   connect() {
@@ -29,7 +28,7 @@ export default class extends Controller {
 
   showStep() {
     this.stepTargets.forEach((el, index) => {
-      el.classList.toggle("hidden", index !== this.currentValue)
+      el.classList.toggle("d-none", index !== this.currentValue)
     })
   }
 
@@ -58,98 +57,98 @@ export default class extends Controller {
       })
   }
 
-renderBreedPage() {
-  const grid = this.breedGridTarget
-  grid.innerHTML = ""
+  renderBreedPage() {
+    const grid = this.breedGridTarget
+    grid.innerHTML = ""
 
-  if (!this.breeds.length) {
-    grid.innerHTML = "<p>No breeds found</p>"
-    return
-  }
+    if (!this.breeds.length) {
+      grid.innerHTML = "<p>No breeds found</p>"
+      return
+    }
 
-  const start = this.currentBreedPage * this.breedsPerPage
-  const end = start + this.breedsPerPage
+    const start = this.currentBreedPage * this.breedsPerPage
+    const end = start + this.breedsPerPage
 
-  const visibleBreeds = this.breeds.slice(start, end)
+    const visibleBreeds = this.breeds.slice(start, end)
 
-  const lastPage =
-    Math.ceil(this.breeds.length / this.breedsPerPage) - 1
+    const lastPage =
+      Math.ceil(this.breeds.length / this.breedsPerPage) - 1
 
-  // PREVIOUS FIRST
-  if (this.currentBreedPage > 0) {
-    const prevCard = document.createElement("div")
-    prevCard.classList.add("species-card")
+    // PREVIOUS FIRST
+    if (this.currentBreedPage > 0) {
+      const prevCard = document.createElement("div")
+      prevCard.classList.add("species-card")
 
-    prevCard.innerHTML = `
-      <div class="card-content">
-        <div class="icon">
-          <i class="fa-solid fa-arrow-left"></i>
+      prevCard.innerHTML = `
+        <div class="card-content">
+          <div class="icon">
+            <i class="fa-solid fa-arrow-left"></i>
+          </div>
+
+          <div class="name">
+            Previous breeds
+          </div>
         </div>
+      `
 
-        <div class="name">
-          Previous breeds
+      prevCard.addEventListener("click", () => {
+        this.prevBreedPage()
+      })
+
+      grid.appendChild(prevCard)
+    }
+
+    // BREEDS
+    visibleBreeds.forEach(breed => {
+      const card = document.createElement("label")
+      card.classList.add("species-card")
+
+      card.innerHTML = `
+        <input
+          type="radio"
+          name="pet[breed_id]"
+          value="${breed.id}"
+          class="d-none"
+        />
+
+        <div class="card-content">
+          <div class="icon">
+            <i class="${this.speciesIcon}"></i>
+          </div>
+
+          <div class="name">
+            ${breed.name}
+          </div>
         </div>
-      </div>
-    `
+      `
 
-    prevCard.addEventListener("click", () => {
-      this.prevBreedPage()
+      grid.appendChild(card)
     })
 
-    grid.appendChild(prevCard)
+    // NEXT LAST
+    if (this.currentBreedPage < lastPage) {
+      const nextCard = document.createElement("div")
+      nextCard.classList.add("species-card")
+
+      nextCard.innerHTML = `
+        <div class="card-content">
+          <div class="icon">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+          <div class="name">
+            More breeds
+          </div>
+        </div>
+      `
+
+      nextCard.addEventListener("click", () => {
+        this.nextBreedPage()
+      })
+
+      grid.appendChild(nextCard)
+    }
   }
-
-  // BREEDS
-  visibleBreeds.forEach(breed => {
-    const card = document.createElement("label")
-    card.classList.add("species-card")
-
-    card.innerHTML = `
-      <input
-        type="radio"
-        name="pet[breed_id]"
-        value="${breed.id}"
-        class="d-none"
-      />
-
-      <div class="card-content">
-        <div class="icon">
-          <i class="${this.speciesIcon}"></i>
-        </div>
-
-        <div class="name">
-          ${breed.name}
-        </div>
-      </div>
-    `
-
-    grid.appendChild(card)
-  })
-
-  // NEXT LAST
-  if (this.currentBreedPage < lastPage) {
-    const nextCard = document.createElement("div")
-    nextCard.classList.add("species-card")
-
-    nextCard.innerHTML = `
-      <div class="card-content">
-        <div class="icon">
-          <i class="fa-solid fa-arrow-right"></i>
-        </div>
-
-        <div class="name">
-          More breeds
-        </div>
-      </div>
-    `
-
-    nextCard.addEventListener("click", () => {
-      this.nextBreedPage()
-    })
-
-    grid.appendChild(nextCard)
-  }
-}
 
   nextBreedPage() {
     this.currentBreedPage++

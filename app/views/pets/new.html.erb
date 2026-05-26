@@ -18,7 +18,7 @@
       <button type="button" data-action="form-steps#next" class="btn">Continue</button>
     </div>
     <!-- STEP 2 -->
-    <div data-form-steps-target="step" class="hidden">
+    <div data-form-steps-target="step" class="d-none">
       <h3>Species:</h3>
       <div class="species-grid">
         <% Species.all.each do |species| %>
@@ -39,7 +39,7 @@
     </div>
     <!-- STEP 3 -->
     <!-- STEP 3 -->
-    <div data-form-steps-target="step" class="hidden">
+    <div data-form-steps-target="step" class="d-none">
       <h3>Breed:</h3>
       <div
     class="species-grid"
@@ -63,7 +63,7 @@
       </div>
     </div>
     <!-- STEP 4 -->
-    <div data-form-steps-target="step" class="hidden">
+    <div data-form-steps-target="step" class="d-none ">
       <h3>Details:</h3>
       <%= f.input :fixed, as: :boolean %>
       <div class="weight-field">
@@ -80,7 +80,7 @@
       </div>
     </div>
     <!-- STEP 5 -->
-    <div data-form-steps-target="step" class="hidden">
+    <div data-form-steps-target="step" class="d-none">
       <h3>Other</h3>
       <%= f.input :notes %>
       <button type="button" data-action="form-steps#prev" class="btn"> Back </button>
@@ -88,95 +88,3 @@
     </div>
   <% end %>
 </div>
-<style>
-  .hidden {
-    display: none;
-  }
-
-  .progress {
-    width: 100%;
-    height: 8px;
-    background: #eee;
-    margin-bottom: 20px;
-    border-radius: 4px;
-  }
-
-  .progress-bar {
-    height: 100%;
-    width: 0%;
-    background: #4caf50;
-    transition: width 0.3s ease;
-  }
-  .species-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
-    gap: 0.75rem;
-  }
-
-  .species-card {
-    cursor: pointer;
-    height: 9rem;
-  }
-
-  .species-card input {
-    display: none;
-  }
-
-  .species-card .card-content {
-    height: 100%;
-    border: 2px solid #ddd;
-    border-radius: 0.625rem;
-    padding: 0.75rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    transition: 0.2s;
-  }
-
-  .card-content .icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .card-content .name {
-    min-height: 2.5rem;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 0.875rem;
-      line-height: 1.2;
-  }
-
-  /* Selected state */
-  .species-card input:checked + .card-content {
-  border-color: #4caf50;
-  background: #f0fff4;
-  }
-
-  .species-card input:checked + .card-content {
-  border-color: #4caf50;
-  background: #f0fff4;
-  }
-
-  .weight-field {
-  position: relative;
-  }
-
-  .weight-field input {
-  padding-right: 35px;
-  }
-
-  .weight-field .suffix {
-  position: absolute;
-  right: 10px;
-  top: 40px;
-  color: #888;
-  font-size: 14px;
-  }
-</style>
