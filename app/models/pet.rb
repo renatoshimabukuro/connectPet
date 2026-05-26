@@ -12,7 +12,7 @@ class Pet < ApplicationRecord
 
   validates :name, presence: true
   validates :dob, presence: true
-  validates :species, presence: true
+  # validates :species, presence: true
   validates :vacc_status, presence: true
 
   # Attribute archived is active by default
