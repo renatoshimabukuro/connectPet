@@ -1,21 +1,37 @@
 <div class="pet-nav-header">
   <div class="nav-content">
+    <% is_home = request.path == "/" || (user_signed_in? && request.path.match?(%r{^/users/\d+/pets$})) %>
+    <% show_back = !is_home %>
     <div class="nav-items-left">
-      <% is_home = request.path == "/" || (user_signed_in? && request.path.match?(%r{^/users/\d+/pets$})) %>
-      <% unless is_home %>
-        <%= link_to :back, class: "nav-link-custom me-3" do %>
-          <i class="fa-solid fa-arrow-left me-2"></i>Back
+      <% if show_back %>
+        <%= link_to :back, class: "nav-link-custom back-button" do %>
+          <i class="fa-solid fa-arrow-left"></i><span class="ms-2 d-none d-md-inline">Back</span>
+        <% end %>
+      <% else %>
+        <% if user_signed_in? && current_user.present? %>
+          <% brand_link = user_pets_path(current_user) %>
+        <% else %>
+          <% brand_link = root_path %>
+        <% end %>
+        <%= link_to brand_link, class: "nav-brand-text" do %>
+          connectPet <i class="fa-solid fa-paw"></i>
         <% end %>
       <% end %>
-      <% if user_signed_in? && current_user.present? %>
-        <% brand_link = user_pets_path(current_user) %>
-      <% else %>
-        <% brand_link = root_path %>
-      <% end %>
-      <%= link_to brand_link, class: "nav-brand-text" do %>
-        connectPet <i class="fa-solid fa-paw"></i>
-      <% end %>
     </div>
+    <% if show_back %>
+      <div class="nav-center">
+        <% if user_signed_in? && current_user.present? %>
+          <% brand_link = user_pets_path(current_user) %>
+        <% else %>
+          <% brand_link = root_path %>
+        <% end %>
+        <%= link_to brand_link, class: "nav-brand-text" do %>
+          connectPet <i class="fa-solid fa-paw"></i>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="nav-center"></div>
+    <% end %>
     <div class="nav-items-right">
       <% if user_signed_in? %>
         <div class="dropdown">

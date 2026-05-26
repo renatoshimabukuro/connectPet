@@ -11,6 +11,8 @@ def attach_photo(record, url, filename)
   )
 end
 
+vet01 = User.find_by!(email: "patrick@vet.com")
+
 lewagon = Clinic.find_or_initialize_by(clinic_name: "Le Wagon Pet Clinic").tap do |c|
   c.field = ["general practice", "cardiology", "gastroenterology"]
   c.contact = "contact@lewagonvet.com"
@@ -28,6 +30,7 @@ attach_photo(
 
 puts "Le Wagon Clinic created"
 
+vet02 = User.find_by!(email: "james@vet.com")
 
 sos_pet = Clinic.find_or_initialize_by(clinic_name: "SOS Pet").tap do |c|
   c.field = ["general practice"]
@@ -46,6 +49,7 @@ attach_photo(
 
 puts "SOS Pet Clinic created"
 
+vet03 = User.find_by!(email: "john@vet.com")
 
 pet_protect = Clinic.find_or_initialize_by(clinic_name: "PetProtect").tap do |c|
   c.field = ["oncology"]

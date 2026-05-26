@@ -95,7 +95,7 @@ raise @pet.errors.full_messages.inspect
     params.require(:pet).permit(
       :name, :dob, :species_id, :breed_id, :microchip,
       :weight, :current_meds, :notes,
-      :insurance, :fixed, :gender, :photo, vacc_status: []
+      :insurance, :fixed, :gender, :photo
     )
   end
 

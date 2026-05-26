@@ -15,13 +15,21 @@ raye = Pet.find_or_initialize_by(
   pet.species     = cat
   pet.breed       = mixed
   pet.weight      = 4.8
-  # pet.vacc_status = ["Vaccinated"]
   pet.fixed       = true
   pet.gender      = "Male"
   pet.microchip   = "111 111 111 111 111"
 
   pet.save!
 end
+
+raye.pet_vaccs.find_or_initialize_by(
+  vaccine_definition: VaccineDefinition.find_by!(
+    name: "3-way Combination Vaccine (FVRCP)",
+    species: raye.species
+  ),
+  administered_on: Date.today,
+  expires_on: Date.today + 365.days
+)
 
 # cloudinary
 raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/reye.jpg"
@@ -37,13 +45,21 @@ percy = Pet.find_or_initialize_by(
   pet.species     = cat
   pet.breed       = mixed
   pet.weight      = 5
-  # pet.vacc_status = ["Vaccinated"]
   pet.fixed       = true
   pet.gender      = "Male"
   pet.microchip   = "111 111 111 111 112"
 
   pet.save!
 end
+
+percy.pet_vaccs.find_or_initialize_by(
+  vaccine_definition: VaccineDefinition.find_by!(
+    name: "3-way Combination Vaccine (FVRCP)",
+    species: percy.species
+  ),
+  administered_on: Date.today,
+  expires_on: Date.today + 365.days
+)
 
 # cloudinary
 percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/percy.jpg"
@@ -59,13 +75,21 @@ cory = Pet.find_or_initialize_by(
   pet.species     = cat
   pet.breed       = mixed
   pet.weight      = 5.2
-  # pet.vacc_status = ["Vaccinated"]
   pet.fixed       = true
   pet.gender      = "Male"
   pet.microchip   = "111 111 111 111 113"
 
   pet.save!
 end
+
+cory.pet_vaccs.find_or_initialize_by(
+  vaccine_definition: VaccineDefinition.find_by!(
+    name: "3-way Combination Vaccine (FVRCP)",
+    species: cory.species
+  ),
+  administered_on: Date.today,
+  expires_on: Date.today + 365.days
+)
 
 # cloudinary
 cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/corey.jpg"
@@ -90,7 +114,6 @@ maple = Pet.find_or_initialize_by(
   pet.species     = dog
   pet.breed       = toy
   pet.weight      = 4.5
-  # pet.vacc_status = ["Vaccinated"]
   pet.fixed       = false
   pet.gender      = "Female"
 
@@ -119,7 +142,6 @@ gabby = Pet.find_or_initialize_by(
   pet.species     = cat
   pet.breed       = exotic
   pet.weight      = 5
-  # pet.vacc_status = ["Vaccinated"]
   pet.fixed       = true
   pet.gender      = "Male"
 
@@ -140,7 +162,6 @@ jade = Pet.find_or_initialize_by(
   pet.species     = cat
   pet.breed       = exotic
   pet.weight      = 4
-  # pet.vacc_status = ["Vaccinated"]
   pet.fixed       = true
   pet.gender      = "Female"
 
