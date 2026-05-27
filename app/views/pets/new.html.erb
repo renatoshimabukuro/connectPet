@@ -10,7 +10,27 @@
     <div data-form-steps-target="step">
       <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: false, show_continue: true %>
       <h2>Add a pet</h2>
-      <%= f.input :picture, as: :file, label: "Profile Picture" %>
+      <div data-controller="avatar-preview">
+        <div class="avatar-upload mx-auto <%= 'has-image' if f.object.photo.present? %>"
+       data-avatar-preview-target="preview"
+       data-action="click->avatar-preview#openFilePicker">
+          <% if f.object.photo.present? %>
+            <%= image_tag f.object.photo, alt: "Pet photo preview" %>
+          <% end %>
+        </div>
+        <%= f.input :photo,
+              as: :file,
+              label: false,
+              input_html: {
+                class: "d-none",
+                accept: "image/*",
+                capture: "environment",
+                data: {
+                  avatar_preview_target: "input",
+                  action: "change->avatar-preview#previewImage"
+                }
+              } %>
+      </div>
       <%= f.input :name %>
       <%= f.input :gender, as: :radio_buttons, collection: ["male", "female"], wrapper_html: { class: "row "},
                 item_wrapper_class: "col-6 mb-2",
@@ -59,42 +79,6 @@
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vaccinationModal">
         Add vaccination
       </button>
-      <div class="modal fade" id="vaccinationModal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Add Vaccination</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-              <%= form_with url: "#", method: :post, local: true do |f| %>
-                <!-- Vaccine dropdown -->
-                <div class="mb-3">
-                  <%= f.label :vaccine_definition_id, "Vaccine" %>
-                  <%= f.collection_select :vaccine_definition_id,
-              @pet.species.vaccine_definitions,
-              :id,
-              :name,
-              { prompt: "Select vaccine" },
-              class: "form-control"
-            %>
-                </div>
-                <!-- Date -->
-                <div class="mb-3">
-                  <%= f.label :administered_on %>
-                  <%= f.date_field :administered_on, class: "form-control" %>
-                </div>
-                <!-- Notes -->
-                <div class="mb-3">
-                  <%= f.label :notes %>
-                  <%= f.text_area :notes, class: "form-control" %>
-                </div>
-                <%= f.submit "Add", class: "btn btn-success" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
       <%= render "step_navigation", classes: "mt-2 d-none d-md-flex gap-2", show_back: true, show_continue: true %>
     </div>
     <!-- STEP 5 -->
@@ -107,3 +91,40 @@
     </div>
   <% end %>
 </div>
+<style>
+  .avatar-upload {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    margin: 0 auto 20px;
+    cursor: pointer;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #999;
+    font-size: 14px;
+
+    /* smoother on touch devices */
+    touch-action: manipulation;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &::before {
+      content: "Choose photo";
+      text-align: center;
+      padding: 8px;
+    }
+
+    &.has-image::before {
+      display: none;
+    }
+  }
+</style>
