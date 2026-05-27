@@ -41,7 +41,6 @@
     <!-- STEP 2 -->
     <div data-form-steps-target="step" class="d-none">
       <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: true %>
-      <h3>Species:</h3>
       <div class="species-grid">
         <% Species.all.each do |species| %>
           <label class="species-card">
