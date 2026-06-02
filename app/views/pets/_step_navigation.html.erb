@@ -1,0 +1,12 @@
+<div class="<%= classes %> d-flex justify-content-between align-items-center">
+  <% if show_back %>
+    <button type="button" data-action="form-steps#prev" class="btn me-auto">
+      Back
+    </button>
+  <% end %>
+  <% if show_continue %>
+    <button type="button" data-action="form-steps#next" class="btn ms-auto">
+      Continue
+    </button>
+  <% end %>
+</div>

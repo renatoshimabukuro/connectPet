@@ -1,0 +1,125 @@
+.hidden {
+    display: none;
+  }
+
+.progress {
+    width: 100%;
+    height: 8px;
+    background: #eee;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #4caf50;
+    transition: width 0.3s ease;
+  }
+  .species-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+    gap: 0.75rem;
+  }
+
+  .species-card {
+    cursor: pointer;
+    height: 9rem;
+  }
+
+  .species-card input {
+    display: none;
+  }
+
+  .species-card .card-content {
+    height: 100%;
+    border: 2px solid #ddd;
+    border-radius: 0.625rem;
+    padding: 0.75rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    transition: 0.2s;
+  }
+
+  .card-content .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-content .name {
+    min-height: 2.5rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 0.875rem;
+      line-height: 1.2;
+  }
+
+  /* Selected state */
+  .species-card input:checked + .card-content {
+  border-color: #4caf50;
+  background: #f0fff4;
+  }
+
+  .species-card input:checked + .card-content {
+  border-color: #4caf50;
+  background: #f0fff4;
+  }
+
+  .weight-field {
+  position: relative;
+  }
+
+  .weight-field input {
+  padding-right: 35px;
+  }
+
+  .weight-field .suffix {
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  color: #888;
+  font-size: 14px;
+  }
+
+  .avatar-upload {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    margin: 0 auto 20px;
+    cursor: pointer;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #999;
+    font-size: 14px;
+
+    touch-action: manipulation;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &::before {
+      content: "Choose photo";
+      text-align: center;
+      padding: 8px;
+    }
+
+    &.has-image::before {
+      display: none;
+    }
+  }

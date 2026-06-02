@@ -28,7 +28,7 @@ export default class extends Controller {
 
   showStep() {
     this.stepTargets.forEach((el, index) => {
-      el.classList.toggle("hidden", index !== this.currentValue)
+      el.classList.toggle("d-none", index !== this.currentValue)
     })
   }
 
@@ -38,35 +38,125 @@ export default class extends Controller {
   }
 
   filterBreeds(event) {
-  const speciesId = event.target.value
-  const speciesIcon = event.target.closest("label")
-    ?.querySelector(".icon i")?.className || ""
+    const speciesId = event.target.value
 
-  fetch(`/species/${speciesId}/breeds`)
-    .then(res => res.json())
-    .then(breeds => {
-      const grid = this.breedGridTarget
-      grid.innerHTML = ""
+    const speciesIcon =
+      event.target.closest("label")
+        ?.querySelector(".icon i")
+        ?.className || ""
 
-      if (!breeds.length) {
-        grid.innerHTML = "<p>No breeds found</p>"
-        return
-      }
+    fetch(`/species/${speciesId}/breeds`)
+      .then(res => res.json())
+      .then(breeds => {
+        this.breeds = breeds
+        this.speciesIcon = speciesIcon
+        this.currentBreedPage = 0
+        this.breedsPerPage = 8
 
-      breeds.forEach(breed => {
-        const card = document.createElement("label")
-        card.classList.add("species-card")
-
-        card.innerHTML = `
-          <input type="radio" name="pet[breed_id]" value="${breed.id}" class="hidden" />
-          <div class="card-content">
-            <div class="icon"><i class="${speciesIcon}"></i></div>
-            <div class="name">${breed.name}</div>
-          </div>
-        `
-
-        grid.appendChild(card)
+        this.renderBreedPage()
       })
+  }
+
+  renderBreedPage() {
+    const grid = this.breedGridTarget
+    grid.innerHTML = ""
+
+    if (!this.breeds.length) {
+      grid.innerHTML = "<p>No breeds found</p>"
+      return
+    }
+
+    const start = this.currentBreedPage * this.breedsPerPage
+    const end = start + this.breedsPerPage
+
+    const visibleBreeds = this.breeds.slice(start, end)
+
+    const lastPage =
+      Math.ceil(this.breeds.length / this.breedsPerPage) - 1
+
+    // PREVIOUS FIRST
+    if (this.currentBreedPage > 0) {
+      const prevCard = document.createElement("div")
+      prevCard.classList.add("species-card")
+
+      prevCard.innerHTML = `
+        <div class="card-content">
+          <div class="icon">
+            <i class="fa-solid fa-arrow-left"></i>
+          </div>
+
+          <div class="name">
+            Previous breeds
+          </div>
+        </div>
+      `
+
+      prevCard.addEventListener("click", () => {
+        this.prevBreedPage()
+      })
+
+      grid.appendChild(prevCard)
+    }
+
+    // BREEDS
+    visibleBreeds.forEach(breed => {
+      const card = document.createElement("label")
+      card.classList.add("species-card")
+
+      card.innerHTML = `
+        <input
+          type="radio"
+          name="pet[breed_id]"
+          value="${breed.id}"
+          class="d-none"
+        />
+
+        <div class="card-content">
+          <div class="icon">
+            <i class="${this.speciesIcon}"></i>
+          </div>
+
+          <div class="name">
+            ${breed.name}
+          </div>
+        </div>
+      `
+
+      grid.appendChild(card)
     })
-}
+
+    // NEXT LAST
+    if (this.currentBreedPage < lastPage) {
+      const nextCard = document.createElement("div")
+      nextCard.classList.add("species-card")
+
+      nextCard.innerHTML = `
+        <div class="card-content">
+          <div class="icon">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+          <div class="name">
+            More breeds
+          </div>
+        </div>
+      `
+
+      nextCard.addEventListener("click", () => {
+        this.nextBreedPage()
+      })
+
+      grid.appendChild(nextCard)
+    }
+  }
+
+  nextBreedPage() {
+    this.currentBreedPage++
+    this.renderBreedPage()
+  }
+
+  prevBreedPage() {
+    this.currentBreedPage--
+    this.renderBreedPage()
+  }
 }

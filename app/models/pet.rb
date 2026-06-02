@@ -14,7 +14,6 @@ class Pet < ApplicationRecord
 
   validates :name, presence: true
   validates :dob, presence: true
-  validates :species, presence: true
 
   # Attribute archived is active by default
   attribute :archived, :boolean, default: false
