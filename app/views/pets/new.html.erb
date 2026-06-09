@@ -66,7 +66,7 @@
     <div data-form-steps-target="step" class="d-none ">
       <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: true %>
       <h3>Health and Security:</h3>
-      <%= f.input :fixed, as: :boolean %>
+      <%= f.input :fixed, as: :boolean, label: "Neutered/spayed" %>
       <div class="weight-field">
         <%= f.input :weight, label: "Weight", input_html: { step: 0.1 } %>
         <span class="suffix">kg</span>
