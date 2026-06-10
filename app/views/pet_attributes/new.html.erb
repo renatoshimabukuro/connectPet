@@ -1,4 +1,13 @@
-<div class="container mt-3">
+<div class="container mt-3"
+     data-controller="form-steps"
+     data-form-steps-current-value="0"
+     data-form-steps-stage-value="3">
+  <!-- Progress bar -->
+  <% unless @pet.onboarding_completed? %>
+    <div class="progress">
+      <div class="progress-bar" data-form-steps-target="progressBar"></div>
+    </div>
+  <% end %>
   <h2>Choose Attributes to Track</h2>
   <%= form_with url: user_pet_pet_attributes_path(@user, @pet),
         method: :post do |f| %>
