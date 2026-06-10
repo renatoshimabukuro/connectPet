@@ -1,3 +1,4 @@
+<% selected_ids = @pet.pet_attributes.pluck(:attribute_definition_id) %>
 <div class="container mt-3"
      data-controller="form-steps"
      data-form-steps-current-value="0"
@@ -9,6 +10,10 @@
     </div>
   <% end %>
   <h2>Choose Attributes to Track</h2>
+  <p>
+    Note: You can track up to 5 attributes.
+    Currently tracking: <%= @pet.pet_attributes.count %>
+  </p>
   <%= form_with url: user_pet_pet_attributes_path(@user, @pet),
         method: :post do |f| %>
     <div class="attribute-grid">
@@ -17,7 +22,8 @@
           <%= check_box_tag(
                 "attribute_definition_ids[]",
                 attribute.id,
-                false,
+                selected_ids.include?(attribute.id),
+                disabled: selected_ids.include?(attribute.id),
                 class: "d-none attribute-checkbox"
               ) %>
           <div class="card-content">
@@ -37,8 +43,8 @@
       <%= link_to "+ Create Custom Attribute",
           new_user_attribute_definition_path(@user, pet_id: @pet.id),
           class: "btn btn-outline-secondary" %>
-      <%= submit_tag "Save Tracking Preferences",
-          class: "btn btn-primary" %>
+      <%= submit_tag "Save Tracking",
+          class: "btn btn-primary", disabled: @pet.pet_attributes.count >= 5 %>
     </div>
   <% end %>
 </div>

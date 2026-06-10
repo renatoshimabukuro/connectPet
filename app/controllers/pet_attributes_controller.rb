@@ -20,7 +20,10 @@ class PetAttributesController < ApplicationController
 
     attribute_ids = params[:attribute_definition_ids] || []
 
-    attribute_ids.each do |attribute_id|
+    existing_count = @pet.pet_attributes.count
+    available_slots = 5 - existing_count
+
+    attribute_ids.take(available_slots).each do |attribute_id|
       @pet.pet_attributes.find_or_create_by!(
         attribute_definition_id: attribute_id
       )
