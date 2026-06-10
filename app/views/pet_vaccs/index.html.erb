@@ -37,16 +37,6 @@
                   <%= vacc.administered_on %>
                 </p>
               </div>
-              <%= link_to user_pet_pet_vacc_path(@user, @pet, vacc),
-                  data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Delete this vaccination?"
-                  },
-                  class: "log-trash" do %>
-                <i class="iconify"
-                   data-icon="akar-icons:trash-can"
-                   style="font-size: 1.5rem"></i>
-              <% end %>
             </div>
             <div class="px-3 pb-3">
               <p class="mb-1">
