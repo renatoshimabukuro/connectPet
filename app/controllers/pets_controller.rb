@@ -34,7 +34,7 @@ class PetsController < ApplicationController
 
     if @pet.save
       assign_attributes_to_pet
-      redirect_to new_user_pet_pet_vacc_path(@user, @pet)
+      redirect_to new_user_pet_pet_vacc_path(@user, @pet, onboarding: true)
     else
 raise @pet.errors.full_messages.inspect
       render :new, status: :unprocessable_entity

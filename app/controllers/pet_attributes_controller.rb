@@ -9,9 +9,9 @@ class PetAttributesController < ApplicationController
     )
 
     if pet_attribute.save
-      render json: pet_attribute
+      redirect_to user_pet_path(@user, @pet)
     else
-      render json: { errors: pet_attribute.errors.full_messages }, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 end

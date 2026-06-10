@@ -7,9 +7,11 @@
           form_steps_stage_value: 2
           } do |f| %>
     <!-- Progress bar -->
-    <div class="progress">
-      <div class="progress-bar" data-form-steps-target="progressBar"></div>
-    </div>
+    <% if params[:onboarding] %>
+      <div class="progress">
+        <div class="progress-bar" data-form-steps-target="progressBar"></div>
+      </div>
+    <% end %>
     <!-- STEP 1 -->
     <div data-form-steps-target="step">
       <h2>New pet: Vaccine information</h2>
@@ -17,9 +19,13 @@
       <%= f.input :administered_on, as: :date, label: "Administed on", start_year: Date.current.year - 30, end_year: Date.current.year  %>
       <%= f.input :notes, placeholder: "Reactions, notes from vet, etc." %>
       <div class="d-flex justify-content-between">
-        <%= link_to "Skip for now",
+        <% if params[:onboarding] %>
+          <%= link_to "Skip for now",
         user_pet_pet_attributes_path(@pet.user, @pet),
         class: "btn btn-outline-secondary" %>
+        <% else %>
+          <%= link_to "Cancel", user_pet_pet_vaccs_path(@pet.user, @pet) %>
+        <% end %>
         <%= f.button :submit, "Save vaccine" %>
       </div>
     </div>
