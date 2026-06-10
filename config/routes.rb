@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :clinics, only: [:index, :show] #showing the clinics to all
   resources :users, only: [:show, :new, :create] do
     resources :pets, only: [:show, :new, :create, :index, :edit, :update] do
-      resources :pet_vaccs, only: [:new, :create, :destroy]
+      resources :pet_vaccs, only: [:index, :new, :create, :destroy]
       resources :pet_attributes, only: [:new, :create]
       member do
       # Add route /users/:user_id/pets/:id/archive

@@ -1,6 +1,13 @@
 class PetVaccsController < ApplicationController
 
+  before_action :set_user
   before_action :set_pet
+
+  def index
+    @pet_vaccs = @pet.pet_vaccs
+                    .includes(:vaccine_definition)
+                    .order(expires_on: :desc)
+  end
 
   def new
     @vaccines = VaccineDefinition.where(species: @pet.species)
@@ -44,7 +51,6 @@ end
   end
 
   def set_pet
-    set_user
     @pet = @user.pets.find(params[:pet_id])
   end
 end
