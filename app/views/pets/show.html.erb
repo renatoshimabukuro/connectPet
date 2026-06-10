@@ -46,9 +46,9 @@
       </div>
       <%# Vaccines %>
       <% current_vaccine = @pet.pet_vaccs
-                       .where("expires_on >= ?", Date.current)
-                       .order(:expires_on)
-                       .first %>
+                      .where("expires_on >= ?", Date.current)
+                      .order(:expires_on)
+                      .first %>
       <%= link_to user_pet_pet_vaccs_path(@user, @pet),
       class: "text-decoration-none text-reset" do %>
         <div class="vital-card">
@@ -58,7 +58,7 @@
           <span class="card-label">Vaccines:</span>
           <span class="card-value">
             <% if current_vaccine.present? %>
-              <%= truncate(current_vaccine.vaccine_definition.name, length: 15, separator: ' ', omission: '') %>
+              <%= truncate(current_vaccine.vaccine_definition.name, length: 15, separator: ' ', omission: '...') %>
             <% else %>
               None active
             <% end %>
@@ -75,7 +75,7 @@
         </div>
         <span class="card-label">Microchip:</span>
         <%# <span class="card-value"><%= @pet.microchip.presence || "None" %></span>
-      <span class="card-value"><%= truncate(@pet.microchip.gsub(/\S/, '*'), length: 15) %> </span>
+      <span class="card-value"><%= truncate(@pet.microchip.gsub(/\S/, '*'), length: 15, omission: '') %> </span>
     </div>
     <%# Weight %>
     <div class="vital-card">
