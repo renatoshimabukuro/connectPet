@@ -9,7 +9,7 @@
                 "attribute_definition_ids[]",
                 attribute.id,
                 false,
-                class: "d-none"
+                class: "d-none attribute-checkbox"
               ) %>
           <div class="card-content">
             <% if attribute.icon.present? %>
@@ -26,7 +26,7 @@
     </div>
     <div class="mt-4">
       <%= link_to "+ Create Custom Attribute",
-          new_user_attribute_definition_path(@user),
+          new_user_attribute_definition_path(@user, pet_id: @pet.id),
           class: "btn btn-outline-secondary" %>
       <%= submit_tag "Save Tracking Preferences",
           class: "btn btn-primary" %>

@@ -16,16 +16,18 @@ class PetAttributesController < ApplicationController
   end
 
   def create
-  @pet = current_user.pets.find(params[:pet_id])
+    @pet = current_user.pets.find(params[:pet_id])
 
-  @pet_attribute = @pet.pet_attributes.new(pet_attribute_params)
+    attribute_ids = params[:attribute_definitions_ids] || []
 
-  if @pet_attribute.save
+    attribute_ids.each do |attribute_id|
+      @pet.pet_attributes.find_or_create_by!(
+        attribute_definition_id: attribute_id
+      )
+    end
+
     redirect_to user_pet_path(current_user, @pet)
-  else
-    render :new, status: :unprocessable_entity
   end
-end
 
   private
 
