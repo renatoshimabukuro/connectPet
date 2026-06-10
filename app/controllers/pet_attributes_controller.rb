@@ -18,7 +18,7 @@ class PetAttributesController < ApplicationController
   def create
     @pet = current_user.pets.find(params[:pet_id])
 
-    attribute_ids = params[:attribute_definitions_ids] || []
+    attribute_ids = params[:attribute_definition_ids] || []
 
     attribute_ids.each do |attribute_id|
       @pet.pet_attributes.find_or_create_by!(
