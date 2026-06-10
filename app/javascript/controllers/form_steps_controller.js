@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["step", "progressBar", "breedGrid"]
-  static values = { current: Number }
+  static values = { current: Number, stage: Number }
 
   connect() {
     this.currentValue = this.currentValue || 0
@@ -33,7 +33,29 @@ export default class extends Controller {
   }
 
   updateProgress() {
-    const percent = ((this.currentValue + 1) / this.stepTargets.length) * 100
+    const stage = this.stageValue || 1
+
+    let percent = 0
+
+    switch (this.stageValue) {
+      case 1:
+        percent =
+          ((this.currentValue + 1) / this.stepTargets.length) * 33.33
+        break
+
+      case 2:
+        percent = 66.66
+        break
+
+      case 3:
+        percent = 100
+        break
+
+      default:
+        percent =
+          ((this.currentValue + 1) / this.stepTargets.length) * 100
+    }
+
     this.progressBarTarget.style.width = `${percent}%`
   }
 

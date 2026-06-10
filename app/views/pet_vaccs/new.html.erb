@@ -1,1 +1,27 @@
-pet vacc new
+<div class="container mt-3">
+  <%= simple_form_for [@user, @pet, @pet_vacc],
+        html: { multipart: true },
+        data: {
+          controller: "form-steps",
+          form_steps_current_value: 0,
+          form_steps_stage_value: 2
+          } do |f| %>
+    <!-- Progress bar -->
+    <div class="progress">
+      <div class="progress-bar" data-form-steps-target="progressBar"></div>
+    </div>
+    <!-- STEP 1 -->
+    <div data-form-steps-target="step">
+      <h2>New pet: Vaccine information</h2>
+      <%= f.input :vaccine_definition_id, collection: @vaccines %>
+      <%= f.input :administered_on, as: :date, label: "Administed on", start_year: Date.current.year - 30, end_year: Date.current.year  %>
+      <%= f.input :notes, placeholder: "Reactions, notes from vet, etc." %>
+      <div class="d-flex justify-content-between">
+        <%= link_to "Skip for now",
+        user_pet_pet_attributes_path(@pet.user, @pet),
+        class: "btn btn-outline-secondary" %>
+        <%= f.button :submit, "Save vaccine" %>
+      </div>
+    </div>
+  <% end %>
+</div>

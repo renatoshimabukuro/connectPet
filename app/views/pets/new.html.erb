@@ -1,7 +1,10 @@
 <div class="container mt-3">
-  <%= simple_form_for [@user, @pet],
+  <%= simple_form_for [@pet.user, @pet, @pet_vacc],
         html: { multipart: true },
-        data: { controller: "form-steps", form_steps_current_value: 0 } do |f| %>
+        data: {
+          controller: "form-steps",
+          form_steps_stage_value: 1
+          } do |f| %>
     <!-- Progress bar -->
     <div class="progress">
       <div class="progress-bar" data-form-steps-target="progressBar"></div>

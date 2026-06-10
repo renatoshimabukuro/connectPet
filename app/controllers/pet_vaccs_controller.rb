@@ -1,13 +1,15 @@
 class PetVaccsController < ApplicationController
 
+  before_action :set_pet
+
   def new
-    @pet = Pet.new
-    @pet.pet_vaccs.build
+    @vaccines = VaccineDefinition.where(species: @pet.species)
+    @pet_vacc = @pet.pet_vaccs.build
   end
 
 def create
   @pet = Pet.find(params[:pet_id])
-  @pet_vacc = @pet.pet_vaccs.build(pet_vacc_params)
+  @pet_vacc = @pet.pet_vaccs.build(vacc_params)
 
   if @pet_vacc.save
     redirect_to new_user_pet_pet_attribute_path(@pet.user, @pet)
@@ -29,8 +31,7 @@ end
 
   def vacc_params
   params.require(:pet_vacc).permit(
-      :pet_id, :vaccine_definition_id,:administered_on,
-      :expires_on, :notes, :reminder_set_at
+      :pet_id, :vaccine_definition_id,:administered_on, :notes
   )
   end
 
@@ -40,5 +41,10 @@ end
     if @user != current_user
       redirect_to root_path, alert: "Unauthorized access."
     end
+  end
+
+  def set_pet
+    set_user
+    @pet = @user.pets.find(params[:pet_id])
   end
 end
