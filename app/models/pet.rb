@@ -35,4 +35,11 @@ class Pet < ApplicationRecord
   def unarchive!
     update(archived: false)
   end
+
+  def refresh_onboarding!
+    update_column(
+      :onboarding_completed,
+      pet_vaccs.exists? && pet_attributes.exists?
+    )
+  end
 end

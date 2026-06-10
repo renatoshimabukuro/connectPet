@@ -4,6 +4,8 @@ class PetVacc < ApplicationRecord
 
   before_validation :calculate_expiration
 
+  after_commit :refresh_pet_onboarding
+
   private
 
   def calculate_expiration
@@ -12,5 +14,9 @@ class PetVacc < ApplicationRecord
 
     self.expires_on =
       administered_on + vaccine_definition.default_duration_days.days
+  end
+
+  def refresh_pet_onboarding
+    pet.refresh_onboarding!
   end
 end

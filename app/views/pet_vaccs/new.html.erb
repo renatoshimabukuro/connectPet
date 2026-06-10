@@ -7,7 +7,7 @@
           form_steps_stage_value: 2
           } do |f| %>
     <!-- Progress bar -->
-    <% if params[:onboarding] %>
+    <% unless @pet.onboarding_completed? %>
       <div class="progress">
         <div class="progress-bar" data-form-steps-target="progressBar"></div>
       </div>

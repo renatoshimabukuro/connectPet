@@ -19,11 +19,7 @@ def create
   @pet_vacc = @pet.pet_vaccs.build(vacc_params)
 
   if @pet_vacc.save
-    if params[:onboarding]
-      redirect_to user_pet_pet_vaccs_path(@pet.user, @pet, onboarding: true)
-    else
-      redirect_to user_pet_pet_vaccs_path(@pet.user, @pet)
-    end
+    redirect_to user_pet_pet_vaccs_path(@pet.user, @pet)
   else
     render :new, status: :unprocessable_entity
   end
