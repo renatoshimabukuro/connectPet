@@ -31,9 +31,6 @@
       <%= @pet.species.name %> • <%= @pet.breed.name %> • <%= @pet.gender %><% if @pet.gender.capitalize == 'Male' %><i class="fa-solid fa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
       <br>
       <%= @pet.fixed ? (@pet.gender == 'Male' ? 'Neutered' : 'Spayed') : 'Intact' %>
-      <% @pet.pet_attributes.each do |attr| %>
-        <i class="<%= attr.attribute_definition.icon %>"></i>
-      <% end %>
     </p>
     <div class="vital-grid">
       <%# DOB %>
@@ -112,6 +109,20 @@
       </div>
       <span class="card-label">Notes:</span>
       <span class="card-value"><%= truncate(@pet.notes.presence, length: 15, separator: ' ') || "No notes" %></span>
+    </div>
+    <%# Tracking Attributes %>
+    <div class="vital-card">
+      <div class="pet-show-icon-wrapper">
+        <i class="fa-solid fa-list-check card-icon"></i>
+      </div>
+      <span class="card-label">Tracked Attributes:</span>
+      <div class="card-value d-flex flex-wrap gap-2">
+        <% @pet.pet_attributes.includes(:attribute_definition).each do |pa| %>
+          <div class="attribute-icon-pill">
+            <i class="<%= pa.attribute_definition.icon %>"></i>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="pet-actions-footer">
