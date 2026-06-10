@@ -28,7 +28,7 @@
   <div class="text-center">
     <h1 class="pet-name-title"><%= @pet.name %></h1>
     <p class="pet-subtitle">
-      <%= @pet.species.name %> • <%= @pet.breed.name %> • <%= @pet.gender %><% if @pet.gender == 'Male' %><i class="fa-solid fa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
+      <%= @pet.species.name %> • <%= @pet.breed.name %> • <%= @pet.gender %><% if @pet.gender.capitalize == 'Male' %><i class="fa-solid fa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
       <br>
       <%= @pet.fixed ? (@pet.gender == 'Male' ? 'Neutered' : 'Spayed') : 'Intact' %>
     </p>
@@ -45,16 +45,23 @@
         <span class="card-value"><%= @pet.dob.strftime("%Y/%m/%d") if @pet.dob %></span>
       </div>
       <%# Vaccines %>
-      <div class="vital-card">
-        <%= link_to edit_user_pet_path(@user, @pet, field: 'vacc_status'), data: { turbo_frame: "modal" } do %>
-          <i class="fa-solid fa-pencil edit-pencil"></i>
-        <% end %>
-        <div class="pet-show-icon-wrapper">
-          <i class="fa-solid fa-syringe card-icon"></i>
+      <% next_expiry = @pet.pet_vaccs.minimum(:expires_on) %>
+      <%= link_to user_pet_pet_vaccs_path(@user, @pet),
+        class: "text-decoration-none text-reset" do %>
+        <div class="vital-card">
+          <div class="pet-show-icon-wrapper">
+            <i class="fa-solid fa-syringe card-icon"></i>
+          </div>
+          <span class="card-label">Vaccines:</span>
+          <span class="card-value">
+            <% if next_expiry.present? %>
+              Due: <%= next_expiry %>
+            <% else %>
+              No vaccines recorded
+            <% end %>
+          </span>
         </div>
-        <span class="card-label">Vaccines:</span>
-        <span class="card-value">Until: <%= @pet.pet_vaccs.last.expires_on %></span>
-      </div>
+      <% end %>
       <%# Microchip %>
       <div class="vital-card">
         <%= link_to edit_user_pet_path(@user, @pet, field: 'microchip'), data: { turbo_frame: "modal" } do %>
