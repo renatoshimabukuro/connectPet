@@ -53,7 +53,7 @@ Rails.application.routes.draw do
       resources :messages, except: [:destroy]
     end
 
-    resources :attribute_definitions, only: [:create]
+    resources :attribute_definitions, only: [:new, :create]
   end
   resources :species do
     resources :breeds, only: :index

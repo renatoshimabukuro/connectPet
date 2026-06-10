@@ -1,5 +1,9 @@
 class AttributeDefinitionsController < ApplicationController
 
+  def new
+
+  end
+
   def create
     attribute = current_user.attribute_definitions.new(attribute_params)
 

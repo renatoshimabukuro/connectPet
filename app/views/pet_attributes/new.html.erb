@@ -1,1 +1,35 @@
-New attribute
+<div class="container mt-3">
+  <h2>Choose Attributes to Track</h2>
+  <%= form_with url: user_pet_pet_attributes_path(@user, @pet),
+        method: :post do |f| %>
+    <div class="attribute-grid">
+      <% @attribute_definitions.each do |attribute| %>
+        <label class="species-card">
+          <%= check_box_tag(
+                "attribute_definition_ids[]",
+                attribute.id,
+                false,
+                class: "d-none"
+              ) %>
+          <div class="card-content">
+            <% if attribute.icon.present? %>
+              <div class="icon">
+                <i class="<%= attribute.icon %>"></i>
+              </div>
+            <% end %>
+            <div class="name">
+              <%= attribute.name %>
+            </div>
+          </div>
+        </label>
+      <% end %>
+    </div>
+    <div class="mt-4">
+      <%= link_to "+ Create Custom Attribute",
+          new_user_attribute_definition_path(@user),
+          class: "btn btn-outline-secondary" %>
+      <%= submit_tag "Save Tracking Preferences",
+          class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
