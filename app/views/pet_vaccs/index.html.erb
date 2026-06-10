@@ -6,7 +6,8 @@
           <h1 class="ms-4"><%= @pet.name %>'s Vaccinations</h1>
         </div>
         <div class="col-2">
-          <%= link_to new_user_pet_pet_vacc_path(@user, @pet), class: "text-dark" do %>
+          <%= link_to new_user_pet_pet_vacc_path(@user, @pet),
+                class: "text-dark" do %>
             <i class="fa-solid fa-plus" style="font-size: 30px"></i>
           <% end %>
         </div>
@@ -14,57 +15,9 @@
     </div>
     <div class="logs-all">
       <% if @pet_vaccs.any? %>
-        <% @pet_vaccs.each do |vacc| %>
-          <% status =
-               if vacc.expires_on < Date.current
-                 "expired"
-               elsif vacc.expires_on < 30.days.from_now
-                 "expiring"
-               else
-                 "current"
-               end
-          %>
-          <div class="card-logs mb-2 mx-auto vaccine-card <%= "expired-card" if status == "expired" %>">
-            <div class="d-flex justify-content-between align-items-center ps-3">
-              <div>
-                <h5 class="mb-1">
-                  <%= vacc.vaccine_definition.name %>
-                </h5>
-                <p class="mb-1">
-                  <strong>
-                    Administered:
-                  </strong>
-                  <%= vacc.administered_on %>
-                </p>
-              </div>
-            </div>
-            <div class="px-3 pb-3">
-              <p class="mb-1">
-                <strong>Expires:</strong>
-                <%= vacc.expires_on %>
-              </p>
-              <p class="mb-1">
-                <strong>Status:</strong>
-                <% if status == "current" %>
-                  <i class="fa-solid fa-check"></i>
-                  Current
-                <% elsif status == "expiring" %>
-                  <i class="fa-solid fa-exclamation"></i>
-                  Expiring Soon
-                <% else %>
-                  <i class="fa-solid fa-x"></i>
-                  Expired
-                <% end %>
-              </p>
-              <% if vacc.notes.present? %>
-                <p class="mb-0">
-                  <strong>Notes:</strong>
-                  <%= vacc.notes %>
-                </p>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+        <%= render partial: "pet_vacc",
+              collection: @pet_vaccs,
+              as: :pet_vacc %>
       <% else %>
         <div class="text-center mt-4">
           <p>No vaccinations recorded yet.</p>

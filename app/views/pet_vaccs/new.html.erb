@@ -19,9 +19,9 @@
       <%= f.input :administered_on, as: :date, label: "Administed on", start_year: Date.current.year - 30, end_year: Date.current.year  %>
       <%= f.input :notes, placeholder: "Reactions, notes from vet, etc." %>
       <div class="d-flex justify-content-between">
-        <% if params[:onboarding] %>
+        <% unless @pet.onboarding_completed? %>
           <%= link_to "Skip for now",
-        user_pet_pet_attributes_path(@pet.user, @pet),
+        new_user_pet_pet_attribute_path(@pet.user, @pet),
         class: "btn btn-outline-secondary" %>
         <% else %>
           <%= link_to "Cancel", user_pet_pet_vaccs_path(@pet.user, @pet) %>

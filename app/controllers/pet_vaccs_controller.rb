@@ -15,11 +15,14 @@ class PetVaccsController < ApplicationController
   end
 
 def create
-  @pet = Pet.find(params[:pet_id])
   @pet_vacc = @pet.pet_vaccs.build(vacc_params)
 
   if @pet_vacc.save
-    redirect_to user_pet_pet_vaccs_path(@pet.user, @pet)
+    if !@pet.onboarding_completed?
+      redirect_to onboarding_completed_user_pet_pet_vaccs_path(@user, @pet)
+    else
+      redirect_to user_pet_pet_vaccs_path(@pet.user, @pet)
+    end
   else
     render :new, status: :unprocessable_entity
   end
@@ -32,6 +35,10 @@ end
     pet_vacc.destroy!
 
     redirect_to pet_path(pet)
+  end
+
+  def onboarding_completed
+    @pet_vaccs = @pet.pet_vaccs.includes(:vaccine_definition).order(expires_on: :desc)
   end
 
   private
