@@ -27,8 +27,8 @@ raye.pet_vaccs.find_or_initialize_by(
     name: "3-way Combination Vaccine (FVRCP)",
     species: raye.species
   ),
-  administered_on: Date.today,
-  expires_on: Date.today + 365.days
+  administered_on: Date.new(2025, 8, 12),
+  expires_on: Date.new(2026, 8, 12)
 )
 
 # cloudinary
@@ -57,8 +57,8 @@ percy.pet_vaccs.find_or_initialize_by(
     name: "3-way Combination Vaccine (FVRCP)",
     species: percy.species
   ),
-  administered_on: Date.today,
-  expires_on: Date.today + 365.days
+  administered_on: Date.new(2025, 8, 12),
+  expires_on: Date.new(2026, 8, 12)
 )
 
 # cloudinary
@@ -87,8 +87,8 @@ cory.pet_vaccs.find_or_initialize_by(
     name: "3-way Combination Vaccine (FVRCP)",
     species: cory.species
   ),
-  administered_on: Date.today,
-  expires_on: Date.today + 365.days
+  administered_on: Date.new(2025, 8, 12),
+  expires_on: Date.new(2026, 8, 12)
 )
 
 # cloudinary
