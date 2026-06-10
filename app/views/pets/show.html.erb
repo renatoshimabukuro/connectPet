@@ -31,6 +31,9 @@
       <%= @pet.species.name %> • <%= @pet.breed.name %> • <%= @pet.gender %><% if @pet.gender.capitalize == 'Male' %><i class="fa-solid fa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
       <br>
       <%= @pet.fixed ? (@pet.gender == 'Male' ? 'Neutered' : 'Spayed') : 'Intact' %>
+      <% @pet.pet_attributes.each do |attr| %>
+        <i class="<%= attr.attribute_definition.icon %>"></i>
+      <% end %>
     </p>
     <div class="vital-grid">
       <%# DOB %>

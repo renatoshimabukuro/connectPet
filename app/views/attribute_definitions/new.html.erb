@@ -14,18 +14,18 @@
     <h4 class="mt-4">Choose an Icon</h4>
     <div class="species-grid">
       <% AttributeDefinition::ICON_OPTIONS.each do |label, icon_class| %>
-        <label class="species-card" title="<%= label %>>
+        <label class="species-card" title="<%= label %>">
           <%= f.radio_button :icon,
             icon_class,
             class: "d-none attribute-icon-radio" %>
           <div class="card-content">
-          <div class="icon">
-            <i class="<%= icon_class %>"></i>
+            <div class="icon">
+              <i class="<%= icon_class %>"></i>
+            </div>
           </div>
-        </div>
-      </label>
-    <% end %>
-  </div>
-  <%= f.button :submit, "Create Attribute" %>
-<% end %>
+        </label>
+      <% end %>
+    </div>
+    <%= f.button :submit, "Create Attribute" %>
+  <% end %>
 </div>
