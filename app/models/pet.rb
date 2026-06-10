@@ -12,6 +12,8 @@ class Pet < ApplicationRecord
 
   has_one_attached :photo
 
+  accepts_nested_attributes_for :pet_vaccs
+
   validates :name, presence: true
   validates :dob, presence: true
 

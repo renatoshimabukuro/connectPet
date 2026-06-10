@@ -9,7 +9,7 @@
     <!-- STEP 1 -->
     <div data-form-steps-target="step">
       <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: false, show_continue: true %>
-      <h2>Add a pet</h2>
+      <h2>New pet: Basic information</h2>
       <div data-controller="avatar-preview">
         <div class="avatar-upload mx-auto <%= 'has-image' if f.object.photo.present? %>"
        data-avatar-preview-target="preview"
@@ -41,6 +41,7 @@
     <!-- STEP 2 -->
     <div data-form-steps-target="step" class="d-none">
       <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: true %>
+      <h2>New pet: Species</h2>
       <div class="species-grid">
         <% Species.all.each do |species| %>
           <label class="species-card">
@@ -58,33 +59,31 @@
     <!-- STEP 3 -->
     <div data-form-steps-target="step" class="d-none">
       <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: true %>
-      <h3>Breed:</h3>
+      <h2>New pet: Breed</h2>
       <div class="species-grid" data-form-steps-target="breedGrid"></div>
       <%= render "step_navigation", classes: "mt-2 d-none d-md-flex gap-2", show_back: true, show_continue: true %>
     </div>
     <!-- STEP 4 -->
     <div data-form-steps-target="step" class="d-none ">
       <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: true %>
-      <h3>Health and Security:</h3>
+      <h2>New pet: Security</h2>
       <%= f.input :fixed, as: :boolean, label: "Neutered/spayed" %>
-      <div class="weight-field">
-        <%= f.input :weight, label: "Weight", input_html: { step: 0.1 } %>
-        <span class="suffix">kg</span>
-      </div>
       <%= f.input :microchip, label: "Microchip number" %>
-      <div id="vaccinations-list">
-        <!-- JS will populate / or server-render later -->
-      </div>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vaccinationModal">
-        Add vaccination
-      </button>
+      <%= f.simple_fields_for :pet_vaccs do |vacc_form| %>
+        <%= vacc_form.input :vaccine_definition_id %>
+        <%= vacc_form.input :date_administered %>
+      <% end %>
       <%= render "step_navigation", classes: "mt-2 d-none d-md-flex gap-2", show_back: true, show_continue: true %>
     </div>
     <!-- STEP 5 -->
     <div data-form-steps-target="step" class="d-none">
       <%= render "step_navigation", classes: "mt-2 mb-3 d-md-none", show_back: true, show_continue: false %>
-      <h3>Other</h3>
-      <%= f.input :notes %>
+      <h2>New pet: Health</h2>
+      <div class="weight-field">
+        <%= f.input :weight, label: "Weight", input_html: { step: 0.1 } %>
+        <span class="suffix">kg</span>
+      </div>
+      <%= f.input :notes, placeholder: "Allergies, preferences, etc." %>
       <%= render "step_navigation", classes: "mt-2 d-none d-md-flex gap-2", show_back: true, show_continue: false %>
       <%= f.button :submit, "Create Pet" %>
     </div>
