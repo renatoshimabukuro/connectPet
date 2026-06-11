@@ -5,7 +5,7 @@ appetite = AttributeDefinition.find_or_create_by!(
   user: nil
 ) do |attr|
   attr.value_type = :range
-  attr.icon = "mdi:silverware-fork-knife"
+  attr.icon = "fa-solid fa-utensils"
 end
 
 nausea = AttributeDefinition.find_or_create_by!(
@@ -13,7 +13,7 @@ nausea = AttributeDefinition.find_or_create_by!(
   user: nil
 ) do |attr|
   attr.value_type = :boolean
-  attr.icon = "streamline:smiley-nauseas-remix"
+  attr.icon = "fa-solid fa-face-dizzy"
 end
 
 toilet = AttributeDefinition.find_or_create_by!(
@@ -21,7 +21,7 @@ toilet = AttributeDefinition.find_or_create_by!(
   user: nil
 ) do |attr|
   attr.value_type = :boolean
-  attr.icon = "mdi:toilet"
+  attr.icon = "fa-solid fa-toilet"
 end
 
 puts "Attribute definitions created"

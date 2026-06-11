@@ -28,7 +28,7 @@
   <div class="text-center">
     <h1 class="pet-name-title"><%= @pet.name %></h1>
     <p class="pet-subtitle">
-      <%= @pet.species.name %> • <%= @pet.breed.name %> • <%= @pet.gender %><% if @pet.gender == 'Male' %><i class="fa-solid fa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
+      <%= @pet.species.name %> • <%= @pet.breed.name %> • <%= @pet.gender %><% if @pet.gender.capitalize == 'Male' %><i class="fa-solid fa-mars"></i><% else %><i class="fa-solid fa-venus"></i><% end %>
       <br>
       <%= @pet.fixed ? (@pet.gender == 'Male' ? 'Neutered' : 'Spayed') : 'Intact' %>
     </p>
@@ -45,16 +45,26 @@
         <span class="card-value"><%= @pet.dob.strftime("%Y/%m/%d") if @pet.dob %></span>
       </div>
       <%# Vaccines %>
-      <div class="vital-card">
-        <%= link_to edit_user_pet_path(@user, @pet, field: 'vacc_status'), data: { turbo_frame: "modal" } do %>
-          <i class="fa-solid fa-pencil edit-pencil"></i>
-        <% end %>
-        <div class="pet-show-icon-wrapper">
-          <i class="fa-solid fa-syringe card-icon"></i>
+      <% current_vaccine = @pet.pet_vaccs
+                      .where("expires_on >= ?", Date.current)
+                      .order(:expires_on)
+                      .first %>
+      <%= link_to user_pet_pet_vaccs_path(@user, @pet),
+      class: "text-decoration-none text-reset" do %>
+        <div class="vital-card">
+          <div class="pet-show-icon-wrapper">
+            <i class="fa-solid fa-syringe card-icon"></i>
+          </div>
+          <span class="card-label">Vaccines:</span>
+          <span class="card-value">
+            <% if current_vaccine.present? %>
+              <%= truncate(current_vaccine.vaccine_definition.name, length: 15, separator: ' ', omission: '...') %>
+            <% else %>
+              None active
+            <% end %>
+          </span>
         </div>
-        <span class="card-label">Vaccines:</span>
-        <span class="card-value">Until: <%= @pet.pet_vaccs.last.expires_on %></span>
-      </div>
+      <% end %>
       <%# Microchip %>
       <div class="vital-card">
         <%= link_to edit_user_pet_path(@user, @pet, field: 'microchip'), data: { turbo_frame: "modal" } do %>
@@ -65,7 +75,7 @@
         </div>
         <span class="card-label">Microchip:</span>
         <%# <span class="card-value"><%= @pet.microchip.presence || "None" %></span>
-      <span class="card-value"><%= truncate(@pet.microchip.gsub(/\S/, '*'), length: 15, separator: ' ', omission: '') %> </span>
+      <span class="card-value"><%= truncate(@pet.microchip.gsub(/\S/, '*'), length: 15, omission: '') %> </span>
     </div>
     <%# Weight %>
     <div class="vital-card">
@@ -100,6 +110,22 @@
       <span class="card-label">Notes:</span>
       <span class="card-value"><%= truncate(@pet.notes.presence, length: 15, separator: ' ') || "No notes" %></span>
     </div>
+    <%# Tracking Attributes %>
+    <%= link_to new_user_pet_pet_attribute_path(@user, @pet), class: "text-decoration-none text-dark" do %>
+      <div class="vital-card">
+        <div class="pet-show-icon-wrapper">
+          <i class="fa-solid fa-list-check card-icon"></i>
+        </div>
+        <span class="card-label">Tracking:</span>
+        <div class="card-value d-flex flex-wrap gap-2">
+          <% @pet.pet_attributes.includes(:attribute_definition).each do |pa| %>
+            <div class="attribute-icon-pill">
+              <i class="<%= pa.attribute_definition.icon %>"></i>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="pet-actions-footer">
     <%= link_to user_pet_logs_path(@user, @pet), class: "btn-log", data: { turbo_frame: "_top" } do %>

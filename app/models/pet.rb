@@ -12,6 +12,8 @@ class Pet < ApplicationRecord
 
   has_one_attached :photo
 
+  accepts_nested_attributes_for :pet_vaccs
+
   validates :name, presence: true
   validates :dob, presence: true
 
@@ -32,5 +34,12 @@ class Pet < ApplicationRecord
   # Method to unarchive a pet
   def unarchive!
     update(archived: false)
+  end
+
+  def refresh_onboarding!
+    update_column(
+      :onboarding_completed,
+      pet_vaccs.exists? && pet_attributes.exists?
+    )
   end
 end

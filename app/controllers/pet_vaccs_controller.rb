@@ -1,19 +1,32 @@
 class PetVaccsController < ApplicationController
-  def create
-    pet = Pet.find(params[:pet_id])
-    definition = VaccineDefinition.find(params[:vaccine_definition_id])
 
-    administered_on = params[:administered_on].to_date
+  before_action :set_user
+  before_action :set_pet
 
-    pet.pet_vaccs.create!(
-      vaccine_definition: definition,
-      administered_on: administered_on,
-      expires_on: administered_on + definition.default_duration_days.days,
-      notes: params[:notes]
-    )
-
-    redirect_to pet_path(pet)
+  def index
+    @pet_vaccs = @pet.pet_vaccs
+                    .includes(:vaccine_definition)
+                    .order(expires_on: :desc)
   end
+
+  def new
+    @vaccines = VaccineDefinition.where(species: @pet.species)
+    @pet_vacc = @pet.pet_vaccs.build
+  end
+
+def create
+  @pet_vacc = @pet.pet_vaccs.build(vacc_params)
+
+  if @pet_vacc.save
+    if !@pet.onboarding_completed?
+      redirect_to onboarding_completed_user_pet_pet_vaccs_path(@user, @pet)
+    else
+      redirect_to user_pet_pet_vaccs_path(@pet.user, @pet)
+    end
+  else
+    render :new, status: :unprocessable_entity
+  end
+end
 
   def destroy
     pet_vacc = PetVacc.find(params[:id])
@@ -22,5 +35,29 @@ class PetVaccsController < ApplicationController
     pet_vacc.destroy!
 
     redirect_to pet_path(pet)
+  end
+
+  def onboarding_completed
+    @pet_vaccs = @pet.pet_vaccs.includes(:vaccine_definition).order(expires_on: :desc)
+  end
+
+  private
+
+  def vacc_params
+  params.require(:pet_vacc).permit(
+      :pet_id, :vaccine_definition_id,:administered_on, :notes
+  )
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
+
+    if @user != current_user
+      redirect_to root_path, alert: "Unauthorized access."
+    end
+  end
+
+  def set_pet
+    @pet = @user.pets.find(params[:pet_id])
   end
 end

@@ -27,13 +27,14 @@ raye.pet_vaccs.find_or_initialize_by(
     name: "3-way Combination Vaccine (FVRCP)",
     species: raye.species
   ),
-  administered_on: Date.today,
-  expires_on: Date.today + 365.days
+  administered_on: Date.new(2025, 8, 12),
+  expires_on: Date.new(2026, 8, 12)
 )
 
 # cloudinary
 raye_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651747/development/reye.jpg"
 raye.photo.attach(io: URI.open(raye_url), filename: "raye.jpg", content_type: "image/jpg")
+raye.onboarding_completed = true
 raye.save!
 puts "Raye created"
 
@@ -57,13 +58,14 @@ percy.pet_vaccs.find_or_initialize_by(
     name: "3-way Combination Vaccine (FVRCP)",
     species: percy.species
   ),
-  administered_on: Date.today,
-  expires_on: Date.today + 365.days
+  administered_on: Date.new(2025, 8, 12),
+  expires_on: Date.new(2026, 8, 12)
 )
 
 # cloudinary
 percy_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651750/development/percy.jpg"
 percy.photo.attach(io: URI.open(percy_url), filename: "percy.jpg", content_type: "image/jpg")
+percy.onboarding_completed = true
 percy.save!
 puts "Percy created"
 
@@ -87,13 +89,14 @@ cory.pet_vaccs.find_or_initialize_by(
     name: "3-way Combination Vaccine (FVRCP)",
     species: cory.species
   ),
-  administered_on: Date.today,
-  expires_on: Date.today + 365.days
+  administered_on: Date.new(2025, 8, 12),
+  expires_on: Date.new(2026, 8, 12)
 )
 
 # cloudinary
 cory_url = "https://res.cloudinary.com/rts1307/image/upload/v1771651745/development/corey.jpg"
 cory.photo.attach(io: URI.open(cory_url), filename: "cory.jpg", content_type: "image/jpg")
+cory.onboarding_completed = true
 cory.save!
 puts "Cory created"
 
@@ -123,6 +126,7 @@ end
 # cloudinary
 maple_url = "https://res.cloudinary.com/rts1307/image/upload/v1771497608/development/maple.png"
 maple.photo.attach(io: URI.open(maple_url), filename: "maple.png", content_type: "image/png")
+maple.onboarding_completed = true
 maple.save!
 puts "Maple created"
 
@@ -151,6 +155,7 @@ end
 # cloudinary
 gabby_url = "https://res.cloudinary.com/rts1307/image/upload/v1771659086/development/gabby.jpg"
 gabby.photo.attach(io: URI.open(gabby_url), filename: "gabby.jpg", content_type: "image/jpg")
+gabby.onboarding_completed = true
 gabby.save!
 puts "Gabby created"
 
@@ -171,5 +176,6 @@ end
 # cloudinary
 jade_url = "https://res.cloudinary.com/rts1307/image/upload/v1771659087/development/jade.jpg"
 jade.photo.attach(io: URI.open(jade_url), filename: "jade.jpg", content_type: "image/jpg")
+jade.onboarding_completed = true
 jade.save!
 puts "Jade created"

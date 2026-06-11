@@ -1,0 +1,17 @@
+<div class="container mt-4">
+  <div class="progress mb-4">
+    <div class="progress-bar" style="width:66%"></div>
+  </div>
+  <h2>Vaccinations Recorded</h2>
+  <%= render partial: "pet_vacc",
+      collection: @pet_vaccs,
+      as: :pet_vacc %>
+  <div class="d-grid gap-2 mt-4">
+    <%= link_to "Add Another Vaccine",
+      new_user_pet_pet_vacc_path(@user, @pet),
+      class: "btn btn-primary" %>
+    <%= link_to "Continue to Tracked Attributes",
+      new_user_pet_pet_attribute_path(@user, @pet),
+      class: "btn btn-outline-primary" %>
+  </div>
+</div>

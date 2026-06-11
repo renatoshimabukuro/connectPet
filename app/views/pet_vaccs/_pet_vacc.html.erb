@@ -1,0 +1,47 @@
+<% status =
+     if pet_vacc.expires_on < Date.current
+       "expired"
+     elsif pet_vacc.expires_on < 30.days.from_now
+       "expiring"
+     else
+       "current"
+     end
+%>
+<div class="card-logs mb-2 mx-auto vaccine-card <%= "expired-card" if status == "expired" %>">
+  <div class="d-flex justify-content-between align-items-center ps-3">
+    <div>
+      <h5 class="mb-1">
+        <%= pet_vacc.vaccine_definition.name %>
+      </h5>
+      <p class="mb-1">
+        <strong>Administered:</strong>
+        <%= pet_vacc.administered_on %>
+      </p>
+    </div>
+  </div>
+  <div class="px-3 pb-3">
+    <p class="mb-1">
+      <strong>Expires:</strong>
+      <%= pet_vacc.expires_on %>
+    </p>
+    <p class="mb-1">
+      <strong>Status:</strong>
+      <% if status == "current" %>
+        <i class="fa-solid fa-check"></i>
+        Current
+      <% elsif status == "expiring" %>
+        <i class="fa-solid fa-exclamation"></i>
+        Expiring Soon
+      <% else %>
+        <i class="fa-solid fa-x"></i>
+        Expired
+      <% end %>
+    </p>
+    <% if pet_vacc.notes.present? %>
+      <p class="mb-0">
+        <strong>Notes:</strong>
+        <%= pet_vacc.notes %>
+      </p>
+    <% end %>
+  </div>
+</div>

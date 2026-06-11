@@ -1,0 +1,50 @@
+<% selected_ids = @pet.pet_attributes.pluck(:attribute_definition_id) %>
+<div class="container mt-3"
+     data-controller="form-steps"
+     data-form-steps-current-value="0"
+     data-form-steps-stage-value="3">
+  <!-- Progress bar -->
+  <% unless @pet.onboarding_completed? %>
+    <div class="progress">
+      <div class="progress-bar" data-form-steps-target="progressBar"></div>
+    </div>
+  <% end %>
+  <h2>Choose Attributes to Track</h2>
+  <p>
+    Note: You can track up to 5 attributes.
+    Currently tracking: <%= @pet.pet_attributes.count %>
+  </p>
+  <%= form_with url: user_pet_pet_attributes_path(@user, @pet),
+        method: :post do |f| %>
+    <div class="attribute-grid">
+      <% @attribute_definitions.each do |attribute| %>
+        <label class="species-card">
+          <%= check_box_tag(
+                "attribute_definition_ids[]",
+                attribute.id,
+                selected_ids.include?(attribute.id),
+                disabled: selected_ids.include?(attribute.id),
+                class: "d-none attribute-checkbox"
+              ) %>
+          <div class="card-content">
+            <% if attribute.icon.present? %>
+              <div class="icon">
+                <i class="<%= attribute.icon %>"></i>
+              </div>
+            <% end %>
+            <div class="name">
+              <%= attribute.name %>
+            </div>
+          </div>
+        </label>
+      <% end %>
+    </div>
+    <div class="mt-4">
+      <%= link_to "+ Create Custom Attribute",
+          new_user_attribute_definition_path(@user, pet_id: @pet.id),
+          class: "btn btn-outline-secondary" %>
+      <%= submit_tag "Save Tracking",
+          class: "btn btn-primary", disabled: @pet.pet_attributes.count >= 5 %>
+    </div>
+  <% end %>
+</div>

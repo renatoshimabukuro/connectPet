@@ -1,0 +1,31 @@
+<div class="container mt-3">
+  <h2>Create Custom Attribute</h2>
+  <%= simple_form_for [current_user, @attribute_definition] do |f| %>
+    <%= hidden_field_tag :pet_id, @pet_id %>
+    <%= f.input :name,
+          label: "Attribute Name",
+          placeholder: "e.g. Seizure Activity" %>
+    <%= f.input :value_type,
+          collection: [
+            ["Yes / No", "boolean"],
+            ["1–5 Scale", "range"]
+          ],
+          include_blank: false %>
+    <h4 class="mt-4">Choose an Icon</h4>
+    <div class="species-grid">
+      <% AttributeDefinition::ICON_OPTIONS.each do |label, icon_class| %>
+        <label class="species-card" title="<%= label %>">
+          <%= f.radio_button :icon,
+            icon_class,
+            class: "d-none attribute-icon-radio" %>
+          <div class="card-content">
+            <div class="icon">
+              <i class="<%= icon_class %>"></i>
+            </div>
+          </div>
+        </label>
+      <% end %>
+    </div>
+    <%= f.button :submit, "Create Attribute" %>
+  <% end %>
+</div>

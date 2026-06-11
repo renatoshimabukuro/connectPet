@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_05_26_092750) do
+ActiveRecord::Schema[7.1].define(version: 2026_06_10_040602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -169,6 +169,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_26_092750) do
     t.boolean "archived", default: false, null: false
     t.bigint "species_id"
     t.bigint "breed_id"
+    t.boolean "onboarding_completed", default: false, null: false
     t.index ["breed_id"], name: "index_pets_on_breed_id"
     t.index ["species_id"], name: "index_pets_on_species_id"
     t.index ["user_id"], name: "index_pets_on_user_id"
